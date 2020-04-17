@@ -1,0 +1,10 @@
+[
+    {
+        "name":"admin",
+        "description":"管理員"
+    },
+    {
+        "name":"user",
+        "description":"使用者"
+    }
+]
