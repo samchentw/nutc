@@ -35,6 +35,6 @@ lerna-debug.log*
 
 /frontend_vue/app_nutc/node_modules
 /frontend_vue/web_nutc/node_modules
-/frontend_vue/web0.5/node_modules
+/frontend_vue/web0.5
 /client
 frontend_vue/web0.5/public/fonts/HuaKangTiFan-CuTi-1.otf
