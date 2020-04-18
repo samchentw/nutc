@@ -11,7 +11,7 @@ import { AppModule } from './app.module';
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
-  app.useStaticAssets(staticAssetsRoot("front"), { prefix: "/0.5/" });
+  //app.useStaticAssets(staticAssetsRoot("front"), { prefix: "/0.5/" });
   app.useStaticAssets(staticAssetsRoot("demo"), { prefix: "/" });
   app.useStaticAssets(staticAssetsRoot("nutc_web"), { prefix: "/nutc/" });
   app.useStaticAssets(staticAssetsRoot("nutc_app"), { prefix: "/admin/" });
