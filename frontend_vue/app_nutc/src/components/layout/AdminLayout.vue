@@ -177,9 +177,9 @@
 
             <!-- Nav Item - User Information -->
             <li class="nav-item dropdown no-arrow">
-              <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Valerie Luna</span>
-                <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
+              <a v-if = "userInfo.account" class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{userInfo.userinfo.name}}</span>
+                <img class="img-profile rounded-circle" src="user.png">
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -239,17 +239,39 @@
 
 
 <script>
-// import axios from 'axios';
+import axios from 'axios';
 import Swal from 'sweetalert2'
+import apiService from '../../apiService'
+
 export default {
   name: 'AdminLayout',
   props: {
   },
+  data() {
+    return {
+      userInfo:{}
+    }
+  },
+  created() {
+     axios
+      .get('../api/users/info',{headers:{
+           Authorization: 'Bearer ' + this.getToken()
+      }})
+      .then((x) => {
+        this.userInfo = x.data ;
+      }) 
+      .catch(() => {
+          Swal.fire("登入失敗！");
+      });
+  },
    methods: {
-    logout() {      
-       window.localStorage.removeItem("nutc");
+    logout() {
+       apiService.clearToken();
          location.href = "./#/";
          Swal.fire("已登出！")
+    },
+    getToken() {
+      return apiService.getToken();
     }
   }
 }

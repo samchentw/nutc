@@ -49,6 +49,7 @@
 <script>
 import axios from 'axios';
 import Swal from 'sweetalert2'
+import apiService from '../apiService'
 export default {
   name: 'Login',
   props: {
@@ -72,7 +73,8 @@ export default {
       .then((x) => {
         // console.log(x)
         Swal.fire("登入成功！");
-        window.localStorage.setItem("nutc", x.data.token);
+        apiService.saveToken(x.data.token);
+        // window.localStorage.setItem("nutc", x.data.token);
          location.href = "./#/system/dashboard";
       }) 
       .catch(() => {

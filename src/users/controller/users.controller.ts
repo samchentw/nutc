@@ -22,7 +22,7 @@ export class UserController {
       @Get('info')
       @ApiDefaultResponse({type:User.UserDto})      
       async userInfo(@Req() req){
-        console.log(req.user)
+        // console.log(req.user)
         return await this.userService.get(req.user.id);
       }
 
