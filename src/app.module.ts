@@ -18,6 +18,7 @@ import { ChatModule } from './chat/chat.module';
 import { FileModule } from './file/file.module';
 import { SettingModule } from './setting/setting.module';
 import { PracticeModule } from './practice/practice.module';
+import { ShopModule } from './shop/shop.module';
 @Module({
   imports: [
     TypeOrmModule.forRoot(),   
@@ -27,7 +28,7 @@ import { PracticeModule } from './practice/practice.module';
     }),
 
     
-    PracticeModule,
+    // PracticeModule,
     // TreeModule,
     ArticleModule,
     AuthModule,
@@ -35,7 +36,8 @@ import { PracticeModule } from './practice/practice.module';
     RoleModule,
     // FileModule,
     // ChatModule,
-    // SettingModule,
+    SettingModule,
+    ShopModule,
     // CmsModule,
   ],
   controllers: [AppController,],

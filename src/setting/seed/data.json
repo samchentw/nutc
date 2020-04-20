@@ -1,0 +1,20 @@
+[
+    {
+        "key":"測試",
+        "value":"test",
+        "description":"",
+        "enable":true
+    },
+    {
+        "key":"123",
+        "value":"456",
+        "description":"",
+        "enable":true
+    },
+    {
+        "key":"87",
+        "value":"456",
+        "description":"",
+        "enable":true
+    }
+]

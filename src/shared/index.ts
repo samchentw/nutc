@@ -2,6 +2,7 @@
 export * from './exception/forbidden.exception';
 export * from './exception/dataDuplication.exception';
 export * from './exception/unauthorized.exception';
+export * from './exception/customized.exception';
 
 //pipes
 export * from './pipes/validation.pipe.ts';
