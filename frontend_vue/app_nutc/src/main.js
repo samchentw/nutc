@@ -2,7 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import VueRouter from 'vue-router';
 // import shared from './shared';
-// import HelloWorld from './components/HelloWorld.vue'
+import HelloWorld from './components/HelloWorld.vue'
 
 import AdminLayout from './components/layout/AdminLayout';
 import Dashboard from './components/Dashboard.vue'
@@ -20,12 +20,13 @@ const router = new VueRouter({
       children:[
         { path: 'dashboard', component: Dashboard },
         { path: 'user', component: User },
+        
+        { path: 'test', component: HelloWorld },
       ]
     },
     { path: '/', component: Login },
    
     
-    // { path: '/about', component: about },
     // { path: '*', component: home },
     // { path: '/a', component: ahome }
   ]
@@ -39,27 +40,13 @@ new Vue({router,
 
 function guard(to, from, next){
   if(getToken()) {
-    console.log(getToken())
+    // console.log(getToken())
       next(); 
   } else{
       next('/'); // go to '/login';
   }
 }
-
-
-
-//存token
-// function saveToken(value) {
-//   window.localStorage.setItem(key, value);
-// }
-
-//取token
 function getToken() {
   return window.localStorage.getItem(key);
 }
-
-// //清token
-// function clearToken() {
-//   window.localStorage.removeItem(key);
-// }
 

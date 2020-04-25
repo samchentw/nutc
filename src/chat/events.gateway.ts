@@ -71,12 +71,7 @@ export class EventsGateway implements OnModuleInit,OnGatewayConnection,OnGateway
     }
   }
 
-  @SubscribeMessage('test')
-  test(client, data) {
-     // client.to("rooms").emit(event, {message:"good"});
-    // client.emit('reply', {message:"good"});
-    // return { 'message', data:"123" };  
-  }
+
 
   @Cron('0 30 * * * *',{
     name: 'test',

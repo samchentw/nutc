@@ -23,10 +23,16 @@
           <span>資訊版</span></a>
       </li>
 
-       <li class="nav-item">
+      <li class="nav-item">
         <a class="nav-link" href="./#/system/user">
           <i class="fas fa-fw fa-user"></i>
           <span>會員資料</span></a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="./#/system/test">
+          <i class="fas fa-fw fa-user"></i>
+          <span>測試</span></a>
       </li>
 
       <!-- Divider -->

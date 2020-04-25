@@ -3,7 +3,6 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ScheduleModule } from '@nestjs/schedule';
 import { ConfigModule } from '@nestjs/config';
 
-import { join } from 'path';
 import {AppController} from './app.controller';
 import { AppService } from './app.service';
 
@@ -27,18 +26,18 @@ import { ShopModule } from './shop/shop.module';
       envFilePath: 'development.env',
     }),
 
+    // AuthModule,
+    // RoleModule,
+    // UsersModule,
+    // SettingModule,
     
-    // PracticeModule,
-    // TreeModule,
     ArticleModule,
-    AuthModule,
-    UsersModule,
-    RoleModule,
-    // FileModule,
-    // ChatModule,
-    SettingModule,
-    ShopModule,
-    // CmsModule,
+    PracticeModule,
+    ChatModule,
+
+    // TreeModule,
+    // ShopModule,
+    
   ],
   controllers: [AppController,],
   providers: [AppService],
