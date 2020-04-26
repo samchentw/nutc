@@ -11,7 +11,7 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                <ul class="navbar-nav ml-auto">
                   <li class="nav-item">
-                     <a class="nav-link active" href="index.html">首頁</a>
+                     <a class="nav-link active" href="./#/">首頁</a>
                   </li>
                   <li class="nav-item">
                      <a class="nav-link" href="about.html">美食</a>
@@ -44,16 +44,16 @@
                      會員中心
                      </a>
                      <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
-                        <a class="dropdown-item" href="faq.html">個人資料</a>
+                        <a class="dropdown-item" href="./#/user">個人資料</a>
                         <a class="dropdown-item" href="404.html">購物車</a>
                         <a class="dropdown-item" href="pricing.html">我的記錄</a>
                      </div>
                   </li>
-                  <li class="nav-item">
-                     <a class="nav-link" href="contact.html">登入</a>
+                  <li class="nav-item" v-if="!token">
+                     <a class="nav-link"  href="./#/login">登入</a>
                   </li>
-                  <li class="nav-item">
-                     <a class="nav-link" href="contact.html">登出</a>
+                  <li class="nav-item" v-if="token">
+                     <a class="nav-link" v-on:click="logout()" href="javascript:void(0)">登出</a>
                   </li>
                </ul>
             </div>
@@ -61,10 +61,12 @@
     </nav>
 <div class="full-title"  style="margin-bottom:20px">
 		<div class="container">
-			<!-- Page Heading/Breadcrumbs -->
-			<h1 class="mt-4 mb-3">About
+			<!--
+         <h1 class="mt-4 mb-3">About
 				<small>Subheading</small>
 			</h1>
+          -->
+			
 		</div>
 	</div>
     
@@ -72,10 +74,30 @@
 </template>
 
 <script>
+import apiService from '../../apiService'
+// import TestStore from '../store/test.store'
+import axios from 'axios';
+import Swal from 'sweetalert2'
 export default {
   name: 'Header',
   props: {
     // msg: String
+  },
+   data() {
+    return {
+      token:"",
+    }
+  },
+   created() {
+     this.token =  apiService.getToken();
+  },
+  methods: {
+    logout() {
+       apiService.clearToken();
+         location.href = "./#/";
+         this.token =  apiService.getToken();
+         Swal.fire("已登出！")
+    },
   }
 }
 </script>

@@ -49,7 +49,8 @@
 <script>
 import axios from 'axios';
 import Swal from 'sweetalert2'
-import apiService from '../apiService'
+import apiService from '../apiService';
+
 export default {
   name: 'Login',
   props: {
@@ -64,6 +65,7 @@ export default {
    },
    methods: {
     login() {      
+
       if(this.loginData.account == "" || this.loginData.password == ""){        
         Swal.fire("不能有空值")
         return;

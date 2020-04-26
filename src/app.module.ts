@@ -26,14 +26,14 @@ import { ShopModule } from './shop/shop.module';
       envFilePath: 'development.env',
     }),
 
-    // AuthModule,
-    // RoleModule,
-    // UsersModule,
-    // SettingModule,
+    AuthModule,
+    RoleModule,
+    UsersModule,
+    SettingModule,
     
-    ArticleModule,
-    PracticeModule,
-    ChatModule,
+    // ArticleModule,
+    // PracticeModule,
+    // ChatModule,
 
     // TreeModule,
     // ShopModule,

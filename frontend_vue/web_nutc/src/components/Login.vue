@@ -2,10 +2,11 @@
   <div>
 
  <div class = "container-fluid">
-    <div class="row" >
+    <div class="row">
         <div class="col-lg-4 col-md-4 col-sm-6 portfolio-item">
         </div>
         <div class="col-lg-4 col-md-4 col-sm-6 portfolio-item">
+            <div v-if="type==1">
             <div class="alert alert-success" role="alert">
                 會員登入
             </div>
@@ -23,15 +24,17 @@
                         </div>
                         
                         <button type="button" class="btn btn-primary" style="margin-right:10px" v-on:click="login()">登入</button>
-                        <button type="submit" class="btn btn-primary">註冊</button>
+                        <button type="submit" class="btn btn-primary" v-on:click="changePage(2)">註冊</button>
                    
                     </form>
                 </div>
             </div>
-            
-            <div style="margin-top:30px" ></div>
-            <div class="alert alert-success" role="alert">
-                會員註冊
+            </div>
+
+            <div v-if="type==2">
+             <div class="alert alert-success" role="alert">
+                <a href="javascript:void(0)" style="font-size:20px;color:black"  v-on:click="changePage(1)">←</a>
+                   會員註冊
             </div>
             <div class="card">
                 <div class="card-body">
@@ -80,19 +83,20 @@
                             </div>
                         </div>
                         <button type="submit" class="btn btn-primary">註冊</button>
+                        
                         </form>
                 </div>
             </div>
+            </div>
+            
+             
+           
             
         </div>
         <div class="col-lg-4 col-md-4 col-sm-6 portfolio-item">
         </div>
     </div>
  </div>
-
-    
-
-
   </div>
 </template>
 
@@ -114,10 +118,14 @@ export default {
         },
         registerData:{
 
-        }
+        },
+        type:1
       }
    },
    methods: {
+    changePage(type){
+        this.type=type;
+    },
     login() {      
       if(this.loginData.account == "" || this.loginData.password == ""){        
         Swal.fire("不能有空值")
@@ -126,9 +134,23 @@ export default {
       axios
       .post('../api/auth/login',this.loginData)
       .then((x) => {
-        Swal.fire("登入成功！");
+        // location.href = "http://www.google.com/"
+        // Swal.fire("登入成功！");
+        Swal.fire({
+        title: '系統訊息',
+        text: "登入成功！",
+        icon: 'success',
+        showCancelButton: false,
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: '確定'
+        }).then((result) => {
+         location.href = "./#/";
+        if (result.value) {
+            window.location.reload();
+            }
+        })
         apiService.saveToken(x.data.token);
-        location.href = "./#/user";
+      
       }) 
       .catch(() => {
           Swal.fire("登入失敗！");
