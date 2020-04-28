@@ -11,7 +11,7 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                <ul class="navbar-nav ml-auto">
                   <li class="nav-item">
-                     <a class="nav-link active" href="./#/">首頁</a>
+                     <a class="nav-link" v-bind:class="{ 'active': route=='/' }"  href="./#/">首頁</a>
                   </li>
                   <li class="nav-item">
                      <a class="nav-link" href="about.html">美食</a>
@@ -39,18 +39,18 @@
                         <a class="dropdown-item" href="blog-post.html">Blog Post</a>
                      </div>
                   </li> -->
-                  <li class="nav-item dropdown">
-                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <li class="nav-item dropdown" v-if="token">
+                     <a class="nav-link dropdown-toggle" href="javascript:void(0)"  v-bind:class="{ 'active': route=='/user' }" id="navbarDropdownBlog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                      會員中心
                      </a>
-                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
-                        <a class="dropdown-item" href="./#/user">個人資料</a>
+                     <div class="dropdown-menu dropdown-menu-right"  aria-labelledby="navbarDropdownBlog">
+                        <a class="dropdown-item"   href="./#/user">個人資料</a>
                         <a class="dropdown-item" href="404.html">購物車</a>
                         <a class="dropdown-item" href="pricing.html">我的記錄</a>
                      </div>
                   </li>
-                  <li class="nav-item" v-if="!token">
-                     <a class="nav-link"  href="./#/login">登入</a>
+                  <li class="nav-item" v-if="!token" >
+                     <a class="nav-link"  v-bind:class="{ 'active': route=='/login' }"   href="./#/login">登入</a>
                   </li>
                   <li class="nav-item" v-if="token">
                      <a class="nav-link" v-on:click="logout()" href="javascript:void(0)">登出</a>
@@ -86,8 +86,15 @@ export default {
    data() {
     return {
       token:"",
+      route:"/"
     }
   },
+  watch: {
+  '$route' (to, from) {
+     this.route=to.path;
+      // console.log(this.route)
+  }
+},
    created() {
      this.token =  apiService.getToken();
   },
@@ -95,8 +102,9 @@ export default {
     logout() {
        apiService.clearToken();
          location.href = "./#/";
-         this.token =  apiService.getToken();
+         // this.token =  apiService.getToken();
          Swal.fire("已登出！")
+          window.location.reload();
     },
   }
 }

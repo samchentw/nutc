@@ -26,7 +26,7 @@ export default {
       }})
       .then((x) => {
         this.users = x.data ;
-        // console.log(this.users)
+        console.log(this.users)
       }) 
       .catch(() => {
           // Swal.fire("登入失敗！");

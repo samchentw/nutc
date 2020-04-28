@@ -3,9 +3,9 @@
 
  <div class = "container-fluid">
     <div class="row">
-        <div class="col-lg-4 col-md-4 col-sm-6 portfolio-item">
+        <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
         </div>
-        <div class="col-lg-4 col-md-4 col-sm-6 portfolio-item">
+        <div class="col-lg-6 col-md-4 col-sm-6 portfolio-item">
             <div v-if="type==1">
             <div class="alert alert-success" role="alert">
                 會員登入
@@ -41,48 +41,52 @@
                     <form>
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                            <label for="inputEmail4">Email</label>
-                            <input type="email" class="form-control" id="inputEmail4">
+                            <label for="inputEmail4">帳號</label>
+                            <input type="text" v-model="registerData.account" class="form-control" id="inputEmail4">
                             </div>
                             <div class="form-group col-md-6">
-                            <label for="inputPassword4">Password</label>
-                            <input type="password" class="form-control" id="inputPassword4">
+                            <label for="inputPassword4">密碼</label>
+                            <input type="password" v-model="registerData.password" class="form-control" id="inputPassword4">
                             </div>
+                        </div>
+
+
+                         <div class="form-group">
+                            <label for="inputAddress2">姓名</label>
+                            <input type="text" v-model="registerData.name" class="form-control" id="inputAddress2">
+                        </div>
+
+                         <div class="form-group">
+                          <b-form-group label="性別">
+                            <b-form-radio-group
+                                id="radio-group-1"
+                                v-model="registerData.gender"
+                                :options="options"
+                                name="radio-options"
+                            ></b-form-radio-group>
+                          </b-form-group>
+                         
+                         </div>
+
+                         <div class="form-group">
+                            <label for="inputAddress2">生日</label>
+                            <b-form-datepicker v-model="registerData.birthday"  locale="cn"></b-form-datepicker>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="inputAddress">地址</label>
+                            <input type="text" v-model="registerData.address" class="form-control" id="inputAddress" >
                         </div>
                         <div class="form-group">
-                            <label for="inputAddress">Address</label>
-                            <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+                            <label for="inputAddress2">電子信箱</label>
+                            <input type="text" v-model="registerData.email" class="form-control" id="inputAddress2">
                         </div>
-                        <div class="form-group">
-                            <label for="inputAddress2">Address 2</label>
-                            <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                            <label for="inputCity">City</label>
-                            <input type="text" class="form-control" id="inputCity">
-                            </div>
-                            <div class="form-group col-md-4">
-                            <label for="inputState">State</label>
-                            <select id="inputState" class="form-control">
-                                <option selected>Choose...</option>
-                                <option>...</option>
-                            </select>
-                            </div>
-                            <div class="form-group col-md-2">
-                            <label for="inputZip">Zip</label>
-                            <input type="text" class="form-control" id="inputZip">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="gridCheck">
-                            <label class="form-check-label" for="gridCheck">
-                                Check me out
-                            </label>
-                            </div>
-                        </div>
-                        <button type="submit" class="btn btn-primary">註冊</button>
+
+
+
+
+                        
+                        <button type="button" v-on:click="register()" class="btn btn-primary">註冊</button>
                         
                         </form>
                 </div>
@@ -93,7 +97,7 @@
            
             
         </div>
-        <div class="col-lg-4 col-md-4 col-sm-6 portfolio-item">
+        <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
         </div>
     </div>
  </div>
@@ -117,9 +121,20 @@ export default {
             password:""
         },
         registerData:{
-
+            "account": "",
+            "password": "",
+            "name": "",
+            "gender": 0,
+            "birthday": new Date(),
+            "address": "",
+            "email": ""
         },
-        type:1
+        type:1,
+         options: [
+          { text: '男性', value: 0 },
+          { text: '女性', value: 1 },
+         ]
+        // value: new Date()
       }
    },
    methods: {
@@ -136,6 +151,7 @@ export default {
       .then((x) => {
         // location.href = "http://www.google.com/"
         // Swal.fire("登入成功！");
+         location.href = "./#/";
         Swal.fire({
         title: '系統訊息',
         text: "登入成功！",
@@ -144,16 +160,39 @@ export default {
         confirmButtonColor: '#3085d6',
         confirmButtonText: '確定'
         }).then((result) => {
-         location.href = "./#/";
-        if (result.value) {
-            window.location.reload();
-            }
+          apiService.saveToken(x.data.token);
+          window.location.reload();
         })
-        apiService.saveToken(x.data.token);
+        
       
       }) 
       .catch(() => {
           Swal.fire("登入失敗！");
+      });
+    },  
+    register() {      
+      if(this.registerData.account == "" || this.registerData.password == ""){        
+        Swal.fire("不能有空值")
+        return;
+      }
+      axios
+      .post('../api/users/register',this.registerData)
+      .then((x) => {
+        Swal.fire({
+        title: '系統訊息',
+        text: "註冊成功！",
+        icon: 'success',
+        showCancelButton: false,
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: '確定'
+        }).then((result) => {
+        //   apiService.saveToken(x.data.token);
+          window.location.reload();
+        })
+        
+      }) 
+      .catch(() => {
+          Swal.fire("註冊失敗！");
       });
     }
    }

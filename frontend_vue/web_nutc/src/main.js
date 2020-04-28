@@ -7,7 +7,13 @@ import HelloWorld from './components/HelloWorld.vue';
 import Test from './components/Test.vue';
 import Login from './components/Login.vue';
 import User from './components/User.vue';
-
+import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
+// Install BootstrapVue
+Vue.use(BootstrapVue)
+// Optionally install the BootstrapVue icon components plugin
+Vue.use(IconsPlugin)
 Vue.config.productionTip = false
 var key = "nutc"
 const router = new VueRouter({

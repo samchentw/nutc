@@ -259,16 +259,18 @@ export default {
     }
   },
   created() {
-     axios
-      .get('../api/users/info',{headers:{
-           Authorization: 'Bearer ' + this.getToken()
+    axios
+      .get('../api/auth/admin/permission',{headers:{
+           Authorization: 'Bearer ' + apiService.getToken()
       }})
       .then((x) => {
-        this.userInfo = x.data ;
+        this.getInfo()
       }) 
       .catch(() => {
-          Swal.fire("登入失敗！");
+          Swal.fire("沒有權限！");
+           location.href = "./#/";
       });
+    
   },
    methods: {
     logout() {
@@ -278,6 +280,17 @@ export default {
     },
     getToken() {
       return apiService.getToken();
+    },getInfo(){
+       axios
+      .get('../api/users/info',{headers:{
+           Authorization: 'Bearer ' + this.getToken()
+      }})
+      .then((x) => {
+        this.userInfo = x.data ;
+      }) 
+      .catch(() => {
+          Swal.fire("登入失敗！");
+      });
     }
   }
 }

@@ -64,6 +64,22 @@ export default {
       }
    },
    methods: {
+    check(){
+       axios
+      .get('../api/auth/admin/permission',{headers:{
+           Authorization: 'Bearer ' + apiService.getToken()
+      }})
+      .then((x) => {
+        // console.log(x)
+        Swal.fire("登入成功！");
+        // apiService.saveToken(x.data.token);
+        // window.localStorage.setItem("nutc", x.data.token);
+         location.href = "./#/system/dashboard";
+      }) 
+      .catch(() => {
+          Swal.fire("沒有權限！");
+      });
+    },
     login() {      
 
       if(this.loginData.account == "" || this.loginData.password == ""){        
@@ -74,10 +90,10 @@ export default {
       .post('../api/auth/login',this.loginData)
       .then((x) => {
         // console.log(x)
-        Swal.fire("登入成功！");
+        // Swal.fire("登入成功！");
         apiService.saveToken(x.data.token);
-        // window.localStorage.setItem("nutc", x.data.token);
-         location.href = "./#/system/dashboard";
+        this.check();
+        
       }) 
       .catch(() => {
           Swal.fire("登入失敗！");
