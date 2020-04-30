@@ -1,5 +1,5 @@
 import {Entity,JoinTable, ManyToMany,CreateDateColumn, Column, ManyToOne, JoinColumn} from 'typeorm';
-import { BaseEntity } from '../../shared';
+import { BaseEntity } from '@app/core/shared';
 import { TagEntity } from './tag.entity'
 @Entity()
 export class ArticleEntity extends BaseEntity{

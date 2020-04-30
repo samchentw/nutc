@@ -1,9 +1,9 @@
 
-import { Entity, Column } from 'typeorm';
-import { BaseEntity } from '../../shared';
-
+import { Entity, Column, OneToMany } from 'typeorm';
+import { BaseEntity } from '@app/core/shared';
+import { ProductEntity } from './product.entity';
 @Entity()
-export class ShopEntity extends BaseEntity{  
+export class ShopEntity extends BaseEntity {
 
   @Column({ length: 30, unique: true })
   name: string;
@@ -12,8 +12,18 @@ export class ShopEntity extends BaseEntity{
   phone: string;
 
   @Column()
+  address: string;
+
+  @Column()
   description: string;
-  
+
+  @Column()
+  remark: string;
+
   @Column()
   delete: boolean;
+
+  @OneToMany(type => ProductEntity, productEntity => productEntity.shop)
+  Product: ProductEntity[];
+
 }

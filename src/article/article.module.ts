@@ -7,7 +7,7 @@ import { ArticleController } from './controller/article.controller';
 import { TagController } from './controller/tag.controller';
 import { TagService } from './service/base/tag.service';
 import { TestService } from './service/test.service';
-import { ExcelFactory } from '../shared';
+import { ExcelFactory } from '@app/core/shared';
 @Module({
     controllers:[
         ArticleController,TagController

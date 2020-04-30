@@ -1,6 +1,6 @@
 import {Entity, PrimaryGeneratedColumn, Column, ManyToOne} from "typeorm";
 import { CmsNewsTypeEntity } from './cms.newsType.entity';
-import { BaseEntity } from '../../shared';
+import { BaseEntity } from '@app/core/shared';
 @Entity()
 export class CmsNewsEntity extends BaseEntity{
 

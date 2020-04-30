@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import * as _ from 'lodash';
-import {BaseService} from '../../../shared';
+import {BaseService} from '@app/core/shared';
 
 import { CreateNewsDto,CreateNewsWithDetailDto, UpdateNewsDto, UpdateNewsTypeDto, CreateNewsTypeDto } from '../../dto';
 import {CmsNewsEntity} from '../../entity';

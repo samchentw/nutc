@@ -1,15 +1,16 @@
 
-module.exports = {
-    "type": "mysql",
-    "host": "localhost",
-    "port": 3306,
-    "username": "root",
-    "password": "",
-    "database": "nest",
-    "entities": ["dist/**/*.entity{.ts,.js}"],
-    "seeds": ["src/**/*.seed.ts"],
-    "synchronize": true
- }
+// module.exports = {
+//     "type": "mysql",
+//     "host": "localhost",
+//     "port": 3306,
+//     "username": "root",
+//     "password": "",
+//     "database": "nest",
+//     "entities": ["dist/**/*.entity{.ts,.js}"],
+//     "seeds": ["src/**/*.seed.ts","libs/**/*seed.ts"],
+//     "synchronize": true,
+//     "autoLoadEntities":true
+//  }
 
 
 

@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import * as _ from 'lodash';
-import { MessageDto } from '../../shared';
+import { MessageDto } from '@app/core/shared';
 import { Queue } from 'bull';
 import { InjectQueue } from '@nestjs/bull';
 import { InjectRepository, } from '@nestjs/typeorm';

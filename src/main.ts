@@ -5,7 +5,7 @@ import * as rateLimit from 'express-rate-limit';
 import * as cpx from 'cpx';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { join } from 'path';
-import { MyLogger } from './shared';
+import { MyLogger } from '@app/core/shared';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { AppModule } from './app.module';
 async function bootstrap() {

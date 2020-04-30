@@ -4,7 +4,7 @@ import { map, filter, take, pluck, combineLatest, tap, } from 'rxjs/operators';
 import * as _ from 'lodash';
 import { fs, vol } from 'memfs';
 import * as f from 'fs'
-import { ExcelService } from '../../shared'
+import { ExcelService } from '@app/core/shared'
 @Injectable()
 export class TestService {
 

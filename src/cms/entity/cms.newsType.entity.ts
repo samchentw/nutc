@@ -1,6 +1,6 @@
 import {Entity, JoinColumn, Column, OneToMany} from "typeorm";
 import { CmsNewsEntity } from './cms.news.entity';
-import { BaseEntity } from '../../shared';
+import { BaseEntity } from '@app/core/shared';
 @Entity()
 export class CmsNewsTypeEntity extends BaseEntity{
 

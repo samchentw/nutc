@@ -2,7 +2,7 @@ import { Test } from '@nestjs/testing';
 import { FileController } from '../controller/file.controller';
 import { FileService } from '../service/file.service';
 import { FileEntity } from '../entity/file.entity';
-import { UploadFactory } from '../../shared';
+import { UploadFactory } from '@app/core/shared';
 import { TypeOrmModule } from '@nestjs/typeorm';
 describe('FileController', () => {
   let fileController: FileController;

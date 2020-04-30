@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import * as _ from 'lodash';
-import {BaseService} from '../../../shared';
+import {BaseService} from '@app/core/shared';
 
 import { CreateArticleDto, UpdateArticleDto, ArticlePageDto ,ArticleQueryPageDto} from '../../dto';
 import {ArticleEntity} from '../../entity/article.entity';

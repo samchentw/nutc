@@ -8,7 +8,7 @@ import {
 } from '@nestjs/websockets';
 import { ChatService } from './service/chat.service';
 // import * as socketioJwt from 'socketio-jwt';
-import { MessageDto } from '../shared';
+import { MessageDto } from '@app/core/shared';
 import { Cron,SchedulerRegistry } from '@nestjs/schedule';
 @WebSocketGateway()
 export class EventsGateway implements OnModuleInit,OnGatewayConnection,OnGatewayDisconnect{

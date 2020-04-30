@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { PracticeController } from './practice.controller';
 import { TestService } from './service/test.service';
-import { ExcelFactory } from '../shared/factory/excel.factory';
+import { ExcelFactory } from '@app/core/shared';
 @Module({
   controllers: [PracticeController],
   providers: [ TestService, ExcelFactory ] 

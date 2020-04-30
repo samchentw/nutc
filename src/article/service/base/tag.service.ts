@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import * as _ from 'lodash';
-import {BaseService, dataDuplicationException} from '../../../shared';
+import {BaseService, dataDuplicationException} from '@app/core/shared';
 
 import { CreateTagDto} from '../../dto';
 import { TagEntity } from '../../entity/tag.entity';

@@ -24,7 +24,8 @@ describe('FileController', () => {
 
   describe('findAll', () => {
     it('should return an array of articleEntity', async () => {     
-        let count =await articleController.getAll();        
+        let count =await articleController.getAll();   
+        console.log(count)     
         expect(count.length).toBeGreaterThanOrEqual(0);
     });
   });

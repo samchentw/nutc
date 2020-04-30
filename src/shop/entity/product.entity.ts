@@ -1,10 +1,13 @@
-import { Entity, Column } from 'typeorm';
-import { BaseEntity } from '../../shared';
-
+import { Entity, Column, ManyToOne } from 'typeorm';
+import { BaseEntity } from '@app/core/shared';
+import { ShopEntity } from './shop.entity';
 @Entity()
 export class ProductEntity extends BaseEntity{  
 
-  @Column({ length: 30, unique: true })
+  @Column()
   name: string;
+
+  @ManyToOne(type => ShopEntity, shopEntity => shopEntity.Product)
+  shop: ShopEntity;
 
 }

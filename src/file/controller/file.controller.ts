@@ -3,7 +3,7 @@ import { Controller, Get, Post, Param, UseInterceptors,UploadedFiles,Request, Re
 import {FileFieldsInterceptor,FileInterceptor} from '@nestjs/platform-express';
 
 import {ApiTags, ApiBearerAuth, ApiParam, ApiConsumes,ApiBody} from '@nestjs/swagger';
-import {dataDuplicationException, RolesGuard, Roles} from '../../shared';
+import {dataDuplicationException, RolesGuard, Roles} from '@app/core/shared';
 import { FileService } from '../service/file.service';
 
 

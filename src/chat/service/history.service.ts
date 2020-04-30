@@ -1,7 +1,7 @@
 import { Process, Processor } from '@nestjs/bull';
 import { Logger } from '@nestjs/common';
 import { Job } from 'bull';
-import { MessageDto } from '../../shared';
+import { MessageDto } from '@app/core/shared';
 import * as _ from 'lodash';
 import { ChatService } from './chat.service';
 @Processor('history')

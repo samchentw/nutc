@@ -3,7 +3,7 @@ import * as _ from 'lodash';
 
 import { InjectRepository, } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { ValidationPipe, ExcelService, ExcelOption, ExcelType } from '../../shared';
+import { ValidationPipe, ExcelService, ExcelOption, ExcelType } from '@app/core/shared';
 @Injectable()
 export class TestService {
     constructor(

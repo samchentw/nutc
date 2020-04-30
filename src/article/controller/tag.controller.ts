@@ -1,7 +1,7 @@
 import { Controller, Get, Post, Body, Put, Param, Delete, Query, UsePipes, Res,Header, Req } from '@nestjs/common';
 import { TagService } from '../service/base/tag.service';
 import { CreateTagDto,TagDto } from '../dto';
-import { ValidationPipe } from '../../shared';
+import { ValidationPipe } from '@app/core/shared';
 import {ApiTags, ApiQuery, ApiParam,ApiDefaultResponse} from '@nestjs/swagger';
 
 @ApiTags("Tag")
