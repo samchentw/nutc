@@ -9,13 +9,8 @@ import { AppService } from './app.service';
 import { IdentityModule } from '@app/identity';
 import { CoreModule } from '@app/core';
 
-import { ArticleModule } from './article/article.module';
-import { CmsModule } from './cms/cms.module';
-import { TreeModule } from './tree/tree.module';
-import { ChatModule } from './chat/chat.module';
-import { FileModule } from './file/file.module';
-import { PracticeModule } from './practice/practice.module';
 import { ShopModule } from './shop/shop.module';
+import { ConsumerModule } from './consumer/consumer.module';
 @Module({
   imports: [
     TypeOrmModule.forRoot({
@@ -36,12 +31,9 @@ import { ShopModule } from './shop/shop.module';
     CoreModule,
     IdentityModule,
     
-    // ArticleModule,FileModule,
-    // PracticeModule,
-    // ChatModule,
-
-    // TreeModule,
     ShopModule,
+    
+    ConsumerModule,
     
   ],
   controllers: [AppController,],

@@ -19,8 +19,8 @@ async function bootstrap() {
   app.setGlobalPrefix('api');
 
   const options = new DocumentBuilder()
-    .setTitle('note example')
-    .setDescription('The note API description')
+    .setTitle('NUTC Api')
+    .setDescription('The NUTC API description')
     .setVersion('1.0')
     .addBearerAuth()
     .build();
@@ -42,5 +42,5 @@ bootstrap();
 
 
 function staticAssetsRoot(folderName: string) {
-  return join(process.cwd(), 'client/'+folderName);
+  return join(process.cwd(), 'client/' + folderName);
 }

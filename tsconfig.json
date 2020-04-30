@@ -22,6 +22,12 @@
       ],
       "@app/core/*": [
         "libs/core/src/*"
+      ],
+      "@app/else": [
+        "libs/else/src"
+      ],
+      "@app/else/*": [
+        "libs/else/src/*"
       ]
     }
   },

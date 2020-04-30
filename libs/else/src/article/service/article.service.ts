@@ -2,8 +2,8 @@ import { Injectable } from '@nestjs/common';
 import * as _ from 'lodash';
 import {BaseService} from '@app/core/shared';
 
-import { CreateArticleDto, UpdateArticleDto, ArticlePageDto ,ArticleQueryPageDto} from '../../dto';
-import {ArticleEntity} from '../../entity/article.entity';
+import { CreateArticleDto, UpdateArticleDto, ArticlePageDto ,ArticleQueryPageDto} from '../dto';
+import {ArticleEntity} from '../entity/article.entity';
 
 import { InjectRepository, } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';

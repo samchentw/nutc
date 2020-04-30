@@ -1,12 +1,12 @@
 import { Test } from '@nestjs/testing';
 import { ArticleController } from '../controller/article.controller';
-import { ArticleService } from '../service/base/article.service';
+import { ArticleService } from '../service/article.service';
 
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ArticleEntity } from '../entity/article.entity';
 import { TagEntity } from '../entity/tag.entity';
 import { TagController } from '../controller/tag.controller';
-import { TagService } from '../service/base/tag.service';
+import { TagService } from '../service/tag.service';
 describe('FileController', () => {
   let articleController: ArticleController;
   let articleService: ArticleService;

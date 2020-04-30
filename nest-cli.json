@@ -19,6 +19,15 @@
       "compilerOptions": {
         "tsConfigPath": "libs/core/tsconfig.lib.json"
       }
+    },
+    "else": {
+      "type": "library",
+      "root": "libs/else",
+      "entryFile": "index",
+      "sourceRoot": "libs/else/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/else/tsconfig.lib.json"
+      }
     }
   },
   "compilerOptions": {

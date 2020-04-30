@@ -1,16 +1,14 @@
 import { Controller, Get, Post, Body, Put, Param, Delete, Query, UsePipes, Res, Header, Req } from '@nestjs/common';
-import { ArticleService } from '../service/base/article.service';
+import { ArticleService } from '../service/article.service';
 import { CreateArticleDto, UpdateArticleDto, ArticlePageDto, ArticleDto } from '../dto';
 import { ValidationPipe } from '@app/core/shared';
 import { ApiTags, ApiQuery, ApiParam, ApiDefaultResponse } from '@nestjs/swagger';
-import { TestService } from '../service/test.service'
 // import { fs } from 'memfs';
 @ApiTags("Article")
 @Controller("article")
 export class ArticleController {
   constructor(
     private readonly articleService: ArticleService,
-    private TestService: TestService
   ) { }
 
   @Get("getAll")
@@ -61,14 +59,14 @@ export class ArticleController {
     return result;
   }
 
-  @Get("excel")
-  excelTest(@Res() res) {
-    res.set('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-    res.attachment('test.xlsx');
-    var result = this.TestService.testExcel();
-    res.end(result, 'binary');
+  // @Get("excel")
+  // excelTest(@Res() res) {
+  //   res.set('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+  //   res.attachment('test.xlsx');
+  //   var result = this.TestService.testExcel();
+  //   res.end(result, 'binary');
+  // }
 
-  }
   // @Get("readJson")
   // readJson(){
   //   console.log(__dirname)

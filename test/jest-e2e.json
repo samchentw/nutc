@@ -14,6 +14,8 @@
     "@app/identity/(.*)": "<rootDir>/../libs/identity/src/$1",
     "@app/identity": "<rootDir>/../libs/identity/src",
     "@app/core/(.*)": "<rootDir>/../libs/core/src/$1",
-    "@app/core": "<rootDir>/../libs/core/src"
+    "@app/core": "<rootDir>/../libs/core/src",
+    "@app/else/(.*)": "<rootDir>/../libs/else/src/$1",
+    "@app/else": "<rootDir>/../libs/else/src"
   }
 }
