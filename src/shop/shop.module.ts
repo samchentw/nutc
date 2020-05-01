@@ -1,22 +1,20 @@
 import { Module } from '@nestjs/common';
 import { ShopEntity } from './entity/shop.entity';
-import { ProductEntity } from './entity/product.entity'
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ShopService } from './service/shop.service';
-import { ProductService } from './service/product.service';
 import { ExcelFactory } from '@app/core/shared';
 import { ShopController } from './controller/shop.controller';
-
+import { FileModule } from '@app/core/file/file.module'
 @Module({
     controllers:[
         ShopController
     ],
     imports: [
-        TypeOrmModule.forFeature([ShopEntity, ProductEntity])
+        TypeOrmModule.forFeature([ShopEntity]),
+        FileModule
     ],
     providers: [
         ShopService,
-        ProductService,
         ExcelFactory,
     ]
 })

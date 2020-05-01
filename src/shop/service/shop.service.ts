@@ -1,12 +1,14 @@
 import { Injectable, Inject } from '@nestjs/common';
 
 import { InjectRepository, } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Repository, Entity } from 'typeorm';
 import * as _ from 'lodash';
-import { ExcelService, BaseService } from '@app/core/shared';
+import { ExcelService, BaseService, PageDto } from '@app/core/shared';
 import { CreateShopDto } from '../dto/create-shop.dto';
 import { UpdateShopDto } from '../dto/update-shop.data';
 import { ShopEntity } from '../entity/shop.entity';
+import { FileService } from '@app/core/file/service/file.service';
+import { plainToClass, classToPlain, classToClass } from 'class-transformer';
 @Injectable()
 export class ShopService extends BaseService<ShopEntity, CreateShopDto, UpdateShopDto> {
 
@@ -14,26 +16,53 @@ export class ShopService extends BaseService<ShopEntity, CreateShopDto, UpdateSh
         @InjectRepository(ShopEntity)
         public repository: Repository<ShopEntity>,
         @Inject('ExcelFactory') private ExcelService: ExcelService,
+        private readonly fileService: FileService,
     ) {
         super(repository)
-        // this.readExcel();
     }
 
-    readExcel() {
+    private async findImage(imageIds: number[]): Promise<string> {
+        var images = await this.fileService.findByIds(imageIds);
+        return JSON.stringify(images);
+    }
+
+    async create(input: CreateShopDto) {
+        var shop = plainToClass(ShopEntity, input);
+        shop.shopImage = await this.findImage(input.imageIds);
+        shop.isDelete = false;
+        return await super.create(shop)
+    }
+
+    async update(id: number, input: UpdateShopDto) {
+        var orShop = await this.repository.findOne(id);
+        if (input.imageIds && input.imageIds.length > 0){
+            orShop.shopImage = await this.findImage(input.imageIds);
+        }
+        delete input.imageIds;
+        delete input.id;
+        orShop = { ...orShop, ...input };
+
+        console.log(orShop)
+        return await super.update(id, orShop)
+    }
+
+    async readExcel() {
         var datas = this.ExcelService.ReadExcel<shopData>("./seeds/店家", 0);
-        datas.forEach(data => {
-            var check = this.repository.findOne({name:data.店家名稱});
-            if(!check){
+
+        for (var i = 0; i < datas.length; i++) {
+            var check = await this.repository.findOne({ name: datas[i].店家名稱 });
+            if (!check) {
                 var shop = new ShopEntity();
-                shop.name = data.店家名稱;
-                shop.phone = data.電話;
-                if (data.備註) shop.remark = data.備註
+                shop.name = datas[i].店家名稱;
+                shop.phone = datas[i].電話;
+                shop.address = datas[i].地址;
+                if (datas[i].備註) shop.remark = datas[i].備註
                 else shop.remark = "";
                 shop.description = "";
-                shop.delete = false;
-                this.repository.save(shop);
+                shop.isDelete = false;
+                await this.repository.save(shop);
             }
-        });
+        }
         console.log("匯入成功！");
     }
 

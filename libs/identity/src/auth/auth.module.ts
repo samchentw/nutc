@@ -45,7 +45,13 @@ export class AuthModule implements NestModule {
         { path: '/role/:id', method: RequestMethod.PUT },
         { path: '/role/:id', method: RequestMethod.DELETE },
 
-        { path: '/setting/setByKey/:key', method: RequestMethod.PUT }
+        // setting
+        { path: '/setting/setByKey/:key', method: RequestMethod.PUT },
+
+        //shop
+        { path: '/shop/create', method: RequestMethod.POST },
+        { path: '/shop/:id', method: RequestMethod.PUT },
+        { path: '/shop/:id', method: RequestMethod.DELETE },
 
       );
   }

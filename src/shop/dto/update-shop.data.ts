@@ -20,5 +20,8 @@ export class UpdateShopDto {
     remark: string;
 
     @ApiProperty()
-    delete: boolean;
+    isDelete: boolean;
+
+    @ApiProperty({ type: Number, isArray: true })
+    imageIds: number[];
 }

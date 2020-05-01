@@ -1,25 +1,33 @@
-import { IsString } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
-
-export class CreateShopDto{
+// import { TagDto } from './tag.dto';
+export class ShopDto{ 
+    @ApiProperty()
+    id: number;
     @ApiProperty()
     name: string;
 
     @ApiProperty()
     phone: string;
-  
+
     @ApiProperty()
     address: string;
-  
+
     @ApiProperty()
     description: string;
-  
+
     @ApiProperty()
     remark: string;
-  
+
     @ApiProperty()
     isDelete: boolean;
-    
-    @ApiProperty({type:Number, isArray:true})
-    imageIds: number[];
+    @ApiProperty()
+    createTime:Date;
+  
+}
+
+export class ShopPageDto{ 
+    @ApiProperty()
+    count:number;
+    @ApiProperty({type:ShopDto,isArray:true})
+    items:ShopDto[];
 }

@@ -11,6 +11,8 @@ import { CoreModule } from '@app/core';
 
 import { ShopModule } from './shop/shop.module';
 import { ConsumerModule } from './consumer/consumer.module';
+// import { ElseModule } from '@app/else';
+import { ProductModule } from './product/product.module';
 @Module({
   imports: [
     TypeOrmModule.forRoot({
@@ -24,16 +26,16 @@ import { ConsumerModule } from './consumer/consumer.module';
       "autoLoadEntities":true,
       "synchronize": true,
     }),   
-    // ScheduleModule.forRoot(),
+    ScheduleModule.forRoot(),
     ConfigModule.forRoot({
       envFilePath: 'development.env',
     }),
     CoreModule,
     IdentityModule,
-    
+
     ShopModule,
-    
     ConsumerModule,
+    ProductModule,
     
   ],
   controllers: [AppController,],

@@ -5,9 +5,18 @@ import VueRouter from 'vue-router';
 import HelloWorld from './components/HelloWorld.vue'
 
 import AdminLayout from './components/layout/AdminLayout';
-import Dashboard from './components/Dashboard.vue'
-import User from './components/User.vue'
-import Login from './components/Login.vue'
+import Dashboard from './components/Dashboard.vue';
+import User from './components/User.vue';
+import Login from './components/Login.vue';
+import Shop from './components/Shop.vue';
+import Setting from './components/Setting.vue';
+
+
+import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
+// Install BootstrapVue
+Vue.use(BootstrapVue)
 
 Vue.config.productionTip = false
 var key = "nutc"
@@ -20,6 +29,8 @@ const router = new VueRouter({
       children:[
         { path: 'dashboard', component: Dashboard },
         { path: 'user', component: User },
+        { path: 'Shop', component: Shop },
+        { path: 'setting', component: Setting },
         
         { path: 'test', component: HelloWorld },
       ]

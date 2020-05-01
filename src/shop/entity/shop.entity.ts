@@ -1,7 +1,6 @@
 
-import { Entity, Column, OneToMany } from 'typeorm';
+import { Entity, Column, OneToMany, BeforeInsert, JoinColumn, JoinTable, ManyToOne } from 'typeorm';
 import { BaseEntity } from '@app/core/shared';
-import { ProductEntity } from './product.entity';
 @Entity()
 export class ShopEntity extends BaseEntity {
 
@@ -21,9 +20,17 @@ export class ShopEntity extends BaseEntity {
   remark: string;
 
   @Column()
-  delete: boolean;
+  isDelete: boolean;
 
-  @OneToMany(type => ProductEntity, productEntity => productEntity.shop)
-  Product: ProductEntity[];
+  // @OneToMany(type => ProductEntity, productEntity => productEntity.shop)
+  // Product: ProductEntity[];
+
+  @Column()
+  shopImage: string;
+
+  // @BeforeInsert()
+  // defaultIsDelete() {
+  //   this.isDelete = false;
+  // }
 
 }

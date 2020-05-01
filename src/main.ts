@@ -10,14 +10,11 @@ import { NestExpressApplication } from '@nestjs/platform-express';
 import { AppModule } from './app.module';
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
-
-  //app.useStaticAssets(staticAssetsRoot("front"), { prefix: "/0.5/" });
-  app.useStaticAssets(staticAssetsRoot("demo"), { prefix: "/" });
+  app.useStaticAssets(staticAssetsRoot("public"), { prefix: "/" });
   app.useStaticAssets(staticAssetsRoot("nutc_web"), { prefix: "/nutc/" });
   app.useStaticAssets(staticAssetsRoot("nutc_app"), { prefix: "/admin/" });
-
   app.setGlobalPrefix('api');
-
+  
   const options = new DocumentBuilder()
     .setTitle('NUTC Api')
     .setDescription('The NUTC API description')
@@ -31,7 +28,7 @@ async function bootstrap() {
   app.use(
     rateLimit({
       windowMs: 15 * 60 * 1000, // 15 minutes
-      max: 500, // limit each IP to 100 requests per windowMs
+      max: 500, // limit each IP to 500 requests per windowMs
     }),
   );
   app.use(compression());
