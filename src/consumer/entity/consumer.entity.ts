@@ -5,11 +5,12 @@ import { BaseEntity } from '@app/core/shared';
 export class ConsumerEntity extends BaseEntity {
 
     @Column()
-    point: number;
+    userId: number;
 
     @Column()
-    userId:number;
+    point: number;
 
-
+    @Column("simple-array")
+    order: number[];
 
 }

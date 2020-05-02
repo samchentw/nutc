@@ -8,7 +8,7 @@ import { CreateShopDto } from '../dto/create-shop.dto';
 import { UpdateShopDto } from '../dto/update-shop.data';
 import { ShopEntity } from '../entity/shop.entity';
 import { FileService } from '@app/core/file/service/file.service';
-import { plainToClass, classToPlain, classToClass } from 'class-transformer';
+import { plainToClass, classToPlain, classToClass, plainToClassFromExist } from 'class-transformer';
 @Injectable()
 export class ShopService extends BaseService<ShopEntity, CreateShopDto, UpdateShopDto> {
 
@@ -34,16 +34,11 @@ export class ShopService extends BaseService<ShopEntity, CreateShopDto, UpdateSh
     }
 
     async update(id: number, input: UpdateShopDto) {
-        var orShop = await this.repository.findOne(id);
-        if (input.imageIds && input.imageIds.length > 0){
-            orShop.shopImage = await this.findImage(input.imageIds);
+        var newshop = plainToClass(ShopEntity, input, { excludeExtraneousValues: true });
+        if (input.imageIds && input.imageIds.length > 0) {
+            newshop.shopImage = await this.findImage(input.imageIds);
         }
-        delete input.imageIds;
-        delete input.id;
-        orShop = { ...orShop, ...input };
-
-        console.log(orShop)
-        return await super.update(id, orShop)
+        return await super.update(id, newshop)
     }
 
     async readExcel() {

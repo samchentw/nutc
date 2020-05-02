@@ -3,7 +3,7 @@ import { Entity, Column, OneToMany, BeforeInsert, JoinColumn, JoinTable, ManyToO
 import { BaseEntity } from '@app/core/shared';
 import { Expose } from 'class-transformer';
 @Entity()
-export class ShopEntity extends BaseEntity {
+export class ProductEntity extends BaseEntity {
 
   @Column({ length: 30, unique: true })
   @Expose()
@@ -11,11 +11,11 @@ export class ShopEntity extends BaseEntity {
 
   @Column()
   @Expose()
-  phone: string;
+  price: number;
 
   @Column()
   @Expose()
-  address: string;
+  type: string;
 
   @Column()
   @Expose()
@@ -23,22 +23,10 @@ export class ShopEntity extends BaseEntity {
 
   @Column()
   @Expose()
-  remark: string;
-
-  @Column()
-  @Expose()
   isDelete: boolean;
 
-  // @OneToMany(type => ProductEntity, productEntity => productEntity.shop)
-  // Product: ProductEntity[];
-
   @Column()
   @Expose()
-  shopImage: string;
-
-  // @BeforeInsert()
-  // defaultIsDelete() {
-  //   this.isDelete = false;
-  // }
+  ProductImage: string;
 
 }

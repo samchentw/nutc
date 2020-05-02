@@ -13,6 +13,7 @@ import { ShopModule } from './shop/shop.module';
 import { ConsumerModule } from './consumer/consumer.module';
 // import { ElseModule } from '@app/else';
 import { ProductModule } from './product/product.module';
+import { OrderModule } from './order/order.module';
 @Module({
   imports: [
     TypeOrmModule.forRoot({
@@ -36,6 +37,7 @@ import { ProductModule } from './product/product.module';
     ShopModule,
     ConsumerModule,
     ProductModule,
+    OrderModule,
     
   ],
   controllers: [AppController,],
