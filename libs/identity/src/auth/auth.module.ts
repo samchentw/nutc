@@ -56,6 +56,8 @@ export class AuthModule implements NestModule {
         { path: '/shop/:id', method: RequestMethod.PUT },
         { path: '/shop/:id', method: RequestMethod.DELETE },
 
+        // consumer
+        { path: '/consumer/info', method: RequestMethod.GET },
       );
   }
 }

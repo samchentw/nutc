@@ -5,7 +5,7 @@ import { BaseEntity } from '@app/core/shared';
 export class ConsumerEntity extends BaseEntity {
 
     @Column()
-    userId: number;
+    userId: string;
 
     @Column()
     point: number;

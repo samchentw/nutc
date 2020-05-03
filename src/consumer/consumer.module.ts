@@ -1,4 +1,19 @@
 import { Module } from '@nestjs/common';
-
-@Module({})
+import { UsersModule } from '@app/identity/users/users.module';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { ConsumerEntity } from './entity/consumer.entity';
+import { ConsumerService } from './service/consumer.service';
+import { ConsumerController } from './controller/consumer.controller';
+@Module({
+    imports:[
+        UsersModule,
+        TypeOrmModule.forFeature([ConsumerEntity])
+    ],
+    controllers:[
+        ConsumerController
+    ],
+    providers:[
+        ConsumerService
+    ]
+})
 export class ConsumerModule {}

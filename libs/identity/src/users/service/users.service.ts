@@ -21,7 +21,7 @@ export class UsersService {
     }
 
     //註冊
-    async register(body:CreateUserDto):Promise<InsertResult>{
+    async register(body:CreateUserDto):Promise<User>{
         const {account,password,name,gender,birthday,address,email} =body;
         const check=await this.UserRepository.findOne({account});
         if(check){
@@ -33,7 +33,7 @@ export class UsersService {
         const userinfo= await this.UserInfoRepository.save({
             name,gender,birthday,address,email,role:roleArray
         });
-        return await this.UserRepository.insert({account,password,userinfo});       
+        return await this.UserRepository.save({account,password,userinfo});       
     }
 
     //帳號密碼驗證

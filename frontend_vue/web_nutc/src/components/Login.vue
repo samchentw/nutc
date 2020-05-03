@@ -176,7 +176,7 @@ export default {
         return;
       }
       axios
-      .post('../api/users/register',this.registerData)
+      .post('../api/consumer/register',this.registerData)
       .then((x) => {
         Swal.fire({
         title: '系統訊息',

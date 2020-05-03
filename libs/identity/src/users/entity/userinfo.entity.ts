@@ -1,7 +1,7 @@
 
-import { Entity, Column, PrimaryGeneratedColumn, ManyToMany, JoinColumn, JoinTable} from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToMany, JoinColumn, JoinTable } from 'typeorm';
 import { Role } from '../../role/entity/role.entity';
-import { genderDataEnum} from '../enum/enum';
+import { genderDataEnum } from '../enum/enum';
 @Entity()
 export class Userinfo {
   @PrimaryGeneratedColumn()
@@ -9,22 +9,22 @@ export class Userinfo {
 
   @Column({ length: 20 })
   name: string;
-  
-  @Column({type:'enum',enum:genderDataEnum})
-  gender:genderDataEnum;
+
+  @Column({ type: 'enum', enum: genderDataEnum })
+  gender: genderDataEnum;
 
   @Column()
   birthday: Date;
 
-  @Column({length:30})
-  address:string;
+  @Column({ length: 30 })
+  address: string;
 
-  @Column({length:30})
-  email:string;
+  @Column({ length: 30 })
+  email: string;
 
-  @ManyToMany(type=>Role,role=>role.name)
+  @ManyToMany(type => Role, role => role.name)
   @JoinTable()
-  role:Role[];
-  
+  role: Role[];
+
 }
 
