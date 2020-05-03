@@ -6,9 +6,9 @@ import { OrderEntity } from './order.entity';
 @Entity()
 export class OrderDetailEntity extends BaseEntity {
 
-  @Column({ length: 30, unique: true })
+  @Column()
   @Expose()
-  name: string;
+  count: number;
 
 
   @Column("simple-json")

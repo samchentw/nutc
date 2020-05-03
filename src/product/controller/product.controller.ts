@@ -6,7 +6,6 @@ import { ProductDto, ProductPageDto } from '../dto/product.dto';
 import { CreateProductDto } from '../dto/create-product.dto';
 import { UpdateProductDto } from '../dto/update-product.data';
 
-// import { fs } from 'memfs';
 @ApiTags("Product")
 @UseGuards(RolesGuard) 
 @Controller("product")

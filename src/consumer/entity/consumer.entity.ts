@@ -1,6 +1,6 @@
-import { Entity, Column, ManyToOne } from 'typeorm';
+import { Entity, Column, ManyToOne, OneToMany, JoinColumn } from 'typeorm';
 import { BaseEntity } from '@app/core/shared';
-
+import { OrderEntity } from '../../order/entity/order.entity';
 @Entity()
 export class ConsumerEntity extends BaseEntity {
 
@@ -10,7 +10,11 @@ export class ConsumerEntity extends BaseEntity {
     @Column()
     point: number;
 
-    @Column("simple-array")
-    order: number[];
+    // @Column("simple-array")
+    // order: number[];
+
+    @OneToMany(type => OrderEntity, order => order.consumer, { eager: true })
+    @JoinColumn()
+    order: OrderEntity[];
 
 }

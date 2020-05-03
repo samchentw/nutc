@@ -6,15 +6,18 @@ import { ProductService } from './service/product.service';
 import { ProductController } from './controller/product.controller';
 
 @Module({
-    controllers:[
+    controllers: [
         ProductController
     ],
-    imports:[
+    imports: [
         FileModule,
         TypeOrmModule.forFeature([ProductEntity])
     ],
-    providers:[
+    providers: [
+        ProductService
+    ],
+    exports: [
         ProductService
     ]
 })
-export class ProductModule {}
+export class ProductModule { }

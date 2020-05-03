@@ -12,5 +12,7 @@ export class OrderDetailService {
     constructor(
         @InjectRepository(OrderDetailEntity)
         public repository: Repository<OrderDetailEntity>,
-    ){}
+    ) { }
+
+    
 }

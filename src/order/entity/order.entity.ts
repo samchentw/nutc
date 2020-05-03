@@ -4,6 +4,7 @@ import { BaseEntity } from '@app/core/shared';
 import { Expose } from 'class-transformer';
 import { deliveryEnum, paymentEnum, orderStateEnum } from '../enum/enum';
 import { OrderDetailEntity } from './orderDetail.entity';
+import { ConsumerEntity } from 'src/consumer/entity/consumer.entity';
 
 @Entity()
 export class OrderEntity extends BaseEntity {
@@ -25,6 +26,9 @@ export class OrderEntity extends BaseEntity {
 
   @Column({ default: 0 })
   total: number;
+
+  @ManyToOne(type => ConsumerEntity, x => x.order)
+  consumer: ConsumerEntity;
 
   @OneToMany(type => OrderDetailEntity, od => od.order, { eager: true })
   @JoinColumn()
