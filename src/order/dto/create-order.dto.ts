@@ -16,10 +16,6 @@ export class CreateOrderDto {
     @IsNotEmpty()
     readonly deliveryTime: Date;
 
-    // @ApiProperty({enum:["準備中",'運送中',"已送達","未出貨"]})
-    // @IsNotEmpty()
-    // readonly state:statetype;
-
     @ApiProperty()
     @IsNotEmpty()
     readonly address: string;

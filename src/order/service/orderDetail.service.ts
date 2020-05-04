@@ -14,5 +14,8 @@ export class OrderDetailService {
         public repository: Repository<OrderDetailEntity>,
     ) { }
 
+    async save(input:OrderDetailEntity){
+        return await this.repository.save(input);
+    }
     
 }

@@ -1,5 +1,5 @@
 <template>
-  <div>Dashboard</div>
+  <div>鹿港文化藝術復興</div>
 </template>
 
 

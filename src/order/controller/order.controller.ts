@@ -15,6 +15,19 @@ export class OrderController {
     @Post("create")
     @ApiBearerAuth()
     create(@Body() body: CreateOrderDto, @User("id") userId) {
-        this.orderService.createOrder(body, userId);
+        return this.orderService.createOrder(body, userId);
+    }
+
+    @Put("update")
+    @ApiBearerAuth()
+    update(@Body() Body, @User("id") userId) {
+
+    }
+
+    @Delete(":id")
+    @ApiBearerAuth()
+    @ApiParam({ name: 'id' })
+    delete(@Param('id') id, @User("id") userId) {
+        
     }
 }
