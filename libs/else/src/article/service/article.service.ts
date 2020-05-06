@@ -45,8 +45,8 @@ export class ArticleService extends BaseService<ArticleEntity,CreateArticleDto,U
         .leftJoinAndSelect("x.tags", "tag");
         
     if(input.tagId!=0) articles.where("tag.id = :id",{ id:input.tagId });
-    if(input.title) articles.where("x.title like :text",{text:'%'+input.title+'%'});
-    if(input.text) articles.where("x.text like :text",{text:'%'+input.text+'%'});    
+    if(input.title) articles.andWhere("x.title like :text",{text:'%'+input.title+'%'});
+    if(input.text) articles.andWhere("x.text like :text",{text:'%'+input.text+'%'});    
     
     var result =await articles    
     .skip(input.skip)

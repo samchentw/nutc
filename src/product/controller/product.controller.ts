@@ -7,7 +7,7 @@ import { CreateProductDto } from '../dto/create-product.dto';
 import { UpdateProductDto } from '../dto/update-product.data';
 
 @ApiTags("Product")
-@UseGuards(RolesGuard) 
+@UseGuards(RolesGuard)
 @Controller("product")
 export class ProductController {
   constructor(
@@ -27,7 +27,7 @@ export class ProductController {
     return this.productService.get(id);
   }
 
-  @Post("create") 
+  @Post("create")
   @ApiBearerAuth()
   @Roles("admin")
   @UsePipes(new ValidationPipe())
@@ -57,8 +57,9 @@ export class ProductController {
   @ApiDefaultResponse({ type: ProductPageDto })
   @ApiQuery({ name: "skip", required: false })
   @ApiQuery({ name: "take", required: false })
+  @ApiQuery({ name: "productTypeId", required: false })
   async page(@Query() query, @Req() req) {
-    var temp = await this.productService.page({ skip: query.skip, take: query.take }, true);
+    var temp = await this.productService.page({ skip: query.skip, take: query.take, productTypeId: query.productTypeId }, true);
     var result = new ProductPageDto();
     result.count = temp[1];
     result.items = temp[0];

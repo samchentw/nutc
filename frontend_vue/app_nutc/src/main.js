@@ -10,7 +10,8 @@ import User from './components/User.vue';
 import Login from './components/Login.vue';
 import Shop from './components/Shop.vue';
 import Setting from './components/Setting.vue';
-
+import Product from './components/Product.vue';
+import Info from './components/Info.vue';
 
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
@@ -29,8 +30,10 @@ const router = new VueRouter({
       children:[
         { path: 'dashboard', component: Dashboard },
         { path: 'user', component: User },
-        { path: 'Shop', component: Shop },
+        { path: 'shop', component: Shop },
+        { path: 'product', component: Product },
         { path: 'setting', component: Setting },
+        { path: 'info', component: Info },
         
         { path: 'test', component: HelloWorld },
       ]

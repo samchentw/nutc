@@ -27,7 +27,7 @@
                           @click="open(modalShow,item)"
                           >編輯</a>
                           &nbsp;
-                          <a href="javascript:void(0)">刪除</a>
+                          <a href="javascript:void(0)" v-on:click="deleteItem(item.id)">刪除</a>
                         </td>
                       </tr>
                     </tbody>
@@ -53,27 +53,22 @@
           <div class="form-group">
             <label for="exampleInputEmail1">店家名稱</label>
             <input type="email" class="form-control"  v-model="select.name" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
           </div>
            <div class="form-group">
             <label for="exampleInputEmail1">電話</label>
             <input type="email" class="form-control"  v-model="select.phone" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
           </div>
            <div class="form-group">
             <label for="exampleInputEmail1">地址</label>
             <input type="email" class="form-control"  v-model="select.address" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
           </div>
           <div class="form-group">
             <label for="exampleInputEmail1">敘述</label>
             <input type="email" class="form-control"  v-model="select.description" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
           </div>
            <div class="form-group">
             <label for="exampleInputEmail1">備註</label>
             <textarea class="form-control" v-model="select.remark" id="exampleFormControlTextarea1" rows="3"></textarea>
-            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
           </div>
         
          
@@ -107,13 +102,26 @@ export default {
    this.change();
   },
   methods:{
-    handleOk(){
-      console.log("test")
+    handleOk(){ 
+       axios
+      .put('../api/shop/'+this.select.id,this.select,{
+        headers:{
+           Authorization: 'Bearer ' + apiService.getToken()
+        }
+      })
+      .then((x) => {
+        this.change();
+         Swal.fire(
+          '系統訊息',
+          '已更新.',
+          'success'
+        )
+      }) 
+      .catch(() => {});
     },
     open(show,data){
       this.modalShow = !show;
       this.select=data;
-      console.log(data);
     },
     next(x){
       this.pageIndex = x;
@@ -127,7 +135,38 @@ export default {
         this.shop = x.data.items ;
       }) 
       .catch(() => {});
-    }
+    },
+    deleteItem(id){
+      Swal.fire({
+      title: '系統訊息',
+      text: "確認要刪除嗎?",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: '確定',
+      cancelButtonText:'取消'
+    }).then((result) => {
+      if (result.value) {
+       axios
+      .delete('../api/shop/'+id,{
+        headers:{
+           Authorization: 'Bearer ' + apiService.getToken()
+        }
+      })
+      .then((x) => {
+        this.change();
+         Swal.fire(
+          '系統訊息',
+          '已刪除.',
+          'success'
+        )
+      }) 
+      .catch(() => {});
+       
+      }
+    });
+    },
   }
 }
 </script>

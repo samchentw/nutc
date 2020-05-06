@@ -4,20 +4,26 @@ import { FileModule } from '@app/core/file/file.module';
 import { ProductEntity } from './entity/product.entity';
 import { ProductService } from './service/product.service';
 import { ProductController } from './controller/product.controller';
+import { ProductTypeEntity } from './entity/productType.entity';
+import { ProductTypeService } from './service/productType.service';
+import { ProductTypeController } from './controller/productType.controller';
 
 @Module({
     controllers: [
-        ProductController
+        ProductController,
+        ProductTypeController
     ],
     imports: [
         FileModule,
-        TypeOrmModule.forFeature([ProductEntity])
+        TypeOrmModule.forFeature([ProductEntity,ProductTypeEntity])
     ],
     providers: [
-        ProductService
+        ProductService,
+        ProductTypeService
     ],
     exports: [
-        ProductService
+        ProductService,
+        ProductTypeService
     ]
 })
 export class ProductModule { }

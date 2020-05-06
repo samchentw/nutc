@@ -9,8 +9,8 @@ export class ProductDto {
     @ApiProperty()
     price: number;
 
-    @ApiProperty()
-    type: string;
+    // @ApiProperty()
+    // type: string;
 
     @ApiProperty()
     description: string;
@@ -28,4 +28,14 @@ export class ProductPageDto {
     count: number;
     @ApiProperty({ type: ProductDto, isArray: true })
     items: ProductDto[];
+   
+}
+
+export class ProductQueryPageDto {
+    @ApiProperty()
+    skip:number;
+    @ApiProperty()
+    take:number;
+    @ApiProperty()
+    productTypeId?:number;
 }

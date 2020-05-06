@@ -10,8 +10,8 @@ export class UpdateProductDto {
     @ApiProperty()
     price: number;
 
-    @ApiProperty()
-    type: string;
+    // @ApiProperty()
+    // type: string;
 
     @ApiProperty()
     description: string;
@@ -21,4 +21,7 @@ export class UpdateProductDto {
 
     @ApiProperty({ type: Number, isArray: true })
     imageIds: number[];
+
+    @ApiProperty({ type: Number, isArray: true })
+    productTypeIds: number[];
 }
