@@ -39,6 +39,10 @@ const router = new VueRouter({
       path: '/contact', 
       component: Contact,
     },
+    {
+      path: '/aboutus',
+      component: Aboutus
+    },
     { 
       path: '/user', 
       beforeEnter: guard, 
@@ -48,11 +52,6 @@ const router = new VueRouter({
       path: '/shoppingCart', 
       beforeEnter: guard, 
       component: ShoppingCart
-    },
-    {
-      path: '/aboutus', 
-      beforeEnter: guard, 
-      component: Aboutus
     }
     
    
