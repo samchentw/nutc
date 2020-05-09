@@ -19,7 +19,7 @@ export class ConsumerController {
   }
 
   @Get("info")
-//   @Roles("user")
+  @Roles("user")
   @ApiBearerAuth()
   info(@User("id") userId){
       return this.consumerService.getByUserId(userId);

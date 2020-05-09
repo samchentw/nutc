@@ -7,6 +7,13 @@ import HelloWorld from './components/HelloWorld.vue';
 import Test from './components/Test.vue';
 import Login from './components/Login.vue';
 import User from './components/User.vue';
+import ShoppingCart from './components/ShoppingCart.vue';
+import Aboutus from './components/Aboutus.vue';
+import Product from './components/Product.vue';
+import Contact from './components/Contact.vue';
+import Home from './components/Home.vue';
+
+
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
@@ -22,14 +29,32 @@ const router = new VueRouter({
     { path: '/test', component: Test },
     { 
       path: '/', 
-      component: HelloWorld,
+      component: Home,
+    },
+    { 
+      path: '/product', 
+      component: Product,
+    },
+    { 
+      path: '/contact', 
+      component: Contact,
     },
     { 
       path: '/user', 
       beforeEnter: guard, 
       component: User,
+    },
+    {
+      path: '/shoppingCart', 
+      beforeEnter: guard, 
+      component: ShoppingCart
+    },
+    {
+      path: '/aboutus', 
+      beforeEnter: guard, 
+      component: Aboutus
     }
-   
+    
    
   ]
 })

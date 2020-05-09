@@ -13,39 +13,27 @@
                   <li class="nav-item">
                      <a class="nav-link" v-bind:class="{ 'active': route=='/' }"  href="./#/">首頁</a>
                   </li>
+
                   <li class="nav-item">
-                     <a class="nav-link" href="about.html">美食</a>
+                     <a class="nav-link" v-bind:class="{ 'active': route=='/aboutus' }"  href="./#/aboutus">關於我們</a>
                   </li>
-                  
-                  <li class="nav-item dropdown">
-                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                     特色
-                     </a>
-                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
-                        <a class="dropdown-item" href="portfolio-1-col.html">免費型活力</a>
-                        <a class="dropdown-item" href="portfolio-2-col.html">基本商圈消費</a>
-                        <a class="dropdown-item" href="portfolio-3-col.html">3 Column Portfolio</a>
-                        <a class="dropdown-item" href="portfolio-4-col.html">4 Column Portfolio</a>
-                        <a class="dropdown-item" href="portfolio-item.html">Single Portfolio Item</a>
-                     </div>
+
+                  <li class="nav-item">
+                     <a class="nav-link" v-bind:class="{ 'active': route=='/product' }"  href="./#/product">產品</a>
                   </li>
-                <!--  <li class="nav-item dropdown">
-                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                     Blog
-                     </a>
-                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
-                        <a class="dropdown-item" href="blog-home-1.html">Blog Home 1</a>
-                        <a class="dropdown-item" href="blog-home-2.html">Blog Home 2</a>
-                        <a class="dropdown-item" href="blog-post.html">Blog Post</a>
-                     </div>
-                  </li> -->
+
+                  <li class="nav-item">
+                     <a class="nav-link" v-bind:class="{ 'active': route=='/contact' }"  href="./#/contact">聯絡我們</a>
+                  </li>
+                 
+         
                   <li class="nav-item dropdown" v-if="token">
-                     <a class="nav-link dropdown-toggle" href="javascript:void(0)"  v-bind:class="{ 'active': route=='/user' }" id="navbarDropdownBlog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                     <a class="nav-link dropdown-toggle"  href="javascript:void(0)"  v-bind:class="{ 'active': (route=='/user' || route == '/shoppingCart')  }" id="navbarDropdownBlog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                      會員中心
                      </a>
                      <div class="dropdown-menu dropdown-menu-right"  aria-labelledby="navbarDropdownBlog">
                         <a class="dropdown-item"   href="./#/user">個人資料</a>
-                        <a class="dropdown-item" href="404.html">購物車</a>
+                        <a class="dropdown-item" href="./#/shoppingCart">購物車</a>
                         <a class="dropdown-item" href="pricing.html">我的記錄</a>
                      </div>
                   </li>
@@ -113,4 +101,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 
+.navbar-dark .navbar-nav .show > .nav-link, .navbar-dark .navbar-nav .active > .nav-link, .navbar-dark .navbar-nav .nav-link.show, .navbar-dark .navbar-nav .nav-link.active{
+   color:black;
+}
 </style>

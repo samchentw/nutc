@@ -2,7 +2,9 @@
   <div>
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">商家資料</h6>
+              <h6 class="m-0 font-weight-bold text-primary">商家資料
+              <button type="button" @click="open(modalShow,null)" class="btn btn-primary">新增</button>
+              </h6>
             </div>
                 <div class="card-body">
                   <table class="table">
@@ -102,26 +104,49 @@ export default {
    this.change();
   },
   methods:{
+    createShop(){},
     handleOk(){ 
-       axios
-      .put('../api/shop/'+this.select.id,this.select,{
-        headers:{
-           Authorization: 'Bearer ' + apiService.getToken()
-        }
-      })
-      .then((x) => {
-        this.change();
-         Swal.fire(
-          '系統訊息',
-          '已更新.',
-          'success'
-        )
-      }) 
-      .catch(() => {});
+      if(this.select.id)
+      {
+        axios
+        .put('../api/shop/'+this.select.id,this.select,{
+          headers:{
+            Authorization: 'Bearer ' + apiService.getToken()
+          }
+        })
+        .then((x) => {
+          this.change();
+          Swal.fire(
+            '系統訊息',
+            '已更新.',
+            'success'
+          )
+        }) 
+        .catch(() => {});
+      }
+      else{
+         axios
+        .post('../api/shop/create',this.select,{
+          headers:{
+            Authorization: 'Bearer ' + apiService.getToken()
+          }
+        })
+        .then((x) => {
+          this.change();
+          Swal.fire(
+            '系統訊息',
+            '已建立.',
+            'success'
+          )
+        }) 
+        .catch(() => {});
+      }
+       
     },
     open(show,data){
       this.modalShow = !show;
-      this.select=data;
+      if(data) this.select=data;
+      else this.select = {};
     },
     next(x){
       this.pageIndex = x;
@@ -162,9 +187,7 @@ export default {
           'success'
         )
       }) 
-      .catch(() => {});
-       
-      }
+      .catch(() => {});}
     });
     },
   }

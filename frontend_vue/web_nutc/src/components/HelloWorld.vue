@@ -13,7 +13,16 @@ export default {
   name: 'HelloWorld',
   props: {
    
-  }
+  },
+  data(){
+    return {
+    
+    }
+  },
+  created(){
+      // this.change();
+  },
+  methods:{}
 }
 </script>
 
