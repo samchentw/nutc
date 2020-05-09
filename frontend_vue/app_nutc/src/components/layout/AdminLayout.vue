@@ -201,6 +201,7 @@
 import axios from 'axios';
 import Swal from 'sweetalert2'
 import apiService from '../../apiService'
+import messageService from '../../messageService'
 
 export default {
   name: 'AdminLayout',
@@ -212,10 +213,7 @@ export default {
     }
   },
   created() {
-    axios
-      .get('../api/auth/admin/permission',{headers:{
-           Authorization: 'Bearer ' + apiService.getToken()
-      }})
+    apiService.permissionApi()
       .then((x) => {
         this.getInfo()
       }) 
@@ -231,13 +229,8 @@ export default {
          location.href = "./#/";
          Swal.fire("已登出！")
     },
-    getToken() {
-      return apiService.getToken();
-    },getInfo(){
-       axios
-      .get('../api/users/info',{headers:{
-           Authorization: 'Bearer ' + this.getToken()
-      }})
+    getInfo(){
+       apiService.getInfo()
       .then((x) => {
         this.userInfo = x.data ;
       }) 

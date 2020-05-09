@@ -19,6 +19,7 @@ export * from './guard/role.guard';
 
 //decorator
 export * from './decorator/roles.decorator'
+export * from './decorator/user.decorator';
 
 //enum
 export * from './enum/enum';

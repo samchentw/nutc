@@ -1,4 +1,4 @@
-import { Controller, Get, UsePipes, UseGuards, Post, Body, Param, Put, Delete, Query, Req } from '@nestjs/common';
+import { Controller, Get, UsePipes, UseGuards, Post, Body, Param, Put, Delete, Query, Req, ValidationPipe } from '@nestjs/common';
 
 import { ApiTags, ApiBearerAuth, ApiParam, ApiDefaultResponse } from '@nestjs/swagger';
 import { RolesGuard, Roles } from '@app/core/shared';
@@ -6,8 +6,9 @@ import { SettingService } from '../service/setting.service';
 import { UpdateSettingDto } from '../dto/update-setting.dto';
 import { PostGetKeysDto } from '../dto/post-getKeys.dto';
 @ApiTags('Setting')
-@UseGuards(RolesGuard)
 @Controller('setting')
+@UseGuards(RolesGuard)
+@UsePipes(new ValidationPipe())
 export class SettingController {
     constructor(
         private settingService: SettingService

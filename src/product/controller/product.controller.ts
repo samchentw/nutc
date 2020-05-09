@@ -1,5 +1,5 @@
-import { Controller, Get, Post, Body, Put, Param, Delete, Query, UsePipes, Res, Header, Req, UseGuards } from '@nestjs/common';
-import { ValidationPipe, RolesGuard, Roles } from '@app/core/shared';
+import { Controller, Get, Post, Body, Put, Param, Delete, Query, UsePipes, Res, Header, Req, UseGuards, ValidationPipe } from '@nestjs/common';
+import { RolesGuard, Roles } from '@app/core/shared';
 import { ApiTags, ApiQuery, ApiParam, ApiDefaultResponse, ApiBearerAuth } from '@nestjs/swagger';
 import { ProductService } from '../service/product.service';
 import { ProductDto, ProductPageDto } from '../dto/product.dto';
@@ -7,8 +7,9 @@ import { CreateProductDto } from '../dto/create-product.dto';
 import { UpdateProductDto } from '../dto/update-product.data';
 
 @ApiTags("Product")
-@UseGuards(RolesGuard)
 @Controller("product")
+@UseGuards(RolesGuard)
+@UsePipes(new ValidationPipe())
 export class ProductController {
   constructor(
     private readonly productService: ProductService,
@@ -30,7 +31,6 @@ export class ProductController {
   @Post("create")
   @ApiBearerAuth()
   @Roles("admin")
-  @UsePipes(new ValidationPipe())
   @ApiDefaultResponse({ type: ProductDto })
   create(@Body() input: CreateProductDto) {
     return this.productService.create(input);

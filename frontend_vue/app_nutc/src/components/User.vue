@@ -45,16 +45,12 @@ export default {
     }
   },
   created(){
-    axios
-      .get('../api/users/admin/getAllUser',{headers:{
-           Authorization: 'Bearer ' + apiService.getToken()
-      }})
+    apiService.getAllUser()
       .then((x) => {
         this.users = x.data ;
         // console.log(this.users)
       }) 
       .catch(() => {
-          // Swal.fire("登入失敗！");
       });
   },
   methods:{

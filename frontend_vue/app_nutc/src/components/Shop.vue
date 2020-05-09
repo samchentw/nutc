@@ -54,19 +54,19 @@
         <form>
           <div class="form-group">
             <label for="exampleInputEmail1">店家名稱</label>
-            <input type="email" class="form-control"  v-model="select.name" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+            <input type="email" class="form-control"  v-model="select.name" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
           </div>
            <div class="form-group">
             <label for="exampleInputEmail1">電話</label>
-            <input type="email" class="form-control"  v-model="select.phone" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+            <input type="email" class="form-control"  v-model="select.phone" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
           </div>
            <div class="form-group">
             <label for="exampleInputEmail1">地址</label>
-            <input type="email" class="form-control"  v-model="select.address" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+            <input type="email" class="form-control"  v-model="select.address" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
           </div>
           <div class="form-group">
             <label for="exampleInputEmail1">敘述</label>
-            <input type="email" class="form-control"  v-model="select.description" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+            <input type="email" class="form-control"  v-model="select.description" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
           </div>
            <div class="form-group">
             <label for="exampleInputEmail1">備註</label>
@@ -86,6 +86,8 @@
 import axios from 'axios';
 import Swal from 'sweetalert2'
 import apiService from '../apiService'
+import messageService from '../messageService'
+
 export default {
   name: 'Shop',
    props: {
@@ -106,14 +108,10 @@ export default {
   methods:{
     createShop(){},
     handleOk(){ 
+      this.select.imageIds=[];
       if(this.select.id)
       {
-        axios
-        .put('../api/shop/'+this.select.id,this.select,{
-          headers:{
-            Authorization: 'Bearer ' + apiService.getToken()
-          }
-        })
+        apiService.updateShopApi(this.select.id,this.select)
         .then((x) => {
           this.change();
           Swal.fire(
@@ -125,12 +123,7 @@ export default {
         .catch(() => {});
       }
       else{
-         axios
-        .post('../api/shop/create',this.select,{
-          headers:{
-            Authorization: 'Bearer ' + apiService.getToken()
-          }
-        })
+         apiService.createShopApi(this.select)
         .then((x) => {
           this.change();
           Swal.fire(
@@ -139,7 +132,9 @@ export default {
             'success'
           )
         }) 
-        .catch(() => {});
+        .catch(() => {
+          Swal.fire("輸入資料格式錯誤！");
+        });
       }
        
     },
@@ -153,8 +148,7 @@ export default {
       this.change();
     },
     change(){
-       axios
-      .get('../api/shop/page?take=10&skip='+10*this.pageIndex)
+      apiService.getShopPage(10*this.pageIndex)
       .then((x) => {
         this.pages = Math.round(x.data.count/10);
         this.shop = x.data.items ;
@@ -162,23 +156,10 @@ export default {
       .catch(() => {});
     },
     deleteItem(id){
-      Swal.fire({
-      title: '系統訊息',
-      text: "確認要刪除嗎?",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: '確定',
-      cancelButtonText:'取消'
-    }).then((result) => {
+      messageService.confirm("確認要刪除嗎?")
+      .then((result) => {
       if (result.value) {
-       axios
-      .delete('../api/shop/'+id,{
-        headers:{
-           Authorization: 'Bearer ' + apiService.getToken()
-        }
-      })
+       apiService.deleteShopById(id)
       .then((x) => {
         this.change();
          Swal.fire(

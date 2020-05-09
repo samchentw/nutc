@@ -7,7 +7,7 @@
 
       <div class="col-lg-3">
 
-        <h1 class="my-4">Shop Name</h1>
+        <h3 class="my-4">產品種類</h3>
         <div class="list-group">
           <a href="#" class="list-group-item">Category 1</a>
           <a href="#" class="list-group-item">Category 2</a>
@@ -147,9 +147,13 @@ export default {
     }
   },
   created(){
-      // this.change();
+      this.init();
   },
-  methods:{}
+  methods:{
+    init(){
+      
+    },
+  }
 }
 </script>
 
@@ -160,6 +164,6 @@ export default {
     display: block;
     padding: 0.75rem 1.25rem;
     background-color: #fff;
-    border: 1px solid rgba(0, 0, 140, 0.125);
+    border: 1.5px solid rgba(0, 0, 140, 0.125);
 }
 </style>

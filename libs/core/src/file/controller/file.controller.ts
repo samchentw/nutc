@@ -28,7 +28,6 @@ export class FileController {
   @Post('upload')
   @Roles("admin")
   @ApiBearerAuth()
-  // @UseInterceptors(FileInterceptor('file'))
   @ApiConsumes('multipart/form-data')
   @ApiBody({
     schema: {

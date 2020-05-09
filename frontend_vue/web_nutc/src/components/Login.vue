@@ -109,6 +109,8 @@
 import axios from 'axios';
 import Swal from 'sweetalert2'
 import apiService from '../apiService'
+import messageService from '../messageService'
+
 export default {
   name: 'Login',
   props: {
@@ -146,20 +148,10 @@ export default {
         Swal.fire("不能有空值")
         return;
       }
-      axios
-      .post('../api/auth/login',this.loginData)
+     apiService.loginApi(this.loginData)
       .then((x) => {
-        // location.href = "http://www.google.com/"
-        // Swal.fire("登入成功！");
          location.href = "./#/";
-        Swal.fire({
-        title: '系統訊息',
-        text: "登入成功！",
-        icon: 'success',
-        showCancelButton: false,
-        confirmButtonColor: '#3085d6',
-        confirmButtonText: '確定'
-        }).then((result) => {
+        messageService.success("登入成功！").then((result) => {
           apiService.saveToken(x.data.token);
           window.location.reload();
         })
@@ -175,18 +167,9 @@ export default {
         Swal.fire("不能有空值")
         return;
       }
-      axios
-      .post('../api/consumer/register',this.registerData)
+      apiService.registerApi(this.registerData)
       .then((x) => {
-        Swal.fire({
-        title: '系統訊息',
-        text: "註冊成功！",
-        icon: 'success',
-        showCancelButton: false,
-        confirmButtonColor: '#3085d6',
-        confirmButtonText: '確定'
-        }).then((result) => {
-        //   apiService.saveToken(x.data.token);
+        messageService.success("註冊成功！").then((result) => { 
           window.location.reload();
         })
         

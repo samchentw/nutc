@@ -1,4 +1,4 @@
-import { Controller, Get, UsePipes, UseGuards, Post, Body,Param, Put, Delete, Query, Req } from '@nestjs/common';
+import { Controller, Get, UsePipes, UseGuards, Post, Body,Param, Put, Delete, Query, Req, ValidationPipe } from '@nestjs/common';
 import { RoleService } from './role.service';
 import { RoleDto } from './dto';
 import {ApiTags, ApiBearerAuth, ApiParam, ApiDefaultResponse} from '@nestjs/swagger';
@@ -6,6 +6,7 @@ import {RolesGuard,Roles} from '@app/core/shared';
 
 @ApiTags('Role')
 @UseGuards(RolesGuard)
+@UsePipes(new ValidationPipe())
 @Controller('role')
 export class RoleController {
     constructor(
