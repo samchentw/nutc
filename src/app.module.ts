@@ -3,7 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ScheduleModule } from '@nestjs/schedule';
 import { ConfigModule } from '@nestjs/config';
 
-import {AppController} from './app.controller';
+import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
 import { IdentityModule } from '@app/identity';
@@ -16,7 +16,7 @@ import { ProductModule } from './product/product.module';
 import { OrderModule } from './order/order.module';
 @Module({
   imports: [
-    
+
     TypeOrmModule.forRoot({
       "type": "mysql",
       "host": "localhost",
@@ -25,9 +25,9 @@ import { OrderModule } from './order/order.module';
       "password": "",
       "database": "nest",
       "entities": ["dist/**/*.entity{.ts,.js}"],
-      "autoLoadEntities":true,
+      "autoLoadEntities": true,
       "synchronize": true,
-    }),   
+    }),
     ScheduleModule.forRoot(),
     ConfigModule.forRoot({
       envFilePath: 'development.env',
@@ -39,9 +39,9 @@ import { OrderModule } from './order/order.module';
     // ConsumerModule,
     // ProductModule,
     // OrderModule,
-    
+
   ],
   controllers: [AppController,],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule { }

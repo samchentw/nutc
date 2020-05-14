@@ -5,7 +5,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { SaveFileService } from '@app/core/shared';
 import { File } from '../entity/file.entity';
 import { extname } from 'path';
-
+import * as fs from 'fs';
 
 @Injectable()
 export class FileService {
@@ -15,6 +15,12 @@ export class FileService {
         private readonly FileRepository: Repository<File>,
         private readonly configService: ConfigService
     ) { }
+
+    async readPublicFiles(): Promise<String[]> {
+        var savepath = this.configService.get<string>('saveFilePath');
+        var files = await fs.readdirSync(process.cwd() + savepath)
+        return files;
+    }
 
     saveFile(files: any[]) {
         var savepath = this.configService.get<string>('saveFilePath');
@@ -40,10 +46,10 @@ export class FileService {
         });
     }
 
-    findByIds(ids:number[]){
+    findByIds(ids: number[]) {
         return this.FileRepository.findByIds(ids);
     }
-    
+
     findAll() {
         return this.FileRepository.find();
     }

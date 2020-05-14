@@ -24,6 +24,11 @@ export class FileController {
     return this.fileService.findAll();
   }
 
+  @Get("getPublicFiles")
+  getPublicFiles(){
+    return this.fileService.readPublicFiles();
+  }
+
 
   @Post('upload')
   @Roles("admin")
