@@ -1,6 +1,6 @@
 import { Module, HttpModule } from '@nestjs/common';
-import { ArticleEntity } from './entity/article.entity';
-import { TagEntity } from './entity/tag.entity';
+import { Article } from './entity/article.entity';
+import { Tag } from './entity/tag.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ArticleService } from './service/article.service';
 import { ArticleController } from './controller/article.controller';
@@ -12,7 +12,7 @@ import { TagService } from './service/tag.service';
     ],
     imports:[
         HttpModule,
-        TypeOrmModule.forFeature([ArticleEntity,TagEntity]),
+        TypeOrmModule.forFeature([Article,Tag]),
     ],
     providers:[        
         ArticleService,TagService

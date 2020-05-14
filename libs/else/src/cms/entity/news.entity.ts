@@ -1,8 +1,8 @@
 import {Entity, PrimaryGeneratedColumn, Column, ManyToOne} from "typeorm";
-import { CmsNewsTypeEntity } from './cms.newsType.entity';
+import { NewsType } from './newsType.entity';
 import { BaseEntity } from '@app/core/shared';
 @Entity()
-export class CmsNewsEntity extends BaseEntity{
+export class News extends BaseEntity{
 
     @Column()
     title: string;
@@ -19,7 +19,7 @@ export class CmsNewsEntity extends BaseEntity{
     @Column()
     isActive: boolean;
 
-    @ManyToOne(type => CmsNewsTypeEntity, NewsType => NewsType.news)
-    newsType: CmsNewsTypeEntity;
+    @ManyToOne(type => NewsType, NewsType => NewsType.news)
+    newsType: NewsType;
 
 }

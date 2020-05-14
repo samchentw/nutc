@@ -2,9 +2,9 @@
 import { Entity, Column, OneToMany, BeforeInsert, JoinColumn, JoinTable, ManyToOne } from 'typeorm';
 import { BaseEntity } from '@app/core/shared';
 import { Expose } from 'class-transformer';
-import { OrderEntity } from './order.entity';
+import { Order } from './order.entity';
 @Entity()
-export class OrderDetailEntity extends BaseEntity {
+export class OrderDetail extends BaseEntity {
 
   @Column()
   @Expose()
@@ -14,7 +14,7 @@ export class OrderDetailEntity extends BaseEntity {
   @Column("simple-json")
   product: { name: string, price: number, ProductImage: string };
 
-  @ManyToOne(type => OrderEntity, order => order.orderDetail)
+  @ManyToOne(type => Order, order => order.orderDetail)
   @JoinColumn()
-  order: OrderEntity;
+  order: Order;
 }

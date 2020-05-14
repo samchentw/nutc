@@ -3,7 +3,7 @@ import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn } from 'typeor
 import { BaseEntity } from '@app/core/shared';
 
 @Entity()
-export class SettingEntity{  
+export class Setting{  
 
   @PrimaryGeneratedColumn()
   id:number;   

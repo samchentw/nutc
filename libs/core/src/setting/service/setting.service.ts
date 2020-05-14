@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 
 import { Repository } from 'typeorm';
 import { BaseService } from '@app/core/shared';
-import { SettingEntity } from '../entity/setting.entity';
+import { Setting } from '../entity/setting.entity';
 import { CreateSettingDto } from '../dto/create-setting.dto';
 import { UpdateSettingDto } from '../dto/update-setting.dto';
 import { PostGetKeysDto } from '../dto/post-getKeys.dto';
@@ -11,16 +11,16 @@ import * as fs from 'fs'
 import * as _ from 'lodash';
 
 @Injectable()
-export class SettingService extends BaseService<SettingEntity, CreateSettingDto, UpdateSettingDto> {
+export class SettingService extends BaseService<Setting, CreateSettingDto, UpdateSettingDto> {
     constructor(
-        @InjectRepository(SettingEntity)
-        public repository: Repository<SettingEntity>,
+        @InjectRepository(Setting)
+        public repository: Repository<Setting>,
     ) {
         super(repository)
     }
 
     async getByKeys(input: PostGetKeysDto) {
-        var result: SettingEntity[] = [];
+        var result: Setting[] = [];
         for (var i = 0; i < input.key.length; i++) {
             result.push(await this.repository.findOne({ key: input.key[i] }));
         }
@@ -37,14 +37,14 @@ export class SettingService extends BaseService<SettingEntity, CreateSettingDto,
         return await this.repository.findOne({ key });
     }
 
-    private updateData(value: SettingEntity, newValue: Partial<SettingEntity>): SettingEntity {
+    private updateData(value: Setting, newValue: Partial<Setting>): Setting {
         return { ...value, ...newValue }
     }
 
     // seed
     async seed() {
         var settings = await this.repository.find();
-        let data: SettingEntity[] = JSON.parse(fs.readFileSync(process.cwd() + "/seeds/settings.json", "utf8"));
+        let data: Setting[] = JSON.parse(fs.readFileSync(process.cwd() + "/seeds/settings.json", "utf8"));
         settings = _.differenceBy(settings, data, "key");
         // console.log(settings)
         settings.forEach(async x=>{

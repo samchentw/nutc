@@ -6,7 +6,7 @@ import * as _ from 'lodash';
 import { ExcelService, BaseService, PageDto } from '@app/core/shared';
 import { FileService } from '@app/core/file/service/file.service';
 import { plainToClass, classToPlain, classToClass, plainToClassFromExist } from 'class-transformer';
-import { ConsumerEntity } from '../entity/consumer.entity';
+import { Consumer } from '../entity/consumer.entity';
 import { UsersService } from '@app/identity/users/service/users.service';
 import { CreateUserDto } from '@app/identity/users/dto';
 
@@ -15,23 +15,23 @@ import { CreateUserDto } from '@app/identity/users/dto';
 export class ConsumerService {
 
     constructor(
-        @InjectRepository(ConsumerEntity)
-        public repository: Repository<ConsumerEntity>,
-        private readonly usersService:UsersService
+        @InjectRepository(Consumer)
+        public repository: Repository<Consumer>,
+        private readonly usersService: UsersService
     ) {
-     
+
     }
 
-    async register(input:CreateUserDto){
+    async register(input: CreateUserDto) {
         var user = await this.usersService.register(input);
-        var consumer = new ConsumerEntity();
+        var consumer = new Consumer();
         consumer.order = [];
         consumer.point = 0;
         consumer.userId = user.id;
         return await this.repository.save(consumer);
     }
 
-    getByUserId(userId:string){
-        return this.repository.findOne({userId});
+    getByUserId(userId: string) {
+        return this.repository.findOne({ userId });
     }
 }

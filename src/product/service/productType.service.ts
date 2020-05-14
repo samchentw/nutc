@@ -7,20 +7,20 @@ import { ExcelService, BaseService, PageDto } from '@app/core/shared';
 
 import { FileService } from '@app/core/file/service/file.service';
 import { plainToClass, classToPlain, classToClass, plainToClassFromExist } from 'class-transformer';
-import { ProductTypeEntity } from '../entity/productType.entity';
+import { ProductType } from '../entity/productType.entity';
 import { CreateProductTypeDto } from '../dto/create-productType.dto';
 @Injectable()
-export class ProductTypeService extends BaseService<ProductTypeEntity, CreateProductTypeDto, CreateProductTypeDto> {
+export class ProductTypeService extends BaseService<ProductType, CreateProductTypeDto, CreateProductTypeDto> {
     constructor(
-        @InjectRepository(ProductTypeEntity)
-        public repository: Repository<ProductTypeEntity>,
+        @InjectRepository(ProductType)
+        public repository: Repository<ProductType>,
     ) {
         super(repository)
     }
 
-    getypes(ids:number[]){
-        var types=this.repository.findByIds(ids);    
+    getypes(ids: number[]) {
+        var types = this.repository.findByIds(ids);
         return types;
-      }
+    }
 
 }

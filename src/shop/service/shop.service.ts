@@ -6,15 +6,15 @@ import * as _ from 'lodash';
 import { ExcelService, BaseService, PageDto } from '@app/core/shared';
 import { CreateShopDto } from '../dto/create-shop.dto';
 import { UpdateShopDto } from '../dto/update-shop.data';
-import { ShopEntity } from '../entity/shop.entity';
+import { Shop } from '../entity/shop.entity';
 import { FileService } from '@app/core/file/service/file.service';
 import { plainToClass, classToPlain, classToClass, plainToClassFromExist } from 'class-transformer';
 @Injectable()
-export class ShopService extends BaseService<ShopEntity, CreateShopDto, UpdateShopDto> {
+export class ShopService extends BaseService<Shop, CreateShopDto, UpdateShopDto> {
 
     constructor(
-        @InjectRepository(ShopEntity)
-        public repository: Repository<ShopEntity>,
+        @InjectRepository(Shop)
+        public repository: Repository<Shop>,
         @Inject('ExcelFactory') private ExcelService: ExcelService,
         private readonly fileService: FileService,
     ) {
@@ -27,14 +27,14 @@ export class ShopService extends BaseService<ShopEntity, CreateShopDto, UpdateSh
     }
 
     async create(input: CreateShopDto) {
-        var shop = plainToClass(ShopEntity, input);
+        var shop = plainToClass(Shop, input);
         shop.shopImage = await this.findImage(input.imageIds);
         shop.isDelete = false;
         return await super.create(shop)
     }
 
     async update(id: number, input: UpdateShopDto) {
-        var newshop = plainToClass(ShopEntity, input, { excludeExtraneousValues: true });
+        var newshop = plainToClass(Shop, input, { excludeExtraneousValues: true });
         if (input.imageIds && input.imageIds.length > 0) {
             newshop.shopImage = await this.findImage(input.imageIds);
         }
@@ -47,7 +47,7 @@ export class ShopService extends BaseService<ShopEntity, CreateShopDto, UpdateSh
         for (var i = 0; i < datas.length; i++) {
             var check = await this.repository.findOne({ name: datas[i].店家名稱 });
             if (!check) {
-                var shop = new ShopEntity();
+                var shop = new Shop();
                 shop.name = datas[i].店家名稱;
                 shop.phone = datas[i].電話;
                 shop.address = datas[i].地址;

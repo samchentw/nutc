@@ -3,7 +3,7 @@ import {Entity,OneToOne, PrimaryGeneratedColumn,CreateDateColumn, Column, ManyTo
 
 
 @Entity()
-export class FileEntity{
+export class File{
     @PrimaryGeneratedColumn()
     id:number;
 

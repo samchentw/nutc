@@ -3,7 +3,7 @@ import { ConfigService } from '@nestjs/config';
 import { Repository, UpdateResult, InsertResult } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { SaveFileService } from '@app/core/shared';
-import { FileEntity } from '../entity/file.entity';
+import { File } from '../entity/file.entity';
 import { extname } from 'path';
 
 
@@ -11,8 +11,8 @@ import { extname } from 'path';
 export class FileService {
     constructor(
         @Inject('SaveFileFactory') private saveFileService: SaveFileService,
-        @InjectRepository(FileEntity)
-        private readonly FileRepository: Repository<FileEntity>,
+        @InjectRepository(File)
+        private readonly FileRepository: Repository<File>,
         private readonly configService: ConfigService
     ) { }
 

@@ -14,7 +14,7 @@ import { PracticeModule } from './practice/practice.module';
     CmsModule,
     TreeModule,
     ChatModule,
-    PracticeModule,
+    // PracticeModule,
   ],
   providers: [ElseService],
   exports: [ElseService],

@@ -3,11 +3,11 @@ import { Entity, Column, OneToMany, BeforeInsert, JoinColumn, JoinTable, ManyToO
 import { BaseEntity } from '@app/core/shared';
 import { Expose, Type } from 'class-transformer';
 import { deliveryEnum, paymentEnum, orderStateEnum } from '../enum/enum';
-import { OrderDetailEntity } from './orderDetail.entity';
-import { ConsumerEntity } from 'src/consumer/entity/consumer.entity';
+import { OrderDetail } from './orderDetail.entity';
+import { Consumer } from 'src/consumer/entity/consumer.entity';
 
 @Entity()
-export class OrderEntity extends BaseEntity {
+export class Order extends BaseEntity {
 
   @Column({ type: 'enum', enum: deliveryEnum })
   @Expose()
@@ -33,11 +33,11 @@ export class OrderEntity extends BaseEntity {
   @Expose()
   total: number;
 
-  @ManyToOne(type => ConsumerEntity, x => x.order)
-  consumer: ConsumerEntity;
+  @ManyToOne(type => Consumer, x => x.order)
+  consumer: Consumer;
 
-  @OneToMany(type => OrderDetailEntity, od => od.order, { eager: true })
+  @OneToMany(type => OrderDetail, od => od.order, { eager: true })
   @JoinColumn()
-  @Type(() => OrderDetailEntity)
-  orderDetail: OrderDetailEntity[];
+  @Type(() => OrderDetail)
+  orderDetail: OrderDetail[];
 }

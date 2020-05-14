@@ -2,9 +2,9 @@
 import { Entity, Column, OneToMany, BeforeInsert, JoinColumn, JoinTable, ManyToOne, ManyToMany } from 'typeorm';
 import { BaseEntity } from '@app/core/shared';
 import { Expose } from 'class-transformer';
-import { ProductTypeEntity } from './productType.entity';
+import { ProductType } from './productType.entity';
 @Entity()
-export class ProductEntity extends BaseEntity {
+export class Product extends BaseEntity {
 
   @Column({ length: 30, unique: true })
   @Expose()
@@ -26,8 +26,8 @@ export class ProductEntity extends BaseEntity {
   @Expose()
   ProductImage: string;
 
-  @ManyToMany(type => ProductTypeEntity, { eager: true })
+  @ManyToMany(type => ProductType, { eager: true })
   @JoinTable()
-  productTypes: ProductTypeEntity[];
+  productTypes: ProductType[];
 
 }

@@ -1,10 +1,12 @@
 import { Injectable, Inject } from '@nestjs/common';
 import { observable, Subscription, range, of, forkJoin, from } from 'rxjs';
-import { map, filter, take, pluck, combineLatest, tap, } from 'rxjs/operators';
+import { map, filter, take, pluck, combineLatest, tap, delay, } from 'rxjs/operators';
 import * as _ from 'lodash';
 import { fs, vol } from 'memfs';
 import * as f from 'fs'
 import { ExcelService } from '@app/core/shared'
+import { InjectQueue } from '@nestjs/bull';
+import { Queue } from 'bull';
 @Injectable()
 export class TestService {
 
@@ -16,9 +18,19 @@ export class TestService {
 
     constructor(
         @Inject('ExcelFactory') private excelService: ExcelService,
+        @InjectQueue('qe') private readonly testQueue: Queue
+
     ) {
         // this.test();
+        this.test2();
 
+    }
+
+    async test2() {
+        for (var i = 0; i < 100; i++) {
+            await this.testQueue.add("sub",i);
+        }
+        console.log(await this.testQueue.getJobCounts())
     }
 
     test() {

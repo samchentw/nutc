@@ -11,11 +11,12 @@ import { CoreModule } from '@app/core';
 
 import { ShopModule } from './shop/shop.module';
 import { ConsumerModule } from './consumer/consumer.module';
-// import { ElseModule } from '@app/else';
+import { ElseModule } from '@app/else';
 import { ProductModule } from './product/product.module';
 import { OrderModule } from './order/order.module';
 @Module({
   imports: [
+    
     TypeOrmModule.forRoot({
       "type": "mysql",
       "host": "localhost",
@@ -33,11 +34,11 @@ import { OrderModule } from './order/order.module';
     }),
     CoreModule,
     IdentityModule,
-
-    ShopModule,
-    ConsumerModule,
-    ProductModule,
-    OrderModule,
+    ElseModule,
+    // ShopModule,
+    // ConsumerModule,
+    // ProductModule,
+    // OrderModule,
     
   ],
   controllers: [AppController,],

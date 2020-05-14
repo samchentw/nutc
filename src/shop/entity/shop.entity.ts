@@ -3,7 +3,7 @@ import { Entity, Column, OneToMany, BeforeInsert, JoinColumn, JoinTable, ManyToO
 import { BaseEntity } from '@app/core/shared';
 import { Expose } from 'class-transformer';
 @Entity()
-export class ShopEntity extends BaseEntity {
+export class Shop extends BaseEntity {
 
   @Column({ length: 30, unique: true })
   @Expose()

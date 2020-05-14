@@ -6,18 +6,18 @@ import * as _ from 'lodash';
 import { ExcelService, BaseService, PageDto, customizedException } from '@app/core/shared';
 import { FileService } from '@app/core/file/service/file.service';
 import { plainToClass, classToPlain, classToClass, plainToClassFromExist } from 'class-transformer';
-import { OrderEntity } from '../entity/order.entity';
+import { Order } from '../entity/order.entity';
 import { CreateOrderDto } from '../dto/create-order.dto';
 import { ConsumerService } from '../../consumer/service/consumer.service';
 import { orderStateEnum } from '../enum/enum';
 import { ProductService } from '../../product/service/product.service';
-import { OrderDetailEntity } from '../entity/orderDetail.entity';
+import { OrderDetail } from '../entity/orderDetail.entity';
 import { OrderDetailService } from './orderDetail.service';
 @Injectable()
 export class OrderService {
     constructor(
-        @InjectRepository(OrderEntity)
-        public repository: Repository<OrderEntity>,
+        @InjectRepository(Order)
+        public repository: Repository<Order>,
         private readonly consumerService: ConsumerService,
         private readonly ProductService: ProductService,
         private readonly orderDetailService: OrderDetailService,
@@ -35,7 +35,7 @@ export class OrderService {
             throw new customizedException("時間錯誤！！", 400);
         }
 
-        var order = plainToClass(OrderEntity, input, { excludeExtraneousValues: true })
+        var order = plainToClass(Order, input, { excludeExtraneousValues: true })
         order.orderDetail = [];
         order.consumer = consumer;
         order.total = 0;
@@ -43,7 +43,7 @@ export class OrderService {
 
         for (var i = 0; i < orderDetail.length; i++) {
             var product = await this.ProductService.get(orderDetail[i].productId);
-            var od = new OrderDetailEntity();
+            var od = new OrderDetail();
             od.product = product;
             od.count = orderDetail[i].count;
             var odEntity = await this.orderDetailService.save(od);

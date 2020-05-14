@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { FileModule } from '@app/core/file/file.module';
-import { ProductEntity } from './entity/product.entity';
+import { Product } from './entity/product.entity';
 import { ProductService } from './service/product.service';
 import { ProductController } from './controller/product.controller';
-import { ProductTypeEntity } from './entity/productType.entity';
+import { ProductType } from './entity/productType.entity';
 import { ProductTypeService } from './service/productType.service';
 import { ProductTypeController } from './controller/productType.controller';
 
@@ -15,7 +15,7 @@ import { ProductTypeController } from './controller/productType.controller';
     ],
     imports: [
         FileModule,
-        TypeOrmModule.forFeature([ProductEntity,ProductTypeEntity])
+        TypeOrmModule.forFeature([Product, ProductType])
     ],
     providers: [
         ProductService,
