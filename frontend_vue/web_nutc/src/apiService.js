@@ -3,15 +3,19 @@ import axios from 'axios';
 export default {
   // 登入api
   loginApi(loginData) {
-    return axios.post('../api/auth/login',loginData);
+    return axios.post('../api/auth/login', loginData);
   },
 
   // 註冊
-  registerApi(data){
-    return axios.post('../api/consumer/register',data);
+  registerApi(data) {
+    return axios.post('../api/consumer/register', data);
   },
 
-  // 
+  //settings
+
+  getSettingKeys(data) {
+    return axios.post('../api/setting/getKeys', data);
+  },
 
 
 

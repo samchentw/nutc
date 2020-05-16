@@ -1,19 +1,13 @@
 [
     {
-        "key":"dog",
-        "value":"臭比",
+        "key":"前台.關於我們.title",
+        "value":"title test",
         "description":"",
         "enable":true
     },
     {
-        "key":"123",
-        "value":"456",
-        "description":"",
-        "enable":true
-    },
-    {
-        "key":"123456",
-        "value":"77",
+        "key":"前台.關於我們.description",
+        "value":"description test",
         "description":"",
         "enable":true
     }

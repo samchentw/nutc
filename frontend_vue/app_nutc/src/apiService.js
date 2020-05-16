@@ -36,6 +36,20 @@ export default {
     }});
   },
 
+  
+  //settings
+
+  getSettingKeys(data) {
+    return axios.post('../api/setting/getKeys', data);
+  },
+
+  updateSetting(data){
+    return axios.put('../api/setting/setByKey',data,{headers:{
+      Authorization: 'Bearer ' + this.getToken()
+    }});
+  },
+
+
 
   // 店家CRUD
   createShopApi(data) {

@@ -27,8 +27,8 @@ export class SettingService extends BaseService<Setting, CreateSettingDto, Updat
         return await result;
     }
 
-    async setByKey(key: string, input: UpdateSettingDto) {
-        var find = await this.getBykey(key);
+    async setByKey(input: UpdateSettingDto) {
+        var find = await this.getBykey(input.key);
         var result = this.updateData(find, input);
         return this.repository.save(result);
     }
@@ -46,6 +46,7 @@ export class SettingService extends BaseService<Setting, CreateSettingDto, Updat
         var settings = await this.repository.find();
         let data: Setting[] = JSON.parse(fs.readFileSync(process.cwd() + "/seeds/settings.json", "utf8"));
         settings = _.differenceBy(settings, data, "key");
+        // console.log(data);
         // console.log(settings)
         settings.forEach(async x=>{
             await this.repository.delete(x.id);
@@ -53,7 +54,7 @@ export class SettingService extends BaseService<Setting, CreateSettingDto, Updat
 
         for (var i = 0; i < data.length; i++) {
             var find = await this.repository.findOne({ key: data[i].key });
-            console.log(find)
+            // console.log(find)
             if (find == null) {
                 await this.repository.save(data[i]);
             }

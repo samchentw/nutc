@@ -1,19 +1,23 @@
-import { IsString, IsNotEmpty } from 'class-validator';
+import { IsString, IsNotEmpty, IsBoolean } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
 
-export class UpdateSettingDto{ 
-   
-    
-    @ApiProperty()   
-    @IsNotEmpty()
-    value:string;
+export class UpdateSettingDto {
 
-    @ApiProperty()   
-    @IsNotEmpty()
-    description:string;
+    @ApiProperty()
+    @IsString()
+    key: string;
 
-    @ApiProperty()   
-    @IsNotEmpty()
-    enable:boolean;
+
+    @ApiProperty()
+    @IsString()
+    value: string;
+
+    @ApiProperty()
+    @IsString()
+    description: string;
+
+    @ApiProperty()
+    @IsBoolean()
+    enable: boolean;
 }

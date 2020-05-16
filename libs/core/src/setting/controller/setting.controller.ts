@@ -33,10 +33,10 @@ export class SettingController {
 
     @ApiBearerAuth()
     @Roles("admin")
-    @Put("setByKey/:key")
-    @ApiParam({ name: 'key' })
-    setByKey(@Param('key') key: string,@Body() body: UpdateSettingDto) {
-        return this.settingService.setByKey(key, body);
+    @Put("setByKey")
+    setByKey(@Body() body: UpdateSettingDto) {
+        // console.log(body)
+        return this.settingService.setByKey(body);
     }
 
     @Get("seed")

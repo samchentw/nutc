@@ -10,10 +10,10 @@ import { PracticeModule } from './practice/practice.module';
 
 @Module({
   imports:[
-    ArticleModule,
+    // ArticleModule,
     CmsModule,
-    TreeModule,
-    ChatModule,
+    // TreeModule,
+    // ChatModule,
     // PracticeModule,
   ],
   providers: [ElseService],
