@@ -58,9 +58,15 @@ export class ProductController {
   @ApiQuery({ name: "skip", required: false })
   @ApiQuery({ name: "take", required: false })
   @ApiQuery({ name: "productTypeId", required: false })
+  @ApiQuery({ name: "showIsSell", required: false })
   async page(@Query() query, @Req() req) {
     // console.log(query)
-    var temp = await this.productService.page({ skip: query.skip, take: query.take, productTypeId: query.productTypeId }, true);
+    var temp = await this.productService.page(
+      { skip: query.skip, 
+        take: query.take, 
+        productTypeId: query.productTypeId, 
+        showIsSell: query.showIsSell 
+      }, true);
     var result = new ProductPageDto();
     result.count = temp[1];
     result.items = temp[0];

@@ -27,11 +27,12 @@ export class ProductService extends BaseService<Product, CreateProductDto, Updat
     private async findImage(imageIds: number[]): Promise<string> {
         var images = await this.fileService.findByIds(imageIds);
         // console.log(images.map(x=>x.url));
-        var urls = images.map(x=>x.url);
+        var urls = images.map(x => x.url);
         return JSON.stringify(urls);
     }
 
     async create(input: CreateProductDto) {
+        console.log(input)
         var product = plainToClass(Product, input);
         var types = await this.productTypeService.get(input.productTypeId);
         product.productImage = await this.findImage(input.imageIds);
@@ -54,10 +55,8 @@ export class ProductService extends BaseService<Product, CreateProductDto, Updat
     async page(input: ProductQueryPageDto, useIsDelete = false): Promise<[Product[], number]> {
         var product = this.repository.createQueryBuilder("x")
             .leftJoinAndSelect("x.productTypes", "productTypes");
-
         if (input.productTypeId != 0) product.where("productTypes.id = :id", { id: input.productTypeId });
-
-        // console.log(input.productTypeId)
+        if (input.showIsSell == 'false') product.andWhere("isSell = true");
         if (useIsDelete) product.andWhere("isDelete=false")
         var result = await product
             .skip(input.skip)

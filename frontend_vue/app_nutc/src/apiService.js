@@ -84,8 +84,8 @@ export default {
     });
   },
   //產品CRUD
-  getProducts(skip, productTypeId) {
-    return axios.get('../api/product/page?take=999&skip=' + skip + "&productTypeId=" + productTypeId);
+  getProducts(skip, productTypeId, showIsSell) {
+    return axios.get('../api/product/page?take=999&skip=' + skip + "&productTypeId=" + productTypeId+ "&showIsSell=" + showIsSell);
   },
   createProduct(data) {
     return axios.post('../api/product/create', data, {

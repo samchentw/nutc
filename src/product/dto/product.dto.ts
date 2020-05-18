@@ -30,14 +30,16 @@ export class ProductPageDto {
     count: number;
     @ApiProperty({ type: ProductDto, isArray: true })
     items: ProductDto[];
-   
+
 }
 
 export class ProductQueryPageDto {
     @ApiProperty()
-    skip:number;
+    skip: number;
     @ApiProperty()
-    take:number;
+    take: number;
     @ApiProperty()
-    productTypeId?:number;
+    productTypeId?: number;
+    @ApiProperty()
+    showIsSell: string;
 }

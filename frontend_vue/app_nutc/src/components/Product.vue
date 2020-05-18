@@ -253,13 +253,14 @@ export default {
         this.selectProductData.imageIds = imageDatas.data;
       }
 
-      if(this.selectProductData.id){
-        apiService.updateProduct(this.selectProductData).then(x=>{
-           Swal.fire('更新成功！');
-        })
-      }else{
+      if (this.selectProductData.id) {
+        apiService.updateProduct(this.selectProductData).then(x => {
+          Swal.fire('更新成功！');
+        });
+      } else {
         apiService.createProduct(this.selectProductData).then(x => {
           Swal.fire('建立成功！');
+          this.file = null;
           this.selectProductData = {
             name: '',
             price: 0,
@@ -271,11 +272,9 @@ export default {
           };
         });
       }
-
-      
     },
     selectProduct(id) {
-      apiService.getProducts(0, id).then(x => {
+      apiService.getProducts(0, id, true).then(x => {
         this.selectTypeId = id;
         this.product = x.data.items;
         // console.log(this.product)
