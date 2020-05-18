@@ -12,7 +12,7 @@ export class OrderDetail extends BaseEntity {
 
 
   @Column("simple-json")
-  product: { name: string, price: number, ProductImage: string };
+  product: { name: string, price: number, productImage: string };
 
   @ManyToOne(type => Order, order => order.orderDetail)
   @JoinColumn()

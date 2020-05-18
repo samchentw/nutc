@@ -6,18 +6,17 @@
     <div class="row my-2">
         <div class="col-lg-8 order-lg-2">
             <ul class="nav nav-tabs">
+                
                 <li class="nav-item">
-                    <a href="" data-target="#profile" data-toggle="tab" class="nav-link active">個人資料</a>
+                    <a href="" data-target="#edit" data-toggle="tab" class="nav-link active">個人資料</a>
                 </li>
                 <li class="nav-item">
-                    <a href="" data-target="#messages" data-toggle="tab" class="nav-link">Messages</a>
+                    <a href="" data-target="#messages" data-toggle="tab" class="nav-link">購買記錄</a>
                 </li>
-                <li class="nav-item">
-                    <a href="" data-target="#edit" data-toggle="tab" class="nav-link">編輯</a>
-                </li>
+              
             </ul>
             <div class="tab-content py-4">
-                <div class="tab-pane active" id="profile">
+                <div class="tab-pane" id="profile">
                     <div class="row">
                         <div class="col-md-6">
                             <h6>About</h6>
@@ -80,105 +79,55 @@
                     <!--/row-->
                 </div>
                 <div class="tab-pane" id="messages">
-                    <div class="alert alert-info alert-dismissable">
-                        <a class="panel-close close" data-dismiss="alert">×</a> This is an <strong>.alert</strong>. Use this to show important messages to the user.
-                    </div>
+                    
                     <table class="table table-hover table-striped">
                         <tbody>                                    
                             <tr>
                                 <td>
-                                   <span class="float-right font-weight-bold">3 hrs ago</span> Here is your a link to the latest summary report from the..
+                                   <a href="javascript:void(0)" class="float-right font-weight-bold">詳細資料</a> Here is your a link to the latest summary report from the..
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                   <span class="float-right font-weight-bold">Yesterday</span> There has been a request on your account since that was..
+                                    <a href="javascript:void(0)" class="float-right font-weight-bold">詳細資料</a>  There has been a request on your account since that was..
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                   <span class="float-right font-weight-bold">9/10</span> Porttitor vitae ultrices quis, dapibus id dolor. Morbi venenatis lacinia rhoncus. 
+                                   <a href="javascript:void(0)" class="float-right font-weight-bold">詳細資料</a> Porttitor vitae ultrices quis, dapibus id dolor. Morbi venenatis lacinia rhoncus. 
                                 </td>
                             </tr>
-                            <tr>
-                                <td>
-                                   <span class="float-right font-weight-bold">9/4</span> Vestibulum tincidunt ullamcorper eros eget luctus. 
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                   <span class="float-right font-weight-bold">9/4</span> Maxamillion ais the fix for tibulum tincidunt ullamcorper eros. 
-                                </td>
-                            </tr>
+                           
                         </tbody> 
                     </table>
                 </div>
-                <div class="tab-pane" id="edit">
+                <div class="tab-pane active" id="edit" v-if="user.id">
                     <form role="form">
                         <div class="form-group row">
-                            <label class="col-lg-3 col-form-label form-control-label">First name</label>
+                            <label class="col-lg-3 col-form-label form-control-label">帳號</label>
                             <div class="col-lg-9">
-                                <input class="form-control" type="text" value="Jane">
+                                <input class="form-control" v-model="user.account" type="text" value="Jane">
                             </div>
                         </div>
+                        
                         <div class="form-group row">
-                            <label class="col-lg-3 col-form-label form-control-label">Last name</label>
+                            <label class="col-lg-3 col-form-label form-control-label">電子信箱</label>
                             <div class="col-lg-9">
-                                <input class="form-control" type="text" value="Bishop">
+                                <input class="form-control" v-model="user.userinfo.email" type="email" value="email@gmail.com">
                             </div>
                         </div>
+                        
                         <div class="form-group row">
-                            <label class="col-lg-3 col-form-label form-control-label">Email</label>
+                            <label class="col-lg-3 col-form-label form-control-label">地址</label>
                             <div class="col-lg-9">
-                                <input class="form-control" type="email" value="email@gmail.com">
+                                <input class="form-control" v-model="user.userinfo.address" type="text" value="" placeholder="Street">
                             </div>
                         </div>
+                        
                         <div class="form-group row">
-                            <label class="col-lg-3 col-form-label form-control-label">Company</label>
+                            <label class="col-lg-3 col-form-label form-control-label">姓名</label>
                             <div class="col-lg-9">
-                                <input class="form-control" type="text" value="">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-lg-3 col-form-label form-control-label">Website</label>
-                            <div class="col-lg-9">
-                                <input class="form-control" type="url" value="">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-lg-3 col-form-label form-control-label">Address</label>
-                            <div class="col-lg-9">
-                                <input class="form-control" type="text" value="" placeholder="Street">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-lg-3 col-form-label form-control-label"></label>
-                            <div class="col-lg-6">
-                                <input class="form-control" type="text" value="" placeholder="City">
-                            </div>
-                            <div class="col-lg-3">
-                                <input class="form-control" type="text" value="" placeholder="State">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-lg-3 col-form-label form-control-label">Time Zone</label>
-                            <div class="col-lg-9">
-                                <select id="user_time_zone" class="form-control" size="0">
-                                    <option value="Hawaii">(GMT-10:00) Hawaii</option>
-                                    <option value="Alaska">(GMT-09:00) Alaska</option>
-                                    <option value="Pacific Time (US &amp; Canada)">(GMT-08:00) Pacific Time (US &amp; Canada)</option>
-                                    <option value="Arizona">(GMT-07:00) Arizona</option>
-                                    <option value="Mountain Time (US &amp; Canada)">(GMT-07:00) Mountain Time (US &amp; Canada)</option>
-                                    <option value="Central Time (US &amp; Canada)" selected="selected">(GMT-06:00) Central Time (US &amp; Canada)</option>
-                                    <option value="Eastern Time (US &amp; Canada)">(GMT-05:00) Eastern Time (US &amp; Canada)</option>
-                                    <option value="Indiana (East)">(GMT-05:00) Indiana (East)</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-lg-3 col-form-label form-control-label">Username</label>
-                            <div class="col-lg-9">
-                                <input class="form-control" type="text" value="janeuser">
+                                <input class="form-control" v-model="user.userinfo.name" type="text" value="janeuser">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -196,8 +145,7 @@
                         <div class="form-group row">
                             <label class="col-lg-3 col-form-label form-control-label"></label>
                             <div class="col-lg-9">
-                                <input type="reset" class="btn btn-secondary" value="Cancel">
-                                <input type="button" class="btn btn-primary" value="Save Changes">
+                                <input type="button" class="btn btn-primary" value="儲存">
                             </div>
                         </div>
                     </form>
@@ -205,12 +153,8 @@
             </div>
         </div>
         <div class="col-lg-4 order-lg-1 text-center">
-            <img src="//placehold.it/150" class="mx-auto img-fluid img-circle d-block" alt="avatar">
-            <h6 class="mt-2">Upload a different photo</h6>
-            <label class="custom-file">
-                <input type="file" id="file" class="custom-file-input">
-                <span class="custom-file-control">Choose file</span>
-            </label>
+            <img src="user.png"  style="height:150px" class="mx-auto img-fluid img-circle d-block" alt="avatar">
+           
         </div>
     </div>
 </div>
@@ -231,21 +175,14 @@ export default {
   },
   data(){
     return {
-      users:[]
+        user:{}
     }
   },
   created(){
-    axios
-      .get('../api/users/admin/getAllUser',{headers:{
-           Authorization: 'Bearer ' + apiService.getToken()
-      }})
-      .then((x) => {
-        this.users = x.data ;
-        console.log(this.users)
-      }) 
-      .catch(() => {
-          // Swal.fire("登入失敗！");
-      });
+   apiService.getUserinfo().then(x=>{
+       console.log(x.data);
+       this.user = x.data;
+   })
   },
   methods:{
 

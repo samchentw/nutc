@@ -30,23 +30,27 @@ export default {
       })
   },
 
-  getAllUser(){
-    return axios.get('../api/users/admin/getAllUser',{headers:{
-      Authorization: 'Bearer ' + this.getToken()
-    }});
+  getAllUser() {
+    return axios.get('../api/users/admin/getAllUser', {
+      headers: {
+        Authorization: 'Bearer ' + this.getToken()
+      }
+    });
   },
 
-  
+
   //settings
 
   getSettingKeys(data) {
     return axios.post('../api/setting/getKeys', data);
   },
 
-  updateSetting(data){
-    return axios.put('../api/setting/setByKey',data,{headers:{
-      Authorization: 'Bearer ' + this.getToken()
-    }});
+  updateSetting(data) {
+    return axios.put('../api/setting/setByKey', data, {
+      headers: {
+        Authorization: 'Bearer ' + this.getToken()
+      }
+    });
   },
 
 
@@ -72,17 +76,67 @@ export default {
     return axios.get('../api/shop/page?take=10&skip=' + skip);
   },
 
-  deleteShopById(id){
-    return  axios.delete('../api/shop/'+id,{
-      headers:{
-         Authorization: 'Bearer ' + this.getToken()
+  deleteShopById(id) {
+    return axios.delete('../api/shop/' + id, {
+      headers: {
+        Authorization: 'Bearer ' + this.getToken()
       }
     });
   },
+  //產品CRUD
+  getProducts(skip, productTypeId) {
+    return axios.get('../api/product/page?take=999&skip=' + skip + "&productTypeId=" + productTypeId);
+  },
+  createProduct(data) {
+    return axios.post('../api/product/create', data, {
+      headers: {
+        Authorization: 'Bearer ' + this.getToken()
+      }
+    })
+  },
+  updateProduct(data) {
+    return axios.put('../api/product/' + data.id, data, {
+      headers: {
+        Authorization: 'Bearer ' + this.getToken()
+      }
+    })
+  },
+
+  uploadfile(data) {
+    return axios.post('../api/file/upload', data, {
+      headers: {
+        Authorization: 'Bearer ' + this.getToken()
+      }
+    })
+  },
 
   // 產品種類CRUD
-  getProductType(){
-    return  axios.get('../api/productType/getAll');
+  getProductType() {
+    return axios.get('../api/productType/getAll');
+  },
+
+  createProductType(data) {
+    return axios.post('../api/productType/create', data, {
+      headers: {
+        Authorization: 'Bearer ' + this.getToken()
+      }
+    })
+  },
+
+  updateProudctType(data) {
+    return axios.put('../api/productType/' + data.id, data, {
+      headers: {
+        Authorization: 'Bearer ' + this.getToken()
+      }
+    })
+  },
+
+  deleteProductType(id) {
+    return axios.delete('../api/productType/' + id, {
+      headers: {
+        Authorization: 'Bearer ' + this.getToken()
+      }
+    });
   },
 
   //存token

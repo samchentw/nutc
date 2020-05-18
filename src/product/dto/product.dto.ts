@@ -15,6 +15,8 @@ export class ProductDto {
     @ApiProperty()
     description: string;
 
+    @ApiProperty()
+    isSell: boolean;
 
     @ApiProperty()
     isDelete: boolean;

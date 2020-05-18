@@ -17,7 +17,13 @@ export default {
     return axios.post('../api/setting/getKeys', data);
   },
 
-
+  getUserinfo(){
+    return axios.get('../api/users/info', {
+      headers: {
+        Authorization: 'Bearer ' + this.getToken()
+      }
+    });
+  },
 
   //存token
   saveToken(value) {

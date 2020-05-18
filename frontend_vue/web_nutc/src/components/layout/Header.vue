@@ -104,4 +104,8 @@ export default {
 .navbar-dark .navbar-nav .show > .nav-link, .navbar-dark .navbar-nav .active > .nav-link, .navbar-dark .navbar-nav .nav-link.show, .navbar-dark .navbar-nav .nav-link.active{
    color:black;
 }
+
+.navbar-dark .navbar-toggler{
+   color:#4e3914;
+}
 </style>

@@ -30,20 +30,23 @@ export class FileService {
             file.displayName = randomName + extname(file.originalname);
         });
         this.saveFileService.saveFiles(path, files);
-        this.saveDb(files);
+        return this.saveDb(files);
     }
 
-    saveDb(files: any[]) {
-        files.forEach(file => {
-            this.FileRepository.insert({
-                filename: file.fieldname,
-                originalname: file.originalname,
+    async saveDb(files: any[]): Promise<number[]> {
+        var result: number[] = [];
+        for (var i = 0; i < files.length; i++) {
+            var temp = await this.FileRepository.save({
+                filename: files[i].fieldname,
+                originalname: files[i].originalname,
                 isDelete: false,
-                mimetype: file.mimetype,
-                size: file.encoding,
-                url: "/" + file.displayName
+                mimetype: files[i].mimetype,
+                size: files[i].encoding,
+                url: "/" + files[i].displayName
             });
-        });
+            result.push(temp.id)
+        }
+        return result;
     }
 
     findByIds(ids: number[]) {

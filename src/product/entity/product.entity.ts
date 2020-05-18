@@ -24,10 +24,14 @@ export class Product extends BaseEntity {
 
   @Column()
   @Expose()
-  ProductImage: string;
+  isSell: boolean;
 
-  @ManyToMany(type => ProductType, { eager: true })
+  @Column()
+  @Expose()
+  productImage: string;
+
+  @ManyToOne(type => ProductType, { eager: true })
   @JoinTable()
-  productTypes: ProductType[];
+  productTypes: ProductType;
 
 }

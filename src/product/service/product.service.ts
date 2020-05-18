@@ -26,13 +26,15 @@ export class ProductService extends BaseService<Product, CreateProductDto, Updat
 
     private async findImage(imageIds: number[]): Promise<string> {
         var images = await this.fileService.findByIds(imageIds);
-        return JSON.stringify(images);
+        // console.log(images.map(x=>x.url));
+        var urls = images.map(x=>x.url);
+        return JSON.stringify(urls);
     }
 
     async create(input: CreateProductDto) {
         var product = plainToClass(Product, input);
-        var types = await this.productTypeService.getypes(input.productTypeIds);
-        product.ProductImage = await this.findImage(input.imageIds);
+        var types = await this.productTypeService.get(input.productTypeId);
+        product.productImage = await this.findImage(input.imageIds);
         product.isDelete = false;
         product.productTypes = types;
         return await super.create(product)
@@ -41,9 +43,9 @@ export class ProductService extends BaseService<Product, CreateProductDto, Updat
     async update(id: number, input: UpdateProductDto) {
         var newproduct = plainToClass(Product, input, { excludeExtraneousValues: true });
         if (input.imageIds && input.imageIds.length > 0) {
-            newproduct.ProductImage = await this.findImage(input.imageIds);
+            newproduct.productImage = await this.findImage(input.imageIds);
         }
-        var types = await this.productTypeService.getypes(input.productTypeIds);
+        var types = await this.productTypeService.get(input.productTypeId);
         newproduct.productTypes = types;
         return await super.update(id, newproduct)
     }
@@ -55,7 +57,7 @@ export class ProductService extends BaseService<Product, CreateProductDto, Updat
 
         if (input.productTypeId != 0) product.where("productTypes.id = :id", { id: input.productTypeId });
 
-        console.log(input.productTypeId)
+        // console.log(input.productTypeId)
         if (useIsDelete) product.andWhere("isDelete=false")
         var result = await product
             .skip(input.skip)
