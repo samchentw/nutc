@@ -52,4 +52,18 @@ export class OrderService {
         }
         await this.repository.save(order);
     }
+
+    async getOrdersByUserId(user: string) {
+        var consumer = await this.consumerService.getByUserId(user);
+        var orders = this.repository.find({ consumer });
+        return orders;
+    }
+
+    async update() {
+
+    }
+
+    async delete() {
+
+    }
 }

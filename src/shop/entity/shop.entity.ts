@@ -1,9 +1,17 @@
 
-import { Entity, Column, OneToMany, BeforeInsert, JoinColumn, JoinTable, ManyToOne } from 'typeorm';
-import { BaseEntity } from '@app/core/shared';
+import { Entity, Column, OneToMany, BaseEntity, JoinColumn, JoinTable, ManyToOne, PrimaryGeneratedColumn, CreateDateColumn } from 'typeorm';
+// import { BaseEntity } from '@app/core/shared';
 import { Expose } from 'class-transformer';
 @Entity()
 export class Shop extends BaseEntity {
+
+  @PrimaryGeneratedColumn()
+  @Expose()
+  id:number;   
+  
+  @CreateDateColumn({ type: 'timestamp' })
+  @Expose()
+  createTime:Date;
 
   @Column({ length: 30, unique: true })
   @Expose()

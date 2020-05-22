@@ -3,14 +3,13 @@ import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn } from 'typeor
 import { BaseEntity } from '@app/core/shared';
 
 @Entity()
-export class Setting{  
+export class Setting {
 
   @PrimaryGeneratedColumn()
-  id:number;   
-  // @ObjectIdColumn()
-  // id: ObjectID;
+  id: number;
+
   @CreateDateColumn({ type: 'timestamp' })
-  createTime:Date;
+  createTime: Date;
 
 
   @Column({ length: 30, unique: true })
@@ -21,7 +20,7 @@ export class Setting{
 
   @Column()
   description: string;
-  
+
   @Column()
   enable: boolean;
 }

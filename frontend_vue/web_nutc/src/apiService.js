@@ -5,7 +5,20 @@ export default {
   loginApi(loginData) {
     return axios.post('../api/auth/login', loginData);
   },
-
+  getUserinfo() {
+    return axios.get('../api/users/info', {
+      headers: {
+        Authorization: 'Bearer ' + this.getToken()
+      }
+    });
+  },
+  updateUserData(data) {
+    return axios.put('../api/users/info', data, {
+      headers: {
+        Authorization: 'Bearer ' + this.getToken()
+      }
+    });
+  },
   // 註冊
   registerApi(data) {
     return axios.post('../api/consumer/register', data);

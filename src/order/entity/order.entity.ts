@@ -1,6 +1,5 @@
 
-import { Entity, Column, OneToMany, BeforeInsert, JoinColumn, JoinTable, ManyToOne } from 'typeorm';
-import { BaseEntity } from '@app/core/shared';
+import { Entity, Column, OneToMany, BaseEntity, JoinColumn, JoinTable, ManyToOne, PrimaryGeneratedColumn, CreateDateColumn } from 'typeorm';
 import { Expose, Type } from 'class-transformer';
 import { deliveryEnum, paymentEnum, orderStateEnum } from '../enum/enum';
 import { OrderDetail } from './orderDetail.entity';
@@ -8,6 +7,15 @@ import { Consumer } from 'src/consumer/entity/consumer.entity';
 
 @Entity()
 export class Order extends BaseEntity {
+  @PrimaryGeneratedColumn()
+  @Expose()
+  id: number;
+
+  @CreateDateColumn({ type: 'timestamp' })
+  @Expose()
+  createTime: Date;
+
+
 
   @Column({ type: 'enum', enum: deliveryEnum })
   @Expose()

@@ -1,9 +1,14 @@
-import { Entity, Column, OneToMany } from "typeorm";
-// import {ArticleEntity} from "./article.entity";
-import { BaseEntity } from '@app/core/shared';
+import { Entity, Column, OneToMany, CreateDateColumn, PrimaryGeneratedColumn, BaseEntity } from "typeorm";
 import { Product } from './product.entity';
 @Entity()
 export class ProductType extends BaseEntity {
+
+    @PrimaryGeneratedColumn()
+    id: number;
+
+    @CreateDateColumn({ type: 'timestamp' })
+    createTime: Date;
+
     @Column({ unique: true })
     name: string;
 

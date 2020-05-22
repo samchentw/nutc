@@ -2,11 +2,13 @@ import {ObjectID, ObjectIdColumn, PrimaryGeneratedColumn,CreateDateColumn, Colum
 import { Expose } from 'class-transformer';
 
 export abstract  class BaseEntity{
+     // @ObjectIdColumn()
+    // id: ObjectID;
+    
     @PrimaryGeneratedColumn()
     @Expose()
     id:number;   
-    // @ObjectIdColumn()
-    // id: ObjectID;
+   
     @CreateDateColumn({ type: 'timestamp' })
     @Expose()
     createTime:Date;

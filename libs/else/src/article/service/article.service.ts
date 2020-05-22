@@ -17,7 +17,6 @@ export class ArticleService extends BaseService<Article, CreateArticleDto, Updat
     public repository: Repository<Article>,
   ) {
     super(repository)
-    // this.test()
   }
 
   async create(input: CreateArticleDto) {
