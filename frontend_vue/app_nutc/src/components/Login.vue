@@ -18,7 +18,7 @@
                   </div>
                   <form class="user">
                     <div class="form-group">
-                      <input type="email" v-model="loginData.account" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="帳號">
+                      <input type="email" v-model="loginData.username" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="帳號">
                     </div>
                     <div class="form-group">
                       <input type="password"  v-model="loginData.password" class="form-control form-control-user" id="exampleInputPassword" placeholder="密碼">
@@ -58,7 +58,7 @@ export default {
   data() {
      return {
         loginData:{
-            account: "",
+            username: "",
             password:""
         }
       }
@@ -82,7 +82,7 @@ export default {
     },
     login() {      
 
-      if(this.loginData.account == "" || this.loginData.password == ""){        
+      if(this.loginData.username == "" || this.loginData.password == ""){        
         Swal.fire("不能有空值")
         return;
       }
@@ -91,7 +91,7 @@ export default {
       .then((x) => {
         // console.log(x)
         // Swal.fire("登入成功！");
-        apiService.saveToken(x.data.token);
+        apiService.saveToken(x.data.access_token);
         this.check();
         
       }) 

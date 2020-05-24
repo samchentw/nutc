@@ -55,7 +55,30 @@ export class OrderService {
 
     async getOrdersByUserId(user: string) {
         var consumer = await this.consumerService.getByUserId(user);
-        var orders = this.repository.find({ consumer });
+        var orders = await this.repository.createQueryBuilder("o")
+            .leftJoinAndSelect("o.orderDetail", "orderDetail")
+            .where("o.consumer.id=:consumer")
+            .setParameters({ consumer: consumer.id })
+            .getMany();
+        // console.log(temp);
+        return orders;
+    }
+
+    async testgetOrdersByUserId(user: string, start: Date, end: Date) {
+        var consumer = await this.consumerService.getByUserId(user);
+        var orders = await this.repository.createQueryBuilder("o")
+            .leftJoinAndSelect("o.orderDetail", "orderDetail")
+            .where("o.consumer.id=:consumer")
+            .andWhere("o.createTime < :before")
+            .andWhere("o.createTime >= :after")
+            .setParameters(
+                {
+                    consumer: consumer.id,
+                    before: end.toISOString(),
+                    after: start.toISOString()
+                })
+            .getMany();
+        // console.log(temp);
         return orders;
     }
 

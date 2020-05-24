@@ -1,38 +1,39 @@
-import { Controller, Get, Post, Param, UseInterceptors,UploadedFiles,Request, Res
-    , Req, UploadedFile, Delete, Query, UseGuards } from '@nestjs/common';
-import {FileFieldsInterceptor,FileInterceptor} from '@nestjs/platform-express';
+import {
+  Controller, Get, Post, Param, UseInterceptors, UploadedFiles, Request, Res
+  , Req, UploadedFile, Delete, Query, UseGuards
+} from '@nestjs/common';
+import { FileFieldsInterceptor, FileInterceptor } from '@nestjs/platform-express';
 
-import {ApiTags, ApiBearerAuth, ApiParam, ApiConsumes,ApiBody} from '@nestjs/swagger';
-import {dataDuplicationException, RolesGuard, Roles} from '@app/core/shared';
+import { ApiTags, ApiBearerAuth, ApiParam, ApiConsumes, ApiBody } from '@nestjs/swagger';
+import { dataDuplicationException, RolesGuard, Roles, RoleCheck } from '@app/core/shared';
 import { FileService } from '../service/file.service';
+import { JwtAuthGuard } from '@app/identity/auth/guard/jwt-auth.guard';
 
 
 
 @ApiTags('File')
-@UseGuards(RolesGuard)
 @Controller('File')
 export class FileController {
-  
+
   constructor(
-      private fileService:FileService
-  ){    
-        
+    private fileService: FileService
+  ) {
+
   }
 
   @Get("getAll")
-  getAll(){
+  getAll() {
     return this.fileService.findAll();
   }
 
   @Get("getPublicFiles")
-  getPublicFiles(){
+  getPublicFiles() {
     return this.fileService.readPublicFiles();
   }
 
 
   @Post('upload')
-  @Roles("admin")
-  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
   @ApiConsumes('multipart/form-data')
   @ApiBody({
     schema: {
@@ -44,12 +45,12 @@ export class FileController {
         },
       },
     },
-  })       
+  })
   @UseInterceptors(
     FileFieldsInterceptor([
-    { name: 'file', maxCount: 5 },
+      { name: 'file', maxCount: 5 },
     ]))
-    async fileUpload( @UploadedFiles() files,@Request() req) {                  
-        return this.fileService.saveFile(files.file);        
-    }
+  async fileUpload(@UploadedFiles() files, @RoleCheck(["admin"]) admin) {
+    return this.fileService.saveFile(files.file);
+  }
 }

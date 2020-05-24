@@ -1,30 +1,28 @@
-import { Injectable, Inject, HttpException, HttpStatus, forwardRef } from '@nestjs/common';
-import * as jwt from 'jsonwebtoken';
-import { ConfigService } from '@nestjs/config';
+import { Injectable } from '@nestjs/common';
 import { UsersService } from '../../users/service/users.service';
+import { JwtService } from '@nestjs/jwt';
 @Injectable()
 export class AuthService {
-    constructor(
-        private readonly usersService: UsersService,
-        private readonly configService:ConfigService
-    ) {}
+  constructor(
+    private usersService: UsersService,
+    private jwtService: JwtService,
+  ) { }
 
-    validateLogin(data):boolean{        
-        const existedUser = this.usersService.checkUser(data);
-        if(existedUser) return true;
-        else false;
+  async validateUser(username: string, pass: string): Promise<any> {
+    const user = await this.usersService.checkUser({ account: username, password: pass });
+    if (user) {
+      var roles = await this.usersService.getRole(user.userinfo.id);
+      const { password, ...result } = user;
+      var data = { "roles": roles, ...result };
+      return data;
     }
+    return null;
+  }
 
-    //取得token
-    async createToken(uuid,userinfoId) {
-        const roles=await this.usersService.getRole(userinfoId);        
-        const expiresIn = '3h';
-        const secret = this.configService.get<string>('donttalk');
-        // console.log(secret)
-        const token = jwt.sign({id:uuid,roles}, secret, { expiresIn });
-        return {
-            expires_in:expiresIn,
-            token: token
-        };
-    }
+  async login(user: any) {
+    const payload = user;
+    return {
+      access_token: this.jwtService.sign(payload),
+    };
+  }
 }

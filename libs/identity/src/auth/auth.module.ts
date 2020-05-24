@@ -5,76 +5,37 @@ import {
   MiddlewareConsumer,
   RequestMethod
 } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
+import { AuthService } from './service/auth.service';
+import { LocalStrategy } from './service/local.strategy';
+import { PassportModule } from '@nestjs/passport';
 import { AuthController } from './controller/auth.controller';
-import { AuthService, JwtStrategy } from './service';
+import { JwtModule } from '@nestjs/jwt';
+import { jwtConstants } from './constants';
+import { JwtStrategy } from './service/jwt.strategy';
 import { UsersModule } from '../users/users.module';
 
 @Module({
-  controllers: [AuthController],
+  controllers: [
+    AuthController
+  ],
   imports: [
     UsersModule,
-    ConfigModule.forRoot({
-      envFilePath: 'development.env',
+    PassportModule,
+    JwtModule.register({
+      secret: jwtConstants.secret,
+      signOptions: { expiresIn: '1h' },
     }),
   ],
   providers: [
+    // UsersService,
     AuthService,
-    JwtStrategy
+    LocalStrategy,
+    JwtStrategy,
+  ],
+  exports: [
+    // UsersService
   ]
 })
-export class AuthModule implements NestModule {
-  //全域middleware
-  public configure(consumber: MiddlewareConsumer) {
-    //apply、forRoute方法允許傳入多個參數
-    consumber
-      .apply(passport.authenticate('jwt', { session: false }))
-      .forRoutes(
+export class AuthModule {
 
-        //auth
-        { path: '/auth/admin/permission', method: RequestMethod.GET },
-
-        //user              
-        { path: '/users/info', method: RequestMethod.GET },
-        { path: '/users/admin/getAllUser', method: RequestMethod.GET },
-        { path: '/users/info', method: RequestMethod.PUT },
-        { path: '/users/password', method: RequestMethod.PUT },
-
-        // role
-        { path: '/role/create', method: RequestMethod.POST },
-        { path: '/role/:id', method: RequestMethod.PUT },
-        { path: '/role/:id', method: RequestMethod.DELETE },
-
-        // setting
-        { path: '/setting/setByKey', method: RequestMethod.PUT },
-
-        // file
-        { path: '/file/upload', method: RequestMethod.POST },
-
-        //shop
-        { path: '/shop/create', method: RequestMethod.POST },
-        { path: '/shop/:id', method: RequestMethod.PUT },
-        { path: '/shop/:id', method: RequestMethod.DELETE },
-
-        // order
-        { path: '/order/create', method: RequestMethod.POST },
-        { path: '/order/update', method: RequestMethod.PUT },
-        { path: '/order/:id', method: RequestMethod.DELETE },
-
-        // consumer
-        { path: '/consumer/info', method: RequestMethod.GET },
-     
-        // product
-        { path: '/product/create', method: RequestMethod.POST },
-        { path: '/product/:id', method: RequestMethod.PUT },
-        { path: '/product/:id', method: RequestMethod.DELETE },
-
-
-        // product type
-        { path: '/productType/create', method: RequestMethod.POST },
-        { path: '/productType/:id', method: RequestMethod.PUT },
-        { path: '/productType/:id', method: RequestMethod.DELETE },
-
-      );
-  }
 }

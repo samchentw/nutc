@@ -1,12 +1,12 @@
-import { Controller, Get, UsePipes, UseGuards, Post, Body, Param, Put, Delete, Query, Req, ValidationPipe } from '@nestjs/common';
+import { Controller, Get, UsePipes, UseGuards, Post, Body, Param, Put, Delete, Request, Req, ValidationPipe } from '@nestjs/common';
 import { UpdateUserPwd, CreateUserDto, LoginUserDto, UpdateUserInfoDto, User } from '../dto';
 import { UsersService } from '../service/users.service';
-import { UnauthorizedException, RolesGuard, Roles } from '@app/core/shared';
+import { UnauthorizedException, RolesGuard, Roles, RoleCheck } from '@app/core/shared';
 import { ApiTags, ApiBearerAuth, ApiDefaultResponse, ApiBody } from '@nestjs/swagger';
+import { JwtAuthGuard } from '@app/identity/auth/guard/jwt-auth.guard';
 
 @ApiTags('Users')
 @Controller('users')
-@UseGuards(RolesGuard)
 @UsePipes(new ValidationPipe())
 export class UserController {
   constructor(
@@ -19,20 +19,22 @@ export class UserController {
   }
 
   @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
   @Get('info')
   @ApiDefaultResponse({ type: User.UserDto })
   async userInfo(@Req() req) {
-    // console.log(req.user)
     return await this.userService.get(req.user.id);
   }
 
   @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
   @Put('info')
   async update(@Req() req, @Body() body: UpdateUserInfoDto) {
     return await this.userService.update(req.user.id, body);
   }
 
   @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
   @Put('password')
   async updatePwd(@Req() req, @Body() body: UpdateUserPwd) {
     const check = await this.userService.userPwdcheck(req.user.id, body);
@@ -43,9 +45,9 @@ export class UserController {
 
 
   @ApiBearerAuth()
-  @Roles("admin")
+  @UseGuards(JwtAuthGuard)
   @Get("admin/getAllUser")
-  async getAllUser() {
+  async getAllUser(@RoleCheck(["admin"]) admin) {
     return await this.userService.getAllUser();
   }
 

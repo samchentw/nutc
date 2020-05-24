@@ -1,36 +1,44 @@
-import { Controller, Post, UsePipes, Body, UseGuards, Get } from '@nestjs/common';
-import {ApiTags, ApiBearerAuth,ApiDefaultResponse,ApiBody} from '@nestjs/swagger';
+import { Controller, Post, Get, Body, UseGuards, Request } from '@nestjs/common';
+import { ApiTags, ApiBearerAuth, ApiDefaultResponse, ApiBody, ApiProperty } from '@nestjs/swagger';
 import { LoginUserDto, User } from '../../users/dto';
-import {ValidationPipe,UnauthorizedException,RolesGuard,Roles} from '@app/core/shared';
 import { UsersService } from '../../users/service/users.service';
-import { AuthService } from '../service';
+import { AuthService } from '../service/auth.service';
+import { AuthGuard } from '@nestjs/passport';
+import { LocalAuthGuard } from '../guard/local-auth.guard';
+import { JwtAuthGuard } from '../guard/jwt-auth.guard';
+import { RoleCheck } from '@app/core/shared';
+
+export class logDto {
+  @ApiProperty()
+  username: string;
+  @ApiProperty()
+  password: string;
+}
 @ApiTags('Auth')
-@UseGuards(RolesGuard) 
 @Controller('auth')
 export class AuthController {
-    constructor(
-        private usersService:UsersService,
-        private authService:AuthService
-    ) {}
-    
-    @Post('login')
-    @ApiBody({type:LoginUserDto})
-    @ApiDefaultResponse({type:User.TokenDto})
-    @UsePipes(new ValidationPipe())
-    async login(@Body() body:LoginUserDto){
-      const user=await this.usersService.checkUser(body);
-      if(user) return await this.authService.createToken(user.id,user.userinfo.id);
-      else   throw new UnauthorizedException();
-    }
+  constructor(
+    private authService: AuthService
+  ) { }
 
+  @UseGuards(LocalAuthGuard)
+  @ApiBody({ type: logDto })
+  @Post('login')
+  async login(@Request() req) {
+    return this.authService.login(req.user);
+  }
 
-    @Roles("admin")
-    @ApiBearerAuth()
-    @Get('admin/permission')
-    // @ApiBody({type:LoginUserDto})
-    // @ApiDefaultResponse({type:User.TokenDto})
-    @UsePipes(new ValidationPipe())
-    async admin(){
-      return true;
-    }
+  // @UseGuards(JwtAuthGuard)
+  // @Get('profile')
+  // @ApiBearerAuth()
+  // getProfile(@Request() req) {
+  //   return req.user;
+  // }
+
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
+  @Get('admin/permission')
+  async admin(@RoleCheck(["admin"]) check) {
+    return true;
+  }
 }

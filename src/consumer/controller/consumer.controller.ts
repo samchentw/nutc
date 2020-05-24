@@ -3,10 +3,10 @@ import { ValidationPipe, RolesGuard, Roles } from '@app/core/shared';
 import { ApiTags, ApiQuery, ApiParam, ApiDefaultResponse, ApiBearerAuth } from '@nestjs/swagger';
 import { ConsumerService } from '../service/consumer.service';
 import { CreateUserDto } from '@app/identity/users/dto';
-import { User } from '@app/core/shared/decorator/user.decorator';
+import { User, RoleCheck } from '@app/core/shared/decorator/user.decorator';
+import { JwtAuthGuard } from '@app/identity/auth/guard/jwt-auth.guard';
 // import { fs } from 'memfs';
 @ApiTags("Consumer")
-@UseGuards(RolesGuard) 
 @Controller("consumer")
 export class ConsumerController {
   constructor(
@@ -14,14 +14,14 @@ export class ConsumerController {
   ) { }
 
   @Post("register")
-  register(@Body() body:CreateUserDto){
+  register(@Body() body: CreateUserDto) {
     return this.consumerService.register(body);
   }
 
   @Get("info")
-  @Roles("user")
   @ApiBearerAuth()
-  info(@User("id") userId){
-      return this.consumerService.getByUserId(userId);
+  @UseGuards(JwtAuthGuard)
+  info(@User("id") userId, @RoleCheck(["user"]) check) {
+    return this.consumerService.getByUserId(userId);
   }
 }
