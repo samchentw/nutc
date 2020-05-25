@@ -6,6 +6,13 @@ export default {
     return axios.post('../api/auth/login', loginData);
   },
 
+  getUserinfo() {
+    return axios.get('../api/users/info', {
+      headers: {
+        Authorization: 'Bearer ' + this.getToken()
+      }
+    });
+  },
   // 註冊
   registerApi(data) {
     return axios.post('../api/consumer/register', data);
@@ -53,6 +60,14 @@ export default {
     });
   },
 
+  updateSettings(data) {
+    return axios.put('../api/setting/setByKeys', data, {
+      headers: {
+        Authorization: 'Bearer ' + this.getToken()
+      }
+    });
+  },
+
 
 
   // 店家CRUD
@@ -85,7 +100,7 @@ export default {
   },
   //產品CRUD
   getProducts(skip, productTypeId, showIsSell) {
-    return axios.get('../api/product/page?take=999&skip=' + skip + "&productTypeId=" + productTypeId+ "&showIsSell=" + showIsSell);
+    return axios.get('../api/product/page?take=999&skip=' + skip + "&productTypeId=" + productTypeId + "&showIsSell=" + showIsSell);
   },
   createProduct(data) {
     return axios.post('../api/product/create', data, {

@@ -1,6 +1,6 @@
 import { Controller, Get, UsePipes, UseGuards, Post, Body, Param, Put, Delete, Query, Req, ValidationPipe } from '@nestjs/common';
 
-import { ApiTags, ApiBearerAuth, ApiParam, ApiDefaultResponse } from '@nestjs/swagger';
+import { ApiTags, ApiBearerAuth, ApiParam, ApiDefaultResponse, ApiBody } from '@nestjs/swagger';
 import { RolesGuard, Roles, RoleCheck } from '@app/core/shared';
 import { SettingService } from '../service/setting.service';
 import { UpdateSettingDto } from '../dto/update-setting.dto';
@@ -35,8 +35,15 @@ export class SettingController {
     @UseGuards(JwtAuthGuard)
     @Put("setByKey")
     setByKey(@Body() body: UpdateSettingDto, @RoleCheck(["admin"]) admin) {
-        // console.log(body)
         return this.settingService.setByKey(body);
+    }
+
+    @ApiBearerAuth()
+    @ApiBody({ type: UpdateSettingDto, isArray: true })
+    @UseGuards(JwtAuthGuard)
+    @Put("setByKeys")
+    setByKeys(@Body() body: UpdateSettingDto[], @RoleCheck(["admin"]) admin) {
+        return this.settingService.setBykeys(body);
     }
 
     @Get("seed")

@@ -10,5 +10,23 @@
         "value":"description test",
         "description":"",
         "enable":true
+    },
+    {
+        "key":"前台.首頁.欄位一",
+        "value":"",
+        "description":"",
+        "enable":true
+    },
+    {
+        "key":"前台.首頁.欄位二",
+        "value":"",
+        "description":"",
+        "enable":true
+    },
+    {
+        "key":"前台.首頁.欄位三",
+        "value":"",
+        "description":"",
+        "enable":true
     }
 ]

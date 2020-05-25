@@ -104,7 +104,7 @@ export default {
   position: relative;
   display: block;
   padding: 0.75rem 1.25rem;
-  background-color: #fff;
+  /* background-color: #fff; */
   border: 1.5px solid rgba(0, 0, 140, 0.125);
 }
 </style>

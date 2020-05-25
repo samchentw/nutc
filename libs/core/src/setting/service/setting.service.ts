@@ -33,6 +33,15 @@ export class SettingService extends BaseService<Setting, CreateSettingDto, Updat
         return this.repository.save(result);
     }
 
+    async setBykeys(input: UpdateSettingDto[]) {
+        var result = [];
+        for (var i = 0; i < input.length; i++) {
+            var data = await this.setByKey(input[i]);
+            result.push(data);
+        }
+        return result;
+    }
+
     async getBykey(key: string) {
         return await this.repository.findOne({ key });
     }
@@ -48,7 +57,7 @@ export class SettingService extends BaseService<Setting, CreateSettingDto, Updat
         settings = _.differenceBy(settings, data, "key");
         // console.log(data);
         // console.log(settings)
-        settings.forEach(async x=>{
+        settings.forEach(async x => {
             await this.repository.delete(x.id);
         });
 
