@@ -34,13 +34,13 @@ export class TreeController {
     @Get("getTree/:id")
     @ApiParam({ name: "id" })
     @ApiDefaultResponse({ type: Tree.TreeDto, isArray: true })
-    getTree(@Param('id') id) {
+    getTree(@Param('id') id: string) {
         return this.treeService.getDescendantsTree(id);
     }
 
     @Get("roots")
     @ApiDefaultResponse({ type: Tree.TreeDto, isArray: true })
-    getRoots(){
+    getRoots() {
         return this.treeService.getRoot();
     }
 

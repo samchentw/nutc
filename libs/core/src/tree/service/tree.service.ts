@@ -10,13 +10,13 @@ export class TreeService {
     constructor(
         @InjectRepository(TreeEntity)
         private readonly Repository: TreeRepository<TreeEntity>
-    ) {
-
-    }
+    ) { }
 
     async create(input: CreateTreeDto) {
-        var parent = null;
-        if (input.parentId) parent = await this.Repository.findOne({ id: input.parentId });;
+        var parent: TreeEntity = null;
+        if (input.parentId) {
+            parent = await this.Repository.findOne({ id: input.parentId });
+        }
         var result = plainToClass(TreeEntity, input);
         result.parent = parent;
         return await this.Repository.save(result);
@@ -30,9 +30,8 @@ export class TreeService {
         return this.Repository.findTrees();
     }
 
-    async getDescendantsTree(id: number) {
+    async getDescendantsTree(id: string) {
         var tree = await this.Repository.findOne(id);
-        // return this.Repository.findAncestorsTree(tree)
         return this.Repository.findDescendantsTree(tree)
     }
 
@@ -40,16 +39,13 @@ export class TreeService {
         return this.Repository.findRoots();
     }
 
-    test() {
-        // return this.Repository.merge()
-    }
 
     update(input: UpdateTreeDto) {
         delete input.id;
         return this.Repository.update({ id: input.id }, input);
     }
 
-    delete(id: number) {
+    delete(id: string) {
         return this.Repository.delete({ id });
     }
 }

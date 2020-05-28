@@ -4,8 +4,8 @@ import { Entity, Tree, Column, PrimaryGeneratedColumn, TreeChildren, TreeParent,
 @Tree("closure-table")
 export class TreeEntity {
 
-    @PrimaryGeneratedColumn()
-    id: number;
+    @PrimaryGeneratedColumn('uuid')
+    id: string;
 
     @Column()
     name: string;

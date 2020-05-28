@@ -1,18 +1,18 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-export namespace Tree{
-    export class TreeWithDetailDto{
+export namespace Tree {
+    export class TreeWithDetailDto {
         @ApiProperty()
-        id: number;
+        id: string;
         @ApiProperty()
         name: string;
-        @ApiProperty({type:TreeWithDetailDto,isArray:true})
-        children: TreeWithDetailDto[];    
+        @ApiProperty({ type: TreeWithDetailDto, isArray: true })
+        children: TreeWithDetailDto[];
     }
 
-    export class TreeDto{
+    export class TreeDto {
         @ApiProperty()
-        id: number;
+        id: string;
         @ApiProperty()
         name: string;
     }

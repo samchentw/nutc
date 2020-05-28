@@ -9,7 +9,8 @@ export * from './pipes/validation.pipe.ts';
 export * from './pipes/systemQuestionEnum.pipe';
 
 //filter
-export * from './filter/HttpErrorFilter.filter';
+export * from './filter/httpErrorFilter.filter';
+export * from './filter/http-exception.filter';
 
 //interceptor
 export * from './interceptor/logging.interceptor';
