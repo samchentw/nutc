@@ -11,11 +11,11 @@ export class HttpExceptionFilter implements ExceptionFilter {
       const status = exception.getStatus();
   
       if (status === 404) {
-        response
-          .status(status)
-          .send(
-            'Go to home page <a href="https://my.url/">https://my.url/</a>',
-          );
+        response.redirect("./nutc")
+          // .status(status)
+          // .send(
+          //   'Go to home page <a href="https://my.url/">https://my.url/</a>',
+          // );
       } else {
         response.status(status).json({
           statusCode: status,

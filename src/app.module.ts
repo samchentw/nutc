@@ -14,6 +14,7 @@ import { ConsumerModule } from './consumer/consumer.module';
 import { ElseModule } from '@app/else';
 import { ProductModule } from './product/product.module';
 import { OrderModule } from './order/order.module';
+import { ContactModule } from './contact/contact.module';
 @Module({
   imports: [
 
@@ -39,6 +40,7 @@ import { OrderModule } from './order/order.module';
     ConsumerModule,
     ProductModule,
     OrderModule,
+    ContactModule,
 
   ],
   controllers: [AppController,],

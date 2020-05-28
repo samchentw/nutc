@@ -5,7 +5,7 @@ import * as rateLimit from 'express-rate-limit';
 import * as cpx from 'cpx';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { join } from 'path';
-import { MyLogger } from '@app/core/shared';
+import { MyLogger, HttpExceptionFilter } from '@app/core/shared';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { AppModule } from './app.module';
 async function bootstrap() {
@@ -33,6 +33,7 @@ async function bootstrap() {
   );
   app.use(compression());
   app.use(helmet());
+  app.useGlobalFilters(new HttpExceptionFilter())
   await app.listen(3000);
 }
 bootstrap();

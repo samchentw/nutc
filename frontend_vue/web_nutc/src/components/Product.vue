@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="container">
+    <div class="container" v-if="showType==1">
       <div class="row">
         <div class="col-lg-3">
           <h3 class="my-4">產品種類</h3>
@@ -39,7 +39,8 @@
                   <p class="card-text">{{item.description}}</p>
                 </div>
                 <div class="card-footer">
-                  <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+                  <!-- <button></button> -->
+                  <b-button v-on:click="change(2)">購買</b-button>
                 </div>
               </div>
             </div>
@@ -50,6 +51,12 @@
       </div>
       <!-- /.row -->
     </div>
+
+    <div  class="container" v-if="showType==2">
+      test
+       <b-button v-on:click="change(1)">back</b-button>
+    </div>
+
   </div>
 </template>
 
@@ -65,19 +72,22 @@ export default {
       productType: [],
       selectType: 0,
       products: [],
+      showType: 1,
     };
   },
   created() {
     this.init();
   },
   methods: {
+    change(type){
+      this.showType = type;
+    },
     init() {
       apiService.getProductType().then(x => {
         this.productType = x.data;
       });
       apiService.getProducts(0, 0, false).then(x => {
         this.products = x.data.items;
-        // console.log(this.products)
       });
     },
     funSelectType(id) {
@@ -104,7 +114,7 @@ export default {
   position: relative;
   display: block;
   padding: 0.75rem 1.25rem;
-  /* background-color: #fff; */
-  border: 1.5px solid rgba(0, 0, 140, 0.125);
+  background-color: #fff;
+  border: 3px solid rgba(0, 0, 140, 0.125);
 }
 </style>
