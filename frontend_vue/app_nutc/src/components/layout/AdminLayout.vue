@@ -29,13 +29,28 @@
           <span>會員資料</span></a>
       </li>
 
-     <!-- <li class="nav-item">
-        <a class="nav-link" href="./#/system/test">
-          <i class="fas fa-fw fa-user"></i>
-          <span>測試</span></a>
-      </li> -->
+      <li class="nav-item">
+        <a class="nav-link" href="./#/system/contact">
+          <i class="fas fa-fw fa-file"></i>
+          <span>聯絡資訊</span></a>
+      </li>
 
-      <!-- Divider -->
+       <hr class="sidebar-divider">
+
+      <!-- Heading -->
+      <div class="sidebar-heading">
+        活動管理
+      </div>
+
+
+      <li class="nav-item">
+        <a class="nav-link" href="./#/system/activity">
+          <i class="fas fa-fw fa-camera-retro"></i>
+          <span>活動設定</span></a>
+      </li>
+
+
+    
       <hr class="sidebar-divider">
 
       <!-- Heading -->

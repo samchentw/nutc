@@ -30,7 +30,6 @@ export * from './extends/AutoToEntity';
 
 //base
 export * from './base/base.service';
-export * from './base/treeBase.serivce'
 export * from './base/base.entity';
 //dto 
 export * from './dto/page.dto';

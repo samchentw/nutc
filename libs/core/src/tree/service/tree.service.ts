@@ -4,7 +4,7 @@ import { TreeRepository } from 'typeorm';
 import { CreateTreeDto, CreateTreeWithDetailDto, UpdateTreeDto } from '../dto';
 import { TreeEntity } from '../entity/tree.entity';
 import { plainToClass } from 'class-transformer';
-import { TreeBaseService } from '@app/core/shared'
+
 @Injectable()
 export class TreeService {
     constructor(

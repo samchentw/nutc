@@ -37,16 +37,8 @@ export class Shop extends BaseEntity {
   @Expose()
   isDelete: boolean;
 
-  // @OneToMany(type => ProductEntity, productEntity => productEntity.shop)
-  // Product: ProductEntity[];
-
   @Column()
   @Expose()
   shopImage: string;
-
-  // @BeforeInsert()
-  // defaultIsDelete() {
-  //   this.isDelete = false;
-  // }
 
 }

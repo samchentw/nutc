@@ -152,6 +152,11 @@ export default {
     });
   },
 
+  // contact
+  createContact(data) {
+    return axios.post('../api/contact', data);
+  },
+
   //存token
   saveToken(value) {
     window.localStorage.setItem("nutc", value);

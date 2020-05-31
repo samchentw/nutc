@@ -21,14 +21,9 @@ export class ShopService extends BaseService<Shop, CreateShopDto, UpdateShopDto>
         super(repository)
     }
 
-    private async findImage(imageIds: number[]): Promise<string> {
-        var images = await this.fileService.findByIds(imageIds);
-        return JSON.stringify(images);
-    }
-
     async create(input: CreateShopDto) {
         var shop = plainToClass(Shop, input);
-        shop.shopImage = await this.findImage(input.imageIds);
+        shop.shopImage = await this.fileService.getFileUrlAndIdStr(input.imageIds);
         shop.isDelete = false;
         return await super.create(shop)
     }
@@ -36,7 +31,7 @@ export class ShopService extends BaseService<Shop, CreateShopDto, UpdateShopDto>
     async update(id: number, input: UpdateShopDto) {
         var newshop = plainToClass(Shop, input, { excludeExtraneousValues: true });
         if (input.imageIds && input.imageIds.length > 0) {
-            newshop.shopImage = await this.findImage(input.imageIds);
+            newshop.shopImage = await this.fileService.getFileUrlAndIdStr(input.imageIds);
         }
         return await super.update(id, newshop)
     }
@@ -55,6 +50,7 @@ export class ShopService extends BaseService<Shop, CreateShopDto, UpdateShopDto>
                 else shop.remark = "";
                 shop.description = "";
                 shop.isDelete = false;
+
                 await this.repository.save(shop);
             }
         }

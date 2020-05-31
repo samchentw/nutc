@@ -74,7 +74,7 @@
                     </td>
                     <td>
                       <a href="javascript:void(0)" @click="open1(modalShow1,item)">編輯</a>|
-                      <a href>刪除</a>
+                      <a href="javascript:void(0)" @click="deleteProduct(item)">刪除</a>
                     </td>
                   </tr>
                 </tbody>
@@ -149,8 +149,8 @@
 
         <div v-if="selectProductImage.length > 0">
           <div style="display:grid;grid-template-columns: 1fr 1fr 1fr;">
-            <div v-for="(item) in selectProductImage" :key="item" style="width:100%">
-              <img v-bind:src="'..'+item" style="width:100%" />
+            <div v-for="(item) in selectProductImage" :key="item.id" style="width:100%">
+              <img v-bind:src="'..'+item.url" style="width:100%" />
               <!-- {{item.id}} -->
             </div>
           </div>
@@ -240,8 +240,6 @@ export default {
       });
     },
     async handleOk1() {
-      this.selectProductData.productTypeId = this.selectTypeId;
-      // console.log(this.file)
       var imageDatas = [];
 
       if (this.file) {
@@ -251,13 +249,21 @@ export default {
         }
         imageDatas = await apiService.uploadfile(form);
         this.selectProductData.imageIds = imageDatas.data;
+      }else{
+        this.selectProductData.imageIds = [];
       }
+
+      this.selectProductData.imageIds = this.selectProductData.imageIds.concat(
+        this.selectProductImage.map(x => x.id),
+      );
 
       if (this.selectProductData.id) {
         apiService.updateProduct(this.selectProductData).then(x => {
           Swal.fire('更新成功！');
+          this.file = null;
         });
       } else {
+         this.selectProductData.productTypeId = this.selectTypeId;
         apiService.createProduct(this.selectProductData).then(x => {
           Swal.fire('建立成功！');
           this.file = null;
@@ -285,13 +291,21 @@ export default {
       if (data) this.select = data;
       else this.select = {};
     },
+    deleteProduct(product){
+      messageService.confirm('確定要刪除嗎？').then(x => {
+        if (x.value) {
+          product.isDelete = true;
+          apiService.updateProduct(product).then(x => {
+            Swal.fire('刪除成功！');
+          });
+        }
+      });
+    },
     open1(show, data) {
       this.modalShow1 = !show;
       if (data) {
         this.selectProductData = data;
-
         this.selectProductImage = JSON.parse(data.productImage);
-        console.log(this.selectProductImage);
       } else
         this.selectProductData = {
           name: '',

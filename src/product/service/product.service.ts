@@ -9,7 +9,7 @@ import { FileService } from '@app/core/file/service/file.service';
 import { plainToClass, classToPlain, classToClass, plainToClassFromExist } from 'class-transformer';
 import { Product } from '../entity/product.entity';
 import { CreateProductDto } from '../dto/create-product.dto';
-import { UpdateProductDto } from '../dto/update-product.data';
+import { UpdateProductDto } from '../dto/update-product.dto';
 import { ProductTypeService } from './productType.service';
 import { ProductPageDto, ProductQueryPageDto } from '../dto/product.dto';
 @Injectable()
@@ -24,29 +24,25 @@ export class ProductService extends BaseService<Product, CreateProductDto, Updat
         super(repository)
     }
 
-    private async findImage(imageIds: number[]): Promise<string> {
-        var images = await this.fileService.findByIds(imageIds);
-        // console.log(images.map(x=>x.url));
-        var urls = images.map(x => x.url);
-        return JSON.stringify(urls);
-    }
+
 
     async create(input: CreateProductDto) {
-        console.log(input)
+        // console.log(input)
         var product = plainToClass(Product, input);
         var types = await this.productTypeService.get(input.productTypeId);
-        product.productImage = await this.findImage(input.imageIds);
+        product.productImage = await this.fileService.getFileUrlAndIdStr(input.imageIds);
         product.isDelete = false;
         product.productTypes = types;
         return await super.create(product)
     }
 
     async update(id: number, input: UpdateProductDto) {
+        var or = await this.get(id);
         var newproduct = plainToClass(Product, input, { excludeExtraneousValues: true });
         if (input.imageIds && input.imageIds.length > 0) {
-            newproduct.productImage = await this.findImage(input.imageIds);
+            newproduct.productImage = await this.fileService.getFileUrlAndIdStr(input.imageIds);
         }
-        var types = await this.productTypeService.get(input.productTypeId);
+        var types = or.productTypes
         newproduct.productTypes = types;
         return await super.update(id, newproduct)
     }

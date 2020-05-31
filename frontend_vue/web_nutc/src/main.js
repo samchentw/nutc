@@ -12,7 +12,8 @@ import Aboutus from './components/Aboutus.vue';
 import Product from './components/Product.vue';
 import Contact from './components/Contact.vue';
 import Home from './components/Home.vue';
-
+import Activity from './components/Activity.vue';
+import Shop from './components/Shop.vue';
 
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
@@ -34,6 +35,14 @@ const router = new VueRouter({
     { 
       path: '/product', 
       component: Product,
+    },
+    { 
+      path: '/shop', 
+      component: Shop,
+    },
+    { 
+      path: '/activity', 
+      component: Activity,
     },
     { 
       path: '/contact', 

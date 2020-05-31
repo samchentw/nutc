@@ -6,7 +6,7 @@
         <div class="row">
           <!-- <div class="col-lg-6">
             <img class="img-fluid rounded mb-4" src="images/about-img.jpg" alt />
-          </div> -->
+          </div>-->
           <div class="col-lg-12">
             <h2>{{title}}</h2>
             <p>{{description}}</p>
@@ -41,7 +41,6 @@ export default {
         this.description = x.data.find(
           y => y.key == '前台.關於我們.description',
         ).value;
-        console.log(this.title);
       });
     },
   },

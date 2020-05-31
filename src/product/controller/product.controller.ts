@@ -4,7 +4,7 @@ import { ApiTags, ApiQuery, ApiParam, ApiDefaultResponse, ApiBearerAuth } from '
 import { ProductService } from '../service/product.service';
 import { ProductDto, ProductPageDto } from '../dto/product.dto';
 import { CreateProductDto } from '../dto/create-product.dto';
-import { UpdateProductDto } from '../dto/update-product.data';
+import { UpdateProductDto } from '../dto/update-product.dto';
 import { JwtAuthGuard } from '@app/identity/auth/guard/jwt-auth.guard';
 
 @ApiTags("Product")

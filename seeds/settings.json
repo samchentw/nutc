@@ -1,32 +1,56 @@
 [
     {
-        "key":"前台.關於我們.title",
-        "value":"title test",
-        "description":"",
-        "enable":true
+        "key": "前台.關於我們.title",
+        "value": "title test",
+        "description": "",
+        "enable": true
     },
     {
-        "key":"前台.關於我們.description",
-        "value":"description test",
-        "description":"",
-        "enable":true
+        "key": "前台.關於我們.description",
+        "value": "description test",
+        "description": "",
+        "enable": true
     },
     {
-        "key":"前台.首頁.欄位一",
-        "value":"",
-        "description":"",
-        "enable":true
+        "key": "前台.首頁.欄位一",
+        "value": "",
+        "description": "",
+        "enable": true
     },
     {
-        "key":"前台.首頁.欄位二",
-        "value":"",
-        "description":"",
-        "enable":true
+        "key": "前台.首頁.欄位二",
+        "value": "",
+        "description": "",
+        "enable": true
     },
     {
-        "key":"前台.首頁.欄位三",
-        "value":"",
-        "description":"",
-        "enable":true
+        "key": "前台.首頁.欄位三",
+        "value": "",
+        "description": "",
+        "enable": true
+    },
+    {
+        "key": "前台.活動.欄位一",
+        "value": "1.免費型活動",
+        "description": "",
+        "enable": true
+    },
+    {
+        "key": "前台.活動.欄位二",
+        "value": "2.基本型商圈消費",
+        "description": "",
+        "enable": true
+    },
+    {
+        "key": "前台.活動.欄位三",
+        "value": "3.兩天一夜過夜型",
+        "description": "",
+        "enable": true
+    },
+    {
+        "key": "前台.活動.欄位四",
+        "value": "4.社區導覽",
+        "description": "",
+        "enable": true
     }
 ]

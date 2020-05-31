@@ -12,6 +12,8 @@ import Shop from './components/Shop.vue';
 import Setting from './components/Setting.vue';
 import Product from './components/Product.vue';
 import Info from './components/Info.vue';
+import Contact from './components/Contact.vue';
+import Activity from './components/Activity.vue';
 
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
@@ -33,7 +35,12 @@ const router = new VueRouter({
         { path: 'shop', component: Shop },
         { path: 'product', component: Product },
         { path: 'setting', component: Setting },
+
+        { path: 'activity', component: Activity },
+        
+
         { path: 'info', component: Info },
+        { path: 'contact', component: Contact },
         
         { path: 'test', component: HelloWorld },
       ]

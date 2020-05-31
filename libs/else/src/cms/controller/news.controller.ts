@@ -1,8 +1,7 @@
 import { Controller, Get, Post, Body, Put, Param, Query, Delete } from '@nestjs/common';
 import { NewsService,CmsJob } from '../service';
-import { CreateNewsDto, UpdateNewsDto } from '../dto';
-import { News } from '../dto/news.dto';
-import {ApiTags, ApiDefaultResponse, ApiParam} from '@nestjs/swagger';
+import { CreateNewsDto, UpdateNewsDto, News } from '../dto';
+import {ApiTags, ApiDefaultResponse, ApiParam, ApiQuery} from '@nestjs/swagger';
 @ApiTags("News")
 @Controller("news")
 export class NewsController {
@@ -23,6 +22,8 @@ export class NewsController {
     }
 
     @Get("page")
+    @ApiQuery({ name: "skip", required: false })
+    @ApiQuery({ name: "take", required: false })
     page(@Query() query){        
         return this.newsService.page({skip:query.skip,take:query.take});
     }

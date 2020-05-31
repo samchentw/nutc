@@ -14,7 +14,7 @@ import { ConsumerModule } from './consumer/consumer.module';
 import { ElseModule } from '@app/else';
 import { ProductModule } from './product/product.module';
 import { OrderModule } from './order/order.module';
-import { ContactModule } from './contact/contact.module';
+
 @Module({
   imports: [
 
@@ -24,7 +24,7 @@ import { ContactModule } from './contact/contact.module';
       "port": 3306,
       "username": "root",
       "password": "",
-      "database": "nest",
+      "database": "nutc",
       "entities": ["dist/**/*.entity{.ts,.js}"],
       "autoLoadEntities": true,
       "synchronize": true,
@@ -35,12 +35,11 @@ import { ContactModule } from './contact/contact.module';
     }),
     CoreModule,
     IdentityModule,
-    // ElseModule,
+    ElseModule,
     ShopModule,
     ConsumerModule,
     ProductModule,
     OrderModule,
-    ContactModule,
 
   ],
   controllers: [AppController,],

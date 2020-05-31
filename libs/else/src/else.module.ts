@@ -11,7 +11,7 @@ import { PracticeModule } from './practice/practice.module';
 @Module({
   imports:[
     // ArticleModule,
-    // CmsModule,
+    CmsModule,
     // ChatModule,
     // PracticeModule,
   ],

@@ -1,23 +1,43 @@
-import {Entity, PrimaryGeneratedColumn, Column, ManyToOne} from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, CreateDateColumn, BaseEntity } from "typeorm";
 import { NewsType } from './newsType.entity';
-import { BaseEntity } from '@app/core/shared';
+import { Expose } from "class-transformer";
+
+// import { BaseEntity } from '@app/core/shared';
 @Entity()
-export class News extends BaseEntity{
+export class News extends BaseEntity {
+
+    @PrimaryGeneratedColumn()
+    @Expose()
+    id: number;
+
+    @CreateDateColumn({ type: 'timestamp' })
+    @Expose()
+    createTime: Date;
+
 
     @Column()
+    @Expose()
     title: string;
 
     @Column()
+    @Expose()
     subtitle: string;
 
-    @Column({type:"text"})
+    @Column({ type: "text" })
+    @Expose()
     description: string;
 
     @Column()
-    url:string;
+    @Expose()
+    url: string;
 
     @Column()
+    @Expose()
     isActive: boolean;
+
+    @Column()
+    @Expose()
+    Images: string;
 
     @ManyToOne(type => NewsType, NewsType => NewsType.news)
     newsType: NewsType;

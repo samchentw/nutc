@@ -49,8 +49,19 @@ export class FileService {
         return result;
     }
 
-    findByIds(ids: number[]) {
+    findByIds(ids: number[]): Promise<File[]> {
         return this.FileRepository.findByIds(ids);
+    }
+
+    async getFileUrlAndIdStr(ids: number[]): Promise<string> {
+        var file = await this.findByIds(ids);
+        var result = file.map(x => {
+            return {
+                id: x.id,
+                url: x.url
+            }
+        });
+        return JSON.stringify(result);
     }
 
     findAll() {

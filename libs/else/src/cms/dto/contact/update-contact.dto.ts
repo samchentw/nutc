@@ -2,11 +2,10 @@ import { IsString, IsNumber, IsBoolean, IsArray, IsNotEmpty } from 'class-valida
 import { ApiProperty } from '@nestjs/swagger';
 
 
-export class CreateContactDto {
+export class UpdateContactDto {
 
     @ApiProperty()
-    @IsString()
-    createTime: Date;
+    id:number;
 
     @ApiProperty()
     @IsString()

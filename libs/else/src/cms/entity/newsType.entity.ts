@@ -1,8 +1,14 @@
-import {Entity, JoinColumn, Column, OneToMany} from "typeorm";
+import {Entity, JoinColumn, Column, OneToMany, PrimaryGeneratedColumn, CreateDateColumn, BaseEntity} from "typeorm";
 import { News } from './news.entity';
-import { BaseEntity } from '@app/core/shared';
+
 @Entity()
 export class NewsType extends BaseEntity{
+
+    @PrimaryGeneratedColumn()
+    id:number;   
+   
+    @CreateDateColumn({ type: 'timestamp' })
+    createTime:Date;
 
     @Column()
     name: string;   

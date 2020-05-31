@@ -7,7 +7,7 @@ import { TreeModule } from './tree/tree.module';
   imports:[
     SettingModule,
     FileModule,
-    TreeModule,
+    // TreeModule,
   ],
   providers: [CoreService],
   exports: [CoreService],

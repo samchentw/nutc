@@ -37,7 +37,7 @@ export class UpdateProductDto {
     @IsString()
     productImage: string;
 
-    @ApiProperty({ type: Number })
-    @IsNumber()
-    productTypeId: number;
+    // @ApiProperty({ type: Number })
+    // @IsNumber()
+    // productTypeId: number;
 }
