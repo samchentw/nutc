@@ -25,9 +25,6 @@ export * from './decorator/user.decorator';
 //enum
 export * from './enum/enum';
 
-//extends
-export * from './extends/AutoToEntity';
-
 //base
 export * from './base/base.service';
 export * from './base/base.entity';
