@@ -155,4 +155,8 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.btn  {
+      background-color: #ffad60;
+      border-color: #ffad60;
+    }
 </style>

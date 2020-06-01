@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="container" v-if="showType==1">
-      <div class="row">
+      <div class="row" style="margin-bottom:100px">
         <div class="col-lg-3">
           <h3 class="my-4">產品種類</h3>
           <div class="list-group" v-if="productType.length>0">
@@ -26,6 +26,10 @@
 
         <div class="col-lg-9">
           <div class="row">
+            <div class="col-lg-12 col-md-12 mb-12" style="margin:10px" v-if="products.length == 0">
+              <div class="alert alert-info" role="alert">目前沒有產品</div>
+            </div>
+
             <div class="col-lg-4 col-md-6 mb-4" v-for="(item) in products" :key="item.id">
               <div class="card h-100">
                 <a href="#">
@@ -52,11 +56,10 @@
       <!-- /.row -->
     </div>
 
-    <div  class="container" v-if="showType==2">
+    <div class="container" v-if="showType==2">
       test
-       <b-button v-on:click="change(1)">back</b-button>
+      <b-button v-on:click="change(1)">back</b-button>
     </div>
-
   </div>
 </template>
 
@@ -79,7 +82,7 @@ export default {
     this.init();
   },
   methods: {
-    change(type){
+    change(type) {
       this.showType = type;
     },
     init() {
@@ -116,5 +119,10 @@ export default {
   padding: 0.75rem 1.25rem;
   background-color: #fff;
   border: 3px solid rgba(0, 0, 140, 0.125);
+}
+
+.list-group-item.active {
+  background-color: #ff9800;
+  border-color: #ff9800;
 }
 </style>

@@ -9,7 +9,7 @@
             <div class="card h-100" v-if="one.id">
               <h4 class="card-header">{{one.value}}</h4>
               <div class="card-img">
-                <img class="img-fluid"  style="height:262.38px;width:350px" src="home1.jpg" alt />
+                <img class="img-fluid"  style="height:262.38px;width:100%" src="home1.jpg" alt />
               </div>
               <div class="card-body">
                 <p
@@ -25,7 +25,7 @@
             <div class="card h-100" v-if="two.id">
               <h4 class="card-header">{{two.value}}</h4>
               <div class="card-img">
-                <img class="img-fluid" style="height:262.38px;width:350px" src="home2.jpg" alt />
+                <img class="img-fluid" style="height:262.38px;width:100%" src="home2.jpg" alt />
               </div>
               <div class="card-body">
                 <p
@@ -97,4 +97,5 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+
 </style>
