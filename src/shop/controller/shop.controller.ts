@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Put, Param, Delete, Query, UsePipes, Res, Header, Req, UseGuards, ValidationPipe } from '@nestjs/common';
+import { Controller, Get, Post, Body, Put, Param, Delete, Query, UsePipes, Res, Header, Req, UseGuards } from '@nestjs/common';
 import { RolesGuard, Roles, RoleCheck } from '@app/core/shared';
 import { ApiTags, ApiQuery, ApiParam, ApiDefaultResponse, ApiBearerAuth } from '@nestjs/swagger';
 import { ShopService } from '../service/shop.service';
@@ -10,7 +10,6 @@ import { JwtAuthGuard } from '@app/identity/auth/guard/jwt-auth.guard';
 // import { fs } from 'memfs';
 @ApiTags("Shop")
 @UseGuards(RolesGuard)
-@UsePipes(new ValidationPipe()) 
 @Controller("shop")
 export class ShopController {
   constructor(

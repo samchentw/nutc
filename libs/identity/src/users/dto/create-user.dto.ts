@@ -1,31 +1,33 @@
-import { IsString, IsEnum } from 'class-validator';
+import { IsString, IsEnum, IsNotEmpty, Length } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
-import { genderDataEnum,genderEnumArray } from '@app/core/shared';
-export class CreateUserDto{
+import { genderDataEnum, genderEnumArray } from '@app/core/shared';
+export class CreateUserDto {
     @ApiProperty()
-    @IsString()
-    readonly account:string;
+    @IsNotEmpty()
+    @Length(5)
+    readonly account: string;
 
     @ApiProperty()
-    @IsString()
-    readonly password:string;
+    @IsNotEmpty()
+    @Length(5)
+    readonly password: string;
 
     @ApiProperty()
-    @IsString()
-    readonly name:string;
+    @IsNotEmpty()
+    readonly name: string;
 
-    @ApiProperty({enum:genderEnumArray})    
+    @ApiProperty({ enum: genderEnumArray })
     @IsEnum(genderDataEnum)
-    readonly gender:genderDataEnum;
+    readonly gender: genderDataEnum;
 
     @ApiProperty({ type: 'string', format: 'date-time', example: '2018-11-21' })
-    readonly birthday:Date;
+    readonly birthday: Date;
 
     @ApiProperty()
-    @IsString()
-    readonly address:string;
+    @IsNotEmpty()
+    readonly address: string;
 
     @ApiProperty()
-    @IsString()
-    readonly email:string;
+    @IsNotEmpty()
+    readonly email: string;
 }

@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Put, Param, Delete, Query, UsePipes, Res, Header, Req, UseGuards, ValidationPipe } from '@nestjs/common';
+import { Controller, Get, Post, Body, Put, Param, Delete, Query, UsePipes, Res, Header, Req, UseGuards } from '@nestjs/common';
 import { RolesGuard, Roles, RoleCheck } from '@app/core/shared';
 import { ApiTags, ApiQuery, ApiParam, ApiDefaultResponse, ApiBearerAuth } from '@nestjs/swagger';
 import { JwtAuthGuard } from '@app/identity/auth/guard/jwt-auth.guard';
@@ -10,7 +10,6 @@ import { UpdateContactDto } from '../dto';
 
 @ApiTags("Contact")
 @Controller("contact")
-@UsePipes(new ValidationPipe())
 export class ContactController {
     constructor(
         private readonly contactService: ContactService,

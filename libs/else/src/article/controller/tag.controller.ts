@@ -1,7 +1,6 @@
 import { Controller, Get, Post, Body, Put, Param, Delete, Query, UsePipes, Res,Header, Req } from '@nestjs/common';
 import { TagService } from '../service/tag.service';
 import { CreateTagDto,TagDto } from '../dto';
-import { ValidationPipe } from '@app/core/shared';
 import {ApiTags, ApiQuery, ApiParam,ApiDefaultResponse} from '@nestjs/swagger';
 
 @ApiTags("Tag")
@@ -25,7 +24,6 @@ export class TagController {
   }
 
   @Post()    
-  @UsePipes(new ValidationPipe())
   @ApiDefaultResponse({type:TagDto})
   create(@Body() input:CreateTagDto){
     return this.tagService.create(input);

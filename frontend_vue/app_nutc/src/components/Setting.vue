@@ -100,10 +100,109 @@
           <div class="input-group-prepend">
             <span class="input-group-text" id="basic-addon1">首頁-欄位三-敘述</span>
           </div>
-          <!-- <input type="text" class="form-control" v-model="description.value" aria-label="Username" aria-describedby="basic-addon1"> -->
           <textarea
             class="form-control"
             v-model="three.description"
+            id="exampleFormControlTextarea1"
+            rows="3"
+          ></textarea>
+        </div>
+
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">活動-欄位一-標題</span>
+          </div>
+          <input
+            type="text"
+            class="form-control"
+            v-model="activity.one.value"
+            aria-label="Username"
+            aria-describedby="basic-addon1"
+          />
+        </div>
+
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">活動-欄位一-敘述</span>
+          </div>
+          <textarea
+            class="form-control"
+            v-model="activity.one.description"
+            id="exampleFormControlTextarea1"
+            rows="3"
+          ></textarea>
+        </div>
+
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">活動-欄位二-標題</span>
+          </div>
+          <input
+            type="text"
+            class="form-control"
+            v-model="activity.two.value"
+            aria-label="Username"
+            aria-describedby="basic-addon1"
+          />
+        </div>
+
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">活動-欄位二-敘述</span>
+          </div>
+          <textarea
+            class="form-control"
+            v-model="activity.two.description"
+            id="exampleFormControlTextarea1"
+            rows="3"
+          ></textarea>
+        </div>
+
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">活動-欄位三-標題</span>
+          </div>
+          <input
+            type="text"
+            class="form-control"
+            v-model="activity.three.value"
+            aria-label="Username"
+            aria-describedby="basic-addon1"
+          />
+        </div>
+
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">活動-欄位三-敘述</span>
+          </div>
+          <textarea
+            class="form-control"
+            v-model="activity.three.description"
+            id="exampleFormControlTextarea1"
+            rows="3"
+          ></textarea>
+        </div>
+
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">活動-欄位四-標題</span>
+          </div>
+          <input
+            type="text"
+            class="form-control"
+            v-model="activity.four.value"
+            aria-label="Username"
+            aria-describedby="basic-addon1"
+          />
+        </div>
+
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">活動-欄位四-敘述</span>
+          </div>
+          <textarea
+            class="form-control"
+            v-model="activity.four.description"
             id="exampleFormControlTextarea1"
             rows="3"
           ></textarea>
@@ -130,6 +229,13 @@ export default {
       one: {},
       two: {},
       three: {},
+
+      activity: {
+        one: {},
+        two: {},
+        three: {},
+        four: {},
+      },
     };
   },
   created() {
@@ -144,6 +250,11 @@ export default {
           '前台.首頁.欄位一',
           '前台.首頁.欄位二',
           '前台.首頁.欄位三',
+
+          '前台.活動.欄位一',
+          '前台.活動.欄位二',
+          '前台.活動.欄位三',
+          '前台.活動.欄位四',
         ],
       };
       apiService.getSettingKeys(data).then(x => {
@@ -154,6 +265,11 @@ export default {
         this.one = x.data.find(y => y.key == '前台.首頁.欄位一');
         this.two = x.data.find(y => y.key == '前台.首頁.欄位二');
         this.three = x.data.find(y => y.key == '前台.首頁.欄位三');
+
+        this.activity.one = x.data.find(y => y.key == '前台.活動.欄位一');
+        this.activity.two = x.data.find(y => y.key == '前台.活動.欄位二');
+        this.activity.three = x.data.find(y => y.key == '前台.活動.欄位三');
+        this.activity.four = x.data.find(y => y.key == '前台.活動.欄位四');
       });
     },
     save() {
@@ -163,7 +279,13 @@ export default {
         this.three,
         this.title,
         this.description,
+        this.activity.one,
+        this.activity.two,
+        this.activity.three,
+        this.activity.four,
+        
       ];
+
       apiService.updateSettings(input).then(() => {
         Swal.fire('儲存成功！');
       });

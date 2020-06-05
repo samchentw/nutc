@@ -1,4 +1,4 @@
-import { IsString, IsNumber, IsBoolean, IsArray } from 'class-validator';
+import { IsString, IsNumber, IsBoolean, IsArray, IsNotEmpty } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class UpdateProductDto {

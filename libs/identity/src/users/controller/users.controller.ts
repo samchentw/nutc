@@ -1,13 +1,12 @@
-import { Controller, Get, UsePipes, UseGuards, Post, Body, Param, Put, Delete, Request, Req, ValidationPipe } from '@nestjs/common';
+import { Controller, Get, UsePipes, UseGuards, Post, Body, Param, Put, Delete, Request, Req } from '@nestjs/common';
 import { UpdateUserPwd, CreateUserDto, LoginUserDto, UpdateUserInfoDto, User } from '../dto';
 import { UsersService } from '../service/users.service';
 import { UnauthorizedException, RolesGuard, Roles, RoleCheck } from '@app/core/shared';
-import { ApiTags, ApiBearerAuth, ApiDefaultResponse, ApiBody } from '@nestjs/swagger';
+import { ApiTags, ApiBearerAuth, ApiDefaultResponse, ApiBody, ApiParam } from '@nestjs/swagger';
 import { JwtAuthGuard } from '@app/identity/auth/guard/jwt-auth.guard';
 
 @ApiTags('Users')
 @Controller('users')
-@UsePipes(new ValidationPipe())
 export class UserController {
   constructor(
     private readonly userService: UsersService
@@ -49,6 +48,14 @@ export class UserController {
   @Get("admin/getAllUser")
   async getAllUser(@RoleCheck(["admin"]) admin) {
     return await this.userService.getAllUser();
+  }
+
+  @ApiBearerAuth()
+  @ApiParam({ name: "userinfoId" })
+  @UseGuards(JwtAuthGuard)
+  @Delete(":userinfoId")
+  async deleteUser(@RoleCheck(["admin"]) admin, @Param('userinfoId') id: number) {
+    return this.userService.delete(id);
   }
 
   @Get("seed")

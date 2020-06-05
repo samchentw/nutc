@@ -1,5 +1,5 @@
-import { Controller, Get, Post, Body, Put, Param, Delete, Query, UsePipes, Res, Header, Req, UseGuards } from '@nestjs/common';
-import { ValidationPipe, RolesGuard, Roles } from '@app/core/shared';
+import { Controller, Get, Post, Body, Put, Param, Delete, Query, UsePipes, Res, Header, UseGuards } from '@nestjs/common';
+import { RolesGuard, Roles } from '@app/core/shared';
 import { ApiTags, ApiQuery, ApiParam, ApiDefaultResponse, ApiBearerAuth } from '@nestjs/swagger';
 import { ConsumerService } from '../service/consumer.service';
 import { CreateUserDto } from '@app/identity/users/dto';

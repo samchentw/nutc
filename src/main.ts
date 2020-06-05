@@ -8,13 +8,14 @@ import { join } from 'path';
 import { MyLogger, HttpExceptionFilter } from '@app/core/shared';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { AppModule } from './app.module';
+import { ValidationPipe } from '@nestjs/common';
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
   app.useStaticAssets(staticAssetsRoot("public"), { prefix: "/" });
   app.useStaticAssets(staticAssetsRoot("nutc_web"), { prefix: "/nutc/" });
   app.useStaticAssets(staticAssetsRoot("nutc_app"), { prefix: "/admin/" });
   app.setGlobalPrefix('api');
-  
+
   const options = new DocumentBuilder()
     .setTitle('NUTC Api')
     .setDescription('The NUTC API description')
@@ -31,9 +32,11 @@ async function bootstrap() {
       max: 500, // limit each IP to 500 requests per windowMs
     }),
   );
+    
   app.use(compression());
   app.use(helmet());
   app.useGlobalFilters(new HttpExceptionFilter())
+  app.useGlobalPipes(new ValidationPipe())
   await app.listen(3000);
 }
 bootstrap();

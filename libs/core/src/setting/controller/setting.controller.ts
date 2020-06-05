@@ -1,4 +1,4 @@
-import { Controller, Get, UsePipes, UseGuards, Post, Body, Param, Put, Delete, Query, Req, ValidationPipe } from '@nestjs/common';
+import { Controller, Get, UsePipes, UseGuards, Post, Body, Param, Put, Delete, Query, Req } from '@nestjs/common';
 
 import { ApiTags, ApiBearerAuth, ApiParam, ApiDefaultResponse, ApiBody } from '@nestjs/swagger';
 import { RolesGuard, Roles, RoleCheck } from '@app/core/shared';
@@ -8,7 +8,6 @@ import { PostGetKeysDto } from '../dto/post-getKeys.dto';
 import { JwtAuthGuard } from '@app/identity/auth/guard/jwt-auth.guard';
 @ApiTags('Setting')
 @Controller('setting')
-@UsePipes(new ValidationPipe())
 export class SettingController {
     constructor(
         private settingService: SettingService

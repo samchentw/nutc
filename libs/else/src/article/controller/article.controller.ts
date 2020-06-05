@@ -1,7 +1,6 @@
 import { Controller, Get, Post, Body, Put, Param, Delete, Query, UsePipes, Res, Header, Req } from '@nestjs/common';
 import { ArticleService } from '../service/article.service';
 import { CreateArticleDto, UpdateArticleDto, ArticlePageDto, ArticleDto } from '../dto';
-import { ValidationPipe } from '@app/core/shared';
 import { ApiTags, ApiQuery, ApiParam, ApiDefaultResponse } from '@nestjs/swagger';
 // import { fs } from 'memfs';
 @ApiTags("Article")
@@ -25,7 +24,6 @@ export class ArticleController {
   }
 
   @Post()
-  @UsePipes(new ValidationPipe())
   @ApiDefaultResponse({ type: ArticleDto })
   create(@Body() input: CreateArticleDto) {
     return this.articleService.create(input);

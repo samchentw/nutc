@@ -22,26 +22,10 @@
             </div>
           </div>
           <div class="col-lg-3 mb-3">
-            <div class="card h-100" v-if="one.id">
-              <h4 class="card-header">{{one.value}}</h4>
-              <div class="card-img">
-                <img class="img-fluid"  style="height:262.38px;width:350px" src="home1.jpg" alt />
-              </div>
-              <div class="card-body">
-                <p
-                  class="card-text"
-                >{{one.description}}</p>
-              </div>
-              <div class="card-footer">
-                <a href="#" class="btn btn-primary">詳細資料</a>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-3 mb-3">
             <div class="card h-100" v-if="two.id">
               <h4 class="card-header">{{two.value}}</h4>
               <div class="card-img">
-                <img class="img-fluid" style="height:262.38px;width:350px" src="home2.jpg" alt />
+                <img class="img-fluid"  style="height:262.38px;width:350px" src="home1.jpg" alt />
               </div>
               <div class="card-body">
                 <p
@@ -57,12 +41,28 @@
             <div class="card h-100" v-if="three.id">
               <h4 class="card-header">{{three.value}}</h4>
               <div class="card-img">
-                <img class="img-fluid" src="home3.jpg" alt />
+                <img class="img-fluid" style="height:262.38px;width:350px" src="home2.jpg" alt />
               </div>
               <div class="card-body">
                 <p
                   class="card-text"
                 >{{three.description}}</p>
+              </div>
+              <div class="card-footer">
+                <a href="#" class="btn btn-primary">詳細資料</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 mb-3">
+            <div class="card h-100" v-if="four.id">
+              <h4 class="card-header">{{four.value}}</h4>
+              <div class="card-img">
+                <img class="img-fluid" src="home3.jpg" alt />
+              </div>
+              <div class="card-body">
+                <p
+                  class="card-text"
+                >{{four.description}}</p>
               </div>
               <div class="card-footer">
                 <a href="#" class="btn btn-primary">詳細資料</a>

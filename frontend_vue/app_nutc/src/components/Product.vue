@@ -118,7 +118,7 @@
         <div class="form-group">
           <label for="exampleInputEmail1">價格</label>
           <input
-            type="email"
+            type="number"
             class="form-control"
             v-model="selectProductData.price"
             id="exampleInputEmail1"
@@ -258,6 +258,7 @@ export default {
       );
 
       if (this.selectProductData.id) {
+        this.selectProductData.price = parseInt(this.selectProductData.price,10);
         apiService.updateProduct(this.selectProductData).then(x => {
           Swal.fire('更新成功！');
           this.file = null;
