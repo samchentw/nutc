@@ -1,7 +1,8 @@
 
-import { Entity, Column, PrimaryGeneratedColumn, ManyToMany, JoinColumn, JoinTable } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToMany, JoinColumn, JoinTable, OneToOne } from 'typeorm';
 import { Role } from '../../role/entity/role.entity';
 import { genderDataEnum } from '../enum/enum';
+import { User } from './user.entity';
 @Entity()
 export class Userinfo {
   @PrimaryGeneratedColumn()
@@ -21,6 +22,9 @@ export class Userinfo {
 
   @Column({ length: 30 })
   email: string;
+
+  @OneToOne(type => User, user => user.userinfo)
+  user: User;
 
   @ManyToMany(type => Role, role => role.name)
   @JoinTable()

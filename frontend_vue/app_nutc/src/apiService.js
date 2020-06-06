@@ -13,6 +13,13 @@ export default {
       }
     });
   },
+  deleteUser(userinfo){
+    return axios.delete('../api/users/'+userinfo,{
+      headers: {
+        Authorization: 'Bearer ' + this.getToken()
+      }
+    })
+  },
   // 註冊
   registerApi(data) {
     return axios.post('../api/consumer/register', data);
