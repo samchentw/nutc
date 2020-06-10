@@ -16,31 +16,13 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
+            <tr v-for="(data) in items" :key="data.id">
               <th scope="row">1</th>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
+              <td>{{data.name}}</td>
+              <td>{{data.phone}}</td>
+              <td>{{data.mail}}</td>
               <td>
-                <a href>詳細資料</a>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td>Jacob</td>
-              <td>Thornton</td>
-              <td>@fat</td>
-              <td>
-                <a href>詳細資料</a>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td>Larry</td>
-              <td>the Bird</td>
-              <td>@twitter</td>
-              <td>
-                <a href>詳細資料</a>
+                <a href>詳細資料</a> |<a href>刪除</a>
               </td>
             </tr>
           </tbody>
@@ -65,6 +47,8 @@
 </template>
 
 <script>
+import apiService from '../apiService';
+import messageService from '../messageService';
 export default {
   name: 'Contact',
   props: {
@@ -75,8 +59,15 @@ export default {
       items: [],
     };
   },
+  created() {
+    this.init();
+  },
   methods: {
-    test() {},
+    init() {
+      apiService.GetAllContact().then(x => {
+        this.items = x.data;
+      });
+    },
   },
 };
 </script>

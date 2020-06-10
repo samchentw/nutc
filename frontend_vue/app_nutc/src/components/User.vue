@@ -48,20 +48,24 @@ export default {
     };
   },
   created() {
-    apiService
+    this.init();
+  },
+  methods: {
+    init(){
+      apiService
       .getAllUser()
       .then(x => {
         this.users = x.data;
         // console.log(this.users)
       })
       .catch(() => {});
-  },
-  methods: {
+    },
     deleteUser(id) {
       messageService.confirm('確認刪除嗎？').then(result => {
         if (result.value) {
           apiService.deleteUser(id).then(x => {
             messageService.success('刪除成功！');
+            this.init();
           });
         }
       });

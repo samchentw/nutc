@@ -6,8 +6,8 @@
 				<a href="#"><img src="images/footer-logo.png" alt="" /></a>
 			</div> -->
             <!--foote_bottom_ul_amrc ends here-->
-            <p class="copyright text-center">All Rights Reserved. &copy; 2018 <a href="#">N & LW Lawn Care</a> Design By : 
-				<a href="https://html.design/">html design</a>
+            <p class="copyright text-center">鹿港文化藝術復興 
+				<!-- <a href="https://html.design/">html design</a> -->
             </p>
             <ul class="social_footer_ul">
 				<li><a href="#"><i class="fab fa-facebook-f"></i></a></li>

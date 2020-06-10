@@ -1,140 +1,36 @@
 <template>
   <div class="container-fluid">
-    <h2 style="text-align: center;">商家介紹</h2>
+    <h2 style="text-align: center;margin-bottom:10px">商家介紹</h2>
 
     <div class="row">
-      <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
+      <div
+        class="col-lg-3 col-md-4 col-sm-6 portfolio-item"
+        v-for="(item) in showList"
+        :key="item.id"
+      >
         <div class="card h-100">
           <a href="#">
             <img class="card-img-top" src="images/portfolio-big-02.jpg" alt />
           </a>
           <div class="card-body">
             <h4 class="card-title">
-              <a href="#">Project Two</a>
+              <a href="#">{{item.name}}</a>
             </h4>
-            <p
-              class="card-text"
-            >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
-        <div class="card h-100">
-          <a href="#">
-            <img class="card-img-top" src="images/portfolio-big-02.jpg" alt />
-          </a>
-          <div class="card-body">
-            <h4 class="card-title">
-              <a href="#">Project Two</a>
-            </h4>
-            <p
-              class="card-text"
-            >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
-        <div class="card h-100">
-          <a href="#">
-            <img class="card-img-top" src="images/portfolio-big-03.jpg" alt />
-          </a>
-          <div class="card-body">
-            <h4 class="card-title">
-              <a href="#">Project Three</a>
-            </h4>
-            <p
-              class="card-text"
-            >Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos quisquam, error quod sed cumque, odio distinctio velit nostrum temporibus necessitatibus et facere atque iure perspiciatis mollitia recusandae vero vel quam!</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
-        <div class="card h-100">
-          <a href="#">
-            <img class="card-img-top" src="images/portfolio-big-04.jpg" alt />
-          </a>
-          <div class="card-body">
-            <h4 class="card-title">
-              <a href="#">Project Four</a>
-            </h4>
-            <p
-              class="card-text"
-            >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
-        <div class="card h-100">
-          <a href="#">
-            <img class="card-img-top" src="images/portfolio-big-04.jpg" alt />
-          </a>
-          <div class="card-body">
-            <h4 class="card-title">
-              <a href="#">Project Five</a>
-            </h4>
-            <p
-              class="card-text"
-            >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
-        <div class="card h-100">
-          <a href="#">
-            <img class="card-img-top" src="images/portfolio-big-01.jpg" alt />
-          </a>
-          <div class="card-body">
-            <h4 class="card-title">
-              <a href="#">Project Six</a>
-            </h4>
-            <p
-              class="card-text"
-            >Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque earum nostrum suscipit ducimus nihil provident, perferendis rem illo, voluptate atque, sit eius in voluptates, nemo repellat fugiat excepturi! Nemo, esse.</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
-        <div class="card h-100">
-          <a href="#">
-            <img class="card-img-top" src="images/portfolio-big-02.jpg" alt />
-          </a>
-          <div class="card-body">
-            <h4 class="card-title">
-              <a href="#">Project Seven</a>
-            </h4>
-            <p
-              class="card-text"
-            >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
-        <div class="card h-100">
-          <a href="#">
-            <img class="card-img-top" src="images/portfolio-big-03.jpg" alt />
-          </a>
-          <div class="card-body">
-            <h4 class="card-title">
-              <a href="#">Project Eight</a>
-            </h4>
-            <p
-              class="card-text"
-            >Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius adipisci dicta dignissimos neque animi ea, veritatis, provident hic consequatur ut esse! Commodi ea consequatur accusantium, beatae qui deserunt tenetur ipsa.</p>
+            <p class="card-text">{{item.remark}}</p>
           </div>
         </div>
       </div>
     </div>
 
-        <b-pagination
-        v-model="currentPage"
-        :total-rows="rows"
-        :per-page="perPage"
-         align="center"
-        prev-text="上一頁"
-        next-text="下一頁"
-      ></b-pagination>
-      
-
+    <b-pagination
+      v-model="currentPage"
+      :total-rows="rows"
+      :per-page="perPage"
+      @change="change()"
+      align="center"
+      prev-text="上一頁"
+      next-text="下一頁"
+    ></b-pagination>
   </div>
 </template>
 
@@ -147,10 +43,36 @@ export default {
   props: {},
   data() {
     return {
-      rows: 100,
+      items: [],
+      rows: 1,
       perPage: 1,
-      currentPage: 5,
+      currentPage: 1,
+      showList: [],
     };
+  },
+  created() {
+    this.init();
+  },
+  methods: {
+    init() {
+      apiService.getShopPage(0).then(x => {
+        this.items = x.data.items;
+        this.rows = x.data.count / 8;
+        this.change();
+      });
+    },
+    async change() {
+      await this.sleep(500);
+      this.showList = [];
+      var start = (this.currentPage-1) * 8;
+      // console.log(this.currentPage-1);
+      for (var i = start; i < start + 8; i++) {
+        this.showList.push(this.items[i]);
+      }
+    },
+    sleep(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    },
   },
 };
 </script>

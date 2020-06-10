@@ -25,6 +25,10 @@ export default {
     return axios.post('../api/consumer/register', data);
   },
 
+  GetAllContact(){
+    return axios.get('../api/contact/getAll');
+  },
+
   // 取得個人資料
   getInfo() {
     return axios.get('../api/users/info', {

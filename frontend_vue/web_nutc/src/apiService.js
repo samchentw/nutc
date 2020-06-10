@@ -86,7 +86,7 @@ export default {
   },
 
   getShopPage(skip) {
-    return axios.get('../api/shop/page?take=10&skip=' + skip);
+    return axios.get('../api/shop/page?take=999&skip=' + 0);
   },
 
   deleteShopById(id) {

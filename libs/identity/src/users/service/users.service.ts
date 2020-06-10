@@ -106,10 +106,8 @@ export class UsersService {
     }
 
     async delete(userinfoId: number) {
-        var userinfo = await this.UserInfoRepository.findOne({ id: userinfoId });
-        console.log(userinfo)
-        var user = await this.UserRepository.findOne({ userinfo });
-        console.log(user)
+        let userinfo = await this.UserInfoRepository.findOne({ id: userinfoId }, { relations: ["user"] });
+        var user = await this.UserRepository.findOne({ id:userinfo.user.id });
         await this.UserRepository.delete(user);
         await this.UserInfoRepository.delete(userinfoId)
         return true;
