@@ -323,6 +323,7 @@ export default {
         apiService.updateProduct(this.selectProductData).then(x => {
           Swal.fire('更新成功！');
           this.selectProduct(this.selectProductData.productTypeId);
+          this.selectProductImage = [];
           this.file = null;
         });
       } else {
@@ -330,6 +331,7 @@ export default {
         apiService.createProduct(this.selectProductData).then(x => {
           Swal.fire('建立成功！');
           this.file = null;
+          this.selectProductImage = [];
           this.selectProduct(this.selectTypeId);
           this.selectProductData = {
             name: '',
@@ -371,6 +373,8 @@ export default {
     },
     open1(show, data) {
       this.modalShow1 = !show;
+      this.file = null;
+      this.selectProductImage = [];
       if (data) {
         this.selectProductData = data;
         this.selectProductImage = JSON.parse(data.productImage);

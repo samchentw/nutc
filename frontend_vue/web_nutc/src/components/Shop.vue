@@ -10,7 +10,9 @@
       >
         <div class="card h-100">
           <a href="#">
-            <img class="card-img-top" src="images/portfolio-big-02.jpg" alt />
+            <img class="card-img-top" style="height:200px;width:100%" :src="transferImage(item.shopImage)" alt />
+
+            <!-- <img class="card-img-top" src="images/portfolio-big-02.jpg" alt /> -->
           </a>
           <div class="card-body">
             <h4 class="card-title">
@@ -85,6 +87,14 @@ export default {
     },
     sleep(ms) {
       return new Promise(resolve => setTimeout(resolve, ms));
+    },
+    transferImage(image) {
+      var temp = JSON.parse(image);
+      if (temp.length > 0) {
+        return temp[0].url;
+      } else {
+        return 'images/portfolio-big-02.jpg';
+      }
     },
   },
 };
