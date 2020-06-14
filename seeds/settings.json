@@ -1,56 +1,56 @@
 [
     {
         "key": "前台.關於我們.title",
-        "value": "title test",
+        "value": "關於我們 標題",
         "description": "",
         "enable": true
     },
     {
         "key": "前台.關於我們.description",
-        "value": "description test",
+        "value": "關於我們 內容",
         "description": "",
         "enable": true
     },
     {
         "key": "前台.首頁.欄位一",
-        "value": "",
-        "description": "",
+        "value": "藝文廊道",
+        "description": "藝文廊道 內容",
         "enable": true
     },
     {
         "key": "前台.首頁.欄位二",
-        "value": "",
-        "description": "",
+        "value": "桂花巷",
+        "description": "桂花巷 內容",
         "enable": true
     },
     {
         "key": "前台.首頁.欄位三",
-        "value": "",
-        "description": "",
+        "value": "鹿港公會堂",
+        "description": "鹿港公會堂 內容",
         "enable": true
     },
     {
         "key": "前台.活動.欄位一",
-        "value": "1.免費型活動",
-        "description": "",
+        "value": "免費型活動",
+        "description": "免費型活動 內容",
         "enable": true
     },
     {
         "key": "前台.活動.欄位二",
-        "value": "2.基本型商圈消費",
-        "description": "",
+        "value": "基本型商圈消費",
+        "description": "基本型商圈消費 內容",
         "enable": true
     },
     {
         "key": "前台.活動.欄位三",
-        "value": "3.兩天一夜過夜型",
-        "description": "",
+        "value": "兩天一夜過夜型",
+        "description": "兩天一夜過夜型 內容",
         "enable": true
     },
     {
         "key": "前台.活動.欄位四",
-        "value": "4.社區導覽",
-        "description": "",
+        "value": "社區導覽",
+        "description": "社區導覽 內容",
         "enable": true
     }
 ]

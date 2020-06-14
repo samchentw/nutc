@@ -16,9 +16,9 @@
                   class="card-text"
                 >{{one.description}}</p>
               </div>
-              <div class="card-footer">
+              <!-- <div class="card-footer">
                 <a href="#" class="btn btn-primary">詳細資料</a>
-              </div>
+              </div> -->
             </div>
           </div>
           <div class="col-lg-4 mb-4">
@@ -32,25 +32,25 @@
                   class="card-text"
                 >{{two.description}}</p>
               </div>
-              <div class="card-footer">
+              <!-- <div class="card-footer">
                 <a href="#" class="btn btn-primary">詳細資料</a>
-              </div>
+              </div> -->
             </div>
           </div>
           <div class="col-lg-4 mb-4">
             <div class="card h-100" v-if="three.id">
               <h4 class="card-header">{{three.value}}</h4>
               <div class="card-img">
-                <img class="img-fluid" src="home3.jpg" alt />
+                <img class="img-fluid" style="height:262.38px;width:100%" src="home3.jpg" alt />
               </div>
               <div class="card-body">
                 <p
                   class="card-text"
                 >{{three.description}}</p>
               </div>
-              <div class="card-footer">
+              <!-- <div class="card-footer">
                 <a href="#" class="btn btn-primary">詳細資料</a>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>

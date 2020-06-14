@@ -89,6 +89,10 @@ export default {
     return axios.get('../api/shop/page?take=999&skip=' + 0);
   },
 
+  getShopByType(type){
+    return axios.get('../api/shop/getShopByType/'+type);
+  },
+
   deleteShopById(id) {
     return axios.delete('../api/shop/' + id, {
       headers: {

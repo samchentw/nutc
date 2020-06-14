@@ -9,6 +9,7 @@ import { UpdateShopDto } from '../dto/update-shop.data';
 import { Shop } from '../entity/shop.entity';
 import { FileService } from '@app/core/file/service/file.service';
 import { plainToClass, classToPlain, classToClass, plainToClassFromExist } from 'class-transformer';
+import { ShopTypeEnum } from '../enum/enum';
 @Injectable()
 export class ShopService extends BaseService<Shop, CreateShopDto, UpdateShopDto> {
 
@@ -32,8 +33,14 @@ export class ShopService extends BaseService<Shop, CreateShopDto, UpdateShopDto>
         var newshop = plainToClass(Shop, input, { excludeExtraneousValues: true });
         if (input.imageIds && input.imageIds.length > 0) {
             newshop.shopImage = await this.fileService.getFileUrlAndIdStr(input.imageIds);
+        }else{
+            newshop.shopImage = "[]";
         }
         return await super.update(id, newshop)
+    }
+
+    async getShopByType(ShopTypeEnum: ShopTypeEnum) {
+        return await this.repository.find({ shopType: ShopTypeEnum });
     }
 
     async readExcel() {
@@ -50,7 +57,12 @@ export class ShopService extends BaseService<Shop, CreateShopDto, UpdateShopDto>
                 else shop.remark = "";
                 shop.description = "";
                 shop.isDelete = false;
-
+                shop.shopImage = "[]";
+                if (datas[i].種類 == 0) {
+                    shop.shopType = ShopTypeEnum.一般商店;
+                } else {
+                    shop.shopType = ShopTypeEnum.美食商店;
+                }
                 await this.repository.save(shop);
             }
         }
@@ -65,4 +77,5 @@ export class shopData {
     地址: string;
     電話: string;
     備註: string;
+    種類: number;
 }

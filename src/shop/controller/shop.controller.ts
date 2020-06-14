@@ -29,7 +29,18 @@ export class ShopController {
     return this.ShopService.get(id);
   }
 
-  @Post("create") 
+  @Get("getShopByType/:id")
+  @ApiParam({ name: "id" })
+  @ApiDefaultResponse({ type: ShopDto, isArray: true })
+  async getAllByType(@Param('id') id) {
+    var temp = await this.ShopService.getShopByType(id);
+    var result = new ShopPageDto();
+    result.count = temp.length;
+    result.items = temp;
+    return result;
+  }
+
+  @Post("create")
   @ApiBearerAuth()
   @UseGuards(JwtAuthGuard)
   @ApiDefaultResponse({ type: ShopDto })

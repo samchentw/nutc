@@ -1,4 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { ShopTypeEnum, ShopTypeEnumArray } from '../enum/enum';
 // import { TagDto } from './tag.dto';
 export class ShopDto{ 
     @ApiProperty()
@@ -17,6 +18,9 @@ export class ShopDto{
 
     @ApiProperty()
     remark: string;
+
+    @ApiProperty({ enum: ShopTypeEnumArray })
+    shopType: ShopTypeEnum;
 
     @ApiProperty()
     isDelete: boolean;

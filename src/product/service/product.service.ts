@@ -27,7 +27,6 @@ export class ProductService extends BaseService<Product, CreateProductDto, Updat
 
 
     async create(input: CreateProductDto) {
-        // console.log(input)
         var product = plainToClass(Product, input);
         var types = await this.productTypeService.get(input.productTypeId);
         product.productImage = await this.fileService.getFileUrlAndIdStr(input.imageIds);
@@ -41,6 +40,8 @@ export class ProductService extends BaseService<Product, CreateProductDto, Updat
         var newproduct = plainToClass(Product, input, { excludeExtraneousValues: true });
         if (input.imageIds && input.imageIds.length > 0) {
             newproduct.productImage = await this.fileService.getFileUrlAndIdStr(input.imageIds);
+        }else{
+            newproduct.productImage = "[]";
         }
         var types = or.productTypes
         newproduct.productTypes = types;

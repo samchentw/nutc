@@ -2,6 +2,7 @@
 import { Entity, Column, OneToMany, BaseEntity, JoinColumn, JoinTable, ManyToOne, PrimaryGeneratedColumn, CreateDateColumn } from 'typeorm';
 // import { BaseEntity } from '@app/core/shared';
 import { Expose } from 'class-transformer';
+import { ShopTypeEnum } from '../enum/enum';
 @Entity()
 export class Shop extends BaseEntity {
 
@@ -24,6 +25,10 @@ export class Shop extends BaseEntity {
   @Column()
   @Expose()
   address: string;
+
+  @Column({ type: 'enum', enum: ShopTypeEnum })
+  @Expose()
+  shopType: ShopTypeEnum;
 
   @Column()
   @Expose()

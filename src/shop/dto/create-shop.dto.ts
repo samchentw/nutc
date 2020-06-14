@@ -1,5 +1,6 @@
-import { IsString, IsArray } from 'class-validator';
+import { IsString, IsArray, IsNotEmpty } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
+import { ShopTypeEnum, ShopTypeEnumArray } from '../enum/enum';
 
 export class CreateShopDto {
     @ApiProperty()
@@ -24,6 +25,10 @@ export class CreateShopDto {
 
     @ApiProperty()
     isDelete: boolean;
+
+    @ApiProperty({ enum: ShopTypeEnumArray })
+    @IsNotEmpty()
+    shopType: ShopTypeEnum;
 
     @ApiProperty({ type: Number, isArray: true })
     @IsArray()

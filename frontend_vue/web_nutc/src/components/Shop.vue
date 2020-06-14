@@ -48,25 +48,38 @@ export default {
       perPage: 1,
       currentPage: 1,
       showList: [],
+      shopType: 0,
     };
   },
+  watch: {
+    $route(to, from) {
+      var route = to.path;
+      this.shopType = route.split('/')[2];
+      this.init();
+    },
+  },
   created() {
+    this.shopType = this.$route.params.typeId;
     this.init();
   },
   methods: {
     init() {
-      apiService.getShopPage(0).then(x => {
+      apiService.getShopByType(this.shopType).then(x => {
         this.items = x.data.items;
-        this.rows = x.data.count / 8;
+        if (x.data.count < 8) {
+          this.rows = 1;
+        } else {
+          this.rows = Math.ceil(x.data.count / 8);
+        }
         this.change();
       });
     },
     async change() {
       await this.sleep(500);
       this.showList = [];
-      var start = (this.currentPage-1) * 8;
-      // console.log(this.currentPage-1);
+      var start = (this.currentPage - 1) * 8;
       for (var i = start; i < start + 8; i++) {
+        if (!this.items[i]) break;
         this.showList.push(this.items[i]);
       }
     },

@@ -37,7 +37,7 @@ const router = new VueRouter({
       component: Product,
     },
     { 
-      path: '/shop', 
+      path: '/shop/:typeId', 
       component: Shop,
     },
     { 

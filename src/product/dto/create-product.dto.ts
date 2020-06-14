@@ -14,6 +14,21 @@ export class CreateProductDto {
     @IsString()
     description: string;
 
+    @ApiProperty()
+    @IsString()
+    address: string;
+
+    @ApiProperty()
+    @IsString()
+    time: string;
+
+    @ApiProperty()
+    @IsString()
+    owner: string;
+
+    @ApiProperty()
+    @IsString()
+    phone: string;
 
     @ApiProperty()
     @IsBoolean()

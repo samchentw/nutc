@@ -151,13 +151,13 @@
                     </div>
                   </div>
                   <div class="form-group row">
-                    <label class="col-lg-3 col-form-label form-control-label">Password</label>
+                    <label class="col-lg-3 col-form-label form-control-label">密碼</label>
                     <div class="col-lg-9">
                       <input class="form-control" type="password" value="11111122333" />
                     </div>
                   </div>
                   <div class="form-group row">
-                    <label class="col-lg-3 col-form-label form-control-label">Confirm password</label>
+                    <label class="col-lg-3 col-form-label form-control-label">確認密碼</label>
                     <div class="col-lg-9">
                       <input class="form-control" type="password" value="11111122333" />
                     </div>

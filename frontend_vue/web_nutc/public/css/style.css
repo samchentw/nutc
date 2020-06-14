@@ -2,7 +2,6 @@
  *  N & LW Lawn Care - Landscaping Bootstrap4 HTML5 Responsive Template
  */
 
- 
 @import url('https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800');
  
 body {
@@ -19,35 +18,43 @@ body {
 }
 
 a.btn-primary{
+	font-family: Microsoft JhengHei;
 	background-color: #4eae3a;
 	border-color: #4eae3a;
 }
 a.btn-primary:hover{
+	font-family: Microsoft JhengHei;
 	background-color: #5ec549;
 	border-color: #5ec549;
 }
 button.btn-primary{
+	font-family: Microsoft JhengHei;
 	background-color: #4eae3a;
 	border-color: #4eae3a;
 }
 button.btn-primary:hover{
+	font-family: Microsoft JhengHei;
 	background-color: #5ec549;
 	border-color: #5ec549;
 }
 
 a.btn-secondary{
+	font-family: Microsoft JhengHei;
 	background-color: #4eae3a;
 	border-color: #4eae3a;
 }
 a.btn-secondary:hover{
+	font-family: Microsoft JhengHei;
 	background-color: #5ec549;
 	border-color: #5ec549;
 }
 button.btn-secondary{
+	font-family: Microsoft JhengHei;
 	background-color: #4eae3a;
 	border-color: #4eae3a;
 }
 button.btn-secondary:hover{
+	font-family: Microsoft JhengHei;
 	background-color: #5ec549;
 	border-color: #5ec549;
 }
@@ -59,6 +66,7 @@ button.btn-secondary:hover{
 	padding: 10px 15px;
 	color: #4e3914;
 	font-size: 14px;
+	font-family: Microsoft JhengHei;
 	font-weight: 300;
 	text-transform: uppercase;
 }
@@ -123,6 +131,7 @@ button.btn-secondary:hover{
   margin-bottom: 30px;
 }
 .services-bar h1{
+	/* font-family: Microsoft JhengHei!important; */
 	font-weight: 600;
 	font-size: 24px;
 }

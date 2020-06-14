@@ -102,7 +102,7 @@ export default {
     transferImage(image) {
       var temp = JSON.parse(image);
       if (temp.length > 0) {
-        return temp[0];
+        return temp[0].url;
       } else {
         return 'http://placehold.it/700x400';
       }

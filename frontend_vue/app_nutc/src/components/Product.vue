@@ -137,6 +137,54 @@
           ></textarea>
         </div>
 
+        <div class="form-group">
+          <label for="exampleInputEmail1">負責人</label>
+          <input
+            type="text"
+            class="form-control"
+            v-model="selectProductData.owner"
+            id="exampleInputEmail1"
+            aria-describedby="emailHelp"
+            placeholder
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="exampleInputEmail1">時間</label>
+          <input
+            type="text"
+            class="form-control"
+            v-model="selectProductData.time"
+            id="exampleInputEmail1"
+            aria-describedby="emailHelp"
+            placeholder
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="exampleInputEmail1">地址</label>
+          <input
+            type="text"
+            class="form-control"
+            v-model="selectProductData.address"
+            id="exampleInputEmail1"
+            aria-describedby="emailHelp"
+            placeholder
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="exampleInputEmail1">電話</label>
+          <input
+            type="text"
+            class="form-control"
+            v-model="selectProductData.phone"
+            id="exampleInputEmail1"
+            aria-describedby="emailHelp"
+            placeholder
+          />
+        </div>
+
         <div class="custom-control custom-switch">
           <input
             type="checkbox"
@@ -150,6 +198,7 @@
         <div v-if="selectProductImage.length > 0">
           <div style="display:grid;grid-template-columns: 1fr 1fr 1fr;">
             <div v-for="(item) in selectProductImage" :key="item.id" style="width:100%">
+              <button class="btn btn-danger" v-on:click="deleteImage(item.id)">X</button>
               <img v-bind:src="'..'+item.url" style="width:100%" />
               <!-- {{item.id}} -->
             </div>
@@ -196,6 +245,10 @@ export default {
         isDelete: false,
         imageIds: [],
         isSell: false,
+        owner: '',
+        time: '',
+        address: '',
+        phone: '',
         productTypeId: 0,
       },
       selectProductImage: [],
@@ -215,6 +268,11 @@ export default {
           this.productTypes = x.data;
         })
         .catch(() => {});
+    },
+    deleteImage(id) {
+      this.selectProductImage = this.selectProductImage.filter(x => {
+        return x.id != id;
+      });
     },
     handleOk() {
       if (this.select.id) {
@@ -249,25 +307,30 @@ export default {
         }
         imageDatas = await apiService.uploadfile(form);
         this.selectProductData.imageIds = imageDatas.data;
-      }else{
+      } else {
         this.selectProductData.imageIds = [];
       }
 
       this.selectProductData.imageIds = this.selectProductData.imageIds.concat(
         this.selectProductImage.map(x => x.id),
       );
-
+      // console.log(this.selectProductData.imageIds)
       if (this.selectProductData.id) {
-        this.selectProductData.price = parseInt(this.selectProductData.price,10);
+        this.selectProductData.price = parseInt(
+          this.selectProductData.price,
+          10,
+        );
         apiService.updateProduct(this.selectProductData).then(x => {
           Swal.fire('更新成功！');
+          this.selectProduct(this.selectProductData.productTypeId);
           this.file = null;
         });
       } else {
-         this.selectProductData.productTypeId = this.selectTypeId;
+        this.selectProductData.productTypeId = this.selectTypeId;
         apiService.createProduct(this.selectProductData).then(x => {
           Swal.fire('建立成功！');
           this.file = null;
+          this.selectProduct(this.selectTypeId);
           this.selectProductData = {
             name: '',
             price: 0,
@@ -275,6 +338,10 @@ export default {
             isDelete: false,
             imageIds: [],
             isSell: false,
+            owner: '',
+            time: '',
+            address: '',
+            phone: '',
             productTypeId: 0,
           };
         });
@@ -292,7 +359,7 @@ export default {
       if (data) this.select = data;
       else this.select = {};
     },
-    deleteProduct(product){
+    deleteProduct(product) {
       messageService.confirm('確定要刪除嗎？').then(x => {
         if (x.value) {
           product.isDelete = true;

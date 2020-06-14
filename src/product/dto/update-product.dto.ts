@@ -14,8 +14,22 @@ export class UpdateProductDto {
     @IsNumber()
     price: number;
 
-    // @ApiProperty()
-    // type: string;
+    @ApiProperty()
+    @IsString()
+    address: string;
+
+    @ApiProperty()
+    @IsString()
+    time: string;
+
+    @ApiProperty()
+    @IsString()
+    owner: string;
+
+    @ApiProperty()
+    @IsString()
+    phone: string;
+    
 
     @ApiProperty()
     @IsString()

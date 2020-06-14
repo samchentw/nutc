@@ -4,7 +4,7 @@
       <!-- Content Row -->
       <div class="row">
         <!-- Map Column -->
-        <div class="col-lg-8 mb-4">
+        <div class="col-lg-12 mb-12">
           <!-- Embedded Google Map -->
           <iframe
             width="100%"
@@ -17,7 +17,7 @@
           ></iframe>
         </div>
         <!-- Contact Details Column -->
-        <div class="col-lg-4 mb-4 contact-right">
+        <!-- <div class="col-lg-4 mb-4 contact-right">
           <h3>聯絡資訊</h3>
           <p>
             3481 Melrose Place
@@ -34,7 +34,7 @@
           <p>
             <abbr title="Hours">H</abbr>: Monday - Friday: 9:00 AM to 5:00 PM
           </p>
-        </div>
+        </div> -->
       </div>
       <!-- /.row -->
 

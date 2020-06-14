@@ -20,6 +20,22 @@ export class Product extends BaseEntity {
 
   @Column()
   @Expose()
+  address: string;
+
+  @Column()
+  @Expose()
+  time: string;
+
+  @Column()
+  @Expose()
+  owner: string;
+
+  @Column()
+  @Expose()
+  phone: string;
+
+  @Column()
+  @Expose()
   price: number;
 
   @Column()

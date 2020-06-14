@@ -22,8 +22,13 @@
                      <a class="nav-link" v-bind:class="{ 'active': route=='/activity' }"  href="./#/activity">活動</a>
                   </li>
 
+
                   <li class="nav-item">
-                     <a class="nav-link" v-bind:class="{ 'active': route=='/shop' }"  href="./#/shop">商家介紹</a>
+                     <a class="nav-link" v-bind:class="{ 'active': route=='/shop/1' }"  href="./#/shop/1">美食介紹</a>
+                  </li>
+
+                  <li class="nav-item">
+                     <a class="nav-link" v-bind:class="{ 'active': route=='/shop/0' }"  href="./#/shop/0">商家介紹</a>
                   </li>
 
                   <li class="nav-item">

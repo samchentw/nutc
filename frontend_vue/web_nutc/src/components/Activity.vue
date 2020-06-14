@@ -9,7 +9,7 @@
             <div class="card h-100" v-if="one.id">
               <h4 class="card-header">{{one.value}}</h4>
               <div class="card-img">
-                <img class="img-fluid"  style="height:262.38px;width:350px" src="home1.jpg" alt />
+                <img class="img-fluid" style="height:262.38px;width:100%" src="home1.jpg" alt />
               </div>
               <div class="card-body">
                 <p
@@ -25,7 +25,7 @@
             <div class="card h-100" v-if="two.id">
               <h4 class="card-header">{{two.value}}</h4>
               <div class="card-img">
-                <img class="img-fluid"  style="height:262.38px;width:350px" src="home1.jpg" alt />
+                <img class="img-fluid" style="height:262.38px;width:100%" src="home1.jpg" alt />
               </div>
               <div class="card-body">
                 <p
@@ -41,7 +41,7 @@
             <div class="card h-100" v-if="three.id">
               <h4 class="card-header">{{three.value}}</h4>
               <div class="card-img">
-                <img class="img-fluid" style="height:262.38px;width:350px" src="home2.jpg" alt />
+                <img class="img-fluid" style="height:262.38px;width:100%" src="home2.jpg" alt />
               </div>
               <div class="card-body">
                 <p
@@ -57,7 +57,7 @@
             <div class="card h-100" v-if="four.id">
               <h4 class="card-header">{{four.value}}</h4>
               <div class="card-img">
-                <img class="img-fluid" src="home3.jpg" alt />
+                <img class="img-fluid" style="height:262.38px;width:100%" src="home3.jpg" alt />
               </div>
               <div class="card-body">
                 <p
