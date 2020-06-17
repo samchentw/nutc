@@ -14,6 +14,7 @@ import Contact from './components/Contact.vue';
 import Home from './components/Home.vue';
 import Activity from './components/Activity.vue';
 import Shop from './components/Shop.vue';
+import ShopDetail from './components/ShopDetail.vue';
 
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
@@ -39,6 +40,10 @@ const router = new VueRouter({
     { 
       path: '/shop/:typeId', 
       component: Shop,
+    },
+    {
+      path:'/ShopDetail/:id',
+      component: ShopDetail
     },
     { 
       path: '/activity', 
@@ -67,12 +72,10 @@ const router = new VueRouter({
   ]
 })
 
-// Vue.use(Vuex)
+
 Vue.use(VueRouter)
-// vue.use(axios,vueaxios)
 new Vue({router,
   render: h => h(App),
-  // store:TestStore
 }).$mount('#app')
 
 

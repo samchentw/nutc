@@ -22,13 +22,14 @@
               <td>{{data.phone}}</td>
               <td>{{data.mail}}</td>
               <td>
-                <a href>詳細資料</a> |<a href>刪除</a>
+                <a href="javascript:void(0)" v-on:click="show(data.message)">詳細資料</a> 
+                |<a href="javascript:void(0)" v-on:click="deleteItem(data.id)">刪除</a>
               </td>
             </tr>
           </tbody>
         </table>
 
-        <nav aria-label="Page navigation example">
+        <!-- <nav aria-label="Page navigation example">
           <ul class="pagination justify-content-center">
             <li class="page-item">
               <a class="page-link" href="#">1</a>
@@ -40,7 +41,7 @@
               <a class="page-link" href="#">3</a>
             </li>
           </ul>
-        </nav>
+        </nav> -->
       </div>
     </div>
   </div>
@@ -68,6 +69,18 @@ export default {
         this.items = x.data;
       });
     },
+    deleteItem(id){
+      messageService.confirm("確認要刪除嗎？").then(x=>{
+        if(x.value){
+          apiService.deleteContact(id).then(x=>{
+            this.init();
+          })
+        }
+      })
+    },
+    show(item){
+      alert(item);
+    }
   },
 };
 </script>

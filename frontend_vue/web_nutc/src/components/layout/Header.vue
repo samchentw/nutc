@@ -113,6 +113,11 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+a{
+font-family: arial, "Microsoft JhengHei", "微軟正黑體", sans-serif !important;
+/* font-weight:bold; */
+}
+
 .navbar{
    background-color:#FFF3E0!important
 }

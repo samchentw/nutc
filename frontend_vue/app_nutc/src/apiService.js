@@ -29,6 +29,13 @@ export default {
     return axios.get('../api/contact/getAll');
   },
 
+  deleteContact(id){
+    return axios.delete('../api/contact/'+id,{
+      headers: {
+        Authorization: 'Bearer ' + this.getToken()
+      }
+    });
+  },
   // 取得個人資料
   getInfo() {
     return axios.get('../api/users/info', {

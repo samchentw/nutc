@@ -10,15 +10,20 @@
       >
         <div class="card h-100">
           <a href="#">
-            <img class="card-img-top" style="height:200px;width:100%" :src="transferImage(item.shopImage)" alt />
+            <img
+              class="card-img-top"
+              style="height:200px;width:100%"
+              :src="transferImage(item.shopImage)"
+              alt
+            />
 
             <!-- <img class="card-img-top" src="images/portfolio-big-02.jpg" alt /> -->
           </a>
           <div class="card-body">
             <h4 class="card-title">
-              <a href="#">{{item.name}}</a>
+              <a :href="'./#/shopDetail/'+item.id">{{item.name}}</a>
             </h4>
-            <p class="card-text">{{item.remark}}</p>
+            <p class="card-text">{{item.remark | capitalize}}</p>
           </div>
         </div>
       </div>
@@ -63,6 +68,13 @@ export default {
   created() {
     this.shopType = this.$route.params.typeId;
     this.init();
+  },
+  filters: {
+    capitalize: function(value) {
+      if (!value) return '';
+      if(value.length > 30) return value.substring(0,30)+"..."
+      else value; 
+    },
   },
   methods: {
     init() {

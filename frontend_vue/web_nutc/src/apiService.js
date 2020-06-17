@@ -85,6 +85,10 @@ export default {
     })
   },
 
+  getshop(id){
+    return axios.get('../api/shop/get/' + id);
+  },
+
   getShopPage(skip) {
     return axios.get('../api/shop/page?take=999&skip=' + 0);
   },

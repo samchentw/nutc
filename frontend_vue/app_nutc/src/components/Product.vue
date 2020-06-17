@@ -49,7 +49,7 @@
               <h6 class="m-0 font-weight-bold text-primary" style="display:flex;">
                 產品
                 <span style="flex:1 1 auto"></span>
-                <button type="button" @click="open1(modalShow1,null)" class="btn btn-primary">新增</button>
+                <button type="button" v-if="selectTypeId!=0" @click="open1(modalShow1,null)" class="btn btn-primary">新增</button>
               </h6>
             </div>
             <div class="card-body">
@@ -65,7 +65,7 @@
                 </thead>
                 <tbody v-if="product.length>0">
                   <tr v-for="(item,index) in product" :key="item.id">
-                    <th scope="row">{{index}}</th>
+                    <th scope="row">{{index+1}}</th>
                     <td>{{item.name || '--'}}</td>
                     <td>{{item.price}}</td>
                     <td>
