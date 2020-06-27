@@ -13,8 +13,8 @@ export default {
       }
     });
   },
-  deleteUser(userinfo){
-    return axios.delete('../api/users/'+userinfo,{
+  deleteUser(userinfo) {
+    return axios.delete('../api/users/' + userinfo, {
       headers: {
         Authorization: 'Bearer ' + this.getToken()
       }
@@ -25,12 +25,12 @@ export default {
     return axios.post('../api/consumer/register', data);
   },
 
-  GetAllContact(){
+  GetAllContact() {
     return axios.get('../api/contact/getAll');
   },
 
-  deleteContact(id){
-    return axios.delete('../api/contact/'+id,{
+  deleteContact(id) {
+    return axios.delete('../api/contact/' + id, {
       headers: {
         Authorization: 'Bearer ' + this.getToken()
       }
@@ -86,7 +86,37 @@ export default {
     });
   },
 
+  //活動類型R
+  getallNewsType() {
+    return axios.get('../api/newsType/getAll');
+  },
 
+  //活動crud
+  getAllBytypeId(id) {
+    return axios.get('../api/news/newsType/' + id);
+  },
+
+  createNews(data) {
+    return axios.post('../api/news', data, {
+      headers: {
+        Authorization: 'Bearer ' + this.getToken()
+      }
+    })
+  },
+  updateNews(data) {
+    return axios.put('../api/news/' + data.id, data, {
+      headers: {
+        Authorization: 'Bearer ' + this.getToken()
+      }
+    })
+  },
+  deleteNews(id) {
+    return axios.delete('../api/news/' + id, {
+      headers: {
+        Authorization: 'Bearer ' + this.getToken()
+      }
+    })
+  },
 
   // 店家CRUD
   createShopApi(data) {

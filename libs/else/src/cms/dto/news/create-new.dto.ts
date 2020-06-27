@@ -1,13 +1,16 @@
 import { Exclude } from 'class-transformer';
 import { ApiProperty } from '@nestjs/swagger';
-import { IsArray } from 'class-validator';
+import { IsArray, IsNotEmpty } from 'class-validator';
 export class CreateNewsDto {
     @ApiProperty()
+    @IsNotEmpty()
     @Exclude()
     newsTypeId: number;
     @ApiProperty()
+    @IsNotEmpty()
     title: string;
     @ApiProperty()
+    @IsNotEmpty()
     subtitle: string;
     @ApiProperty()
     description: string;

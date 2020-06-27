@@ -28,7 +28,7 @@ export class RoleService extends BaseService<Role, RoleDto, RoleDto>{
     async seed() {
         var count = await this.repository.count();
         if (count == 0) {
-            let data:Role[] = JSON.parse(fs.readFileSync(process.cwd()+"/seeds/roles.json","utf8"));  
+            let data: Role[] = JSON.parse(fs.readFileSync(process.cwd() + "/seeds/roles.json", "utf8"));
             await this.repository.save(data);
         }
     }

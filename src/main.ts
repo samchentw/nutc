@@ -11,7 +11,7 @@ import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
-  app.useStaticAssets(staticAssetsRoot("public"), { prefix: "/" });
+  // app.useStaticAssets(staticAssetsRoot("public"), { prefix: "/" });
   app.useStaticAssets(staticAssetsRoot("nutc_web"), { prefix: "/nutc/" });
   app.useStaticAssets(staticAssetsRoot("nutc_app"), { prefix: "/admin/" });
   app.setGlobalPrefix('api');
@@ -29,7 +29,7 @@ async function bootstrap() {
   app.use(
     rateLimit({
       windowMs: 15 * 60 * 1000, // 15 minutes
-      max: 500, // limit each IP to 500 requests per windowMs
+      max: 1000, // limit each IP to 500 requests per windowMs
     }),
   );
     

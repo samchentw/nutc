@@ -25,7 +25,13 @@ export class NewsService extends BaseService<News, CreateNewsDto, UpdateNewsDto>
   async create(input: CreateNewsDto): Promise<News> {
     var newsType = await this.newsTypeService.get(input.newsTypeId);
     var result = plainToClass(News, input);
-    result.Images = await this.fileService.getFileUrlAndIdStr(input.imageIds);
+    if (input.imageIds && input.imageIds.length > 0) {
+      result.Images = await this.fileService.getFileUrlAndIdStr(input.imageIds);
+    } else {
+      result.Images = "[]";
+    }
+
+    // result.Images = await this.fileService.getFileUrlAndIdStr(input.imageIds);
     result.newsType = newsType;
     return await super.create(result);
   }
@@ -39,5 +45,12 @@ export class NewsService extends BaseService<News, CreateNewsDto, UpdateNewsDto>
     news.newsType = types;
     return await super.update(id, news)
   }
+
+
+  async getAllByNewsTypeId(newsTypeId: number) {
+    var newtype = await this.newsTypeService.get(newsTypeId);
+    return this.repository.find({ newsType: newtype });
+  }
+
 
 }

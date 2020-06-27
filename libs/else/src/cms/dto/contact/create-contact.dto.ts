@@ -6,18 +6,22 @@ export class CreateContactDto {
 
     
     @ApiProperty()
+    @IsNotEmpty()
     @IsString()
     name: string;
 
     @ApiProperty()
+    @IsNotEmpty()
     @IsString()
     phone: string;
 
     @ApiProperty()
+    @IsNotEmpty()
     @IsString()
     mail: string;
 
     @ApiProperty()
+    @IsNotEmpty()
     @IsString()
     message: string;
 

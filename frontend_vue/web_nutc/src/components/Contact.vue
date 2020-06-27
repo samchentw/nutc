@@ -34,7 +34,7 @@
           <p>
             <abbr title="Hours">H</abbr>: Monday - Friday: 9:00 AM to 5:00 PM
           </p>
-        </div> -->
+        </div>-->
       </div>
       <!-- /.row -->
 
@@ -144,10 +144,15 @@ export default {
       };
     },
     send() {
-      apiService.createContact(this.input).then(x => {
-        Swal.fire('送出成功！');
-        this.init();
-      });
+      apiService
+        .createContact(this.input)
+        .then(x => {
+          Swal.fire('送出成功！');
+          this.init();
+        })
+        .catch(x => {
+          alert('不能有空值！');
+        });
     },
   },
 };
@@ -155,8 +160,8 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.btn  {
-      background-color: #ffad60;
-      border-color: #ffad60;
-    }
+.btn {
+  background-color: #ffad60;
+  border-color: #ffad60;
+}
 </style>
