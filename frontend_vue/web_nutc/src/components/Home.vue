@@ -12,9 +12,14 @@
                 <img class="img-fluid"  style="height:262.38px;width:100%" src="home1.jpg" alt />
               </div>
               <div class="card-body">
-                <p
+                <span
                   class="card-text"
-                >{{one.description}}</p>
+                  v-if="!isShow.one && one.description.length >= textLen"
+                >{{show(one.description)}}<a href="javascript:void(0)" v-on:click="setShow(1)">More...</a></span>
+                <span
+                  class="card-text"
+                  v-if="isShow.one || one.description.length < textLen"
+                >{{one.description}}</span>
               </div>
               <!-- <div class="card-footer">
                 <a href="#" class="btn btn-primary">詳細資料</a>
@@ -28,9 +33,14 @@
                 <img class="img-fluid" style="height:262.38px;width:100%" src="home2.jpg" alt />
               </div>
               <div class="card-body">
-                <p
+                <span
                   class="card-text"
-                >{{two.description}}</p>
+                  v-if="!isShow.two && two.description.length >= textLen"
+                >{{show(two.description)}}<a href="javascript:void(0)" v-on:click="setShow(2)">More...</a></span>
+                <span
+                  class="card-text"
+                  v-if="isShow.two || two.description.length < textLen"
+                >{{two.description}}</span>
               </div>
               <!-- <div class="card-footer">
                 <a href="#" class="btn btn-primary">詳細資料</a>
@@ -44,9 +54,14 @@
                 <img class="img-fluid" style="height:262.38px;width:100%" src="home3.jpg" alt />
               </div>
               <div class="card-body">
-                <p
+                <span
                   class="card-text"
-                >{{three.description}}</p>
+                  v-if="!isShow.three && three.description.length >= textLen"
+                >{{show(three.description)}}<a href="javascript:void(0)" v-on:click="setShow(3)">More...</a></span>
+                <span
+                  class="card-text"
+                  v-if="isShow.three|| three.description.length < textLen"
+                >{{three.description}}</span>
               </div>
               <!-- <div class="card-footer">
                 <a href="#" class="btn btn-primary">詳細資料</a>
@@ -71,7 +86,13 @@ export default {
     return {
        one:{},
        two:{},
-       three:{}
+       three:{},
+       isShow:{
+         one:false,
+         two:false,
+         three:false
+       },
+      textLen:30
     };
   },
   created() {
@@ -91,6 +112,15 @@ export default {
         // console.log(this.title);
       });
     },
+    show(text){
+      return text.substring(0,this.textLen);
+    },
+    setShow(type){
+      if(type==1){
+        this.isShow.one = true;
+      }else if(type==2) this.isShow.two = true;
+      else if(type==3) this.isShow.three = true;
+    }
   },
 };
 </script>

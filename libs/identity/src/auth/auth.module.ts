@@ -27,14 +27,11 @@ import { UsersModule } from '../users/users.module';
     }),
   ],
   providers: [
-    // UsersService,
     AuthService,
     LocalStrategy,
     JwtStrategy,
   ],
-  exports: [
-    // UsersService
-  ]
+  exports: []
 })
 export class AuthModule {
 

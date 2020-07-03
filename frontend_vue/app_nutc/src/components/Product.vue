@@ -346,6 +346,8 @@ export default {
             phone: '',
             productTypeId: 0,
           };
+        }).catch(x=>{
+          alert("不能有空值！")
         });
       }
     },
