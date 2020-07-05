@@ -7,6 +7,11 @@ import { File } from '../entity/file.entity';
 import { extname } from 'path';
 import * as fs from 'fs';
 
+export class ImageIdAndUrlDto {
+    id: number;
+    url: string;
+}
+
 @Injectable()
 export class FileService {
     constructor(
@@ -17,14 +22,14 @@ export class FileService {
     ) { }
 
     async readPublicFiles(): Promise<String[]> {
-        var savepath = this.configService.get<string>('saveFilePath');
-        var files = await fs.readdirSync(process.cwd() + savepath)
+        let savepath = this.configService.get<string>('saveFilePath');
+        let files = await fs.readdirSync(process.cwd() + savepath)
         return files;
     }
 
     saveFile(files: any[]) {
-        var savepath = this.configService.get<string>('saveFilePath');
-        var path = process.cwd() + savepath;
+        let savepath = this.configService.get<string>('saveFilePath');
+        let path = process.cwd() + savepath;
         files.forEach(file => {
             const randomName = Array(32).fill(null).map(() => (Math.round(Math.random() * 16)).toString(16)).join('');
             file.displayName = randomName + extname(file.originalname);
@@ -34,9 +39,9 @@ export class FileService {
     }
 
     async saveDb(files: any[]): Promise<number[]> {
-        var result: number[] = [];
-        for (var i = 0; i < files.length; i++) {
-            var temp = await this.FileRepository.save({
+        let result: number[] = [];
+        for (let i = 0; i < files.length; i++) {
+            let temp = await this.FileRepository.save({
                 filename: files[i].fieldname,
                 originalname: files[i].originalname,
                 isDelete: false,
@@ -54,14 +59,25 @@ export class FileService {
     }
 
     async getFileUrlAndIdStr(ids: number[]): Promise<string> {
-        var file = await this.findByIds(ids);
-        var result = file.map(x => {
+        let file = await this.findByIds(ids);
+        let result = file.map(x => {
             return {
                 id: x.id,
                 url: x.url
             }
         });
         return JSON.stringify(result);
+    }
+
+    async getFileUrlAndId(ids: number[]): Promise<ImageIdAndUrlDto[]> {
+        let file = await this.findByIds(ids);
+        let result: ImageIdAndUrlDto[] = file.map(x => {
+            return {
+                id: x.id,
+                url: x.url
+            }
+        });
+        return result
     }
 
     findAll() {

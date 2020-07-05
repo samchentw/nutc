@@ -28,6 +28,15 @@
       "compilerOptions": {
         "tsConfigPath": "libs/else/tsconfig.lib.json"
       }
+    },
+    "cms": {
+      "type": "library",
+      "root": "libs/cms",
+      "entryFile": "index",
+      "sourceRoot": "libs/cms/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/cms/tsconfig.lib.json"
+      }
     }
   },
   "compilerOptions": {

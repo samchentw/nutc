@@ -16,6 +16,8 @@
     "@app/core/(.*)": "<rootDir>/../libs/core/src/$1",
     "@app/core": "<rootDir>/../libs/core/src",
     "@app/else/(.*)": "<rootDir>/../libs/else/src/$1",
-    "@app/else": "<rootDir>/../libs/else/src"
+    "@app/else": "<rootDir>/../libs/else/src",
+    "@app/cms/(.*)": "<rootDir>/../libs/cms/src/$1",
+    "@app/cms": "<rootDir>/../libs/cms/src"
   }
 }

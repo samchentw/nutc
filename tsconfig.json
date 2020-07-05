@@ -28,6 +28,12 @@
       ],
       "@app/else/*": [
         "libs/else/src/*"
+      ],
+      "@app/cms": [
+        "libs/cms/src"
+      ],
+      "@app/cms/*": [
+        "libs/cms/src/*"
       ]
     }
   },

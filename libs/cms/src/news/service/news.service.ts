@@ -2,8 +2,8 @@ import { Injectable } from '@nestjs/common';
 import * as _ from 'lodash';
 import { BaseService } from '@app/core/shared';
 
-import { CreateNewsDto, CreateNewsWithDetailDto, UpdateNewsDto, UpdateNewsTypeDto, CreateNewsTypeDto } from '../../dto';
-import { News } from '../../entity';
+import { CreateNewsDto, CreateNewsWithDetailDto, UpdateNewsDto, UpdateNewsTypeDto, CreateNewsTypeDto } from '../dto';
+import { News } from '../entity/news.entity';
 
 import { plainToClass } from 'class-transformer';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -23,32 +23,37 @@ export class NewsService extends BaseService<News, CreateNewsDto, UpdateNewsDto>
   }
 
   async create(input: CreateNewsDto): Promise<News> {
-    var newsType = await this.newsTypeService.get(input.newsTypeId);
-    var result = plainToClass(News, input);
+    let newsType = await this.newsTypeService.get(input.newsTypeId);
+    let result = plainToClass(News, input);
     if (input.imageIds && input.imageIds.length > 0) {
-      result.Images = await this.fileService.getFileUrlAndIdStr(input.imageIds);
+      result.images = await this.fileService.getFileUrlAndIdStr(input.imageIds);
     } else {
-      result.Images = "[]";
+      result.images = "[]";
     }
 
-    // result.Images = await this.fileService.getFileUrlAndIdStr(input.imageIds);
+    let detailImageIds = input.newsDetails.map(x => x.ImageId);
+    let imageDatas = await this.fileService.getFileUrlAndId(detailImageIds);
+    for (let i = 0; i < imageDatas.length; i++) {
+      //imageDatas[i].id
+    }
+
     result.newsType = newsType;
     return await super.create(result);
   }
 
   async update(id: number, input: UpdateNewsDto) {
-    var news = plainToClass(News, input, { excludeExtraneousValues: true });
+    let news = plainToClass(News, input, { excludeExtraneousValues: true });
     if (input.imageIds && input.imageIds.length > 0) {
-      news.Images = await this.fileService.getFileUrlAndIdStr(input.imageIds);
+      news.images = await this.fileService.getFileUrlAndIdStr(input.imageIds);
     }
-    var types = await this.newsTypeService.get(input.newsTypeId);
+    let types = await this.newsTypeService.get(input.newsTypeId);
     news.newsType = types;
     return await super.update(id, news)
   }
 
 
   async getAllByNewsTypeId(newsTypeId: number) {
-    var newtype = await this.newsTypeService.get(newsTypeId);
+    let newtype = await this.newsTypeService.get(newsTypeId);
     return this.repository.find({ newsType: newtype });
   }
 

@@ -3,7 +3,6 @@ import { ElseService } from './else.service';
 
 
 import { ArticleModule } from './article/article.module';
-import { CmsModule } from './cms/cms.module';
 import { TreeModule } from '../../core/src/tree/tree.module';
 import { ChatModule } from './chat/chat.module';
 import { PracticeModule } from './practice/practice.module';
@@ -11,7 +10,7 @@ import { PracticeModule } from './practice/practice.module';
 @Module({
   imports:[
     // ArticleModule,
-    CmsModule,
+    // CmsModule,
     // ChatModule,
     // PracticeModule,
   ],

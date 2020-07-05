@@ -1,5 +1,5 @@
 import { Controller, Get, Post, Body, Put, Param, Delete, UseGuards } from '@nestjs/common';
-import { NewsTypeService, CmsJob } from '../service';
+import { NewsTypeService } from '../service/newsType.service';
 import { CreateNewsTypeDto, UpdateNewsTypeDto } from '../dto';
 import { ApiTags, ApiQuery, ApiParam, ApiBearerAuth } from '@nestjs/swagger';
 import { JwtAuthGuard } from '@app/identity/auth/guard/jwt-auth.guard';

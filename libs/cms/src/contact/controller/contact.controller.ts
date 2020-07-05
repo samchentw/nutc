@@ -2,9 +2,9 @@ import { Controller, Get, Post, Body, Put, Param, Delete, Query, UsePipes, Res, 
 import { RolesGuard, Roles, RoleCheck } from '@app/core/shared';
 import { ApiTags, ApiQuery, ApiParam, ApiDefaultResponse, ApiBearerAuth } from '@nestjs/swagger';
 import { JwtAuthGuard } from '@app/identity/auth/guard/jwt-auth.guard';
-import { ContactService } from '../service';
-import { CreateContactDto } from '../dto';
-import { UpdateContactDto } from '../dto';
+import { ContactService } from '../service/contact.service';
+import { CreateContactDto } from '../dto/create-contact.dto';
+import { UpdateContactDto } from '../dto/update-contact.dto';
 
 
 

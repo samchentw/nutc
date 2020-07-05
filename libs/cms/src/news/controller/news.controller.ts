@@ -1,5 +1,5 @@
 import { Controller, Get, Post, Body, Put, Param, Query, Delete, UseGuards } from '@nestjs/common';
-import { NewsService, CmsJob } from '../service';
+import { NewsService } from '../service/news.service';
 import { CreateNewsDto, UpdateNewsDto, News } from '../dto';
 import { ApiTags, ApiDefaultResponse, ApiParam, ApiQuery, ApiBearerAuth } from '@nestjs/swagger';
 import { JwtAuthGuard } from '@app/identity/auth/guard/jwt-auth.guard';
@@ -7,8 +7,7 @@ import { JwtAuthGuard } from '@app/identity/auth/guard/jwt-auth.guard';
 @Controller("news")
 export class NewsController {
   constructor(
-    private readonly newsService: NewsService,
-    private readonly cmsJob: CmsJob,
+    private readonly newsService: NewsService
   ) { }
 
   @Get("getAll")
@@ -21,6 +20,7 @@ export class NewsController {
   @ApiBearerAuth()
   @UseGuards(JwtAuthGuard)
   create(@Body() input: CreateNewsDto) {
+    // console.log(input)
     return this.newsService.create(input);
   }
 

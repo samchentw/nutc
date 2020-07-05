@@ -8,6 +8,7 @@ import { AppService } from './app.service';
 
 import { IdentityModule } from '@app/identity';
 import { CoreModule } from '@app/core';
+import { CmsModule } from '@app/cms/cms.module';
 
 import { ShopModule } from './shop/shop.module';
 import { ConsumerModule } from './consumer/consumer.module';
@@ -35,7 +36,8 @@ import { OrderModule } from './order/order.module';
     }),
     CoreModule,
     IdentityModule,
-    ElseModule,
+    CmsModule,
+    // ElseModule,
     ShopModule,
     ConsumerModule,
     ProductModule,

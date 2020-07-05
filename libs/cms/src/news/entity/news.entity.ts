@@ -2,7 +2,13 @@ import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, CreateDateColumn, Ba
 import { NewsType } from './newsType.entity';
 import { Expose } from "class-transformer";
 
-// import { BaseEntity } from '@app/core/shared';
+export class NewsDetail {
+    sequence: number;
+    description: string;
+    ImageId: number;
+    ImageUrl: string;
+}
+
 @Entity()
 export class News extends BaseEntity {
 
@@ -37,7 +43,10 @@ export class News extends BaseEntity {
 
     @Column()
     @Expose()
-    Images: string;
+    images: string;
+
+    @Column('json')
+    newsDetails: NewsDetail[];
 
     @ManyToOne(type => NewsType, NewsType => NewsType.news)
     newsType: NewsType;

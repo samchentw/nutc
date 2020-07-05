@@ -14,7 +14,7 @@ export class Product extends BaseEntity {
   @Expose()
   createTime: Date;
 
-  @Column({ length: 30, unique: true })
+  @Column({ length: 30 })
   @Expose()
   name: string;
 
