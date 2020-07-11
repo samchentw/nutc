@@ -1,16 +1,13 @@
+import { CoreModule } from '@app/core';
 import { Module } from '@nestjs/common';
-import { IdentityService } from './identity.service';
 import { ConfigModule } from '@nestjs/config';
-import { TypeOrmModule } from '@nestjs/typeorm';
-
-import { CoreModule } from '@app/core'
-
 import { AuthModule } from './auth/auth.module';
+import { IdentityService } from './identity.service';
 import { RoleModule } from './role/role.module';
 import { UsersModule } from './users/users.module';
 
 @Module({
-  imports:[
+  imports: [
     ConfigModule.forRoot({
       envFilePath: 'development.env',
     }),
@@ -22,4 +19,4 @@ import { UsersModule } from './users/users.module';
   providers: [IdentityService],
   exports: [IdentityService],
 })
-export class IdentityModule {}
+export class IdentityModule { }

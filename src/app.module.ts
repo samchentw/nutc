@@ -1,20 +1,16 @@
+import { CmsModule } from '@app/cms/cms.module';
+import { CoreModule } from '@app/core';
+import { IdentityModule } from '@app/identity';
 import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { ScheduleModule } from '@nestjs/schedule';
 import { ConfigModule } from '@nestjs/config';
-
+import { ScheduleModule } from '@nestjs/schedule';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-
-import { IdentityModule } from '@app/identity';
-import { CoreModule } from '@app/core';
-import { CmsModule } from '@app/cms/cms.module';
-
-import { ShopModule } from './shop/shop.module';
 import { ConsumerModule } from './consumer/consumer.module';
-import { ElseModule } from '@app/else';
-import { ProductModule } from './product/product.module';
 import { OrderModule } from './order/order.module';
+import { ProductModule } from './product/product.module';
+import { ShopModule } from './shop/shop.module';
 
 @Module({
   imports: [

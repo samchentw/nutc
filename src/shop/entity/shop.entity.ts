@@ -1,7 +1,7 @@
 
-import { Entity, Column, OneToMany, BaseEntity, JoinColumn, JoinTable, ManyToOne, PrimaryGeneratedColumn, CreateDateColumn } from 'typeorm';
 // import { BaseEntity } from '@app/core/shared';
 import { Expose } from 'class-transformer';
+import { BaseEntity, Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from 'typeorm';
 import { ShopTypeEnum } from '../enum/enum';
 @Entity()
 export class Shop extends BaseEntity {

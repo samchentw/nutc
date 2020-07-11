@@ -1,18 +1,16 @@
-import { Injectable, Inject } from '@nestjs/common';
-
-import { InjectRepository, } from '@nestjs/typeorm';
-import { Repository, Entity } from 'typeorm';
-import * as _ from 'lodash';
-import { ExcelService, BaseService, PageDto, customizedException } from '@app/core/shared';
-import { FileService } from '@app/core/file/service/file.service';
-import { plainToClass, classToPlain, classToClass, plainToClassFromExist } from 'class-transformer';
-import { Order } from '../entity/order.entity';
-import { CreateOrderDto } from '../dto/create-order.dto';
+import { customizedException } from '@app/core/shared';
+import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { plainToClass } from 'class-transformer';
+import { Repository } from 'typeorm';
 import { ConsumerService } from '../../consumer/service/consumer.service';
-import { orderStateEnum } from '../enum/enum';
 import { ProductService } from '../../product/service/product.service';
+import { CreateOrderDto } from '../dto/create-order.dto';
+import { Order } from '../entity/order.entity';
 import { OrderDetail } from '../entity/orderDetail.entity';
+import { orderStateEnum } from '../enum/enum';
 import { OrderDetailService } from './orderDetail.service';
+
 @Injectable()
 export class OrderService {
     constructor(

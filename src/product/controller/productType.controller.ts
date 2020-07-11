@@ -1,9 +1,9 @@
-import { Controller, Get, Post, Body, Put, Param, Delete, Query, UsePipes, Res, Header, Req, UseGuards } from '@nestjs/common';
-import { Roles, RolesGuard, RoleCheck } from '@app/core/shared';
-import { ApiTags, ApiQuery, ApiParam, ApiDefaultResponse, ApiBearerAuth } from '@nestjs/swagger';
-import { ProductTypeService } from '../service/productType.service';
-import { CreateProductTypeDto } from '../dto/create-productType.dto';
+import { RoleCheck } from '@app/core/shared';
 import { JwtAuthGuard } from '@app/identity/auth/guard/jwt-auth.guard';
+import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards } from '@nestjs/common';
+import { ApiBearerAuth, ApiParam, ApiTags } from '@nestjs/swagger';
+import { CreateProductTypeDto } from '../dto/create-productType.dto';
+import { ProductTypeService } from '../service/productType.service';
 
 @ApiTags("ProductType")
 @Controller("productType")

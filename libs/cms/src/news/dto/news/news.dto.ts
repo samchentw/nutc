@@ -1,20 +1,60 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { Expose } from 'class-transformer';
+import { ImageIdAndUrlDto } from '@app/core/file/service/file.service';
+import { NewsDetail } from '../../entity/news.entity';
+import * as _ from 'lodash';
+export namespace News {
 
-export namespace News{
-    export class NewsDto{
+    export class NewsDetailDto {
         @ApiProperty()
-        id:number;
+        description: string;
+    
         @ApiProperty()
+        sequence: number;
+    
+        @ApiProperty()
+        ImageId: number;
+    }
+    export class NewsDto {
+        @ApiProperty()
+        @Expose()
+        id: number;
+
+        @ApiProperty()
+        @Expose()
         title: string;
-        @ApiProperty()   
-        subtitle:string; 
+
         @ApiProperty()
-        description: string;    
+        @Expose()
+        subtitle: string;
+
+        // @ApiProperty()
+        // @Expose()
+        // description: string;
+
+        // @ApiProperty()
+        // @Expose()
+        // url: string;
+
         @ApiProperty()
-        url:string;
+        @Expose()
+        isActive: boolean;
         @ApiProperty()
-        isActive: boolean;        
+        @Expose()
+        createTime: Date;
+
+        // @ApiProperty()
+        // @Expose()
+        // images: ImageIdAndUrlDto[];
+
         @ApiProperty()
-        createTime:Date;
+        @Expose()
+        newsDetails: NewsDetail[];
+
+        @ApiProperty()
+        @Expose()
+        get newsDetailsSortBySeq() {
+            return _.sortBy(this.newsDetails, x => x.sequence);
+        }
     }
 }

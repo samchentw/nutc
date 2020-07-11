@@ -1,6 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, CreateDateColumn, BaseEntity } from "typeorm";
 import { NewsType } from './newsType.entity';
 import { Expose } from "class-transformer";
+import { ImageIdAndUrlDto } from "@app/core/file/service/file.service";
 
 export class NewsDetail {
     sequence: number;
@@ -29,23 +30,23 @@ export class News extends BaseEntity {
     @Expose()
     subtitle: string;
 
-    @Column({ type: "text" })
-    @Expose()
-    description: string;
+    // @Column({ type: "text" })
+    // @Expose()
+    // description: string;
 
-    @Column()
-    @Expose()
-    url: string;
+    // @Column()
+    // @Expose()
+    // url: string;
 
     @Column()
     @Expose()
     isActive: boolean;
 
-    @Column()
-    @Expose()
-    images: string;
+    // @Column('simple-json')
+    // @Expose()
+    // images: ImageIdAndUrlDto[];
 
-    @Column('json')
+    @Column('simple-json')
     newsDetails: NewsDetail[];
 
     @ManyToOne(type => NewsType, NewsType => NewsType.news)

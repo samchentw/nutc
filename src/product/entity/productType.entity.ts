@@ -1,4 +1,4 @@
-import { Entity, Column, OneToMany, CreateDateColumn, PrimaryGeneratedColumn, BaseEntity } from "typeorm";
+import { BaseEntity, Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Product } from './product.entity';
 @Entity()
 export class ProductType extends BaseEntity {

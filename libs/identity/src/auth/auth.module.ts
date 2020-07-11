@@ -1,18 +1,12 @@
-import * as passport from 'passport';
-import {
-  Module,
-  NestModule,
-  MiddlewareConsumer,
-  RequestMethod
-} from '@nestjs/common';
-import { AuthService } from './service/auth.service';
-import { LocalStrategy } from './service/local.strategy';
-import { PassportModule } from '@nestjs/passport';
-import { AuthController } from './controller/auth.controller';
+import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
-import { jwtConstants } from './constants';
-import { JwtStrategy } from './service/jwt.strategy';
+import { PassportModule } from '@nestjs/passport';
 import { UsersModule } from '../users/users.module';
+import { jwtConstants } from './constants';
+import { AuthController } from './controller/auth.controller';
+import { AuthService } from './service/auth.service';
+import { JwtStrategy } from './service/jwt.strategy';
+import { LocalStrategy } from './service/local.strategy';
 
 @Module({
   controllers: [

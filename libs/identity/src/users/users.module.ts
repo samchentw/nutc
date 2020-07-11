@@ -1,16 +1,10 @@
-import * as passport from 'passport';
-import {
-    Module,
-    NestModule,
-    MiddlewareConsumer,
-    RequestMethod
-} from '@nestjs/common';
-import { UserController } from './controller/users.controller';
-import { UsersService } from './service/users.service';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { User, Userinfo } from './entity';
-import { RoleModule } from '../role/role.module';
+import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { RoleModule } from '../role/role.module';
+import { UserController } from './controller/users.controller';
+import { User, Userinfo } from './entity';
+import { UsersService } from './service/users.service';
 @Module({
   imports:[    
     TypeOrmModule.forFeature([User, Userinfo]),

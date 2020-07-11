@@ -1,11 +1,11 @@
-import { Controller, Get, Post, Body, Put, Param, Delete, Query, UsePipes, Res, Header, Req, UseGuards } from '@nestjs/common';
-import { RolesGuard, Roles, RoleCheck } from '@app/core/shared';
-import { ApiTags, ApiQuery, ApiParam, ApiDefaultResponse, ApiBearerAuth } from '@nestjs/swagger';
-import { ShopService } from '../service/shop.service';
-import { ShopDto, ShopPageDto } from '../dto/shop.dto';
-import { CreateShopDto } from '../dto/create-shop.dto';
-import { UpdateShopDto } from '../dto/update-shop.data';
+import { RoleCheck, RolesGuard } from '@app/core/shared';
 import { JwtAuthGuard } from '@app/identity/auth/guard/jwt-auth.guard';
+import { Body, Controller, Delete, Get, Param, Post, Put, Query, Req, UseGuards } from '@nestjs/common';
+import { ApiBearerAuth, ApiDefaultResponse, ApiParam, ApiQuery, ApiTags } from '@nestjs/swagger';
+import { CreateShopDto } from '../dto/create-shop.dto';
+import { ShopDto, ShopPageDto } from '../dto/shop.dto';
+import { UpdateShopDto } from '../dto/update-shop.data';
+import { ShopService } from '../service/shop.service';
 
 // import { fs } from 'memfs';
 @ApiTags("Shop")

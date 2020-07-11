@@ -27,7 +27,7 @@ export class FileService {
         return files;
     }
 
-    saveFile(files: any[]) {
+    saveFile(files: any[]): Promise<number[]> {
         let savepath = this.configService.get<string>('saveFilePath');
         let path = process.cwd() + savepath;
         files.forEach(file => {

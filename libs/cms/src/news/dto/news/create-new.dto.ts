@@ -2,18 +2,9 @@ import { Exclude } from 'class-transformer';
 import { ApiProperty } from '@nestjs/swagger';
 import { IsArray, IsNotEmpty, IsNumber } from 'class-validator';
 
+import { News } from './news.dto';
 
 
-export class NewsDetailDto {
-    @ApiProperty()
-    description: string;
-
-    @ApiProperty()
-    sequence: number;
-
-    @ApiProperty()
-    ImageId: number;
-}
 
 
 export class CreateNewsDto {
@@ -29,21 +20,21 @@ export class CreateNewsDto {
     @IsNotEmpty()
     subtitle: string;
 
-    @ApiProperty()
-    description: string;
+    // @ApiProperty()
+    // description: string;
 
-    @ApiProperty()
-    url: string;
+    // @ApiProperty()
+    // url: string;
 
     @ApiProperty()
     isActive: boolean;
 
-    @ApiProperty({ type: Number, isArray: true })
-    @IsArray()
-    imageIds: number[];
+    // @ApiProperty({ type: Number, isArray: true })
+    // @IsArray()
+    // imageIds: number[];
 
-    @ApiProperty({ type: NewsDetailDto, isArray: true})
+    @ApiProperty({ type: News.NewsDetailDto, isArray: true})
     @IsArray()
-    newsDetails: NewsDetailDto[]
+    newsDetails: News.NewsDetailDto[];
 }
 

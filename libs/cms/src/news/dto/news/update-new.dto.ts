@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsArray, IsNotEmpty } from 'class-validator';
-
+import { News } from './news.dto';
 export class UpdateNewsDto {
 
     @ApiProperty()
@@ -15,16 +15,20 @@ export class UpdateNewsDto {
     @IsNotEmpty()
     subtitle: string;
 
-    @ApiProperty()
-    description: string;
+    // @ApiProperty()
+    // description: string;
 
-    @ApiProperty()
-    url: string;
+    // @ApiProperty()
+    // url: string;
 
     @ApiProperty()
     isActive: boolean;
     
-    @ApiProperty({ type: Number, isArray: true })
+    // @ApiProperty({ type: Number, isArray: true })
+    // @IsArray()
+    // imageIds: number[];
+
+    @ApiProperty({ type: News.NewsDetailDto, isArray: true})
     @IsArray()
-    imageIds: number[];
+    newsDetails: News.NewsDetailDto[];
 }

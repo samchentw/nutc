@@ -1,9 +1,9 @@
-import { Controller, Get, UsePipes, UseGuards, Post, Body, Param, Put, Delete, Query, Req } from '@nestjs/common';
-import { RoleService } from './role.service';
-import { RoleDto } from './dto';
-import { ApiTags, ApiBearerAuth, ApiParam, ApiDefaultResponse } from '@nestjs/swagger';
-import { RolesGuard, Roles, RoleCheck } from '@app/core/shared';
+import { RoleCheck } from '@app/core/shared';
+import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards } from '@nestjs/common';
+import { ApiBearerAuth, ApiDefaultResponse, ApiParam, ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from '../auth/guard/jwt-auth.guard';
+import { RoleDto } from './dto';
+import { RoleService } from './role.service';
 
 @ApiTags('Role')
 @Controller('role')

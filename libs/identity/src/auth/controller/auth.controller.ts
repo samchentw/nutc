@@ -1,12 +1,9 @@
-import { Controller, Post, Get, Body, UseGuards, Request } from '@nestjs/common';
-import { ApiTags, ApiBearerAuth, ApiDefaultResponse, ApiBody, ApiProperty } from '@nestjs/swagger';
-import { LoginUserDto, User } from '../../users/dto';
-import { UsersService } from '../../users/service/users.service';
-import { AuthService } from '../service/auth.service';
-import { AuthGuard } from '@nestjs/passport';
-import { LocalAuthGuard } from '../guard/local-auth.guard';
-import { JwtAuthGuard } from '../guard/jwt-auth.guard';
 import { RoleCheck } from '@app/core/shared';
+import { Controller, Get, Post, Request, UseGuards } from '@nestjs/common';
+import { ApiBearerAuth, ApiBody, ApiProperty, ApiTags } from '@nestjs/swagger';
+import { JwtAuthGuard } from '../guard/jwt-auth.guard';
+import { LocalAuthGuard } from '../guard/local-auth.guard';
+import { AuthService } from '../service/auth.service';
 
 export class logDto {
   @ApiProperty()

@@ -1,10 +1,10 @@
-import { Module } from '@nestjs/common';
-import { Shop } from './entity/shop.entity';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { FileModule } from '@app/core/file/file.module'
-import { ShopService } from './service/shop.service';
+import { FileModule } from '@app/core/file/file.module';
 import { ExcelFactory } from '@app/core/shared';
+import { Module } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { ShopController } from './controller/shop.controller';
+import { Shop } from './entity/shop.entity';
+import { ShopService } from './service/shop.service';
 
 @Module({
     controllers: [

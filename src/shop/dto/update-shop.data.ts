@@ -1,6 +1,6 @@
-import { IsString, IsArray, IsNotEmpty } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
-import { ShopTypeEnumArray, ShopTypeEnum } from '../enum/enum';
+import { IsArray, IsNotEmpty, IsString } from 'class-validator';
+import { ShopTypeEnum, ShopTypeEnumArray } from '../enum/enum';
 
 export class UpdateShopDto {
     @ApiProperty()

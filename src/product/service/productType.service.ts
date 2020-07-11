@@ -1,11 +1,10 @@
-import { Injectable, Inject } from '@nestjs/common';
-
-import { InjectRepository, } from '@nestjs/typeorm';
-import { Repository, Entity } from 'typeorm';
-import * as _ from 'lodash';
-import { ExcelService, BaseService, PageDto } from '@app/core/shared';
-import { ProductType } from '../entity/productType.entity';
+import { BaseService } from '@app/core/shared';
+import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 import { CreateProductTypeDto } from '../dto/create-productType.dto';
+import { ProductType } from '../entity/productType.entity';
+
 @Injectable()
 export class ProductTypeService extends BaseService<ProductType, CreateProductTypeDto, CreateProductTypeDto> {
     constructor(

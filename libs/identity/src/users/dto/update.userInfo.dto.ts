@@ -1,7 +1,7 @@
 
-import { IsString, IsNotEmpty } from 'class-validator';
+import { genderDataEnum, genderEnumArray } from '@app/core/shared';
 import { ApiProperty } from '@nestjs/swagger';
-import { genderDataEnum, genderEnumArray} from '@app/core/shared';
+import { IsNotEmpty } from 'class-validator';
 export class UpdateUserInfoDto{
     @ApiProperty()
     @IsNotEmpty()

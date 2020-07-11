@@ -1,4 +1,4 @@
-import {Entity,OneToOne, PrimaryGeneratedColumn,CreateDateColumn, Column, ManyToOne, JoinColumn} from 'typeorm';
+import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 
 

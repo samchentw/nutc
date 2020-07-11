@@ -1,13 +1,12 @@
-import { Injectable, Inject, HttpException, HttpStatus } from '@nestjs/common';
-import { Repository, UpdateEvent, UpdateResult, InsertResult, DeleteResult, createQueryBuilder } from 'typeorm';
-import { User, Userinfo } from '../entity';
 import { dataDuplicationException, genderDataEnum } from '@app/core/shared';
-import * as jwt from 'jsonwebtoken';
-import { InjectRepository } from '@nestjs/typeorm';
-import { LoginUserDto, UpdateUserInfoDto, CreateUserDto, UpdateUserPwd } from '../dto';
-import { RoleService } from '../../role/role.service';
-import { Role } from '../../role/entity/role.entity';
+import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository, UpdateResult } from 'typeorm';
+import { Role } from '../../role/entity/role.entity';
+import { RoleService } from '../../role/role.service';
+import { CreateUserDto, LoginUserDto, UpdateUserInfoDto, UpdateUserPwd } from '../dto';
+import { User, Userinfo } from '../entity';
 @Injectable()
 export class UsersService {
     constructor(

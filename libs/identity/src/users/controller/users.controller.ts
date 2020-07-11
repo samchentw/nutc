@@ -1,9 +1,9 @@
-import { Controller, Get, UsePipes, UseGuards, Post, Body, Param, Put, Delete, Request, Req } from '@nestjs/common';
-import { UpdateUserPwd, CreateUserDto, LoginUserDto, UpdateUserInfoDto, User } from '../dto';
-import { UsersService } from '../service/users.service';
-import { UnauthorizedException, RolesGuard, Roles, RoleCheck } from '@app/core/shared';
-import { ApiTags, ApiBearerAuth, ApiDefaultResponse, ApiBody, ApiParam } from '@nestjs/swagger';
+import { RoleCheck, UnauthorizedException } from '@app/core/shared';
 import { JwtAuthGuard } from '@app/identity/auth/guard/jwt-auth.guard';
+import { Body, Controller, Delete, Get, Param, Post, Put, Req, UseGuards } from '@nestjs/common';
+import { ApiBearerAuth, ApiDefaultResponse, ApiParam, ApiTags } from '@nestjs/swagger';
+import { CreateUserDto, UpdateUserInfoDto, UpdateUserPwd, User } from '../dto';
+import { UsersService } from '../service/users.service';
 
 @ApiTags('Users')
 @Controller('users')

@@ -1,17 +1,16 @@
+import { HttpExceptionFilter } from '@app/core/shared';
+import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
-import * as helmet from 'helmet';
+import { NestExpressApplication } from '@nestjs/platform-express';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import * as compression from 'compression';
 import * as rateLimit from 'express-rate-limit';
-import * as cpx from 'cpx';
-import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
+import * as helmet from 'helmet';
 import { join } from 'path';
-import { MyLogger, HttpExceptionFilter } from '@app/core/shared';
-import { NestExpressApplication } from '@nestjs/platform-express';
 import { AppModule } from './app.module';
-import { ValidationPipe } from '@nestjs/common';
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
-  // app.useStaticAssets(staticAssetsRoot("public"), { prefix: "/" });
+  app.useStaticAssets(staticAssetsRoot("public"), { prefix: "/" });
   app.useStaticAssets(staticAssetsRoot("nutc_web"), { prefix: "/nutc/" });
   app.useStaticAssets(staticAssetsRoot("nutc_app"), { prefix: "/admin/" });
   app.setGlobalPrefix('api');

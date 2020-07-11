@@ -1,5 +1,5 @@
 
-import { Entity, Column, PrimaryGeneratedColumn, ManyToMany, JoinColumn, JoinTable, OneToOne } from 'typeorm';
+import { Column, Entity, JoinTable, ManyToMany, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { Role } from '../../role/entity/role.entity';
 import { genderDataEnum } from '../enum/enum';
 import { User } from './user.entity';

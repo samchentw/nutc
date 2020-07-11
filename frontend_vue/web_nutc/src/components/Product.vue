@@ -33,7 +33,7 @@
             <div class="col-lg-4 col-md-6 mb-4" v-for="(item) in products" :key="item.id">
               <div class="card h-100">
                 <a href="#">
-                  <img class="card-img-top" :src="transferImage(item.productImage)" alt />
+                  <img class="card-img-top" style="height:200px;" :src="transferImage(item.productImage)" alt />
                 </a>
                 <div class="card-body">
                   <h4 class="card-title">

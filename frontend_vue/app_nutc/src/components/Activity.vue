@@ -69,7 +69,17 @@
           />
         </div>
 
-        <div class="form-group">
+        <div class="custom-control custom-switch">
+          <input
+            type="checkbox"
+            v-model="select.isActive"
+            class="custom-control-input"
+            id="customSwitch1"
+          />
+          <label class="custom-control-label" for="customSwitch1">上架</label>
+        </div>
+
+        <!-- <div class="form-group">
           <label for="exampleInputEmail1">敘述</label>
           <textarea class="form-control" v-model="select.description" id="description" rows="3"></textarea>
         </div>
@@ -79,7 +89,43 @@
             <div v-for="(item) in selectImage" :key="item.id" style="width:100%">
               <button class="btn btn-danger" v-on:click="deleteImage(item.id)">X</button>
               <img v-bind:src="'..'+item.url" style="width:100%" />
-              <!-- {{item.id}} -->
+            </div>
+          </div>
+        </div>
+
+        <b-form-file
+          v-model="file"
+          multiple
+          accept="image/jpeg, image/png, image/gif"
+          class="mt-3"
+          plain
+        ></b-form-file>
+        <div class="mt-3">選擇圖片: {{ file ? file.name : '' }}</div>-->
+      </form>
+
+      <div v-for="(item) in detailItem" :key="item.sequence">
+        <hr />
+        <button type="button" class="btn btn-danger" v-on:click="deleteCount(item.sequence)">-</button>
+        <div class="form-group">
+          <label for="exampleInputEmail1">順序</label>
+          <input
+            class="form-control"
+            v-model="item.sequence"
+            type="number"
+            id="example-number-input"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="exampleInputEmail1">敘述</label>
+          <textarea class="form-control" v-model="item.description" id="description" rows="3"></textarea>
+        </div>
+
+        <div v-if="selectImage.length > 0">
+          <div style="display:grid;grid-template-columns: 1fr 1fr 1fr;">
+            <div v-for="(item) in selectImage" :key="item.id" style="width:100%">
+              <button class="btn btn-danger" v-on:click="deleteImage(item.id)">X</button>
+              <img v-bind:src="'..'+item.url" style="width:100%" />
             </div>
           </div>
         </div>
@@ -92,7 +138,9 @@
           plain
         ></b-form-file>
         <div class="mt-3">選擇圖片: {{ file ? file.name : '' }}</div>
-      </form>
+      </div>
+
+      <button type="button" class="btn btn-success" v-on:click="addCount()">+</button>
     </b-modal>
 
     <!--  -->
@@ -117,20 +165,47 @@ export default {
       select: {},
       selectImage: [],
       file: null,
+      detailItem: [],
     };
   },
   created() {
     this.init();
   },
   methods: {
+    deleteImage(id) {
+      this.selectImage = this.selectImage.filter(x => {
+        return x.id != id;
+      });
+    },
     open(show, data) {
       this.modalShow = !show;
+      this.selectImage = [];
       if (data) {
         this.select = data;
-        this.selectImage = JSON.parse(data.Images);
+        this.selectImage = data.images;
       } else {
         this.select = {};
       }
+    },
+    addCount() {
+      if (this.detailItem.length > 0) {
+        var array = this.detailItem.map(x => x.sequence);
+        var maxValue = Math.max(...array);
+        this.detailItem.push({
+          description: '',
+          sequence: maxValue + 1,
+          ImageId: 0,
+        });
+      } else {
+        this.detailItem.push({
+          description: '',
+          sequence: 0,
+          ImageId: 0
+        });
+      }
+    },
+    deleteCount(sequence) {
+      this.detailItem = this.detailItem.filter(x => x.sequence != sequence);
     },
     deleteItem(id) {
       messageService.confirm('確認要刪除嗎？').then(x => {
@@ -186,6 +261,7 @@ export default {
     },
     async handleOk() {
       this.select.imageIds = await this.uploadFile();
+      this.select.newsDetails = [];
       this.select.newsTypeId = this.selected;
       if (this.select.id) {
         apiService

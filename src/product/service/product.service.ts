@@ -1,17 +1,16 @@
-import { Injectable, Inject } from '@nestjs/common';
-
-import { InjectRepository, } from '@nestjs/typeorm';
-import { Repository, Entity } from 'typeorm';
-import * as _ from 'lodash';
-import { ExcelService, BaseService, PageDto } from '@app/core/shared';
-
 import { FileService } from '@app/core/file/service/file.service';
-import { plainToClass, classToPlain, classToClass, plainToClassFromExist } from 'class-transformer';
-import { Product } from '../entity/product.entity';
+import { BaseService } from '@app/core/shared';
+import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { plainToClass } from 'class-transformer';
+import { Repository } from 'typeorm';
 import { CreateProductDto } from '../dto/create-product.dto';
+import { ProductQueryPageDto } from '../dto/product.dto';
 import { UpdateProductDto } from '../dto/update-product.dto';
+import { Product } from '../entity/product.entity';
 import { ProductTypeService } from './productType.service';
-import { ProductPageDto, ProductQueryPageDto } from '../dto/product.dto';
+
+
 @Injectable()
 export class ProductService extends BaseService<Product, CreateProductDto, UpdateProductDto> {
 
