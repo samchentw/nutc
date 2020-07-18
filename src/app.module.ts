@@ -3,7 +3,6 @@ import { CoreModule } from '@app/core';
 import { IdentityModule } from '@app/identity';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { ScheduleModule } from '@nestjs/schedule';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -26,7 +25,6 @@ import { ShopModule } from './shop/shop.module';
       "autoLoadEntities": true,
       "synchronize": true,
     }),
-    ScheduleModule.forRoot(),
     ConfigModule.forRoot({
       envFilePath: 'development.env',
     }),

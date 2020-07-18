@@ -1,4 +1,4 @@
-import { RoleCheck } from '@app/core/shared';
+import { Roles, RolesGuard } from '@app/core/shared';
 import { Controller, Get, Post, Request, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth, ApiBody, ApiProperty, ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from '../guard/jwt-auth.guard';
@@ -33,9 +33,10 @@ export class AuthController {
   // }
 
   @ApiBearerAuth()
-  @UseGuards(JwtAuthGuard)
+  @Roles("admin")
+  @UseGuards(JwtAuthGuard, RolesGuard)
   @Get('admin/permission')
-  async admin(@RoleCheck(["admin"]) check) {
+  async admin() {
     return true;
   }
 }

@@ -1,4 +1,4 @@
-import { RoleCheck } from '@app/core/shared';
+import { Roles, RolesGuard } from '@app/core/shared';
 import { JwtAuthGuard } from '@app/identity/auth/guard/jwt-auth.guard';
 import { Body, Controller, Delete, Get, Param, Post, Put, Query, Req, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth, ApiDefaultResponse, ApiParam, ApiQuery, ApiTags } from '@nestjs/swagger';
@@ -29,26 +29,29 @@ export class ProductController {
 
   @Post("create")
   @ApiBearerAuth()
-  @UseGuards(JwtAuthGuard)
+  @Roles("admin")
+  @UseGuards(JwtAuthGuard, RolesGuard)
   @ApiDefaultResponse({ type: ProductDto })
-  create(@Body() input: CreateProductDto, @RoleCheck(["admin"]) check) {
+  create(@Body() input: CreateProductDto) {
     return this.productService.create(input);
   }
 
   @Put(':id')
   @ApiBearerAuth()
-  @UseGuards(JwtAuthGuard)
+  @Roles("admin")
+  @UseGuards(JwtAuthGuard, RolesGuard)
   @ApiDefaultResponse({ type: ProductDto })
   @ApiParam({ name: 'id' })
-  update(@Param('id') id, @Body() input: UpdateProductDto, @RoleCheck(["admin"]) check) {
+  update(@Param('id') id, @Body() input: UpdateProductDto) {
     return this.productService.update(id, input);
   }
 
   @Delete(':id')
   @ApiBearerAuth()
-  @UseGuards(JwtAuthGuard)
+  @Roles("admin")
+  @UseGuards(JwtAuthGuard, RolesGuard)
   @ApiParam({ name: 'id' })
-  delete(@Param('id') id, @RoleCheck(["admin"]) check) {
+  delete(@Param('id') id) {
     return this.productService.delete(id);
   }
 

@@ -78,29 +78,6 @@
           />
           <label class="custom-control-label" for="customSwitch1">上架</label>
         </div>
-
-        <!-- <div class="form-group">
-          <label for="exampleInputEmail1">敘述</label>
-          <textarea class="form-control" v-model="select.description" id="description" rows="3"></textarea>
-        </div>
-
-        <div v-if="selectImage.length > 0">
-          <div style="display:grid;grid-template-columns: 1fr 1fr 1fr;">
-            <div v-for="(item) in selectImage" :key="item.id" style="width:100%">
-              <button class="btn btn-danger" v-on:click="deleteImage(item.id)">X</button>
-              <img v-bind:src="'..'+item.url" style="width:100%" />
-            </div>
-          </div>
-        </div>
-
-        <b-form-file
-          v-model="file"
-          multiple
-          accept="image/jpeg, image/png, image/gif"
-          class="mt-3"
-          plain
-        ></b-form-file>
-        <div class="mt-3">選擇圖片: {{ file ? file.name : '' }}</div>-->
       </form>
 
       <div v-for="(item) in detailItem" :key="item.sequence">
@@ -121,23 +98,25 @@
           <textarea class="form-control" v-model="item.description" id="description" rows="3"></textarea>
         </div>
 
-        <div v-if="selectImage.length > 0">
+        <div v-if="item.ImageUrl">
+          <button
+            class="btn btn-danger"
+            style="height:30px;width:30px"
+            v-on:click="deleteImage(item.ImageId)"
+          >X</button>
+
           <div style="display:grid;grid-template-columns: 1fr 1fr 1fr;">
-            <div v-for="(item) in selectImage" :key="item.id" style="width:100%">
-              <button class="btn btn-danger" v-on:click="deleteImage(item.id)">X</button>
-              <img v-bind:src="'..'+item.url" style="width:100%" />
-            </div>
+            <img v-bind:src="'..'+item.ImageUrl" style="width:100%" />
           </div>
         </div>
 
         <b-form-file
-          v-model="file"
-          multiple
+          v-model="item.file"
           accept="image/jpeg, image/png, image/gif"
           class="mt-3"
           plain
         ></b-form-file>
-        <div class="mt-3">選擇圖片: {{ file ? file.name : '' }}</div>
+        <div class="mt-3">選擇圖片: {{ item.file ? item.file.name : '' }}</div>
       </div>
 
       <button type="button" class="btn btn-success" v-on:click="addCount()">+</button>
@@ -150,6 +129,7 @@
 <script>
 import apiService from '../apiService';
 import messageService from '../messageService';
+import axios from 'axios';
 export default {
   name: 'Activity',
   props: {
@@ -163,7 +143,6 @@ export default {
 
       modalShow: false,
       select: {},
-      selectImage: [],
       file: null,
       detailItem: [],
     };
@@ -173,16 +152,16 @@ export default {
   },
   methods: {
     deleteImage(id) {
-      this.selectImage = this.selectImage.filter(x => {
-        return x.id != id;
-      });
+      var target = this.detailItem.find(x => x.ImageId == id);
+      target.ImageId = 0;
+      target.ImageUrl = '';
     },
     open(show, data) {
       this.modalShow = !show;
-      this.selectImage = [];
+      this.detailItem = [];
       if (data) {
         this.select = data;
-        this.selectImage = data.images;
+        this.detailItem = data.newsDetailsSortBySeq;
       } else {
         this.select = {};
       }
@@ -195,12 +174,14 @@ export default {
           description: '',
           sequence: maxValue + 1,
           ImageId: 0,
+          file: null,
         });
       } else {
         this.detailItem.push({
           description: '',
           sequence: 0,
-          ImageId: 0
+          ImageId: 0,
+          file: null,
         });
       }
     },
@@ -229,39 +210,28 @@ export default {
           this.selected = x.data[0].id;
         }
         this.file = null;
-        this.selectImage = [];
         this.select = {};
         this.changeItem();
       });
     },
     changeItem() {
       apiService.getAllBytypeId(this.selected).then(x => {
-        console.log(x.data);
         this.newItems = x.data;
       });
     },
-    async uploadFile() {
-      var imageDatas = [];
-
-      if (this.file) {
-        var form = new FormData();
-        for (var i = 0; i < this.file.length; i++) {
-          form.append('file', this.file[i]);
+    async handleOk() {
+      var items = [];
+      // console.log(this.detailItem);
+      for (var i = 0; i < this.detailItem.length; i++) {
+        if (this.detailItem[i].file) {
+          var form = new FormData();
+          form.append('file', this.detailItem[i].file);
+          var result = await apiService.uploadfile(form);
+          this.detailItem[i].ImageId = result.data[0];
         }
-        imageDatas = await apiService.uploadfile(form);
-        this.select.imageIds = imageDatas.data;
-      } else {
-        this.select.imageIds = [];
       }
 
-      this.select.imageIds = this.select.imageIds.concat(
-        this.selectImage.map(x => x.id),
-      );
-      return this.select.imageIds;
-    },
-    async handleOk() {
-      this.select.imageIds = await this.uploadFile();
-      this.select.newsDetails = [];
+      this.select.newsDetails = this.detailItem;
       this.select.newsTypeId = this.selected;
       if (this.select.id) {
         apiService
@@ -282,8 +252,6 @@ export default {
           })
           .catch(error => {
             alert('標題不能空值！');
-            // messageService.error('標題不能空值！');
-            // throw new Error(error)
           });
       }
     },

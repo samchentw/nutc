@@ -1,4 +1,4 @@
-import { RoleCheck, UnauthorizedException } from '@app/core/shared';
+import { Roles, RolesGuard, UnauthorizedException } from '@app/core/shared';
 import { JwtAuthGuard } from '@app/identity/auth/guard/jwt-auth.guard';
 import { Body, Controller, Delete, Get, Param, Post, Put, Req, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth, ApiDefaultResponse, ApiParam, ApiTags } from '@nestjs/swagger';
@@ -44,17 +44,19 @@ export class UserController {
 
 
   @ApiBearerAuth()
-  @UseGuards(JwtAuthGuard)
+  @Roles("admin")
+  @UseGuards(JwtAuthGuard, RolesGuard)
   @Get("admin/getAllUser")
-  async getAllUser(@RoleCheck(["admin"]) admin) {
+  async getAllUser() {
     return await this.userService.getAllUser();
   }
 
   @ApiBearerAuth()
   @ApiParam({ name: "userinfoId" })
-  @UseGuards(JwtAuthGuard)
+  @Roles("admin")
+  @UseGuards(JwtAuthGuard, RolesGuard)
   @Delete(":userinfoId")
-  async deleteUser(@RoleCheck(["admin"]) admin, @Param('userinfoId') id: number) {
+  async deleteUser(@Param('userinfoId') id: number) {
     return this.userService.delete(id);
   }
 

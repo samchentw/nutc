@@ -1,15 +1,14 @@
-import { Injectable } from '@nestjs/common';
-import * as _ from 'lodash';
-import { BaseService } from '@app/core/shared';
-
-import { CreateNewsDto, CreateNewsWithDetailDto, UpdateNewsDto, UpdateNewsTypeDto, CreateNewsTypeDto } from '../dto';
-import { News, NewsDetail } from '../entity/news.entity';
-import { News as n } from '../dto/news/news.dto'
-import { plainToClass, classToPlain } from 'class-transformer';
-import { InjectRepository } from '@nestjs/typeorm';
 import { FileService } from '@app/core/file/service/file.service';
-import { Repository, UpdateResult, InsertResult, Not } from 'typeorm';
+import { BaseService } from '@app/core/shared';
+import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { classToPlain, plainToClass } from 'class-transformer';
+import { Repository } from 'typeorm';
+import { CreateNewsDto, UpdateNewsDto } from '../dto';
+import { News as n } from '../dto/news/news.dto';
+import { News, NewsDetail } from '../entity/news.entity';
 import { NewsTypeService } from './newsType.service';
+
 @Injectable()
 export class NewsService extends BaseService<News, CreateNewsDto, UpdateNewsDto> {
 
@@ -25,19 +24,14 @@ export class NewsService extends BaseService<News, CreateNewsDto, UpdateNewsDto>
   async create(input: CreateNewsDto): Promise<News> {
     let newsType = await this.newsTypeService.get(input.newsTypeId);
     let result = plainToClass(News, input);
-    // if (input.imageIds && input.imageIds.length > 0) {
-    //   result.images = await this.fileService.getFileUrlAndId(input.imageIds);
-    // } else {
-    //   result.images = [];
-    // }
+
     let details: NewsDetail[] = [];
     result.newsDetails = []
-    let detailImageIds = input.newsDetails.map(x => x.ImageId);
-    let imageDatas = await this.fileService.getFileUrlAndId(detailImageIds);
     for (let i = 0; i < input.newsDetails.length; i++) {
       let detail: NewsDetail = new NewsDetail();
-      detail.ImageId = imageDatas[i].id;
-      detail.ImageUrl = imageDatas[i].url;
+      let imageData = await this.fileService.getFileUrlAndId(input.newsDetails[i].ImageId);
+      detail.ImageId = imageData.id;
+      detail.ImageUrl = imageData.url;
       detail.description = input.newsDetails[i].description;
       detail.sequence = input.newsDetails[i].sequence;
       details.push(detail);
@@ -50,18 +44,14 @@ export class NewsService extends BaseService<News, CreateNewsDto, UpdateNewsDto>
 
   async update(id: number, input: UpdateNewsDto) {
     let news = plainToClass(News, input, { excludeExtraneousValues: true });
-    // if (input.imageIds && input.imageIds.length > 0) {
-    //   news.images = await this.fileService.getFileUrlAndId(input.imageIds);
-    // }
 
     let details: NewsDetail[] = [];
     news.newsDetails = []
-    let detailImageIds = input.newsDetails.map(x => x.ImageId);
-    let imageDatas = await this.fileService.getFileUrlAndId(detailImageIds);
     for (let i = 0; i < input.newsDetails.length; i++) {
       let detail: NewsDetail = new NewsDetail();
-      detail.ImageId = imageDatas[i].id;
-      detail.ImageUrl = imageDatas[i].url;
+      let imageData = await this.fileService.getFileUrlAndId(input.newsDetails[i].ImageId);
+      detail.ImageId = imageData.id;
+      detail.ImageUrl = imageData.url;
       detail.description = input.newsDetails[i].description;
       detail.sequence = input.newsDetails[i].sequence;
       details.push(detail);

@@ -1,10 +1,10 @@
-import { Controller, Get, Post, Body, Put, Param, Delete, Query, UsePipes, Res, Header, UseGuards } from '@nestjs/common';
-import { RolesGuard, Roles } from '@app/core/shared';
-import { ApiTags, ApiQuery, ApiParam, ApiDefaultResponse, ApiBearerAuth } from '@nestjs/swagger';
-import { ConsumerService } from '../service/consumer.service';
-import { CreateUserDto } from '@app/identity/users/dto';
-import { User, RoleCheck } from '@app/core/shared/decorator/user.decorator';
+import { Roles, RolesGuard } from '@app/core/shared';
+import { User } from '@app/core/shared/decorator/user.decorator';
 import { JwtAuthGuard } from '@app/identity/auth/guard/jwt-auth.guard';
+import { CreateUserDto } from '@app/identity/users/dto';
+import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { ConsumerService } from '../service/consumer.service';
 // import { fs } from 'memfs';
 @ApiTags("Consumer")
 @Controller("consumer")
@@ -20,8 +20,9 @@ export class ConsumerController {
 
   @Get("info")
   @ApiBearerAuth()
-  @UseGuards(JwtAuthGuard)
-  info(@User("id") userId, @RoleCheck(["user"]) check) {
+  @Roles("user")
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  info(@User("id") userId) {
     return this.consumerService.getByUserId(userId);
   }
 }

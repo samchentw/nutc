@@ -15,6 +15,7 @@ async function bootstrap() {
   app.useStaticAssets(staticAssetsRoot("nutc_app"), { prefix: "/admin/" });
   app.setGlobalPrefix('api');
 
+  // const reflector = new Reflector();
   const options = new DocumentBuilder()
     .setTitle('NUTC Api')
     .setDescription('The NUTC API description')
@@ -31,11 +32,12 @@ async function bootstrap() {
       max: 1000, // limit each IP to 500 requests per windowMs
     }),
   );
-    
+
   app.use(compression());
   app.use(helmet());
   app.useGlobalFilters(new HttpExceptionFilter())
   app.useGlobalPipes(new ValidationPipe())
+  // app.useGlobalGuards(new RolesGuard(reflector))
   await app.listen(3000);
 }
 bootstrap();

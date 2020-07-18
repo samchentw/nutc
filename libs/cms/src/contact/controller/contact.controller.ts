@@ -1,10 +1,9 @@
-import { Controller, Get, Post, Body, Put, Param, Delete, Query, UsePipes, Res, Header, Req, UseGuards } from '@nestjs/common';
-import { RolesGuard, Roles, RoleCheck } from '@app/core/shared';
-import { ApiTags, ApiQuery, ApiParam, ApiDefaultResponse, ApiBearerAuth } from '@nestjs/swagger';
+import { Roles, RolesGuard } from '@app/core/shared';
 import { JwtAuthGuard } from '@app/identity/auth/guard/jwt-auth.guard';
-import { ContactService } from '../service/contact.service';
+import { Body, Controller, Delete, Get, Param, Post, UseGuards } from '@nestjs/common';
+import { ApiBearerAuth, ApiParam, ApiTags } from '@nestjs/swagger';
 import { CreateContactDto } from '../dto/create-contact.dto';
-import { UpdateContactDto } from '../dto/update-contact.dto';
+import { ContactService } from '../service/contact.service';
 
 
 
@@ -33,9 +32,10 @@ export class ContactController {
 
     @Delete(':id')
     @ApiBearerAuth()
-    @UseGuards(JwtAuthGuard)
+    @Roles("admin")
+    @UseGuards(JwtAuthGuard, RolesGuard)
     @ApiParam({ name: 'id' })
-    delete(@Param('id') id, @RoleCheck(["admin"]) check) {
+    delete(@Param('id') id) {
         return this.contactService.delete(id);
     }
 }

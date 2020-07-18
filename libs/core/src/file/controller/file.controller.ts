@@ -1,18 +1,18 @@
-import { RoleCheck } from '@app/core/shared';
+import { Roles, RolesGuard } from '@app/core/shared';
 import { JwtAuthGuard } from '@app/identity/auth/guard/jwt-auth.guard';
 import {
   Controller, Get, Post, UploadedFiles,
   UseGuards, UseInterceptors
 } from '@nestjs/common';
 import { FileFieldsInterceptor } from '@nestjs/platform-express';
-import { ApiBody, ApiConsumes, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiBody, ApiConsumes, ApiTags } from '@nestjs/swagger';
 import { FileService } from '../service/file.service';
 
 
 
 
-@ApiTags('File')
-@Controller('File')
+@ApiTags('file')
+@Controller('file')
 export class FileController {
 
   constructor(
@@ -33,7 +33,9 @@ export class FileController {
 
 
   @Post('upload')
-  @UseGuards(JwtAuthGuard)
+  @Roles("admin")
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @ApiBearerAuth()
   @ApiConsumes('multipart/form-data')
   @ApiBody({
     schema: {
@@ -50,7 +52,8 @@ export class FileController {
     FileFieldsInterceptor([
       { name: 'file', maxCount: 20 },
     ]))
-  fileUpload(@UploadedFiles() files, @RoleCheck(["admin"]) admin): Promise<number[]> {
+  fileUpload(@UploadedFiles() files): Promise<number[]> {
+    // console.log(files.file)
     return this.fileService.saveFile(files.file);
   }
 }

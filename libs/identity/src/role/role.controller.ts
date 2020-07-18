@@ -1,4 +1,4 @@
-import { RoleCheck } from '@app/core/shared';
+import { Roles, RolesGuard } from '@app/core/shared';
 import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth, ApiDefaultResponse, ApiParam, ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from '../auth/guard/jwt-auth.guard';
@@ -19,25 +19,28 @@ export class RoleController {
     }
 
     @ApiBearerAuth()
-    @UseGuards(JwtAuthGuard)
+    @Roles("admin")
+    @UseGuards(JwtAuthGuard, RolesGuard)
     @Post('create')
-    create(@Body() body: RoleDto, @RoleCheck(["admin"]) admin) {
+    create(@Body() body: RoleDto) {
         return this.roleService.create(body);
     }
 
     @ApiBearerAuth()
-    @UseGuards(JwtAuthGuard)
+    @Roles("admin")
+    @UseGuards(JwtAuthGuard, RolesGuard)
     @Put(':id')
     @ApiParam({ name: 'id' })
-    update(@Param('id') id: number, @Body() body: RoleDto, @RoleCheck(["admin"]) check) {
+    update(@Param('id') id: number, @Body() body: RoleDto) {
         return this.roleService.update(id, body);
     }
 
     @ApiBearerAuth()
-    @UseGuards(JwtAuthGuard)
+    @Roles("admin")
+    @UseGuards(JwtAuthGuard, RolesGuard)
     @Delete(':id')
     @ApiParam({ name: 'id' })
-    delete(@Param('id') id: number, @RoleCheck(["admin"]) check) {
+    delete(@Param('id') id: number) {
         return this.roleService.delete(id);
     }
 

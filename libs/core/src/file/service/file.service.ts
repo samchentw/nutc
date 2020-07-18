@@ -41,12 +41,13 @@ export class FileService {
     async saveDb(files: any[]): Promise<number[]> {
         let result: number[] = [];
         for (let i = 0; i < files.length; i++) {
+            // console.log(files[i]);
             let temp = await this.FileRepository.save({
                 filename: files[i].fieldname,
                 originalname: files[i].originalname,
                 isDelete: false,
                 mimetype: files[i].mimetype,
-                size: files[i].encoding,
+                size: files[i].size,
                 url: "/" + files[i].displayName
             });
             result.push(temp.id)
@@ -69,14 +70,26 @@ export class FileService {
         return JSON.stringify(result);
     }
 
-    async getFileUrlAndId(ids: number[]): Promise<ImageIdAndUrlDto[]> {
-        let file = await this.findByIds(ids);
+    async getFileUrlAndIdForList(ids: number[]): Promise<ImageIdAndUrlDto[]> {
+        let filterDatas = ids.filter(x => x != 0);
+        if (filterDatas.length == 0) return [];
+        let file = await this.findByIds(filterDatas);
         let result: ImageIdAndUrlDto[] = file.map(x => {
             return {
                 id: x.id,
                 url: x.url
             }
         });
+        return result
+    }
+
+    async getFileUrlAndId(id: number): Promise<ImageIdAndUrlDto> {
+        if (id == 0) return null;
+        let file = await this.FileRepository.findOne(id);
+
+        let result: ImageIdAndUrlDto = new ImageIdAndUrlDto();
+        result.id = file.id;
+        result.url = file.url;
         return result
     }
 
