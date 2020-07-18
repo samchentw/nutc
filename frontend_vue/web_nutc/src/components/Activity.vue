@@ -168,7 +168,7 @@ export default {
       } else this.select = this.newsType.find(x => x.name == type);
 
       apiService.getAllBytypeId(this.select.id).then(x => {
-        this.news = x.data;
+        this.news = x.data.filter(x=>x.isActive == true);
       });
     },
     transferImage(image) {
