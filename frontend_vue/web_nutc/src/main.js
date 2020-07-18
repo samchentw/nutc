@@ -15,6 +15,7 @@ import Home from './components/Home.vue';
 import Activity from './components/Activity.vue';
 import Shop from './components/Shop.vue';
 import ShopDetail from './components/ShopDetail.vue';
+import ActivityDetail from './components/ActivityDetail.vue';
 
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
@@ -29,62 +30,67 @@ const router = new VueRouter({
   routes: [
     { path: '/login', component: Login },
     { path: '/test', component: Test },
-    { 
-      path: '/', 
+    {
+      path: '/',
       component: Home,
     },
-    { 
-      path: '/product', 
+    {
+      path: '/product',
       component: Product,
     },
-    { 
-      path: '/shop/:typeId', 
+    {
+      path: '/shop/:typeId',
       component: Shop,
     },
     {
-      path:'/ShopDetail/:id',
+      path: '/ShopDetail/:id',
       component: ShopDetail
     },
-    { 
-      path: '/activity', 
+    {
+      path: '/activity',
       component: Activity,
     },
-    { 
-      path: '/contact', 
+    {
+      path: '/activityDetail/:id',
+      component: ActivityDetail,
+    },
+    {
+      path: '/contact',
       component: Contact,
     },
     {
       path: '/aboutus',
       component: Aboutus
     },
-    { 
-      path: '/user', 
-      beforeEnter: guard, 
+    {
+      path: '/user',
+      beforeEnter: guard,
       component: User,
     },
     {
-      path: '/shoppingCart', 
-      beforeEnter: guard, 
+      path: '/shoppingCart',
+      beforeEnter: guard,
       component: ShoppingCart
     }
-    
-   
+
+
   ]
 })
 
 
 Vue.use(VueRouter)
-new Vue({router,
+new Vue({
+  router,
   render: h => h(App),
 }).$mount('#app')
 
 
-function guard(to, from, next){
-  if(getToken()) {
+function guard(to, from, next) {
+  if (getToken()) {
     //  console.log(getToken())
-      next(); 
-  } else{
-      next('/'); // go to '/login';
+    next();
+  } else {
+    next('/'); // go to '/login';
   }
 }
 function getToken() {

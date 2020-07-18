@@ -53,4 +53,10 @@ export class NewsController {
     return this.newsService.getAllByNewsTypeId(id);
   }
 
+  @Get(":id")
+  @ApiParam({ name: 'id' })
+  get(@Param('id') id) {
+    return this.newsService.getByid(id);
+  }
+
 }

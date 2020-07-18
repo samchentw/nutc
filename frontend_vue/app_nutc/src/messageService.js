@@ -1,7 +1,7 @@
 import Swal from 'sweetalert2'
 
-export default{
-    success(message){
+export default {
+    success(message) {
         return Swal.fire({
             title: '系統訊息',
             text: message,
@@ -9,14 +9,21 @@ export default{
             showCancelButton: false,
             confirmButtonColor: '#3085d6',
             confirmButtonText: '確定'
-            });
+        });
     },
 
-    error(){
-
+    error(message) {
+        return Swal.fire({
+            title: '系統訊息',
+            text: message,
+            icon: 'error',
+            showCancelButton: false,
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: '確定'
+        });
     },
 
-    confirm(text){
+    confirm(text) {
         return Swal.fire({
             title: '系統訊息',
             text: text,
@@ -25,8 +32,8 @@ export default{
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
             confirmButtonText: '確定',
-            cancelButtonText:'取消'
-          });
+            cancelButtonText: '取消'
+        });
     }
-    
+
 }

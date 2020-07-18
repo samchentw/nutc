@@ -71,5 +71,12 @@ export class NewsService extends BaseService<News, CreateNewsDto, UpdateNewsDto>
     return result;
   }
 
+  async getByid(id:number){
+    let entity = await this.repository.findOne(id);
+    let dto  = plainToClass(n.NewsDto, entity, { excludeExtraneousValues: true });
+    let result = classToPlain(dto);
+    return result;
+  }
+
 
 }
