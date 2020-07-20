@@ -9,7 +9,6 @@ import { ShopService } from '../service/shop.service';
 
 // import { fs } from 'memfs';
 @ApiTags("Shop")
-@UseGuards(RolesGuard)
 @Controller("shop")
 export class ShopController {
   constructor(
@@ -46,6 +45,7 @@ export class ShopController {
   @UseGuards(JwtAuthGuard, RolesGuard)
   @ApiDefaultResponse({ type: ShopDto })
   create(@Body() input: CreateShopDto) {
+    console.log(input);
     return this.ShopService.create(input);
   }
 

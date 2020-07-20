@@ -9,8 +9,8 @@
         <!-- /.col-lg-8 -->
         <div class="col-lg-5">
           <h3 class="font-weight-light">商店名稱：{{shop.name}}</h3>
-          <p>{{shop.description}}</p>
-          <p>{{shop.remark}}</p>
+          <p style="white-space: pre;">{{shop.description}}</p>
+          <p style="white-space: pre;">{{shop.remark}}</p>
         </div>
         <!-- /.col-md-4 -->
       </div>

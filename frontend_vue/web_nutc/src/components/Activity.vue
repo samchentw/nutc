@@ -9,7 +9,7 @@
             <div class="card h-100" v-if="one.id">
               <h4 class="card-header">{{one.value}}</h4>
               <div class="card-img">
-                <img class="img-fluid" style="height:262.38px;width:100%" src="home1.jpg" alt />
+                <img class="img-fluid" style="height:262.38px;width:100%" src="S__8339588.jpg" alt />
               </div>
               <div class="card-body">
                 <p class="card-text">{{one.description}}</p>

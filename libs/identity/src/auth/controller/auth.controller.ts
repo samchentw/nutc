@@ -11,6 +11,7 @@ export class logDto {
   @ApiProperty()
   password: string;
 }
+
 @ApiTags('Auth')
 @Controller('auth')
 export class AuthController {

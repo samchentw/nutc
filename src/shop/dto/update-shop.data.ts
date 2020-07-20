@@ -7,7 +7,7 @@ export class UpdateShopDto {
     id: number;
 
     @ApiProperty()
-    @IsString()
+    @IsString() 
     name: string;
 
     @ApiProperty()
