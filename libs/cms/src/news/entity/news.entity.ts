@@ -5,6 +5,7 @@ import { ImageIdAndUrlDto } from "@app/core/file/service/file.service";
 
 export class NewsDetail {
     sequence: number;
+    subtitle: string;
     description: string;
     ImageId: number;
     ImageUrl: string;

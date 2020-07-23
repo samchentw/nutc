@@ -32,6 +32,7 @@ export class NewsService extends BaseService<News, CreateNewsDto, UpdateNewsDto>
       let imageData = await this.fileService.getFileUrlAndId(input.newsDetails[i].ImageId);
       detail.ImageId = imageData.id;
       detail.ImageUrl = imageData.url;
+      detail.subtitle = input.newsDetails[i].subtitle;
       detail.description = input.newsDetails[i].description;
       detail.sequence = input.newsDetails[i].sequence;
       details.push(detail);
@@ -52,6 +53,7 @@ export class NewsService extends BaseService<News, CreateNewsDto, UpdateNewsDto>
       let imageData = await this.fileService.getFileUrlAndId(input.newsDetails[i].ImageId);
       detail.ImageId = imageData.id;
       detail.ImageUrl = imageData.url;
+      detail.subtitle = input.newsDetails[i].subtitle;
       detail.description = input.newsDetails[i].description;
       detail.sequence = input.newsDetails[i].sequence;
       details.push(detail);
@@ -71,9 +73,9 @@ export class NewsService extends BaseService<News, CreateNewsDto, UpdateNewsDto>
     return result;
   }
 
-  async getByid(id:number){
+  async getByid(id: number) {
     let entity = await this.repository.findOne(id);
-    let dto  = plainToClass(n.NewsDto, entity, { excludeExtraneousValues: true });
+    let dto = plainToClass(n.NewsDto, entity, { excludeExtraneousValues: true });
     let result = classToPlain(dto);
     return result;
   }

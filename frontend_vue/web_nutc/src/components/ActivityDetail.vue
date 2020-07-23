@@ -1,9 +1,9 @@
 <template>
-  <div v-if="news">
+  <div v-if="news" style="margin-bottom:20px">
     <h2 style="text-align: center;margin-bottom:10px">{{news.title}}</h2>
 
     <p style="text-align: center;margin-bottom:10px">{{news.subtitle}}</p>
-    <div class="container card" v-for="(item) in news.newsDetailsSortBySeq" :key="item.id">
+    <div class="container card" style="margin-bottom:10px" v-for="(item) in news.newsDetailsSortBySeq" :key="item.id">
       <!-- Heading Row -->
       <div class="row align-items-center my-5">
         <div class="col-lg-7">
@@ -11,7 +11,7 @@
         </div>
         <!-- /.col-lg-8 -->
         <div class="col-lg-5">
-          <!-- <h3 class="font-weight-light">名稱：{{item.title}}</h3> -->
+          <h3 class="font-weight-light">{{item.subtitle}}</h3>
           <p>{{item.description}}</p>
           <!-- <p>{{shop.remark}}</p> -->
         </div>

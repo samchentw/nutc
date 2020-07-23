@@ -215,5 +215,13 @@ export default {
   // //清token
   clearToken() {
     window.localStorage.removeItem("nutc");
+  },
+
+  getUserProduct(){
+    var item = window.localStorage.getItem("userProduct");
+    return JSON.parse(item);
+  },
+  saveUserProduct(value){
+    window.localStorage.setItem("userProduct", JSON.stringify(value));
   }
 }

@@ -10,61 +10,40 @@
                     <thead>
                         <tr>
                             <th scope="col"> </th>
-                            <th scope="col">Product</th>
-                            <th scope="col">Available</th>
-                            <th scope="col" class="text-center">Quantity</th>
-                            <th scope="col" class="text-right">Price</th>
+                            <th scope="col">產品名稱</th>
+                            <th scope="col" class="text-center">數量</th>
+                            <th scope="col" class="text-right">價格</th>
                             <th> </th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
+                        <tr v-for="(item) in selectItems" :key="item.id">
                             <td><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>
-                            <td>Product Name Dada</td>
-                            <td>In stock</td>
-                            <td><input class="form-control" type="text" value="1" /></td>
-                            <td class="text-right">124,90 €</td>
-                            <td class="text-right"><button class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> </button> </td>
-                        </tr>
-                        <tr>
-                            <td><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>
-                            <td>Product Name Toto</td>
-                            <td>In stock</td>
-                            <td><input class="form-control" type="text" value="1" /></td>
-                            <td class="text-right">33,90 €</td>
-                            <td class="text-right"><button class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> </button> </td>
-                        </tr>
-                        <tr>
-                            <td><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>
-                            <td>Product Name Titi</td>
-                            <td>In stock</td>
-                            <td><input class="form-control" type="text" value="1" /></td>
-                            <td class="text-right">70,00 €</td>
-                            <td class="text-right"><button class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> </button> </td>
+                            <td>{{item.product.name}}</td>
+                            <td class="text-center">{{item.count}}</td>
+                            <td class="text-right">{{item.product.price}}</td>
+                            <td class="text-right"><button class="btn btn-sm btn-danger" v-on:click="remove(item.product.id)"><i class="fa fa-trash"></i> </button> </td>
                         </tr>
                         <tr>
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td></td>
-                            <td>Sub-Total</td>
-                            <td class="text-right">255,90 €</td>
+                            <td>小計</td>
+                            <td class="text-right">255</td>
                         </tr>
                         <tr>
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td></td>
-                            <td>Shipping</td>
-                            <td class="text-right">6,90 €</td>
+                            <td>運費</td>
+                            <td class="text-right">100</td>
                         </tr>
                         <tr>
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td></td>
-                            <td><strong>Total</strong></td>
-                            <td class="text-right"><strong>346,90 €</strong></td>
+                            <td><strong>總額</strong></td>
+                            <td class="text-right"><strong>3455</strong></td>
                         </tr>
                     </tbody>
                 </table>
@@ -73,10 +52,10 @@
         <div class="col mb-2">
             <div class="row">
                 <div class="col-sm-12  col-md-6">
-                    <button class="btn btn-block btn-light">Continue Shopping</button>
+                    <a href="./#/product" class="btn btn-block btn-light">繼續購買</a>
                 </div>
                 <div class="col-sm-12 col-md-6 text-right">
-                    <button class="btn btn-lg btn-block btn-success text-uppercase">Checkout</button>
+                    <button class="btn btn-lg btn-block btn-success text-uppercase">結帳</button>
                 </div>
             </div>
         </div>
@@ -98,13 +77,23 @@ export default {
   },
   data(){
     return {
-    
+        selectItems:[],
     }
   },
   created(){
       // this.change();
+      this.init();
   },
-  methods:{}
+  methods:{
+      init(){
+         this.selectItems = apiService.getUserProduct();
+         console.log(this.selectItems)
+      },
+      remove(id){
+          this.selectItems = this.selectItems.filter(x=>x.product.id !=id);
+          apiService.saveUserProduct(this.selectItems);
+      }
+  }
 }
 </script>
 

@@ -376,7 +376,7 @@ footer p {
 
 .full-title{
 	padding: 200px 0px;
-	background: url(../images/鹿港天后宮.jpg) no-repeat center;
+	/* background: url(../images/鹿港天后宮.jpg) no-repeat center; */
 	position: relative;
 }
 .full-title:before{

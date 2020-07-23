@@ -94,6 +94,11 @@
         </div>
 
         <div class="form-group">
+          <label for="exampleInputEmail1">副標題</label>
+          <input class="form-control" v-model="item.subtitle" type="text" id="example-number-input" />
+        </div>
+
+        <div class="form-group">
           <label for="exampleInputEmail1">敘述</label>
           <textarea class="form-control" v-model="item.description" id="description" rows="3"></textarea>
         </div>
@@ -103,7 +108,7 @@
             class="btn btn-danger"
             style="height:30px;width:30px"
             v-on:click="deleteImage(item.ImageId)"
-          >X</button> -->
+          >X</button>-->
 
           <div style="display:grid;grid-template-columns: 1fr 1fr 1fr;">
             <img v-bind:src="'..'+item.ImageUrl" style="width:100%" />
@@ -118,7 +123,7 @@
         ></b-form-file>
         <div class="mt-3">選擇圖片: {{ item.file ? item.file.name : '' }}</div>
       </div>
-      <hr>
+      <hr />
       <button type="button" class="btn btn-success" v-on:click="addCount()">新增段落</button>
     </b-modal>
 
@@ -172,6 +177,7 @@ export default {
         var maxValue = Math.max(...array);
         this.detailItem.push({
           description: '',
+          subtitle:'',
           sequence: maxValue + 1,
           ImageId: 0,
           file: null,
@@ -179,6 +185,7 @@ export default {
       } else {
         this.detailItem.push({
           description: '',
+          subtitle:'',
           sequence: 0,
           ImageId: 0,
           file: null,
@@ -230,13 +237,13 @@ export default {
           this.detailItem[i].ImageId = result.data[0];
         }
       }
-    // console.log(this.detailItem)
-      var ds = this.detailItem.map(x=>x.ImageId);
-      var check = ds.some(x=>x == 0);
+      // console.log(this.detailItem)
+      var ds = this.detailItem.map(x => x.ImageId);
+      var check = ds.some(x => x == 0);
       // console.log(check)
-      if(check) {
+      if (check) {
         // alert("error")
-        messageService.error("每個段落都要傳圖片！")
+        messageService.error('每個段落都要傳圖片！');
         return;
       }
       this.select.newsDetails = this.detailItem;

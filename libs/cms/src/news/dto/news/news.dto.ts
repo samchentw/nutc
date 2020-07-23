@@ -7,11 +7,14 @@ export namespace News {
 
     export class NewsDetailDto {
         @ApiProperty()
+        subtitle: string;
+
+        @ApiProperty()
         description: string;
-    
+
         @ApiProperty()
         sequence: number;
-    
+
         @ApiProperty()
         ImageId: number;
     }
@@ -28,24 +31,12 @@ export namespace News {
         @Expose()
         subtitle: string;
 
-        // @ApiProperty()
-        // @Expose()
-        // description: string;
-
-        // @ApiProperty()
-        // @Expose()
-        // url: string;
-
         @ApiProperty()
         @Expose()
         isActive: boolean;
         @ApiProperty()
         @Expose()
         createTime: Date;
-
-        // @ApiProperty()
-        // @Expose()
-        // images: ImageIdAndUrlDto[];
 
         @ApiProperty()
         @Expose()

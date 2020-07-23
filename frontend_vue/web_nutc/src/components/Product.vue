@@ -33,7 +33,12 @@
             <div class="col-lg-4 col-md-6 mb-4" v-for="(item) in products" :key="item.id">
               <div class="card h-100">
                 <a href="#">
-                  <img class="card-img-top" style="height:200px;" :src="transferImage(item.productImage)" alt />
+                  <img
+                    class="card-img-top"
+                    style="height:200px;"
+                    :src="transferImage(item.productImage)"
+                    alt
+                  />
                 </a>
                 <div class="card-body">
                   <h4 class="card-title">
@@ -44,7 +49,7 @@
                 </div>
                 <div class="card-footer">
                   <!-- <button></button> -->
-                  <b-button v-on:click="change(2)">購買</b-button>
+                  <b-button v-on:click="show(item)">購買</b-button>
                 </div>
               </div>
             </div>
@@ -55,6 +60,22 @@
       </div>
       <!-- /.row -->
     </div>
+
+    <b-modal v-model="modalShow" @ok="handleOk">
+      <form>
+        <div class="form-group">
+          <label for="exampleInputEmail1">數量</label>
+          <input
+            type="number"
+            class="form-control"
+            v-model="amount"
+            min="0"
+            id="exampleInputEmail1"
+            aria-describedby="emailHelp"
+          />
+        </div>
+      </form>
+    </b-modal>
 
     <div class="container" v-if="showType==2">
       test
@@ -76,12 +97,20 @@ export default {
       selectType: 0,
       products: [],
       showType: 1,
+      modalShow: false,
+      amount: 0,
+      userSelect: [],
+      selectProduct: {},
     };
   },
   created() {
     this.init();
   },
   methods: {
+    show(data) {
+      this.selectProduct = data;
+      this.modalShow = !this.modalShow;
+    },
     change(type) {
       this.showType = type;
     },
@@ -106,6 +135,16 @@ export default {
       } else {
         return 'http://placehold.it/700x400';
       }
+    },
+    async handleOk() {
+      this.userSelect = this.userSelect.filter(x=>x.productId != this.selectProduct.id);
+      this.userSelect.push({
+        product: this.selectProduct,
+        count: parseInt(this.amount,10),
+      });
+      apiService.saveUserProduct(this.userSelect);
+      this.amount = 0;
+      this.selectProduct = {};
     },
   },
 };

@@ -20,18 +20,8 @@ export class CreateNewsDto {
     @IsNotEmpty()
     subtitle: string;
 
-    // @ApiProperty()
-    // description: string;
-
-    // @ApiProperty()
-    // url: string;
-
     @ApiProperty()
     isActive: boolean;
-
-    // @ApiProperty({ type: Number, isArray: true })
-    // @IsArray()
-    // imageIds: number[];
 
     @ApiProperty({ type: News.NewsDetailDto, isArray: true})
     @IsArray()
