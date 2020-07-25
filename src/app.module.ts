@@ -4,8 +4,6 @@ import { IdentityModule } from '@app/identity';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { ConsumerModule } from './consumer/consumer.module';
 import { OrderModule } from './order/order.module';
 import { ProductModule } from './product/product.module';
@@ -31,14 +29,14 @@ import { ShopModule } from './shop/shop.module';
     CoreModule,
     IdentityModule,
     CmsModule,
-    // ElseModule,
+
     ShopModule,
     ConsumerModule,
     ProductModule,
     OrderModule,
 
   ],
-  controllers: [AppController,],
-  providers: [AppService],
+  controllers: [],
+  providers: [],
 })
 export class AppModule { }
