@@ -70,7 +70,7 @@ export class ExcelService {
     }
 
     public ReadExcel<T>(FileName: string, sheetIndex: number): T[] {
-        var data: string = `${FileName}.xlsx`;
+        var data: string = `${FileName}`;
         var workbook = XLSX.readFile(data, { type: "array", cellHTML: false, cellFormula: false });
         var sheetNames = workbook.SheetNames;
         var worksheet = workbook.Sheets[sheetNames[sheetIndex]];

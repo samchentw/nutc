@@ -83,7 +83,7 @@
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
                 <a class="dropdown-item" href="./#/user">個人資料</a>
                 <a class="dropdown-item" href="./#/shoppingCart">購物車</a>
-                <a class="dropdown-item" href="pricing.html">我的記錄</a>
+                <!-- <a class="dropdown-item" href="pricing.html">我的記錄</a> -->
               </div>
             </li>
             <li class="nav-item" v-if="!token">

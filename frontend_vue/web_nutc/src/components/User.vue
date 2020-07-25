@@ -2,7 +2,7 @@
   <div>
     <div class="card shadow mb-4">
       <div class="container">
-        <div class="row my-2">
+        <div class="row my-2" v-if="!isDetail">
           <div class="col-lg-8 order-lg-2">
             <ul class="nav nav-tabs">
               <li class="nav-item">
@@ -13,93 +13,17 @@
               </li>
             </ul>
             <div class="tab-content py-4">
-              <div class="tab-pane" id="profile">
-                <div class="row">
-                  <div class="col-md-6">
-                    <h6>About</h6>
-                    <p>Web Designer, UI/UX Engineer</p>
-                    <h6>Hobbies</h6>
-                    <p>Indie music, skiing and hiking. I love the great outdoors.</p>
-                  </div>
-                  <div class="col-md-6">
-                    <h6>Recent badges</h6>
-                    <a href="#" class="badge badge-dark badge-pill">html5</a>
-                    <a href="#" class="badge badge-dark badge-pill">react</a>
-                    <a href="#" class="badge badge-dark badge-pill">codeply</a>
-                    <a href="#" class="badge badge-dark badge-pill">angularjs</a>
-                    <a href="#" class="badge badge-dark badge-pill">css3</a>
-                    <a href="#" class="badge badge-dark badge-pill">jquery</a>
-                    <a href="#" class="badge badge-dark badge-pill">bootstrap</a>
-                    <a href="#" class="badge badge-dark badge-pill">responsive-design</a>
-                    <hr />
-                    <span class="badge badge-primary">
-                      <i class="fa fa-user"></i> 900 Followers
-                    </span>
-                    <span class="badge badge-success">
-                      <i class="fa fa-cog"></i> 43 Forks
-                    </span>
-                    <span class="badge badge-danger">
-                      <i class="fa fa-eye"></i> 245 Views
-                    </span>
-                  </div>
-                  <div class="col-md-12">
-                    <h5 class="mt-2">
-                      <span class="fa fa-clock-o ion-clock float-right"></span> Recent Activity
-                    </h5>
-                    <table class="table table-sm table-hover table-striped">
-                      <tbody>
-                        <tr>
-                          <td>
-                            <strong>Abby</strong> joined ACME Project Team in
-                            <strong>`Collaboration`</strong>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <strong>Gary</strong> deleted My Board1 in
-                            <strong>`Discussions`</strong>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <strong>Kensington</strong> deleted MyBoard3 in
-                            <strong>`Discussions`</strong>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <strong>John</strong> deleted My Board1 in
-                            <strong>`Discussions`</strong>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <strong>Skell</strong> deleted his post Look at Why this is.. in
-                            <strong>`Discussions`</strong>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-                <!--/row-->
-              </div>
               <div class="tab-pane" id="messages">
                 <table class="table table-hover table-striped">
                   <tbody>
-                    <tr>
+                    <tr v-for="(item) in orders" :key="item.id">
                       <td>
-                        <a href="javascript:void(0)" class="float-right font-weight-bold">詳細資料</a> Here is your a link to the latest summary report from the..
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <a href="javascript:void(0)" class="float-right font-weight-bold">詳細資料</a> There has been a request on your account since that was..
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <a href="javascript:void(0)" class="float-right font-weight-bold">詳細資料</a> Porttitor vitae ultrices quis, dapibus id dolor. Morbi venenatis lacinia rhoncus.
+                        <a
+                          href="javascript:void(0)"
+                          class="float-right font-weight-bold"
+                          v-on:click="show(item)"
+                        >詳細資料</a>
+                        購買時間：{{item.createTime | dateformate}}
                       </td>
                     </tr>
                   </tbody>
@@ -153,13 +77,13 @@
                   <div class="form-group row">
                     <label class="col-lg-3 col-form-label form-control-label">密碼</label>
                     <div class="col-lg-9">
-                      <input class="form-control" type="password" value="11111122333" />
+                      <input class="form-control" type="password" value />
                     </div>
                   </div>
                   <div class="form-group row">
                     <label class="col-lg-3 col-form-label form-control-label">確認密碼</label>
                     <div class="col-lg-9">
-                      <input class="form-control" type="password" value="11111122333" />
+                      <input class="form-control" type="password" value />
                     </div>
                   </div>
                   <div class="form-group row">
@@ -181,6 +105,39 @@
             />
           </div>
         </div>
+
+        <div class="row" v-if="isDetail" style="padding-top:20px;margin-bottom:30px">
+          <div class="col-lg-4 order-lg-1 text-left">
+            <div>
+              <button v-on:click="back()" type="button" style="margin-bottom:20px" class="btn btn-primary">返回</button>
+              <div>地址：{{selectItem.address}}</div>
+
+              <div>狀態: {{st[selectItem.state]}}</div>
+              <div>總額: {{selectItem.total}}</div>
+            </div>
+          </div>
+          <div class="col-lg-8 order-lg-2">
+            <div class="tab-pane" id="messages">
+              <table class="table table-hover table-striped">
+                <thead>
+                  <tr>
+                    <!-- <th scope="col">#</th> -->
+                    <th scope="col">產品名稱</th>
+                    <th scope="col">數量</th>
+                    <th scope="col">價格</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="(item) in selectItem.orderDetail" :key="item.id">
+                    <td>{{item.product.name}}</td>
+                    <td>{{item.count}}</td>
+                    <td>{{item.product.price}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -189,6 +146,7 @@
 <script>
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import moment from 'moment';
 import apiService from '../apiService';
 export default {
   name: 'User',
@@ -196,18 +154,41 @@ export default {
   data() {
     return {
       user: {},
+      orders: [],
+      selectItem: {},
+      isDetail: false,
+      st: ["準備中", "運送中", "已送達", "未出貨"],
     };
   },
   created() {
     apiService.getUserinfo().then(x => {
-      console.log(x.data);
+      // console.log(x.data);
       this.user = x.data;
     });
+    apiService.getOrdersByUser().then(x => {
+      console.log(x);
+      this.orders = x.data;
+    });
   },
-  methods: {},
+  filters: {
+    dateformate: function(value) {
+      return moment(value).format('YYYY-MM-DD HH:mm:ss');
+    },
+  },
+  methods: {
+    show(item) {
+      this.selectItem = item;
+      this.isDetail = true;
+    },
+    back() {
+      this.selectItem = {};
+      this.isDetail = false;
+    },
+  },
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 </style>
+

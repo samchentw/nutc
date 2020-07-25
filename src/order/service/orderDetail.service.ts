@@ -13,5 +13,9 @@ export class OrderDetailService {
     async save(input:OrderDetail){
         return await this.repository.save(input);
     }
+
+    async deleteByIds(ids:number[]){
+        return await this.repository.delete(ids);
+    }
     
 }

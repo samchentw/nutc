@@ -197,6 +197,23 @@ export default {
     });
   },
 
+  //order
+  createOrder(data){
+    return axios.post('../api/order/create', data, {
+      headers: {
+        Authorization: 'Bearer ' + this.getToken()
+      }
+    })
+  },
+
+  getOrdersByUser(){
+    return axios.get('../api/order/user',{
+      headers:{
+        Authorization: 'Bearer ' + this.getToken()
+      }
+    })
+  },
+
   // contact
   createContact(data) {
     return axios.post('../api/contact', data);

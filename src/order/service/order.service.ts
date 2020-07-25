@@ -1,5 +1,5 @@
 import { customizedException } from '@app/core/shared';
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { plainToClass } from 'class-transformer';
 import { Repository } from 'typeorm';
@@ -42,13 +42,32 @@ export class OrderService {
         for (var i = 0; i < orderDetail.length; i++) {
             var product = await this.ProductService.get(orderDetail[i].productId);
             var od = new OrderDetail();
-            od.product = product;
+            od.product = {
+                name: product.name,
+                productImage: product.productImage,
+                price: product.price
+            };
             od.count = orderDetail[i].count;
             var odEntity = await this.orderDetailService.save(od);
             order.total += orderDetail[i].count * product.price;
             order.orderDetail.push(odEntity);
         }
+        order.total += 100;
         await this.repository.save(order);
+    }
+
+    async getAll(): Promise<Order[]> {
+        return this.repository.find();
+    }
+
+    async deleteOrder(id: number, userId: string) {
+        var order = await this.repository.findOne(id, { relations: ["consumer"] });
+        if (order.consumer.userId != userId) {
+            throw new UnauthorizedException("這不是你的訂單！");
+        }
+        var detailIds = order.orderDetail.map(x => x.id);
+        await this.orderDetailService.deleteByIds(detailIds);
+        await this.repository.delete(id);
     }
 
     async getOrdersByUserId(user: string) {

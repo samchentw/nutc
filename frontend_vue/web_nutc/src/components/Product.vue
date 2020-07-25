@@ -68,8 +68,10 @@
           <input
             type="number"
             class="form-control"
-            v-model="amount"
-            min="0"
+            
+            :min="0"
+            v-model.number="amount"
+            name="amount"
             id="exampleInputEmail1"
             aria-describedby="emailHelp"
           />
@@ -137,7 +139,9 @@ export default {
       }
     },
     async handleOk() {
-      this.userSelect = this.userSelect.filter(x=>x.productId != this.selectProduct.id);
+      // console.log(this.amount)
+      this.userSelect = apiService.getUserProduct();
+      this.userSelect = this.userSelect.filter(x=>x.product.id != this.selectProduct.id);
       this.userSelect.push({
         product: this.selectProduct,
         count: parseInt(this.amount,10),

@@ -13,6 +13,11 @@ export class OrderController {
         private readonly orderService: OrderService
     ) { }
 
+    @Get("getAll")
+    getAll() {
+        return this.orderService.getAll();
+    }
+
     @Get("user")
     @ApiBearerAuth()
     @UseGuards(JwtAuthGuard)
@@ -34,18 +39,18 @@ export class OrderController {
         return this.orderService.createOrder(body, userId);
     }
 
-    @Put("update")
-    @ApiBearerAuth()
-    @UseGuards(JwtAuthGuard)
-    update(@Body() Body, @User("id") userId) {
+    // @Put("update")
+    // @ApiBearerAuth()
+    // @UseGuards(JwtAuthGuard)
+    // update(@Body() Body, @User("id") userId) {
 
-    }
+    // }
 
     @Delete(":id")
     @ApiBearerAuth()
     @UseGuards(JwtAuthGuard)
     @ApiParam({ name: 'id' })
-    delete(@Param('id') id, @User("id") userId) {
-
+    delete(@Param('id') id, @User("id") userId: string) {
+        return this.orderService.deleteOrder(id, userId);
     }
 }
