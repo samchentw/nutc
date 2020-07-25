@@ -68,7 +68,6 @@
           <input
             type="number"
             class="form-control"
-            
             :min="0"
             v-model.number="amount"
             name="amount"
@@ -141,10 +140,13 @@ export default {
     async handleOk() {
       // console.log(this.amount)
       this.userSelect = apiService.getUserProduct();
-      this.userSelect = this.userSelect.filter(x=>x.product.id != this.selectProduct.id);
+      if (this.userSelect == null) apiService.saveUserProduct([]);
+      this.userSelect = this.userSelect.filter(
+        x => x.product.id != this.selectProduct.id,
+      );
       this.userSelect.push({
         product: this.selectProduct,
-        count: parseInt(this.amount,10),
+        count: parseInt(this.amount, 10),
       });
       apiService.saveUserProduct(this.userSelect);
       this.amount = 0;
