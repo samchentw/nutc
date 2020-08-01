@@ -1,7 +1,7 @@
 import { customizedException } from '@app/core/shared';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { plainToClass } from 'class-transformer';
+import { plainToClass, classToPlain } from 'class-transformer';
 import { Repository } from 'typeorm';
 import { ConsumerService } from '../../consumer/service/consumer.service';
 import { ProductService } from '../../product/service/product.service';
@@ -10,7 +10,7 @@ import { Order } from '../entity/order.entity';
 import { OrderDetail } from '../entity/orderDetail.entity';
 import { orderStateEnum } from '../enum/enum';
 import { OrderDetailService } from './orderDetail.service';
-
+import { OrderResult } from '../dto/order-result.dto';
 @Injectable()
 export class OrderService {
     constructor(
@@ -22,7 +22,7 @@ export class OrderService {
     ) { }
 
     async createOrder(input: CreateOrderDto, userId: string) {
-        var consumer = await this.consumerService.getByUserId(userId);
+        let consumer = await this.consumerService.getByUserId(userId);
         const { deliveryTime, orderDetail, usePoints } = input;
 
         if (usePoints > consumer.point) {
@@ -33,22 +33,22 @@ export class OrderService {
             throw new customizedException("時間錯誤！！", 400);
         }
 
-        var order = plainToClass(Order, input, { excludeExtraneousValues: true })
+        let order = plainToClass(Order, input, { excludeExtraneousValues: true })
         order.orderDetail = [];
         order.consumer = consumer;
         order.total = 0;
         order.state = orderStateEnum.準備中
 
-        for (var i = 0; i < orderDetail.length; i++) {
-            var product = await this.ProductService.get(orderDetail[i].productId);
-            var od = new OrderDetail();
+        for (let i = 0; i < orderDetail.length; i++) {
+            let product = await this.ProductService.get(orderDetail[i].productId);
+            let od = new OrderDetail();
             od.product = {
                 name: product.name,
                 productImage: product.productImage,
                 price: product.price
             };
             od.count = orderDetail[i].count;
-            var odEntity = await this.orderDetailService.save(od);
+            let odEntity = await this.orderDetailService.save(od);
             order.total += orderDetail[i].count * product.price;
             order.orderDetail.push(odEntity);
         }
@@ -56,23 +56,34 @@ export class OrderService {
         await this.repository.save(order);
     }
 
-    async getAll(): Promise<Order[]> {
-        return this.repository.find();
+    async getAll() {
+
+        var data = await this.repository.createQueryBuilder("o")
+            .leftJoinAndSelect("o.orderDetail", "orderDetail")
+            .leftJoinAndSelect("o.consumer", "c")
+            .innerJoinAndMapOne("c.userId", "user", "u", "c.userId = u.id")
+            .leftJoinAndSelect("u.userinfo", "userInfo")
+            .getMany()
+
+        // let orders =await this.repository.find({ relations: ['consumer'] });
+        let dto = plainToClass(OrderResult, <any[]>data, { excludeExtraneousValues: true });
+        let result = classToPlain(dto, { version: 1 });
+        return result;
     }
 
     async deleteOrder(id: number, userId: string) {
-        var order = await this.repository.findOne(id, { relations: ["consumer"] });
+        let order = await this.repository.findOne(id, { relations: ["consumer"] });
         if (order.consumer.userId != userId) {
             throw new UnauthorizedException("這不是你的訂單！");
         }
-        var detailIds = order.orderDetail.map(x => x.id);
+        let detailIds = order.orderDetail.map(x => x.id);
         await this.orderDetailService.deleteByIds(detailIds);
         await this.repository.delete(id);
     }
 
     async getOrdersByUserId(user: string) {
-        var consumer = await this.consumerService.getByUserId(user);
-        var orders = await this.repository.createQueryBuilder("o")
+        let consumer = await this.consumerService.getByUserId(user);
+        let orders = await this.repository.createQueryBuilder("o")
             .leftJoinAndSelect("o.orderDetail", "orderDetail")
             .where("o.consumer.id=:consumer")
             .setParameters({ consumer: consumer.id })
@@ -82,8 +93,8 @@ export class OrderService {
     }
 
     async testgetOrdersByUserId(user: string, start: Date, end: Date) {
-        var consumer = await this.consumerService.getByUserId(user);
-        var orders = await this.repository.createQueryBuilder("o")
+        let consumer = await this.consumerService.getByUserId(user);
+        let orders = await this.repository.createQueryBuilder("o")
             .leftJoinAndSelect("o.orderDetail", "orderDetail")
             .where("o.consumer.id=:consumer")
             .andWhere("o.createTime < :before")

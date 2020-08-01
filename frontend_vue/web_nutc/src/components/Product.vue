@@ -87,6 +87,7 @@
 
 <script>
 import axios from 'axios';
+import messageService from '../messageService';
 import Swal from 'sweetalert2';
 import apiService from '../apiService';
 export default {
@@ -139,6 +140,10 @@ export default {
     },
     async handleOk() {
       // console.log(this.amount)
+      if(this.amount<0){
+        messageService.error("不得小於0");
+        return;
+      }
       this.userSelect = apiService.getUserProduct();
       if (this.userSelect == null) apiService.saveUserProduct([]);
       this.userSelect = this.userSelect.filter(

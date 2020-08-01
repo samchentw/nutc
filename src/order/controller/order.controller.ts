@@ -14,6 +14,8 @@ export class OrderController {
     ) { }
 
     @Get("getAll")
+    // @ApiBearerAuth()
+    // @UseGuards(JwtAuthGuard)
     getAll() {
         return this.orderService.getAll();
     }

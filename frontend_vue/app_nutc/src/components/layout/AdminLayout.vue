@@ -50,6 +50,20 @@
       </li>
 
 
+       <hr class="sidebar-divider">
+
+      <!-- Heading -->
+      <div class="sidebar-heading">
+        購物管理
+      </div>
+
+
+      <li class="nav-item">
+        <a class="nav-link" href="./#/system/order">
+          <i class="fas fa-fw fa-camera-retro"></i>
+          <span>訂購管理</span></a>
+      </li>
+
     
       <hr class="sidebar-divider">
 

@@ -14,6 +14,7 @@ import Product from './components/Product.vue';
 import Info from './components/Info.vue';
 import Contact from './components/Contact.vue';
 import Activity from './components/Activity.vue';
+import Order from './components/Order.vue';
 
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
@@ -38,7 +39,7 @@ const router = new VueRouter({
 
         { path: 'activity', component: Activity },
         
-
+        { path: 'order', component: Order },
         { path: 'info', component: Info },
         { path: 'contact', component: Contact },
         

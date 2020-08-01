@@ -4,13 +4,8 @@ import { ApiBearerAuth, ApiBody, ApiProperty, ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from '../guard/jwt-auth.guard';
 import { LocalAuthGuard } from '../guard/local-auth.guard';
 import { AuthService } from '../service/auth.service';
+import { LoginDto } from '../dto/log.dto';
 
-export class logDto {
-  @ApiProperty()
-  username: string;
-  @ApiProperty()
-  password: string;
-}
 
 @ApiTags('Auth')
 @Controller('auth')
@@ -20,7 +15,7 @@ export class AuthController {
   ) { }
 
   @UseGuards(LocalAuthGuard)
-  @ApiBody({ type: logDto })
+  @ApiBody({ type: LoginDto })
   @Post('login')
   async login(@Request() req) {
     return this.authService.login(req.user);
