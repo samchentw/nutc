@@ -97,32 +97,48 @@
       </div>
     </nav>
     <div>
-    
-        <b-carousel
-          id="carousel-1"
-          v-model="slide"
-          :interval="4000"
-          controls
-          img-width="1024"
-          img-height="480"
-          style="text-shadow: 1px 1px 2px #333;"
+      <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel"  style="height:450px">
+        <ol class="carousel-indicators">
+          <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+          <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+          <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+          <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+        
+        </ol>
+        <div class="carousel-inner">
+          <div class="carousel-item active" >
+            <img src="cover/S__40017923.jpg" style="padding-bottom:150px;height:650px"  class="d-block w-100" alt="..." />
+          </div>
+          <div class="carousel-item">
+            <img src="cover/S__40017927.jpg" style="padding-bottom:150px;height:650px" class="d-block w-100" alt="..." />
+          </div>
+          <div class="carousel-item">
+            <img src="cover/S__40027080.jpg" style="padding-bottom:150px;height:650px" class="d-block w-100" alt="..." />
+          </div>
+          <div class="carousel-item">
+            <img src="cover/S__40027082.jpg" style="padding-bottom:150px;height:650px" class="d-block w-100" alt="..." />
+          </div>
+        </div>
+        <a
+          class="carousel-control-prev"
+          href="#carouselExampleIndicators"
+          role="button"
+          data-slide="prev"
         >
-          <!-- Text slides with image -->
-          <b-carousel-slide style="height:450px;"  img-src="cover/S__40017923.jpg"></b-carousel-slide>
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a
+          class="carousel-control-next"
+          href="#carouselExampleIndicators"
+          role="button"
+          data-slide="next"
+        >
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
 
-          <!-- Slides with custom text -->
-          <b-carousel-slide img-src="cover/S__40017927.jpg" style="height:450px;">
-            <!-- <h1>Hello world!</h1> -->
-          </b-carousel-slide>
-
-          <!-- Slides with image only -->
-          <b-carousel-slide img-src="cover/S__40027080.jpg" style="height:450px;" ></b-carousel-slide>
-
-          <!-- Slides with img slot -->
-          <!-- Note the classes .d-block and .img-fluid to prevent browser default image alignment -->
-          <b-carousel-slide img-src="cover/S__40027082.jpg" style="height:450px;"></b-carousel-slide>
-        </b-carousel>
-     
       <!-- <div
         id="carouselExampleControls"
         class="carousel slide"
