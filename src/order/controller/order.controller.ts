@@ -6,6 +6,7 @@ import { User } from '@app/core/shared/decorator/user.decorator';
 import { OrderService } from '../service/order.service';
 import { GetOrdersByDateDto } from '../dto/get-orders-by-date.dto';
 import { JwtAuthGuard } from '@app/identity/auth/guard/jwt-auth.guard';
+import { OrderResultDto } from '../dto/order-result.dto';
 @ApiTags("Order")
 @Controller("order")
 export class OrderController {
@@ -14,8 +15,10 @@ export class OrderController {
     ) { }
 
     @Get("getAll")
-    // @ApiBearerAuth()
-    // @UseGuards(JwtAuthGuard)
+    @ApiBearerAuth()
+    @Roles("admin")
+    @UseGuards(JwtAuthGuard, RolesGuard)
+    @ApiDefaultResponse({ type: OrderResultDto, isArray: true })
     getAll() {
         return this.orderService.getAll();
     }
@@ -41,12 +44,14 @@ export class OrderController {
         return this.orderService.createOrder(body, userId);
     }
 
-    // @Put("update")
-    // @ApiBearerAuth()
-    // @UseGuards(JwtAuthGuard)
-    // update(@Body() Body, @User("id") userId) {
-
-    // }
+    @Put("updateState/:orderId/:state")
+    @ApiBearerAuth()
+    @Roles("admin")
+    @UseGuards(JwtAuthGuard, RolesGuard)
+    update(@Param("orderId") orderId: number, @Param("state") state) {
+        // console.log(orderId, state);
+        return this.orderService.updateState(orderId, +state);
+    }
 
     @Delete(":id")
     @ApiBearerAuth()

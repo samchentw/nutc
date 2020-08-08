@@ -97,9 +97,33 @@
       </div>
     </nav>
     <div>
-       
-        <!-- style="margin-bottom:-125px;" -->
-      <div
+    
+        <b-carousel
+          id="carousel-1"
+          v-model="slide"
+          :interval="4000"
+          controls
+          img-width="1024"
+          img-height="480"
+          style="text-shadow: 1px 1px 2px #333;"
+        >
+          <!-- Text slides with image -->
+          <b-carousel-slide style="height:450px;"  img-src="cover/S__40017923.jpg"></b-carousel-slide>
+
+          <!-- Slides with custom text -->
+          <b-carousel-slide img-src="cover/S__40017927.jpg" style="height:450px;">
+            <!-- <h1>Hello world!</h1> -->
+          </b-carousel-slide>
+
+          <!-- Slides with image only -->
+          <b-carousel-slide img-src="cover/S__40027080.jpg" style="height:450px;" ></b-carousel-slide>
+
+          <!-- Slides with img slot -->
+          <!-- Note the classes .d-block and .img-fluid to prevent browser default image alignment -->
+          <b-carousel-slide img-src="cover/S__40027082.jpg" style="height:450px;"></b-carousel-slide>
+        </b-carousel>
+     
+      <!-- <div
         id="carouselExampleControls"
         class="carousel slide"
         data-ride="carousel"
@@ -107,21 +131,42 @@
       >
         <div class="carousel-inner">
           <div class="carousel-item active" style="height:550px">
-            <img class="d-block w-100"  style="padding-bottom:150px" src="cover/S__40017923.jpg" height="100%" alt="First slide" />
+            <img
+              class="d-block w-100"
+              style="padding-bottom:150px"
+              src="cover/S__40017923.jpg"
+              height="100%"
+              alt="First slide"
+            />
           </div>
           <div class="carousel-item" style="height:550px">
-            <img class="d-block w-100" style="padding-bottom:150px" src="cover/S__40017927.jpg" height="100%" alt="Second slide" />
+            <img
+              class="d-block w-100"
+              style="padding-bottom:150px"
+              src="cover/S__40017927.jpg"
+              height="100%"
+              alt="Second slide"
+            />
           </div>
 
           <div class="carousel-item" style="height:550px">
-            <img class="d-block w-100" style="padding-bottom:150px" src="cover/S__40027080.jpg" height="100%" alt="thire slide" />
+            <img
+              class="d-block w-100"
+              style="padding-bottom:150px"
+              src="cover/S__40027080.jpg"
+              height="100%"
+              alt="thire slide"
+            />
           </div>
           <div class="carousel-item" style="height:550px">
-            <img class="d-block w-100" style="padding-bottom:150px" src="cover/S__40027082.jpg" height="100%" alt="four slide" />
+            <img
+              class="d-block w-100"
+              style="padding-bottom:150px"
+              src="cover/S__40027082.jpg"
+              height="100%"
+              alt="four slide"
+            />
           </div>
-          <!-- <div class="carousel-item">
-              <img class="d-block w-100" src="..." alt="Third slide" />
-          </div>-->
         </div>
         <a
           class="carousel-control-prev"
@@ -141,7 +186,7 @@
           <span class="carousel-control-next-icon" aria-hidden="true"></span>
           <span class="sr-only">Next</span>
         </a>
-      </div>
+      </div>-->
     </div>
   </div>
 </template>
@@ -160,6 +205,8 @@ export default {
     return {
       token: '',
       route: '/',
+      slide: 0,
+      sliding: null,
     };
   },
   watch: {
@@ -180,6 +227,12 @@ export default {
       // this.token =  apiService.getToken();
       Swal.fire('已登出！');
       window.location.reload();
+    },
+    onSlideStart(slide) {
+      this.sliding = true;
+    },
+    onSlideEnd(slide) {
+      this.sliding = false;
     },
   },
 };

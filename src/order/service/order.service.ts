@@ -10,7 +10,7 @@ import { Order } from '../entity/order.entity';
 import { OrderDetail } from '../entity/orderDetail.entity';
 import { orderStateEnum } from '../enum/enum';
 import { OrderDetailService } from './orderDetail.service';
-import { OrderResult } from '../dto/order-result.dto';
+import { OrderResultDto } from '../dto/order-result.dto';
 @Injectable()
 export class OrderService {
     constructor(
@@ -65,8 +65,7 @@ export class OrderService {
             .leftJoinAndSelect("u.userinfo", "userInfo")
             .getMany()
 
-        // let orders =await this.repository.find({ relations: ['consumer'] });
-        let dto = plainToClass(OrderResult, <any[]>data, { excludeExtraneousValues: true });
+        let dto = plainToClass(OrderResultDto, <any[]>data, { excludeExtraneousValues: true });
         let result = classToPlain(dto, { version: 1 });
         return result;
     }
@@ -110,8 +109,10 @@ export class OrderService {
         return orders;
     }
 
-    async update() {
-
+    async updateState(orderId: number, changeState: orderStateEnum) {
+        let order = await this.repository.findOne({ id: orderId });
+        order.state = changeState;
+        return this.repository.save(order);
     }
 
     async delete() {

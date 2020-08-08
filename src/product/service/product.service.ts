@@ -26,8 +26,8 @@ export class ProductService extends BaseService<Product, CreateProductDto, Updat
 
 
     async create(input: CreateProductDto) {
-        var product = plainToClass(Product, input);
-        var types = await this.productTypeService.get(input.productTypeId);
+        let product = plainToClass(Product, input);
+        let types = await this.productTypeService.get(input.productTypeId);
         product.productImage = await this.fileService.getFileUrlAndIdStr(input.imageIds);
         product.isDelete = false;
         product.productTypes = types;
@@ -35,26 +35,26 @@ export class ProductService extends BaseService<Product, CreateProductDto, Updat
     }
 
     async update(id: number, input: UpdateProductDto) {
-        var or = await this.get(id);
-        var newproduct = plainToClass(Product, input, { excludeExtraneousValues: true });
+        let or = await this.get(id);
+        let newproduct = plainToClass(Product, input, { excludeExtraneousValues: true });
         if (input.imageIds && input.imageIds.length > 0) {
             newproduct.productImage = await this.fileService.getFileUrlAndIdStr(input.imageIds);
         }else{
             newproduct.productImage = "[]";
         }
-        var types = or.productTypes
+        let types = or.productTypes
         newproduct.productTypes = types;
         return await super.update(id, newproduct)
     }
 
     // overriding super class method
     async page(input: ProductQueryPageDto, useIsDelete = false): Promise<[Product[], number]> {
-        var product = this.repository.createQueryBuilder("x")
+        let product = this.repository.createQueryBuilder("x")
             .leftJoinAndSelect("x.productTypes", "productTypes");
         if (input.productTypeId != 0) product.where("productTypes.id = :id", { id: input.productTypeId });
         if (input.showIsSell == 'false') product.andWhere("isSell = true");
         if (useIsDelete) product.andWhere("isDelete=false")
-        var result = await product
+        let result = await product
             .skip(input.skip)
             .take(input.take)
             .orderBy("x.createTime", "DESC")

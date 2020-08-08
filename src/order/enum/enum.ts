@@ -21,7 +21,8 @@ export enum orderStateEnum {
     準備中 = 0,
     運送中 = 1,
     已送達 = 2,
-    未出貨 = 3
+    未出貨 = 3,
+    已取消 = 4
 }
 
 export const orderStateEnumArray: number[] =

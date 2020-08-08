@@ -63,6 +63,23 @@ export default {
     });
   },
 
+  // order
+  getorders() {
+    return axios.get('../api/order/getall', {
+      headers: {
+        Authorization: 'Bearer ' + this.getToken()
+      }
+    });
+  },
+
+  change(order, state) {
+    return axios.put('../api/order/updateState/' + order + "/" + state, {}, {
+      headers: {
+        Authorization: 'Bearer ' + this.getToken()
+      }
+    })
+  },
+
 
   //settings
 
