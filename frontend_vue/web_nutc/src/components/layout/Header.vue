@@ -97,26 +97,58 @@
       </div>
     </nav>
     <div>
-      <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel"  style="height:450px">
+      <div class="ff" style="margin:50px;height:220px">
+        <img v-if="type==1" src="cover/S__40017923.jpg" style="width:100%;height:450;" alt srcset />
+        <img v-if="type==2" src="cover/S__40017927.jpg" style="width:100%;height:450;" alt srcset />
+        <img v-if="type==3" src="cover/S__40027080.jpg" style="width:100%;height:450;" alt srcset />
+        <img v-if="type==4" src="cover/S__40027082.jpg" style="width:100%;height:450;" alt srcset />
+    
+      </div>
+
+      <div
+        id="carouselExampleIndicators "
+        class="carousel slide gg"
+        data-ride="carousel"
+        style="height:450px"
+      >
         <ol class="carousel-indicators">
           <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
           <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
           <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
           <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
-        
         </ol>
         <div class="carousel-inner">
-          <div class="carousel-item active" >
-            <img src="cover/S__40017923.jpg" style="padding-bottom:150px;height:650px"  class="d-block w-100" alt="..." />
+          <div class="carousel-item active">
+            <img
+              src="cover/S__40017923.jpg"
+              style="padding-bottom:150px;height:650px"
+              class="d-block w-100"
+              alt="..."
+            />
           </div>
           <div class="carousel-item">
-            <img src="cover/S__40017927.jpg" style="padding-bottom:150px;height:650px" class="d-block w-100" alt="..." />
+            <img
+              src="cover/S__40017927.jpg"
+              style="padding-bottom:150px;height:650px"
+              class="d-block w-100"
+              alt="..."
+            />
           </div>
           <div class="carousel-item">
-            <img src="cover/S__40027080.jpg" style="padding-bottom:150px;height:650px" class="d-block w-100" alt="..." />
+            <img
+              src="cover/S__40027080.jpg"
+              style="padding-bottom:150px;height:650px"
+              class="d-block w-100"
+              alt="..."
+            />
           </div>
           <div class="carousel-item">
-            <img src="cover/S__40027082.jpg" style="padding-bottom:150px;height:650px" class="d-block w-100" alt="..." />
+            <img
+              src="cover/S__40027082.jpg"
+              style="padding-bottom:150px;height:650px"
+              class="d-block w-100"
+              alt="..."
+            />
           </div>
         </div>
         <a
@@ -223,6 +255,7 @@ export default {
       route: '/',
       slide: 0,
       sliding: null,
+      type: 1,
     };
   },
   watch: {
@@ -232,6 +265,10 @@ export default {
     },
   },
   created() {
+    setInterval(() => {
+      this.type += 1;
+      if (this.type == 5) this.type = 1;
+    }, 5000);
     // console.log(this.$route.path)
     this.route = this.$route.path;
     this.token = apiService.getToken();
@@ -274,5 +311,19 @@ a {
 
 .navbar-dark .navbar-toggler {
   color: #4e3914;
+}
+
+@media only screen and (max-width: 500px) {
+  .gg {
+    /* visibility: hidden !important; */
+    display: none;
+  }
+}
+
+@media screen and (min-width: 500px) {
+  .ff {
+    /* visibility: hidden !important; */
+    display: none;
+  }
 }
 </style>
