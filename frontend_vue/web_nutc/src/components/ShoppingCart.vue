@@ -177,8 +177,7 @@ export default {
         payment: this.select,
         deliveryTime: this.time,
         address: this.address,
-        orderDetail: orderDetail,
-        usePoints: 0,
+        orderDetail: orderDetail
       };
 
       apiService.createOrder(order).then(x => {

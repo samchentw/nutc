@@ -12,8 +12,8 @@ export class Consumer extends BaseEntity {
     @Column()
     userId: string;
 
-    @Column()
-    point: number;
+    // @Column()
+    // point: number;
 
     // @Column("simple-array")
     // order: number[];

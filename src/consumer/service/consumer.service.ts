@@ -26,7 +26,7 @@ export class ConsumerService {
         var user = await this.usersService.register(input);
         var consumer = new Consumer();
         consumer.order = [];
-        consumer.point = 0;
+        // consumer.point = 0;
         consumer.userId = user.id;
         return await this.repository.save(consumer);
     }

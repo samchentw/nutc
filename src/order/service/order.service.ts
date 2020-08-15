@@ -23,11 +23,7 @@ export class OrderService {
 
     async createOrder(input: CreateOrderDto, userId: string) {
         let consumer = await this.consumerService.getByUserId(userId);
-        const { deliveryTime, orderDetail, usePoints } = input;
-
-        if (usePoints > consumer.point) {
-            throw new customizedException("點數不足！！", 400);
-        }
+        const { deliveryTime, orderDetail } = input;
 
         if (new Date(deliveryTime) <= new Date()) {
             throw new customizedException("時間錯誤！！", 400);

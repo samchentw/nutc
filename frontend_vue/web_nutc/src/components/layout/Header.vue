@@ -97,7 +97,7 @@
       </div>
     </nav>
     <div>
-      <div class="ff" style="margin:50px;height:220px">
+      <div class="ff" style="margin-bottom:80px;height:220px;">
         <img v-if="type==1" src="cover/S__40017923.jpg" style="width:100%;height:450;" alt srcset />
         <img v-if="type==2" src="cover/S__40017927.jpg" style="width:100%;height:450;" alt srcset />
         <img v-if="type==3" src="cover/S__40027080.jpg" style="width:100%;height:450;" alt srcset />
@@ -105,7 +105,7 @@
     
       </div>
 
-      <div
+      <!-- <div
         id="carouselExampleIndicators "
         class="carousel slide gg"
         data-ride="carousel"
@@ -169,11 +169,11 @@
           <span class="carousel-control-next-icon" aria-hidden="true"></span>
           <span class="sr-only">Next</span>
         </a>
-      </div>
+      </div> -->
 
-      <!-- <div
+      <div
         id="carouselExampleControls"
-        class="carousel slide"
+        class="carousel slide gg"
         data-ride="carousel"
         style="height:450px"
       >
@@ -234,7 +234,8 @@
           <span class="carousel-control-next-icon" aria-hidden="true"></span>
           <span class="sr-only">Next</span>
         </a>
-      </div>-->
+      </div>
+
     </div>
   </div>
 </template>

@@ -23,8 +23,4 @@ export class CreateOrderDto {
     @ApiProperty({ type: [CreateOrderDetailDto] })
     @IsNotEmpty()
     readonly orderDetail: Array<CreateOrderDetailDto>;
-
-    @ApiProperty()
-    @IsNumber()
-    readonly usePoints: number;
 }
