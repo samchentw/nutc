@@ -3,7 +3,7 @@ import { Entity, Column, OneToMany, BaseEntity, JoinColumn, JoinTable, ManyToOne
 import { Expose, Type } from 'class-transformer';
 import { deliveryEnum, paymentEnum, orderStateEnum } from '../enum/enum';
 import { OrderDetail } from './orderDetail.entity';
-import { Consumer } from 'src/consumer/entity/consumer.entity';
+import { Consumer } from '../../consumer/entity/consumer.entity';
 
 @Entity()
 export class Order extends BaseEntity {

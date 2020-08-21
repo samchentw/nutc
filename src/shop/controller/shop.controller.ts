@@ -45,7 +45,6 @@ export class ShopController {
   @UseGuards(JwtAuthGuard, RolesGuard)
   @ApiDefaultResponse({ type: ShopDto })
   create(@Body() input: CreateShopDto) {
-    console.log(input);
     return this.ShopService.create(input);
   }
 

@@ -6,7 +6,7 @@ import { OrderController } from './controller/order.controller';
 import { OrderService } from './service/order.service';
 import { OrderDetailService } from './service/orderDetail.service';
 import { ConsumerModule } from '../consumer/consumer.module';
-import { ProductModule } from 'src/product/product.module';
+import { ProductModule } from '../product/product.module';
 @Module({
     imports: [
         TypeOrmModule.forFeature([
