@@ -1,11 +1,11 @@
 import { Roles, RolesGuard } from '@app/core/shared';
 import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards } from '@nestjs/common';
-import { ApiBearerAuth, ApiDefaultResponse, ApiParam, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiDefaultResponse, ApiParam, ApiTags, ApiOperation } from '@nestjs/swagger';
 import { JwtAuthGuard } from '../auth/guard/jwt-auth.guard';
 import { RoleDto } from './dto';
 import { RoleService } from './role.service';
 
-@ApiTags('Role')
+@ApiTags('Roles(角色)')
 @Controller('role')
 export class RoleController {
     constructor(
@@ -13,6 +13,7 @@ export class RoleController {
     ) { }
 
     @Get('getAll')
+    @ApiOperation({ summary: "取得所有角色" })
     @ApiDefaultResponse({ type: RoleDto, isArray: true })
     getAll() {
         return this.roleService.getAll();
@@ -20,6 +21,7 @@ export class RoleController {
 
     @ApiBearerAuth()
     @Roles("admin")
+    @ApiOperation({ summary: "新增角色" })
     @UseGuards(JwtAuthGuard, RolesGuard)
     @Post('create')
     create(@Body() body: RoleDto) {
@@ -28,6 +30,7 @@ export class RoleController {
 
     @ApiBearerAuth()
     @Roles("admin")
+    @ApiOperation({ summary: "修改角色" })
     @UseGuards(JwtAuthGuard, RolesGuard)
     @Put(':id')
     @ApiParam({ name: 'id' })
@@ -37,6 +40,7 @@ export class RoleController {
 
     @ApiBearerAuth()
     @Roles("admin")
+    @ApiOperation({ summary: "刪除角色" })
     @UseGuards(JwtAuthGuard, RolesGuard)
     @Delete(':id')
     @ApiParam({ name: 'id' })
@@ -45,6 +49,7 @@ export class RoleController {
     }
 
     @Get("seed")
+    @ApiOperation({ summary: "匯入資料" })
     seed() {
         this.roleService.seed();
     }

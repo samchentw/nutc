@@ -1,4 +1,4 @@
-import { HttpExceptionFilter } from '@app/core/shared';
+import { HttpExceptionFilter, HttpErrorFilter } from '@app/core/shared';
 import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { NestExpressApplication } from '@nestjs/platform-express';
@@ -18,7 +18,7 @@ async function bootstrap() {
   // const reflector = new Reflector();
   const options = new DocumentBuilder()
     .setTitle('NUTC Api')
-    .setDescription('The NUTC API description')
+    .setDescription('API 文件')
     .setVersion('1.0')
     .addBearerAuth()
     .build();
@@ -36,8 +36,8 @@ async function bootstrap() {
   app.use(compression());
   app.use(helmet());
   app.useGlobalFilters(new HttpExceptionFilter())
+  // app.useGlobalFilters(new HttpErrorFilter());
   app.useGlobalPipes(new ValidationPipe())
-  // app.useGlobalGuards(new RolesGuard(reflector))
   await app.listen(3000);
 }
 bootstrap();

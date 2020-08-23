@@ -5,13 +5,10 @@ import {
   UseGuards, UseInterceptors
 } from '@nestjs/common';
 import { FileFieldsInterceptor } from '@nestjs/platform-express';
-import { ApiBearerAuth, ApiBody, ApiConsumes, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiBody, ApiConsumes, ApiTags, ApiOperation } from '@nestjs/swagger';
 import { FileService } from '../service/file.service';
 
-
-
-
-@ApiTags('file')
+@ApiTags('file(檔案)')
 @Controller('file')
 export class FileController {
 
@@ -22,11 +19,13 @@ export class FileController {
   }
 
   @Get("getAll")
+  @ApiOperation({ summary: "取得所有檔案資料" })
   getAll() {
     return this.fileService.findAll();
   }
 
   @Get("getPublicFiles")
+  @ApiOperation({ summary: "取得資料夾下所有檔案名稱" })
   getPublicFiles() {
     return this.fileService.readPublicFiles();
   }
@@ -36,6 +35,7 @@ export class FileController {
   @Roles("admin")
   @UseGuards(JwtAuthGuard, RolesGuard)
   @ApiBearerAuth()
+  @ApiOperation({ summary: "上傳多個檔案(上限20筆)" })
   @ApiConsumes('multipart/form-data')
   @ApiBody({
     schema: {
