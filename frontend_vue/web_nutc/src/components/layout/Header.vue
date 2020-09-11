@@ -93,6 +93,9 @@
               <a class="nav-link" v-on:click="logout()" href="javascript:void(0)">登出</a>
             </li>
           </ul>
+
+<span  v-if="user" class="badge badge-success">你好：{{user.userinfo.name}}</span>
+          <!-- <span v-if="user">你好：{{user.userinfo.name}}</span> -->
         </div>
       </div>
     </nav>
@@ -189,6 +192,7 @@ export default {
       slide: 0,
       sliding: null,
       type: 1,
+      user:null
     };
   },
   watch: {
@@ -198,6 +202,15 @@ export default {
     },
   },
   created() {
+
+    var token = apiService.getToken()
+    if(token){
+      apiService.getUserinfo().then(x=>{
+        this.user =x.data;
+        console.log(x.data)
+      });
+    }
+
     setInterval(() => {
       this.type += 1;
       if (this.type == 5) this.type = 1;

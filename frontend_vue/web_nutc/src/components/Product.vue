@@ -140,7 +140,7 @@ export default {
     },
     async handleOk() {
       // console.log(this.amount)
-      if(this.amount<0){
+      if(!this.amount || this.amount<0){
         messageService.error("不得小於0");
         return;
       }

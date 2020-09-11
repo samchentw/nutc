@@ -19,7 +19,7 @@ export class HttpErrorFilter implements ExceptionFilter {
             timestamp: new Date().toLocaleDateString(),
             path: request.url,
             method: request.method,
-            message: exception.message.error || exception.message || null,
+            message: exception.message || null,
         }
 
         Logger.error(

@@ -15,10 +15,10 @@ export class HttpExceptionFilter implements ExceptionFilter {
         timestamp: new Date().toLocaleDateString(),
         path: request.url,
         method: request.method,
-        message: exception.message.error || exception.message || null,
+        message: exception.message || null,
       }
       Logger.error(errorResponse);
-      response.status(404).json(errorResponse);
+      response.status(exception.getStatus()).json(errorResponse);
       return;
     }
 
@@ -31,7 +31,7 @@ export class HttpExceptionFilter implements ExceptionFilter {
         timestamp: new Date().toLocaleDateString(),
         path: request.url,
         method: request.method,
-        message: exception.message.error || exception.message || null,
+        message: exception.message || null,
       }
 
       Logger.error(

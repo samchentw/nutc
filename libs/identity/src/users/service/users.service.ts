@@ -114,8 +114,8 @@ export class UsersService {
 
     //seed
     async seed() {
-        var count = await this.UserRepository.count();
-        if (count == 0) {
+        var check = await this.UserRepository.find({account:"admin"});
+        if (check.length == 0) {
             var roles: Role[] = await this.roleService.getAll();
 
             var userinfoData = {
