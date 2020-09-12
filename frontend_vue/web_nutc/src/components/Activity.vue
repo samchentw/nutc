@@ -79,30 +79,54 @@
           </div>
         </div>
         <div v-if="!select && mode == 2">
-          <button class="btn btn-primary" style="margin-bottom:20px" v-on:click="mode=1">返回</button>
+          <!-- <button class="btn btn-primary" style="margin-bottom:20px" v-on:click="mode=1">返回</button> -->
+        <a class="btn btn-primary" style="margin-bottom:20px" href="./#/activity">返回</a>
+       
         </div>
         <div class="row" v-if="!select && mode == 2">
-          <div class="col-lg-6 mb-6">
-            <a
-              href="javascript:void(0)"
-              class="btn btn-primary"
-              style="width:100%;margin-bottom:30px; font-size: 60px;"
-              v-on:click="selectNewsType('兩天一夜過夜型(晴天)')"
-            >晴天</a>
+          <div class="col-lg-3 mb-3">
+            <div class="card h-100">
+              <h4 class="card-header">晴天</h4>
+              <div class="card-img">
+                <img class="img-fluid" style="height:262.38px;width:100%" src="images/鹿港天后宮.jpg" alt />
+              </div>
+              <div class="card-body">
+                <p class="card-text"></p>
+              </div>
+              <div class="card-footer">
+                <a
+                  href="javascript:void(0)"
+                  class="btn btn-primary"
+                  v-on:click="selectNewsType('兩天一夜過夜型(晴天)')"
+                >詳細資料</a>
+              </div>
+            </div>
+
           </div>
-          <div class="col-lg-6 mb-6">
-            <a
-              href="javascript:void(0)"
-              class="btn btn-primary"
-              style="width:100%;margin-bottom:30px; font-size: 60px;"
-              v-on:click="selectNewsType('兩天一夜過夜型(雨天)')"
-            >雨天</a>
+          <div class="col-lg-3 mb-3">
+            <div class="card h-100">
+              <h4 class="card-header">雨天</h4>
+              <div class="card-img">
+                <img class="img-fluid" style="height:262.38px;width:100%" src="images/鹿港天后宮.jpg" alt />
+              </div>
+              <div class="card-body">
+                <p class="card-text"></p>
+              </div>
+              <div class="card-footer">
+                <a
+                  href="javascript:void(0)"
+                  class="btn btn-primary"
+                  v-on:click="selectNewsType('兩天一夜過夜型(雨天)')"
+                >詳細資料</a>
+              </div>
+            </div>
           </div>
         </div>
         <!-- /.row -->
 
-        <div v-if="select">
-          <button class="btn btn-primary" style="margin-bottom:20px" v-on:click="select=null">返回</button>
+        <div v-if="select">         
+          <a class="btn btn-primary" style="margin-bottom:20px" v-if="mode==2" href="./#/activity?type=兩天一夜過夜型">返回</a> 
+          <a class="btn btn-primary" style="margin-bottom:20px" v-if="mode==1" href="./#/activity">返回</a>     
         </div>
 
         <div class="row" v-if="select">
@@ -156,23 +180,43 @@ export default {
       news: [],
     };
   },
-  created() {
-    this.getData();
+  watch: {
+    $route(to, from) {
+      var type = this.$route.query.type;
+      if (type) {
+        this.selectNewsType_new(type);
+      } else {
+        this.mode = 1;
+        this.select = null;
+      }
+    },
+  },
+  async created() {
+    await this.getData();
+    var type = this.$route.query.type;
+    if (type) {
+      this.selectNewsType_new(type);
+    } else {
+      this.mode = 1;
+      this.select = null;
+    }
   },
   methods: {
-    selectNewsType(type) {
-      // var newType;
+    selectNewsType_new(type) {
       if (type == '兩天一夜過夜型') {
         this.mode = 2;
+        this.select = null;
         return;
       } else this.select = this.newsType.find(x => x.name == type);
-
       apiService.getAllBytypeId(this.select.id).then(x => {
-        this.news = x.data.filter(x=>x.isActive == true);
+        this.news = x.data.filter(x => x.isActive == true);
       });
     },
+    selectNewsType(type) {
+      location.href = './#/activity?type=' + type;
+    },
     transferImage(image) {
-      console.log(image);
+      // console.log(image);
       var temp = JSON.parse(image);
       if (temp.length > 0) {
         return temp[0].url;
@@ -181,10 +225,8 @@ export default {
       }
     },
     async getData() {
-      // 免費型活動 基本型商圈消費 兩天一夜過夜型 社區導覽
       var result = await apiService.getallNewsType();
       this.newsType = result.data;
-
       var data = {
         key: [
           '前台.活動.欄位一',
