@@ -12,7 +12,7 @@
         <!-- /.col-lg-8 -->
         <div class="col-lg-5">
           <h3 class="font-weight-light">{{item.subtitle}}</h3>
-          <p>{{item.description}}</p>
+          <p style="white-space: pre-line; ">{{item.description}}</p>
           <!-- <p>{{shop.remark}}</p> -->
         </div>
         <!-- /.col-md-4 -->
