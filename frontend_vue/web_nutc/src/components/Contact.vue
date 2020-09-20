@@ -85,6 +85,10 @@
             marginwidth="0"
             src="http://maps.google.com/maps?hl=zh-TW&amp;ie=UTF8&amp;ll=24.1523384,120.6831253&amp;spn=56.506174,79.013672&amp;t=m&amp;z=17&amp;output=embed"
           ></iframe>
+
+          <a class="navbar-brand" href="index.html" style="margin-top:20px;">
+            <img src="images/logo.png" alt="logo" />
+          </a>
         </div>
       </div>
       <!-- /.row -->
@@ -92,10 +96,14 @@
       <!-- Contact Form -->
       <!-- In order to set the email address and subject line for the contact form go to the bin/contact_me.php file. -->
       <div class="row" style="margin-top:50px">
+        
+        
         <div class="col-lg-8 mb-4 contact-left">
-          <a class="navbar-brand" href="index.html">
-            <img src="images/logo.png" alt="logo" />
-          </a>
+          
+        </div>
+
+        <div class="col-lg-4 mb-8 contact-left">
+          
         </div>
       </div>
     </div>
