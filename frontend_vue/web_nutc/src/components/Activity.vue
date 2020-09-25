@@ -7,88 +7,121 @@
         <div class="row" v-if="!select && mode == 1">
           <div class="col-lg-3 mb-3">
             <div class="card h-100" v-if="one.id">
-              <h4 class="card-header">{{one.value}}</h4>
+              <h4 class="card-header">{{ one.value }}</h4>
               <div class="card-img">
-                <img class="img-fluid" style="height:262.38px;width:100%" src="S__8339588.jpg" alt />
+                <img
+                  class="img-fluid"
+                  style="height:262.38px;width:100%"
+                  src="S__8339588.jpg"
+                  alt
+                />
               </div>
               <div class="card-body">
-                <p class="card-text">{{one.description}}</p>
+                <p class="card-text">{{ one.description }}</p>
               </div>
               <div class="card-footer">
                 <a
                   href="javascript:void(0)"
                   class="btn btn-primary"
                   v-on:click="selectNewsType('免費型活動')"
-                >詳細資料</a>
+                  >詳細資料</a
+                >
               </div>
             </div>
           </div>
           <div class="col-lg-3 mb-3">
             <div class="card h-100" v-if="two.id">
-              <h4 class="card-header">{{two.value}}</h4>
+              <h4 class="card-header">{{ two.value }}</h4>
               <div class="card-img">
-                <img class="img-fluid" style="height:262.38px;width:100%" src="home1.jpg" alt />
+                <img
+                  class="img-fluid"
+                  style="height:262.38px;width:100%"
+                  src="home1.jpg"
+                  alt
+                />
               </div>
               <div class="card-body">
-                <p class="card-text">{{two.description}}</p>
+                <p class="card-text">{{ two.description }}</p>
               </div>
               <div class="card-footer">
                 <a
                   href="javascript:void(0)"
                   class="btn btn-primary"
                   v-on:click="selectNewsType('基本型商圈消費')"
-                >詳細資料</a>
+                  >詳細資料</a
+                >
               </div>
             </div>
           </div>
           <div class="col-lg-3 mb-3">
             <div class="card h-100" v-if="three.id">
-              <h4 class="card-header">{{three.value}}</h4>
+              <h4 class="card-header">{{ three.value }}</h4>
               <div class="card-img">
-                <img class="img-fluid" style="height:262.38px;width:100%" src="home2.jpg" alt />
+                <img
+                  class="img-fluid"
+                  style="height:262.38px;width:100%"
+                  src="home2.jpg"
+                  alt
+                />
               </div>
               <div class="card-body">
-                <p class="card-text">{{three.description}}</p>
+                <p class="card-text">{{ three.description }}</p>
               </div>
               <div class="card-footer">
                 <a
                   href="javascript:void(0)"
                   class="btn btn-primary"
                   v-on:click="selectNewsType('兩天一夜過夜型')"
-                >詳細資料</a>
+                  >詳細資料</a
+                >
               </div>
             </div>
           </div>
           <div class="col-lg-3 mb-3">
             <div class="card h-100" v-if="four.id">
-              <h4 class="card-header">{{four.value}}</h4>
+              <h4 class="card-header">{{ four.value }}</h4>
               <div class="card-img">
-                <img class="img-fluid" style="height:262.38px;width:100%" src="home3.jpg" alt />
+                <img
+                  class="img-fluid"
+                  style="height:262.38px;width:100%"
+                  src="home3.jpg"
+                  alt
+                />
               </div>
               <div class="card-body">
-                <p class="card-text">{{four.description}}</p>
+                <p class="card-text">{{ four.description }}</p>
               </div>
               <div class="card-footer">
                 <a
                   href="javascript:void(0)"
                   class="btn btn-primary"
                   v-on:click="selectNewsType('社區導覽')"
-                >詳細資料</a>
+                  >詳細資料</a
+                >
               </div>
             </div>
           </div>
         </div>
         <div v-if="!select && mode == 2">
           <!-- <button class="btn btn-primary" style="margin-bottom:20px" v-on:click="mode=1">返回</button> -->
-        <a class="btn btn-primary" style="margin-bottom:20px" href="./#/activity">返回</a>
-       
+          <a
+            class="btn btn-primary"
+            style="margin-bottom:20px"
+            href="./#/activity"
+            >返回</a
+          >
         </div>
         <div class="row" v-if="!select && mode == 2">
           <div class="col-lg-3 mb-3">
             <div class="card h-100">
               <h4 class="card-header">晴天</h4>
               <div class="card-img">
-                <img class="img-fluid" style="height:262.38px;width:100%" src="images/鹿港天后宮.jpg" alt />
+                <img
+                  class="img-fluid"
+                  style="height:262.38px;width:100%"
+                  src="images/鹿港天后宮.jpg"
+                  alt
+                />
               </div>
               <div class="card-body">
                 <p class="card-text"></p>
@@ -98,16 +131,21 @@
                   href="javascript:void(0)"
                   class="btn btn-primary"
                   v-on:click="selectNewsType('兩天一夜過夜型(晴天)')"
-                >詳細資料</a>
+                  >詳細資料</a
+                >
               </div>
             </div>
-
           </div>
           <div class="col-lg-3 mb-3">
             <div class="card h-100">
               <h4 class="card-header">雨天</h4>
               <div class="card-img">
-                <img class="img-fluid" style="height:262.38px;width:100%" src="images/鹿港天后宮.jpg" alt />
+                <img
+                  class="img-fluid"
+                  style="height:262.38px;width:100%"
+                  src="images/鹿港天后宮.jpg"
+                  alt
+                />
               </div>
               <div class="card-body">
                 <p class="card-text"></p>
@@ -117,22 +155,35 @@
                   href="javascript:void(0)"
                   class="btn btn-primary"
                   v-on:click="selectNewsType('兩天一夜過夜型(雨天)')"
-                >詳細資料</a>
+                  >詳細資料</a
+                >
               </div>
             </div>
           </div>
         </div>
         <!-- /.row -->
 
-        <div v-if="select">         
-          <a class="btn btn-primary" style="margin-bottom:20px" v-if="mode==2" href="./#/activity?type=兩天一夜過夜型">返回</a> 
-          <a class="btn btn-primary" style="margin-bottom:20px" v-if="mode==1" href="./#/activity">返回</a>     
+        <div v-if="select">
+          <a
+            class="btn btn-primary"
+            style="margin-bottom:20px"
+            v-if="mode == 2"
+            href="./#/activity?type=兩天一夜過夜型"
+            >返回</a
+          >
+          <a
+            class="btn btn-primary"
+            style="margin-bottom:20px"
+            v-if="mode == 1"
+            href="./#/activity"
+            >返回</a
+          >
         </div>
 
         <div class="row" v-if="select">
           <div
             class="col-lg-3 col-md-4 col-sm-6 portfolio-item"
-            v-for="(item) in news"
+            v-for="item in news"
             :key="item.id"
           >
             <div class="card h-100">
@@ -147,9 +198,21 @@
               </a>
               <div class="card-body">
                 <h4 class="card-title">
-                  <a :href="'./#/activityDetail/'+item.id">{{item.title}}</a>
+                  <a :href="'./#/activityDetail/' + item.id">{{
+                    item.title
+                  }}</a>
                 </h4>
-                <p class="card-text">{{item.subtitle}}</p>
+                <p class="card-text">{{ item.subtitle }}</p>
+
+                <div v-if="userNews && mode == 2">
+                  <span v-if="!findNews(item.id)">
+                    <button  class="btn btn-info" v-on:click="addNews(item.id)">加入行程</button>
+                  </span>
+                  <span v-if="findNews(item.id)">
+                    <button  class="btn btn-danger" v-on:click="removeNews(item.id)">移除行程</button>
+                  </span>
+                </div>
+                
               </div>
             </div>
           </div>
@@ -164,6 +227,7 @@
 <script>
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import messageService from '../messageService';
 import apiService from '../apiService';
 export default {
   name: 'Activity',
@@ -178,6 +242,7 @@ export default {
       mode: 1,
       select: null,
       news: [],
+      userNews: null,
     };
   },
   watch: {
@@ -193,6 +258,7 @@ export default {
   },
   async created() {
     await this.getData();
+    this.init();
     var type = this.$route.query.type;
     if (type) {
       this.selectNewsType_new(type);
@@ -202,6 +268,23 @@ export default {
     }
   },
   methods: {
+    findNews(id){
+      let check = this.userNews.find(x=>x.id == id);
+      // console.log("ccc",check)
+      if(check) return true;
+      else return false;
+    },
+    init() {
+      var token = apiService.getToken();
+      if (token) {
+        apiService.getConsumerNews().then(x => {
+          this.userNews = x.data;
+          // console.log('已登入', x.data);
+        });
+      } else {
+        // console.log('未登入');
+      }
+    },
     selectNewsType_new(type) {
       if (type == '兩天一夜過夜型') {
         this.mode = 2;
@@ -216,7 +299,6 @@ export default {
       location.href = './#/activity?type=' + type;
     },
     transferImage(image) {
-      // console.log(image);
       var temp = JSON.parse(image);
       if (temp.length > 0) {
         return temp[0].url;
@@ -242,6 +324,25 @@ export default {
         this.four = x.data.find(y => y.key == '前台.活動.欄位四');
       });
     },
+    addNews(newsId) {
+       apiService.addorUpdateNews({newsId:newsId,isComplete:false}).then(x => {
+         messageService.success("加入成功！")
+         this.refresh();
+        });
+    },
+    removeNews(newsId) {
+        apiService.deleteConsumerNews(newsId).then(x => {
+         messageService.success("移除成功！")
+         this.refresh();
+        });
+    },
+
+    refresh(){
+      apiService.getConsumerNews().then(x => {
+          this.userNews = x.data;
+          // console.log('已登入', x.data);
+        });
+    }
   },
 };
 </script>

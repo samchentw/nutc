@@ -33,6 +33,35 @@ export default {
     });
   },
 
+
+// 消費者api
+
+  addorUpdateNews(data) {
+    return axios.post('../api/consumer/addOrUpdateNews', data, {
+      headers: {
+        Authorization: 'Bearer ' + this.getToken()
+      }
+    });
+  },
+
+  deleteConsumerNews(newId) {
+    return axios.delete('../api/consumer/news/'+newId, {
+      headers: {
+        Authorization: 'Bearer ' + this.getToken()
+      }
+    });
+  },
+
+  getConsumerNews() {
+    return axios.get('../api/consumer/newsByUser', {
+      headers: {
+        Authorization: 'Bearer ' + this.getToken()
+      }
+    });
+  },
+
+
+
   // 權限確認
   permissionApi() {
     return axios
@@ -67,7 +96,7 @@ export default {
   },
 
 
-  
+
   //活動類型R
   getallNewsType() {
     return axios.get('../api/newsType/getAll');
@@ -122,7 +151,7 @@ export default {
     })
   },
 
-  getshop(id){
+  getshop(id) {
     return axios.get('../api/shop/get/' + id);
   },
 
@@ -130,8 +159,8 @@ export default {
     return axios.get('../api/shop/page?take=999&skip=' + 0);
   },
 
-  getShopByType(type){
-    return axios.get('../api/shop/getShopByType/'+type);
+  getShopByType(type) {
+    return axios.get('../api/shop/getShopByType/' + type);
   },
 
   deleteShopById(id) {
@@ -198,7 +227,7 @@ export default {
   },
 
   //order
-  createOrder(data){
+  createOrder(data) {
     return axios.post('../api/order/create', data, {
       headers: {
         Authorization: 'Bearer ' + this.getToken()
@@ -206,9 +235,9 @@ export default {
     })
   },
 
-  getOrdersByUser(){
-    return axios.get('../api/order/user',{
-      headers:{
+  getOrdersByUser() {
+    return axios.get('../api/order/user', {
+      headers: {
         Authorization: 'Bearer ' + this.getToken()
       }
     })
@@ -234,11 +263,11 @@ export default {
     window.localStorage.removeItem("nutc");
   },
 
-  getUserProduct(){
+  getUserProduct() {
     var item = window.localStorage.getItem("userProduct");
     return JSON.parse(item);
   },
-  saveUserProduct(value){
+  saveUserProduct(value) {
     window.localStorage.setItem("userProduct", JSON.stringify(value));
   }
 }

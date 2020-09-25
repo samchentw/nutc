@@ -38,13 +38,13 @@ export namespace News {
         @Expose()
         createTime: Date;
 
-        @ApiProperty()
+        @ApiProperty({ type: NewsDetailDto, isArray: true })
         @Expose()
         newsDetails: NewsDetail[];
 
-        @ApiProperty()
+        @ApiProperty({ type: NewsDetailDto, isArray: true })
         @Expose()
-        get newsDetailsSortBySeq() {
+        get newsDetailsSortBySeq():NewsDetail[] {
             return _.sortBy(this.newsDetails, x => x.sequence);
         }
     }

@@ -1,4 +1,4 @@
-import { Roles, RolesGuard } from '@app/core/shared';
+import { Roles, RolesGuard, User } from '@app/core/shared';
 import { JwtAuthGuard } from '@app/identity/auth/guard/jwt-auth.guard';
 import { Body, Controller, Delete, Get, Param, Post, Put, Query, Req, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth, ApiDefaultResponse, ApiParam, ApiQuery, ApiTags } from '@nestjs/swagger';
@@ -8,7 +8,7 @@ import { UpdateShopDto } from '../dto/update-shop.data';
 import { ShopService } from '../service/shop.service';
 
 // import { fs } from 'memfs';
-@ApiTags("Shop")
+@ApiTags("Shop(商家)")
 @Controller("shop")
 export class ShopController {
   constructor(
@@ -44,7 +44,8 @@ export class ShopController {
   @Roles("admin")
   @UseGuards(JwtAuthGuard, RolesGuard)
   @ApiDefaultResponse({ type: ShopDto })
-  create(@Body() input: CreateShopDto) {
+  create(@Body() input: CreateShopDto,@User() user) {
+    console.log(user)
     return this.ShopService.create(input);
   }
 

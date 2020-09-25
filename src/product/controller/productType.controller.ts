@@ -5,7 +5,7 @@ import { ApiBearerAuth, ApiParam, ApiTags } from '@nestjs/swagger';
 import { CreateProductTypeDto } from '../dto/create-productType.dto';
 import { ProductTypeService } from '../service/productType.service';
 
-@ApiTags("ProductType")
+@ApiTags("ProductType(產品種類)")
 @Controller("productType")
 export class ProductTypeController {
   constructor(

@@ -10,12 +10,13 @@ export class HttpExceptionFilter implements ExceptionFilter {
     const request = ctx.getRequest();
 
     if (!exception) {
+      const errorMessage = exception.getResponse();
       const errorResponse = {
         code: 500,
         timestamp: new Date().toLocaleDateString(),
         path: request.url,
         method: request.method,
-        message: exception.message || null,
+        message: errorMessage || null,
       }
       Logger.error(errorResponse);
       response.status(exception.getStatus()).json(errorResponse);
@@ -26,12 +27,13 @@ export class HttpExceptionFilter implements ExceptionFilter {
     const url: string = request.url;
 
     if (url.startsWith("/api/")) {
+      const errorMessage = exception.getResponse();
       const errorResponse = {
         code: status,
         timestamp: new Date().toLocaleDateString(),
         path: request.url,
         method: request.method,
-        message: exception.message || null,
+        message: errorMessage || null,
       }
 
       Logger.error(

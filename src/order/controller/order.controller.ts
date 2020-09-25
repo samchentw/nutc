@@ -7,7 +7,7 @@ import { OrderService } from '../service/order.service';
 import { GetOrdersByDateDto } from '../dto/get-orders-by-date.dto';
 import { JwtAuthGuard } from '@app/identity/auth/guard/jwt-auth.guard';
 import { OrderResultDto } from '../dto/order-result.dto';
-@ApiTags("Order")
+@ApiTags("Order(訂購)")
 @Controller("order")
 export class OrderController {
     constructor(

@@ -21,6 +21,10 @@ import { NewsTypeService } from './service/newsType.service';
     providers: [
         NewsService,
         NewsTypeService
+    ],
+    exports: [
+        NewsService,
+        NewsTypeService
     ]
 })
-export class NewsModule {}
+export class NewsModule { }

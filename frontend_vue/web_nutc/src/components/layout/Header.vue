@@ -198,7 +198,7 @@ export default {
   watch: {
     $route(to, from) {
       this.route = to.path;
-      console.log(this.route);
+      // console.log(this.route);
     },
   },
   created() {
@@ -207,7 +207,7 @@ export default {
     if(token){
       apiService.getUserinfo().then(x=>{
         this.user =x.data;
-        console.log(x.data)
+        // console.log(x.data)
       });
     }
 

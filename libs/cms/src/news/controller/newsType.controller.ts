@@ -3,7 +3,7 @@ import { NewsTypeService } from '../service/newsType.service';
 import { CreateNewsTypeDto, UpdateNewsTypeDto } from '../dto';
 import { ApiTags, ApiQuery, ApiParam, ApiBearerAuth } from '@nestjs/swagger';
 import { JwtAuthGuard } from '@app/identity/auth/guard/jwt-auth.guard';
-@ApiTags("NewsType")
+@ApiTags("NewsType(活動種類)")
 @Controller("newsType")
 export class NewsTypeController {
   constructor(

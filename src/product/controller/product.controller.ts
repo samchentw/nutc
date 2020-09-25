@@ -7,7 +7,7 @@ import { ProductDto, ProductPageDto } from '../dto/product.dto';
 import { UpdateProductDto } from '../dto/update-product.dto';
 import { ProductService } from '../service/product.service';
 
-@ApiTags("Product")
+@ApiTags("Product(產品)")
 @Controller("product")
 export class ProductController {
   constructor(

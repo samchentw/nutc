@@ -42,15 +42,6 @@ export class ShopService extends BaseService<Shop, CreateShopDto, UpdateShopDto>
         return await this.repository.find({ shopType: ShopTypeEnum });
     }
 
-    // async readRoad() {  
-    //     let datas = this.ExcelService.ReadExcel<RoadData>("./seeds/opendata108road.xlsx", 0);
-    //     let group: _.Dictionary<RoadData[]> = _.groupBy(datas, x => x.縣市名稱);
-    //     let city = _.uniqBy(datas.map(x => x.縣市名稱), x => x);
-    //     for (let i = 0; i < datas.length; i++) {
-
-    //     }
-    // }
-
     async readExcel() {
         let datas = this.ExcelService.ReadExcel<shopData>("./seeds/店家.xlsx", 0);
 

@@ -1,5 +1,12 @@
 import { Entity, Column, BaseEntity, OneToMany, JoinColumn, PrimaryGeneratedColumn, CreateDateColumn } from 'typeorm';
 import { Order } from '../../order/entity/order.entity';
+
+
+export class newsJson {
+    newsId: number;
+    isComplete: boolean;
+}
+
 @Entity()
 export class Consumer extends BaseEntity {
 
@@ -12,14 +19,12 @@ export class Consumer extends BaseEntity {
     @Column()
     userId: string;
 
-    // @Column()
-    // point: number;
-
-    // @Column("simple-array")
-    // order: number[];
-
     @OneToMany(type => Order, order => order.consumer, { eager: true })
     @JoinColumn()
     order: Order[];
+
+    @Column("simple-json")
+    newsJson: newsJson[];
+
 
 }

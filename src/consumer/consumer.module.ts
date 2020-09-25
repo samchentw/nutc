@@ -4,9 +4,11 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Consumer } from './entity/consumer.entity';
 import { ConsumerService } from './service/consumer.service';
 import { ConsumerController } from './controller/consumer.controller';
+import { NewsModule } from '@app/cms/news/news.module';
 @Module({
     imports: [
         UsersModule,
+        NewsModule,
         TypeOrmModule.forFeature([Consumer])
     ],
     controllers: [

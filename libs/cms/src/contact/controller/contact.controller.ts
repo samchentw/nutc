@@ -7,7 +7,7 @@ import { ContactService } from '../service/contact.service';
 
 
 
-@ApiTags("Contact")
+@ApiTags("Contact(聯絡我們)")
 @Controller("contact")
 export class ContactController {
     constructor(

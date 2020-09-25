@@ -17,7 +17,7 @@ import { LocalStrategy } from './service/local.strategy';
     PassportModule,
     ConfigModule,
     JwtModule.registerAsync({
-      imports: [ConfigModule],
+      imports: [ConfigModule,],
       useFactory: async (configService: ConfigService) => ({
         secret: configService.get('donttalk'),
         signOptions: {
