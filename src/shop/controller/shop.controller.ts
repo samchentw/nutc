@@ -4,7 +4,7 @@ import { Body, Controller, Delete, Get, Param, Post, Put, Query, Req, UseGuards 
 import { ApiBearerAuth, ApiDefaultResponse, ApiParam, ApiQuery, ApiTags } from '@nestjs/swagger';
 import { CreateShopDto } from '../dto/create-shop.dto';
 import { ShopDto, ShopPageDto } from '../dto/shop.dto';
-import { UpdateShopDto } from '../dto/update-shop.data';
+import { UpdateShopDto } from '../dto/update-shop.dto';
 import { ShopService } from '../service/shop.service';
 
 // import { fs } from 'memfs';
@@ -79,7 +79,6 @@ export class ShopController {
     result.items = temp[0];
     return result;
   }
-
 
   @Get("seed")
   seed() {

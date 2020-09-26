@@ -5,7 +5,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { plainToClass } from 'class-transformer';
 import { Repository } from 'typeorm';
 import { CreateShopDto } from '../dto/create-shop.dto';
-import { UpdateShopDto } from '../dto/update-shop.data';
+import { UpdateShopDto } from '../dto/update-shop.dto';
 import { Shop } from '../entity/shop.entity';
 import { ShopTypeEnum } from '../enum/enum';
 import * as _ from 'lodash';
