@@ -50,7 +50,7 @@ export class News extends BaseEntity {
     @Column('simple-json')
     newsDetails: NewsDetail[];
 
-    @ManyToOne(type => NewsType, NewsType => NewsType.news)
+    @ManyToOne(type => NewsType, NewsType => NewsType.news, { eager: true })
     newsType: NewsType;
 
 }

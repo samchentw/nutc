@@ -203,13 +203,16 @@
                   }}</a>
                 </h4>
                 <p class="card-text">{{ item.subtitle }}</p>
-
-                <div v-if="userNews && mode == 2">
+<!-- v-if="item.isComplete" -->
+                <div v-if="userNews && (nowtype == '兩天一夜過夜型(晴天)' || nowtype=='兩天一夜過夜型(雨天)')">
                   <span v-if="!findNews(item.id)">
                     <button  class="btn btn-info" v-on:click="addNews(item.id)">加入行程</button>
                   </span>
-                  <span v-if="findNews(item.id)">
+                  <span v-if="findNews(item.id) && !checkIscomplete(item.id)">
                     <button  class="btn btn-danger" v-on:click="removeNews(item.id)">移除行程</button>
+                  </span>
+                  <span class="badge badge-info" v-if="findNews(item.id) && checkIscomplete(item.id)">
+                    已完成
                   </span>
                 </div>
                 
@@ -239,6 +242,7 @@ export default {
       three: {},
       four: {},
       newsType: [],
+      nowtype:"",
       mode: 1,
       select: null,
       news: [],
@@ -274,6 +278,10 @@ export default {
       if(check) return true;
       else return false;
     },
+    checkIscomplete(id){
+      let check = this.userNews.find(x=>x.id == id);
+      return check.isComplete
+    },
     init() {
       var token = apiService.getToken();
       if (token) {
@@ -286,6 +294,7 @@ export default {
       }
     },
     selectNewsType_new(type) {
+      this.nowtype = type;
       if (type == '兩天一夜過夜型') {
         this.mode = 2;
         this.select = null;

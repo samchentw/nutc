@@ -6,14 +6,9 @@ import { CreateUserDto } from '@app/identity/users/dto';
 import { Body, Controller, Delete, Get, Param, Post, Req, UseGuards} from '@nestjs/common';
 import { ApiBearerAuth, ApiParam, ApiTags, ApiProperty, ApiDefaultResponse } from '@nestjs/swagger';
 import { ConsumerService } from '../service/consumer.service';
+import { addOrUpdateNewsDto } from '../dto/add-or-update-news.dto';
+import { ConsumerNewsDto } from '../dto/consumer-news.dto';
 
-
-export class addOrUpdateNewsDto {
-  @ApiProperty()
-  newsId: number;
-  @ApiProperty()
-  isComplete: boolean;
-}
 
 @ApiTags("Consumer(消費者)")
 @Controller("consumer")
@@ -66,8 +61,8 @@ export class ConsumerController {
   @ApiBearerAuth()
   @Roles("user")
   @UseGuards(JwtAuthGuard)
-  @ApiDefaultResponse({ type: News.NewsDto, isArray: true })
-  getNewsByUser(@User("id") userId,@Req() req) {
+  @ApiDefaultResponse({ type: ConsumerNewsDto, isArray: true })
+  getNewsByUser(@User("id") userId) {
     return this.consumerService.getConsumerWithDetil(userId);
   }
 }

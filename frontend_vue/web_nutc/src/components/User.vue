@@ -141,14 +141,14 @@
               </div>
 
               <div class="tab-pane" id="activity">
-                <div>
-                  晴天：
+                <div v-for="key in newsKey" :key="key">
+                  {{ key }}：
                   <!--  -->
 
-                  <!-- <div class="row">
+                  <div class="row">
                     <div
-                      class="col-lg-3 col-md-4 col-sm-6 portfolio-item"
-                      v-for="item in news"
+                      class="col-lg-4 col-md-5 col-sm-6 portfolio-item"
+                      v-for="item in news[key]"
                       :key="item.id"
                     >
                       <div class="card h-100">
@@ -168,7 +168,27 @@
                           </h4>
                           <p class="card-text">{{ item.subtitle }}</p>
 
-                          <span>
+                          <span v-if="!item.isComplete">
+                            <button
+                              style="margin-right:3px;"
+                              class="btn btn-info"
+                              v-on:click="complete(item.id,true)"
+                            >
+                              完成
+                            </button>
+                          </span>
+
+                          <span v-if="item.isComplete">
+                            <button
+                              style="margin-right:3px;"
+                              class="btn btn-warning"
+                              v-on:click="complete(item.id,false)"
+                            >
+                              取消
+                            </button>
+                          </span>
+
+                          <span v-if="!item.isComplete">
                             <button
                               class="btn btn-danger"
                               v-on:click="removeNews(item.id)"
@@ -179,14 +199,10 @@
                         </div>
                       </div>
                     </div>
-                  </div> -->
+                  </div>
 
                   <!--  -->
-                </div>
-
-                <hr />
-                <div>
-                  雨天：
+                  <hr />
                 </div>
               </div>
             </div>
@@ -194,7 +210,7 @@
           <div class="col-lg-4 order-lg-1 text-center">
             <img
               src="user.png"
-              style="height:150px"
+              style="height:150px;margin-top:30px;"
               class="mx-auto img-fluid img-circle d-block"
               alt="avatar"
             />
@@ -255,6 +271,7 @@ import Swal from 'sweetalert2';
 import messageService from '../messageService';
 import moment from 'moment';
 import apiService from '../apiService';
+import * as _ from 'lodash';
 export default {
   name: 'User',
   props: {},
@@ -263,7 +280,8 @@ export default {
       user: {},
       orders: [],
       selectItem: {},
-      news: [],
+      news: {},
+      newsKey: [],
       isDetail: false,
       st: ['準備中', '運送中', '已送達', '未出貨'],
     };
@@ -301,9 +319,16 @@ export default {
     },
     refresh() {
       apiService.getConsumerNews().then(x => {
-        this.news = x.data;
+        this.news = _.groupBy(x.data, 'newsTypeName');
+        this.newsKey = Object.keys(this.news);
       });
     },
+    complete(newsId,input){
+      apiService.addorUpdateNews({newsId,isComplete:input}).then(x=>{
+        messageService.success("修改成功！");
+        this.refresh();
+      })
+    }
   },
 };
 </script>

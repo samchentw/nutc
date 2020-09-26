@@ -16,7 +16,7 @@ export class HttpExceptionFilter implements ExceptionFilter {
         timestamp: new Date().toLocaleDateString(),
         path: request.url,
         method: request.method,
-        message: errorMessage || null,
+        result: errorMessage || null,
       }
       Logger.error(errorResponse);
       response.status(exception.getStatus()).json(errorResponse);
@@ -33,7 +33,7 @@ export class HttpExceptionFilter implements ExceptionFilter {
         timestamp: new Date().toLocaleDateString(),
         path: request.url,
         method: request.method,
-        message: errorMessage || null,
+        result: errorMessage || null,
       }
 
       Logger.error(
@@ -42,11 +42,12 @@ export class HttpExceptionFilter implements ExceptionFilter {
         'ExceptionFilter',
       );
 
-      response.status(404).json({ errorResponse });
+      response.status(status).json({ errorResponse });
       return;
     }
 
     if (status === 404) {
+      // console.log(404)
       response.redirect("./nutc")
       // .status(status)
       // .send(
