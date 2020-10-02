@@ -78,7 +78,7 @@
           <!-- Embedded Google Map -->
           <iframe
             width="100%"
-            height="300px"
+            height="550px"
             frameborder="0"
             scrolling="no"
             marginheight="0"
@@ -86,9 +86,7 @@
             src="http://maps.google.com/maps?hl=zh-TW&amp;ie=UTF8&amp;ll=24.1523384,120.6831253&amp;spn=56.506174,79.013672&amp;t=m&amp;z=17&amp;output=embed"
           ></iframe>
 
-          <a class="navbar-brand" href="index.html" style="margin-top:20px;">
-            <img src="images/logo.png" alt="logo" />
-          </a>
+          
         </div>
       </div>
       <!-- /.row -->

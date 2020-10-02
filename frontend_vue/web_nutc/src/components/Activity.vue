@@ -106,7 +106,7 @@
           <!-- <button class="btn btn-primary" style="margin-bottom:20px" v-on:click="mode=1">返回</button> -->
           <a
             class="btn btn-primary"
-            style="margin-bottom:20px"
+            style="margin-bottom:20px;margin-top:20px;"
             href="./#/activity"
             >返回</a
           >
@@ -166,14 +166,14 @@
         <div v-if="select">
           <a
             class="btn btn-primary"
-            style="margin-bottom:20px"
+            style="margin-bottom:20px;margin-top:20px;"
             v-if="mode == 2"
             href="./#/activity?type=兩天一夜過夜型"
             >返回</a
           >
           <a
             class="btn btn-primary"
-            style="margin-bottom:20px"
+            style="margin-bottom:20px;margin-top:20px;"
             v-if="mode == 1"
             href="./#/activity"
             >返回</a

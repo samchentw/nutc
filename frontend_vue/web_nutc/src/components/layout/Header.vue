@@ -1,6 +1,8 @@
 <template>
   <div>
-    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-light top-nav fixed-top">
+    <nav
+      class="navbar fixed-top navbar-expand-lg navbar-dark bg-light top-nav fixed-top"
+    >
       <div class="container">
         <a class="navbar-brand" href="index.html">
           <img src="images/logo.png" alt="logo" />
@@ -19,137 +21,140 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <a class="nav-link" v-bind:class="{ 'active': route=='/' }" href="./#/">首頁</a>
+              <a
+                class="nav-link"
+                v-bind:class="{ active: route == '/' }"
+                href="./#/"
+                >首頁</a
+              >
             </li>
 
             <li class="nav-item">
               <a
                 class="nav-link"
-                v-bind:class="{ 'active': route=='/aboutus' }"
+                v-bind:class="{ active: route == '/aboutus' }"
                 href="./#/aboutus"
-              >關於我們</a>
+                >關於我們</a
+              >
             </li>
 
             <li class="nav-item">
               <a
                 class="nav-link"
-                v-bind:class="{ 'active': route=='/activity' }"
+                v-bind:class="{ active: route == '/activity' }"
                 href="./#/activity"
-              >活動</a>
+                >活動</a
+              >
             </li>
 
             <li class="nav-item">
               <a
                 class="nav-link"
-                v-bind:class="{ 'active': route=='/shop/1' }"
+                v-bind:class="{ active: route == '/shop/1' }"
                 href="./#/shop/1"
-              >美食介紹</a>
+                >百司官廚</a
+              >
             </li>
 
             <li class="nav-item">
               <a
                 class="nav-link"
-                v-bind:class="{ 'active': route=='/shop/0' }"
+                v-bind:class="{ active: route == '/shop/0' }"
                 href="./#/shop/0"
-              >商家介紹</a>
+                >五行八祚</a
+              >
             </li>
 
             <li class="nav-item">
               <a
                 class="nav-link"
-                v-bind:class="{ 'active': route=='/product' }"
+                v-bind:class="{ active: route == '/product' }"
                 href="./#/product"
-              >產品</a>
+                >產品</a
+              >
             </li>
 
             <li class="nav-item">
               <a
                 class="nav-link"
-                v-bind:class="{ 'active': route=='/contact' }"
+                v-bind:class="{ active: route == '/contact' }"
                 href="./#/contact"
-              >聯絡我們</a>
+                >聯絡我們</a
+              >
             </li>
 
             <li class="nav-item dropdown" v-if="token">
               <a
                 class="nav-link dropdown-toggle"
                 href="javascript:void(0)"
-                v-bind:class="{ 'active': (route=='/user' || route == '/shoppingCart')  }"
+                v-bind:class="{
+                  active: route == '/user' || route == '/shoppingCart',
+                }"
                 id="navbarDropdownBlog"
                 data-toggle="dropdown"
                 aria-haspopup="true"
                 aria-expanded="false"
-              >會員中心</a>
-              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
+                >會員中心</a
+              >
+              <div
+                class="dropdown-menu dropdown-menu-right"
+                aria-labelledby="navbarDropdownBlog"
+              >
                 <a class="dropdown-item" href="./#/user">個人資料</a>
                 <a class="dropdown-item" href="./#/shoppingCart">購物車</a>
                 <!-- <a class="dropdown-item" href="pricing.html">我的記錄</a> -->
               </div>
             </li>
             <li class="nav-item" v-if="!token">
-              <a class="nav-link" v-bind:class="{ 'active': route=='/login' }" href="./#/login">登入</a>
+              <a
+                class="nav-link"
+                v-bind:class="{ active: route == '/login' }"
+                href="./#/login"
+                >登入</a
+              >
             </li>
             <li class="nav-item" v-if="token">
-              <a class="nav-link" v-on:click="logout()" href="javascript:void(0)">登出</a>
+              <a
+                class="nav-link"
+                v-on:click="logout()"
+                href="javascript:void(0)"
+                >登出</a
+              >
             </li>
           </ul>
 
-          <span  v-if="user" class="badge badge-success">帳號：{{user.account}},你好！{{user.userinfo.name}}</span>
+          <span v-if="user" class="badge badge-success"
+            >帳號：{{ user.account }},你好！{{ user.userinfo.name }}</span
+          >
           <!-- <span v-if="user">你好：{{user.userinfo.name}}</span> -->
         </div>
       </div>
     </nav>
     <div>
-      <div class="ff" style="margin-bottom:80px;height:220px;">
-        <img v-if="type==1" src="cover/S__40017923.jpg" style="width:100%;height:450;" alt srcset />
-        <img v-if="type==2" src="cover/S__40017927.jpg" style="width:100%;height:450;" alt srcset />
-        <img v-if="type==3" src="cover/S__40027080.jpg" style="width:100%;height:450;" alt srcset />
-        <img v-if="type==4" src="cover/S__40027082.jpg" style="width:100%;height:450;" alt srcset />
-      </div>
-
       <div
         id="carouselExampleControls"
         class="carousel slide gg"
         data-ride="carousel"
-        style="height:450px"
       >
         <div class="carousel-inner">
-          <div class="carousel-item active" style="height:550px">
-            <img
-              class="d-block w-100"
-              style="padding-bottom:150px"
-              src="cover/S__40017923.jpg"
-              height="100%"
-              alt="First slide"
-            />
+          <div class="carousel-item active frame">
+            <div class="ex4-img">
+              <img
+                class="myImage"
+                src="cover/S__40017923.jpg"
+                alt="First slide"
+              />
+            </div>
           </div>
-          <div class="carousel-item" style="height:550px">
-            <img
-              class="d-block w-100"
-              style="padding-bottom:150px"
-              src="cover/S__40017927.jpg"
-              height="100%"
-              alt="Second slide"
-            />
+          <div class="carousel-item frame ">
+            <img class="myImage" src="cover/S__40017927.jpg" alt="Second slide" />
           </div>
 
-          <div class="carousel-item" style="height:550px">
-            <img
-              class="d-block w-100"
-              style="padding-bottom:150px"
-              src="cover/S__40027080.jpg"
-              height="100%"
-              alt="thire slide"
-            />
+          <div class="carousel-item frame">
+            <img class="myImage" src="cover/S__40027080.jpg" alt="thire slide" />
           </div>
-          <div class="carousel-item" style="height:550px">
-            <img
-              class="d-block w-100"
-              style="padding-bottom:150px"
-              src="cover/S__40027082.jpg"
-              height="100%"
-              alt="four slide"
-            />
+          <div class="carousel-item frame">
+            <img class="myImage" src="cover/S__40027082.jpg" alt="four slide" />
           </div>
         </div>
         <a
@@ -192,7 +197,7 @@ export default {
       slide: 0,
       sliding: null,
       type: 1,
-      user:null
+      user: null,
     };
   },
   watch: {
@@ -202,19 +207,13 @@ export default {
     },
   },
   created() {
-
-    var token = apiService.getToken()
-    if(token){
-      apiService.getUserinfo().then(x=>{
-        this.user =x.data;
+    var token = apiService.getToken();
+    if (token) {
+      apiService.getUserinfo().then(x => {
+        this.user = x.data;
         // console.log(x.data)
       });
     }
-
-    setInterval(() => {
-      this.type += 1;
-      if (this.type == 5) this.type = 1;
-    }, 5000);
     // console.log(this.$route.path)
     this.route = this.$route.path;
     this.token = apiService.getToken();
@@ -259,17 +258,27 @@ a {
   color: #4e3914;
 }
 
-@media only screen and (max-width: 500px) {
-  .gg {
-    /* visibility: hidden !important; */
-    display: none;
-  }
+.frame {
+  height: 400px;
+  width: 100%;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  background: rgb(63, 62, 62);
+  margin-bottom: 20px;
 }
 
-@media screen and (min-width: 500px) {
-  .ff {
-    /* visibility: hidden !important; */
-    display: none;
-  }
+.myImage {
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: block;
+  margin: auto;
+  max-height: 100%;
+  max-width: 100%;
+  width: auto;
+  height: auto;
+  position: absolute;
 }
 </style>

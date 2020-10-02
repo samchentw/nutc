@@ -87,7 +87,6 @@ new Vue({
 
 function guard(to, from, next) {
   if (getToken()) {
-    //  console.log(getToken())
     next();
   } else {
     next('/'); // go to '/login';

@@ -22,7 +22,7 @@
               <td>{{item.address}}</td>
               <td>{{item.email}}</td>
               <td>
-                <a href="javascript:void(0)" v-on:click="deleteUser(item.id)">刪除</a>
+                <a href="javascript:void(0)" v-if="item.name!='admin'" v-on:click="deleteUser(item.id)">刪除</a>
               </td>
             </tr>
           </tbody>

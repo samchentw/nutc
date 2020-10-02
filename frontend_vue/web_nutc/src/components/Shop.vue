@@ -1,8 +1,8 @@
 <template>
   <div class="container-fluid">
-    <h2 style="text-align: center;margin-bottom:10px" v-if="shopType==0">商家介紹</h2>
+    <h2 style="text-align: center;margin-bottom:10px" v-if="shopType==0">五行八祚</h2>
 
-    <h2 style="text-align: center;margin-bottom:10px" v-if="shopType==1">美食介紹</h2>
+    <h2 style="text-align: center;margin-bottom:10px" v-if="shopType==1">百司官廚</h2>
     <div class="row">
       <div
         class="col-lg-3 col-md-4 col-sm-6 portfolio-item"
