@@ -32,6 +32,7 @@ export class NewsService extends BaseService<News, CreateNewsDto, UpdateNewsDto>
       let imageData = await this.fileService.getFileUrlAndId(input.newsDetails[i].ImageId);
       detail.ImageId = imageData.id;
       detail.ImageUrl = imageData.url;
+      detail.id = this.getRandom();
       detail.subtitle = input.newsDetails[i].subtitle;
       detail.description = input.newsDetails[i].description;
       detail.sequence = input.newsDetails[i].sequence;
@@ -53,6 +54,9 @@ export class NewsService extends BaseService<News, CreateNewsDto, UpdateNewsDto>
       let imageData = await this.fileService.getFileUrlAndId(input.newsDetails[i].ImageId);
       detail.ImageId = imageData.id;
       detail.ImageUrl = imageData.url;
+      
+      if(input.newsDetails[i].id) detail.id = input.newsDetails[i].id;
+      else detail.id=this.getRandom();
       detail.subtitle = input.newsDetails[i].subtitle;
       detail.description = input.newsDetails[i].description;
       detail.sequence = input.newsDetails[i].sequence;
@@ -64,6 +68,12 @@ export class NewsService extends BaseService<News, CreateNewsDto, UpdateNewsDto>
     return await super.update(id, news)
   }
 
+  private getRandom(): string {
+    return Array(6)
+      .fill(null)
+      .map(() => Math.round(Math.random() * 16).toString(16))
+      .join('');
+  }
 
   async getAllByNewsTypeId(newsTypeId: number) {
     let newtype = await this.newsTypeService.get(newsTypeId);

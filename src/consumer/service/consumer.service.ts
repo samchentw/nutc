@@ -17,7 +17,7 @@ export class ConsumerService {
         public repository: Repository<Consumer>,
         private readonly usersService: UsersService,
         private readonly newsService: NewsService,
-        private readonly newsTypeService:NewsTypeService,
+        private readonly newsTypeService: NewsTypeService,
     ) {
 
     }
@@ -31,14 +31,14 @@ export class ConsumerService {
         return await this.repository.save(consumer);
     }
 
-    async addorUpdateNews(userId: string, newsId: number, isComplete: boolean) {
+    async addorUpdateNews(userId: string, newsId: number, isComplete: boolean, newsDetailId: string) {
         let consumer = await this.getByUserId(userId);
 
         let check = consumer.newsJson.findIndex(x => x.newsId == newsId);
 
         if (check == -1) {
             consumer.newsJson.push({
-                newsId, isComplete
+                newsId, isComplete, newsDetailId
             });
         } else {
             consumer.newsJson[check].isComplete = isComplete;

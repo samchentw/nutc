@@ -31,7 +31,7 @@ export class ConsumerController {
   @Roles("user")
   @UseGuards(JwtAuthGuard, RolesGuard)
   addOrUpdateNews(@User("id") userId, @Body() body: addOrUpdateNewsDto) {
-    return this.consumerService.addorUpdateNews(userId, body.newsId, body.isComplete);
+    return this.consumerService.addorUpdateNews(userId, body.newsId, body.isComplete, body.newsDetailId);
   }
 
   @Delete("news/:id")

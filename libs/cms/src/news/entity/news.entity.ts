@@ -4,6 +4,7 @@ import { Expose } from "class-transformer";
 import { ImageIdAndUrlDto } from "@app/core/file/service/file.service";
 
 export class NewsDetail {
+    id: string;
     sequence: number;
     subtitle: string;
     description: string;

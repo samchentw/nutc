@@ -4,6 +4,7 @@ import { Order } from '../../order/entity/order.entity';
 
 export class newsJson {
     newsId: number;
+    newsDetailId: string;
     isComplete: boolean;
 }
 

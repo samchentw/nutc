@@ -7,6 +7,9 @@ export namespace News {
 
     export class NewsDetailDto {
         @ApiProperty()
+        id: string;
+
+        @ApiProperty()
         subtitle: string;
 
         @ApiProperty()
