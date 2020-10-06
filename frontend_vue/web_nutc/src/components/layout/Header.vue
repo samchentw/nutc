@@ -135,6 +135,7 @@
         id="carouselExampleControls"
         class="carousel slide gg"
         data-ride="carousel"
+        style="width:100%"
       >
         <div class="carousel-inner">
           <div class="carousel-item active frame">
@@ -147,11 +148,19 @@
             </div>
           </div>
           <div class="carousel-item frame ">
-            <img class="myImage" src="cover/S__40017927.jpg" alt="Second slide" />
+            <img
+              class="myImage"
+              src="cover/S__40017927.jpg"
+              alt="Second slide"
+            />
           </div>
 
           <div class="carousel-item frame">
-            <img class="myImage" src="cover/S__40027080.jpg" alt="thire slide" />
+            <img
+              class="myImage"
+              src="cover/S__40027080.jpg"
+              alt="thire slide"
+            />
           </div>
           <div class="carousel-item frame">
             <img class="myImage" src="cover/S__40027082.jpg" alt="four slide" />
@@ -258,13 +267,19 @@ a {
   color: #4e3914;
 }
 
+.imageBorder {
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
 .frame {
   height: 400px;
   width: 100%;
   position: relative;
   align-items: center;
   justify-content: center;
-  background: rgb(63, 62, 62);
+  /* background: rgb(63, 62, 62); */
   margin-bottom: 20px;
 }
 
@@ -275,7 +290,7 @@ a {
   right: 0;
   display: block;
   margin: auto;
-  max-height: 100%;
+  /* max-height: 100%; */
   max-width: 100%;
   width: auto;
   height: auto;
