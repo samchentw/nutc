@@ -54,9 +54,9 @@ export class NewsService extends BaseService<News, CreateNewsDto, UpdateNewsDto>
       let imageData = await this.fileService.getFileUrlAndId(input.newsDetails[i].ImageId);
       detail.ImageId = imageData.id;
       detail.ImageUrl = imageData.url;
-      
-      if(input.newsDetails[i].id) detail.id = input.newsDetails[i].id;
-      else detail.id=this.getRandom();
+
+      if (input.newsDetails[i].id) detail.id = input.newsDetails[i].id;
+      else detail.id = this.getRandom();
       detail.subtitle = input.newsDetails[i].subtitle;
       detail.description = input.newsDetails[i].description;
       detail.sequence = input.newsDetails[i].sequence;
@@ -77,13 +77,13 @@ export class NewsService extends BaseService<News, CreateNewsDto, UpdateNewsDto>
 
   async getAllByNewsTypeId(newsTypeId: number) {
     let newtype = await this.newsTypeService.get(newsTypeId);
-    let entities = await this.repository.find({ newsType: newtype });
+    let entities = await this.repository.find({ where: { newsType: newtype } });
     let dto = plainToClass(n.NewsDto, entities, { excludeExtraneousValues: true });
     let result = classToPlain(dto);
     return result;
   }
 
-  async getByid(id: number) {
+  async getById(id: number) {
     let entity = await this.repository.findOne(id);
     let dto = plainToClass(n.NewsDto, entity, { excludeExtraneousValues: true });
     let result = classToPlain(dto);

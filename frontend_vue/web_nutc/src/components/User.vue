@@ -141,69 +141,9 @@
               </div>
 
               <div class="tab-pane" id="activity">
-                <div v-for="key in newsKey" :key="key">
-                  {{ key }}：
-                  <!--  -->
+               
+               todo 開發中
 
-                  <div class="row">
-                    <div
-                      class="col-lg-4 col-md-5 col-sm-6 portfolio-item"
-                      v-for="item in news[key]"
-                      :key="item.id"
-                    >
-                      <div class="card h-100">
-                        <a href="#">
-                          <img
-                            class="card-img-top"
-                            style="height:200px;width:100%"
-                            :src="item.newsDetailsSortBySeq[0].ImageUrl"
-                            alt
-                          />
-                        </a>
-                        <div class="card-body">
-                          <h4 class="card-title">
-                            <a :href="'./#/activityDetail/' + item.id">{{
-                              item.title
-                            }}</a>
-                          </h4>
-                          <p class="card-text">{{ item.subtitle }}</p>
-
-                          <span v-if="!item.isComplete">
-                            <button
-                              style="margin-right:3px;"
-                              class="btn btn-info"
-                              v-on:click="complete(item.id,true)"
-                            >
-                              完成
-                            </button>
-                          </span>
-
-                          <span v-if="item.isComplete">
-                            <button
-                              style="margin-right:3px;"
-                              class="btn btn-warning"
-                              v-on:click="complete(item.id,false)"
-                            >
-                              取消
-                            </button>
-                          </span>
-
-                          <span v-if="!item.isComplete">
-                            <button
-                              class="btn btn-danger"
-                              v-on:click="removeNews(item.id)"
-                            >
-                              移除行程
-                            </button>
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <!--  -->
-                  <hr />
-                </div>
               </div>
             </div>
           </div>
@@ -288,14 +228,11 @@ export default {
   },
   created() {
     apiService.getUserinfo().then(x => {
-      // console.log(x.data);
       this.user = x.data;
     });
     apiService.getOrdersByUser().then(x => {
-      // console.log(x);
       this.orders = x.data;
     });
-    this.refresh();
   },
   filters: {
     dateformate: function(value) {
@@ -311,24 +248,7 @@ export default {
       this.selectItem = {};
       this.isDetail = false;
     },
-    removeNews(newsId) {
-      apiService.deleteConsumerNews(newsId).then(x => {
-        messageService.success('移除成功！');
-        this.refresh();
-      });
-    },
-    refresh() {
-      apiService.getConsumerNews().then(x => {
-        this.news = _.groupBy(x.data, 'newsTypeName');
-        this.newsKey = Object.keys(this.news);
-      });
-    },
-    complete(newsId,input){
-      apiService.addorUpdateNews({newsId,isComplete:input}).then(x=>{
-        messageService.success("修改成功！");
-        this.refresh();
-      })
-    }
+
   },
 };
 </script>

@@ -203,8 +203,8 @@
                   }}</a>
                 </h4>
                 <p class="card-text">{{ item.subtitle }}</p>
-<!-- v-if="item.isComplete" -->
-                <div v-if="userNews && (nowtype == '兩天一夜過夜型(晴天)' || nowtype=='兩天一夜過夜型(雨天)')">
+
+                <!-- <div v-if="userNews && (nowtype == '兩天一夜過夜型(晴天)' || nowtype=='兩天一夜過夜型(雨天)')">
                   <span v-if="!findNews(item.id)">
                     <button  class="btn btn-info" v-on:click="addNews(item.id)">加入行程</button>
                   </span>
@@ -214,13 +214,12 @@
                   <span class="badge badge-info" v-if="findNews(item.id) && checkIscomplete(item.id)">
                     已完成
                   </span>
-                </div>
-                
+                </div> -->
               </div>
             </div>
           </div>
         </div>
-
+        ``
         <!--  -->
       </div>
     </div>
@@ -242,7 +241,7 @@ export default {
       three: {},
       four: {},
       newsType: [],
-      nowtype:"",
+      nowtype: '',
       mode: 1,
       select: null,
       news: [],
@@ -272,15 +271,9 @@ export default {
     }
   },
   methods: {
-    findNews(id){
-      let check = this.userNews.find(x=>x.id == id);
-      // console.log("ccc",check)
-      if(check) return true;
-      else return false;
-    },
-    checkIscomplete(id){
-      let check = this.userNews.find(x=>x.id == id);
-      return check.isComplete
+    checkIscomplete(id) {
+      let check = this.userNews.find(x => x.id == id);
+      return check.isComplete;
     },
     init() {
       var token = apiService.getToken();
@@ -334,24 +327,25 @@ export default {
       });
     },
     addNews(newsId) {
-       apiService.addorUpdateNews({newsId:newsId,isComplete:false}).then(x => {
-         messageService.success("加入成功！")
-         this.refresh();
+      apiService
+        .addorUpdateNews({ newsId: newsId, isComplete: false })
+        .then(x => {
+          messageService.success('加入成功！');
+          this.refresh();
         });
     },
     removeNews(newsId) {
-        apiService.deleteConsumerNews(newsId).then(x => {
-         messageService.success("移除成功！")
-         this.refresh();
-        });
+      apiService.deleteConsumerNews(newsId).then(x => {
+        messageService.success('移除成功！');
+        this.refresh();
+      });
     },
 
-    refresh(){
+    refresh() {
       apiService.getConsumerNews().then(x => {
-          this.userNews = x.data;
-          // console.log('已登入', x.data);
-        });
-    }
+        this.userNews = x.data;
+      });
+    },
   },
 };
 </script>

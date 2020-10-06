@@ -38,7 +38,7 @@ export class ConsumerService {
 
         if (check == -1) {
             consumer.newsJson.push({
-                newsId, isComplete, newsDetailId
+                newsId, isComplete, newsDetailId, time: new Date()
             });
         } else {
             consumer.newsJson[check].isComplete = isComplete;

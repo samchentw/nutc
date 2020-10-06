@@ -53,14 +53,13 @@ export class OrderService {
     }
 
     async getAll() {
-
-        var data = await this.repository.createQueryBuilder("o")
+        let data = await this.repository.createQueryBuilder("o")
             .leftJoinAndSelect("o.orderDetail", "orderDetail")
             .leftJoinAndSelect("o.consumer", "c")
             .innerJoinAndMapOne("c.userId", "user", "u", "c.userId = u.id")
             .leftJoinAndSelect("u.userinfo", "userInfo")
             .getMany()
-
+        console.log(data);
         let dto = plainToClass(OrderResultDto, <any[]>data, { excludeExtraneousValues: true });
         let result = classToPlain(dto, { version: 1 });
         return result;
@@ -78,6 +77,7 @@ export class OrderService {
 
     async getOrdersByUserId(user: string) {
         let consumer = await this.consumerService.getByUserId(user);
+        // this.repository.find({relations:['orderDetail']})
         let orders = await this.repository.createQueryBuilder("o")
             .leftJoinAndSelect("o.orderDetail", "orderDetail")
             .where("o.consumer.id=:consumer")

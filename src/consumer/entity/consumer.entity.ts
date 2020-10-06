@@ -3,6 +3,7 @@ import { Order } from '../../order/entity/order.entity';
 
 
 export class newsJson {
+    time: Date;
     newsId: number;
     newsDetailId: string;
     isComplete: boolean;

@@ -44,8 +44,7 @@ export class ShopController {
   @Roles("admin")
   @UseGuards(JwtAuthGuard, RolesGuard)
   @ApiDefaultResponse({ type: ShopDto })
-  create(@Body() input: CreateShopDto,@User() user) {
-    console.log(user)
+  create(@Body() input: CreateShopDto) {
     return this.ShopService.create(input);
   }
 
