@@ -6,14 +6,14 @@
 				<a href="#"><img src="images/footer-logo.png" alt="" /></a>
 			</div> -->
             <!--foote_bottom_ul_amrc ends here-->
-            <p class="copyright text-center">鹿港文化藝術復興 
+            <p class="copyright text-center">Copyright © 2020. 鹿瑪徒程季
 				<!-- <a href="https://html.design/">html design</a> -->
             </p>
             <ul class="social_footer_ul">
-				<li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-				<li><a href="#"><i class="fab fa-twitter"></i></a></li>
-				<li><a href="#"><i class="fab fa-linkedin"></i></a></li>
-				<li><a href="#"><i class="fab fa-instagram"></i></a></li>
+				<li><a href="javascript:void(0)"><i class="fab fa-facebook-f"></i></a></li>
+				<li><a href="javascript:void(0)"><i class="fab fa-twitter"></i></a></li>
+				<li><a href="javascript:void(0)"><i class="fab fa-linkedin"></i></a></li>
+				<li><a href="javascript:void(0)"><i class="fab fa-instagram"></i></a></li>
             </ul>
             <!--social_footer_ul ends here-->
         </div>

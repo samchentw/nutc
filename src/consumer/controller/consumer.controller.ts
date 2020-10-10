@@ -31,16 +31,16 @@ export class ConsumerController {
   @Roles("user")
   @UseGuards(JwtAuthGuard, RolesGuard)
   addOrUpdateNews(@User("id") userId, @Body() body: addOrUpdateNewsDto) {
-    return this.consumerService.addorUpdateNews(userId, body.newsId, body.isComplete, body.newsDetailId);
+    return this.consumerService.addorUpdateNews(userId, body.newsId, body.isComplete, body.newsDetailId, body.date);
   }
 
-  @Delete("news/:id")
+  @Delete("news/:newsDetailId")
   @ApiBearerAuth()
   @Roles("user")
   @UseGuards(JwtAuthGuard, RolesGuard)
-  @ApiParam({ name: 'id' })
-  deleteNews(@User("id") userId, @Param('id') id) {
-    return this.consumerService.removeNews(userId, id);
+  @ApiParam({ name: 'newsDetailId' })
+  deleteNews(@User("id") userId, @Param('newsDetailId') newsDetailId) {
+    return this.consumerService.removeNewsDetail(userId, newsDetailId);
   }
 
   @Post("register")
@@ -64,6 +64,17 @@ export class ConsumerController {
   @ApiDefaultResponse({ type: ConsumerNewsDto, isArray: true })
   getNewsByUser(@User("id") userId) {
     return this.consumerService.getConsumerWithDetil(userId);
+  }
+
+
+  @Get("oneNewsByUser/:id")
+  @ApiBearerAuth()
+  @Roles("user")
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @ApiParam({ name: 'id' })
+  @ApiDefaultResponse({ type: ConsumerNewsDto, isArray: true })
+  getOneNewsByUser(@User("id") userId,@Param('id') newsId) {
+    return this.consumerService.getConsumerWithDetilByOneNews(userId,newsId);
   }
 
 

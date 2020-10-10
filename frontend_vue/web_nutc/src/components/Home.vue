@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="container">
+    <div class="container-fluid">
       <div class="services-bar">
         <h1 class="my-4">商家介紹</h1>
         <!-- Services Section -->

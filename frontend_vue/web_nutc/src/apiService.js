@@ -34,7 +34,7 @@ export default {
   },
 
 
-// 消費者api
+  // 消費者api
 
   addorUpdateNews(data) {
     return axios.post('../api/consumer/addOrUpdateNews', data, {
@@ -45,7 +45,7 @@ export default {
   },
 
   deleteConsumerNews(newId) {
-    return axios.delete('../api/consumer/news/'+newId, {
+    return axios.delete('../api/consumer/news/' + newId, {
       headers: {
         Authorization: 'Bearer ' + this.getToken()
       }
@@ -54,6 +54,13 @@ export default {
 
   getConsumerNews() {
     return axios.get('../api/consumer/newsByUser', {
+      headers: {
+        Authorization: 'Bearer ' + this.getToken()
+      }
+    });
+  },
+  oneNewsByUser(newId) {
+    return axios.get('../api/consumer/oneNewsByUser/' + newId, {
       headers: {
         Authorization: 'Bearer ' + this.getToken()
       }

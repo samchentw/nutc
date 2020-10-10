@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="container">
+    <div class="container-fluid">
       <!-- Content Row -->
       <div class="row">
         <!-- Map Column -->

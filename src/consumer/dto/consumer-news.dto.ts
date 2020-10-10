@@ -12,4 +12,6 @@ export class ConsumerNewsDto extends News.NewsDto {
     @ApiProperty()
     @Expose()
     newsTypeName: string;
+
+    
 }

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="container">
+    <div class="container-fluid">
       <!-- About Content -->
       <div class="about-main">
         <div class="row">

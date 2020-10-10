@@ -1,8 +1,102 @@
 <template>
   <div>
-    <div class="container">
+    <div class="container-fluid">
       <div class="services-bar">
-        <h1 class="my-4">活動介紹</h1>
+        <h1 class="my-4">平樂觀賦</h1>
+
+        <div
+          v-if="
+            nowtype == '兩天一夜過夜型(晴天)' ||
+              nowtype == '兩天一夜過夜型(雨天)'
+          "
+        >
+          <b-form-datepicker
+            v-model="selectDate"
+            locale="cn"
+          ></b-form-datepicker>
+
+          <div>
+            <div class="card">
+              <div class="card-body">
+                <h4 class="card-title mb-5">個人行程</h4>
+
+                <div class="hori-timeline" dir="ltr">
+                  <ul class="list-inline events">
+                    <li class="list-inline-item event-list">
+                      <div class="px-4">
+                        <div class="event-date bg-soft-primary text-primary">
+                          第一天
+                        </div>
+                      </div>
+                    </li>
+                    <li
+                      class="list-inline-item event-list"
+                      v-for="item in day1"
+                      :key="item.time"
+                    >
+                      <div class="px-4">
+                        <div class="event-date bg-soft-success text-success">
+                          {{item.time}}
+                          <br>
+                          <span style="color:black">尚未安排行程</span>
+                        </div>
+                      </div>
+                    </li>
+
+                    <li class="list-inline-item event-list">
+                      <div class="px-4">
+                        <div class="event-date bg-soft-danger text-danger">
+                          結束
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+
+                  <ul class="list-inline events">
+                    <li class="list-inline-item event-list">
+                      <div class="px-4">
+                        <div class="event-date bg-soft-primary text-primary">
+                          第二天
+                        </div>
+                      </div>
+                    </li>
+                    <li
+                      class="list-inline-item event-list"
+                      v-for="item in day2"
+                      :key="item.time"
+                    >
+                      <div class="px-4">
+                        <div class="event-date bg-soft-success text-success">
+                          {{item.time}}
+                          <br>
+                          <span style="color:black">尚未安排行程</span>
+                        </div>
+                      </div>
+                    </li>
+
+                    <li class="list-inline-item event-list">
+                      <div class="px-4">
+                        <div class="event-date bg-soft-danger text-danger">
+                          結束
+                        </div>
+                      </div>
+                    </li>
+
+                    <!-- <li class="list-inline-item event-list">
+                      <div class="px-4">
+                        <div class="event-date bg-soft-warning text-info">
+                          尚未安排行程
+                        </div>
+                      </div>
+                    </li> -->
+
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <!-- Services Section -->
         <div class="row" v-if="!select && mode == 1">
           <div class="col-lg-3 mb-3">
@@ -203,23 +297,11 @@
                   }}</a>
                 </h4>
                 <p class="card-text">{{ item.subtitle }}</p>
-
-                <!-- <div v-if="userNews && (nowtype == '兩天一夜過夜型(晴天)' || nowtype=='兩天一夜過夜型(雨天)')">
-                  <span v-if="!findNews(item.id)">
-                    <button  class="btn btn-info" v-on:click="addNews(item.id)">加入行程</button>
-                  </span>
-                  <span v-if="findNews(item.id) && !checkIscomplete(item.id)">
-                    <button  class="btn btn-danger" v-on:click="removeNews(item.id)">移除行程</button>
-                  </span>
-                  <span class="badge badge-info" v-if="findNews(item.id) && checkIscomplete(item.id)">
-                    已完成
-                  </span>
-                </div> -->
               </div>
             </div>
           </div>
         </div>
-        ``
+        
         <!--  -->
       </div>
     </div>
@@ -238,6 +320,7 @@ export default {
     return {
       one: {},
       two: {},
+      selectDate: new Date(),
       three: {},
       four: {},
       newsType: [],
@@ -246,6 +329,12 @@ export default {
       select: null,
       news: [],
       userNews: null,
+      day1:[
+        {time:"09:00"},{time:"12:00"},{time:"15:00"},{time:"18:00"},{time:"21:00"},
+      ],
+      day2:[
+         {time:"09:00"},{time:"12:00"},{time:"15:00"},{time:"18:00"},{time:"21:00"},
+      ]
     };
   },
   watch: {
@@ -352,4 +441,59 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.hori-timeline .events {
+  border-top: 3px solid #e9ecef;
+}
+.hori-timeline .events .event-list {
+  display: block;
+  position: relative;
+  text-align: center;
+  padding-top: 70px;
+  margin-right: 0;
+}
+.hori-timeline .events .event-list:before {
+  content: '';
+  position: absolute;
+  height: 36px;
+  border-right: 2px dashed #dee2e6;
+  top: 0;
+}
+.hori-timeline .events .event-list .event-date {
+  position: absolute;
+  top: 38px;
+  left: 0;
+  right: 0;
+  width: 105px;
+  margin: 0 auto;
+  border-radius: 4px;
+  padding: 2px 4px;
+}
+@media (min-width: 1140px) {
+  .hori-timeline .events .event-list {
+    display: inline-block;
+    width: 12%;
+    padding-top: 60px;
+  }
+  .hori-timeline .events .event-list .event-date {
+    top: -12px;
+  }
+}
+.bg-soft-primary {
+  background-color: rgba(64, 144, 203, 0.3) !important;
+}
+.bg-soft-success {
+  background-color: rgba(71, 189, 154, 0.3) !important;
+}
+.bg-soft-danger {
+  background-color: rgba(231, 76, 94, 0.3) !important;
+}
+.bg-soft-warning {
+  background-color: rgba(249, 213, 112, 0.3) !important;
+}
+.card {
+  border: none;
+  margin-bottom: 24px;
+  -webkit-box-shadow: 0 0 13px 0 rgba(236, 236, 241, 0.44);
+  box-shadow: 0 0 13px 0 rgba(236, 236, 241, 0.44);
+}
 </style>

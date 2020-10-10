@@ -9,9 +9,12 @@ import { News } from '@app/cms/news/dto/news/news.dto';
 import { classToPlain, plainToClass } from 'class-transformer';
 import { ConsumerNewsDto } from '../dto/consumer-news.dto';
 import { NewsTypeService } from '@app/cms/news/service/newsType.service';
+import * as _ from 'lodash';
+import { customizedException } from '@app/core/shared';
+import * as moment from 'moment';
 @Injectable()
 export class ConsumerService {
-
+    readonly time: number[] = [9, 12, 15, 18, 21];
     constructor(
         @InjectRepository(Consumer)
         public repository: Repository<Consumer>,
@@ -31,26 +34,40 @@ export class ConsumerService {
         return await this.repository.save(consumer);
     }
 
-    async addorUpdateNews(userId: string, newsId: number, isComplete: boolean, newsDetailId: string) {
+    private searchDay(newsJson: any[], searchDay: number): number[] {
+        let or_date = newsJson
+            .filter(x => new Date(x.time).getDate() == searchDay)
+            .map(x => new Date(x.time).getHours());
+        return _.xorWith(or_date, this.time);
+    }
+
+    async addorUpdateNews(userId: string, newsId: number,
+        isComplete: boolean, newsDetailId: string, date: Date) {
         let consumer = await this.getByUserId(userId);
+        let newDate: any = new Date(date)
+        let xorwith = this.searchDay(consumer.newsJson, newDate.getDate())
 
-        let check = consumer.newsJson.findIndex(x => x.newsId == newsId);
+        if (xorwith.length == 0) {
+            xorwith = this.searchDay(consumer.newsJson, newDate.getDate() + 1)
+            newDate.setDate(newDate.getDate() + 1);
+            if (xorwith.length == 0) throw new customizedException("您的行程已滿！", 403)
+        };
+        newDate.setHours(_.first(xorwith), 0);
 
+        let check = consumer.newsJson.findIndex(x => x.newsDetailId == newsDetailId);
         if (check == -1) {
             consumer.newsJson.push({
-                newsId, isComplete, newsDetailId, time: new Date()
+                newsId, isComplete, newsDetailId, time: newDate.toLocaleString()
             });
         } else {
             consumer.newsJson[check].isComplete = isComplete;
         }
-
-        // console.log(consumer)
         return await this.repository.save(consumer);
     }
 
-    async removeNews(userId: string, newsId: number) {
+    async removeNewsDetail(userId: string, newsDetailId: string) {
         let consumer = await this.getByUserId(userId);
-        consumer.newsJson = consumer.newsJson.filter(x => x.newsId != newsId);
+        consumer.newsJson = consumer.newsJson.filter(x => x.newsDetailId != newsDetailId);
         return await this.repository.save(consumer);
     }
 
@@ -63,18 +80,19 @@ export class ConsumerService {
 
     async getConsumerWithDetil(userId: string) {
         let consumer = await this.getByUserId(userId);
-        let news: ConsumerNewsDto[] = [];
+        const monthName = item => moment(item.time, 'YYYY-MM-DD').format('YYYY-MM-DD');
+        let check = _(consumer.newsJson)
+        .groupBy(monthName)
+        // .mapValues(items => _.map(items, 'newsDetailId'))
+        .value()
+        console.log(check)
+        return check;
+    }
 
-        for (let item of consumer.newsJson) {
-            let newItem = await this.newsService.get(item.newsId);
-            let dto = plainToClass(News.NewsDto, newItem, { excludeExtraneousValues: true });
-            let temp: ConsumerNewsDto;
-            temp = dto as ConsumerNewsDto;
-            temp.newsTypeName = newItem.newsType.name;
-            temp.isComplete = item.isComplete;
-            news.push(temp);
-        }
-        let result = classToPlain(news)
+
+    async getConsumerWithDetilByOneNews(userId: string, newId: number) {
+        let consumer = await this.getByUserId(userId);
+        let result = consumer.newsJson.filter(x => x.newsId == newId);
         return result;
     }
 }

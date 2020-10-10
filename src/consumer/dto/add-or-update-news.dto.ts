@@ -7,4 +7,6 @@ export class addOrUpdateNewsDto {
   isComplete: boolean;
   @ApiProperty()
   newsDetailId: string;
+  @ApiProperty()
+  date: Date;
 }

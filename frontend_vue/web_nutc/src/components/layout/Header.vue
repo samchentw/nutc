@@ -5,7 +5,7 @@
     >
       <div class="container">
         <a class="navbar-brand" href="index.html">
-          <img src="images/logo.png" alt="logo" />
+          <img src="images/logo_main.png" alt="logo" style="width:100px;margin:-10px;"/>
         </a>
         <button
           class="navbar-toggler navbar-toggler-right"
@@ -43,7 +43,7 @@
                 class="nav-link"
                 v-bind:class="{ active: route == '/activity' }"
                 href="./#/activity"
-                >活動</a
+                >平樂觀賦</a
               >
             </li>
 
@@ -70,7 +70,7 @@
                 class="nav-link"
                 v-bind:class="{ active: route == '/product' }"
                 href="./#/product"
-                >產品</a
+                >坐賈行商</a
               >
             </li>
 
@@ -130,7 +130,7 @@
         </div>
       </div>
     </nav>
-    <div>
+    <div style="margin-bottom:10px;">
       <div
         id="carouselExampleControls"
         class="carousel slide gg"
@@ -267,20 +267,15 @@ a {
   color: #4e3914;
 }
 
-.imageBorder {
-  align-items: center;
-  justify-content: center;
-  position: relative;
-}
 
 .frame {
-  height: 400px;
+  height: 450px;
   width: 100%;
   position: relative;
   align-items: center;
   justify-content: center;
   /* background: rgb(63, 62, 62); */
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
 }
 
 .myImage {
@@ -290,7 +285,7 @@ a {
   right: 0;
   display: block;
   margin: auto;
-  /* max-height: 100%; */
+  max-height: 200%;
   max-width: 100%;
   width: auto;
   height: auto;
