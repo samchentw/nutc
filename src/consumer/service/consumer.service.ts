@@ -82,7 +82,7 @@ export class ConsumerService {
     async getConsumerWithDetil(userId: string, date: Date) {
         const dateFormat = "YYYY-MM-DD";
         const today = new Date(Date.now()).toLocaleString();
-        console.log(today)
+        // console.log(today)
         const monthName = item => moment(item.time, dateFormat).format(dateFormat);
 
         let consumer = await this.getByUserId(userId);

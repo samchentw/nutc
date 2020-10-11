@@ -354,7 +354,7 @@ export default {
         this.ano_selectDate.setDate(this.ano_selectDate.getDate() + 1);
        apiService.getConsumerNews(new Date(this.selectDate).toLocaleDateString()).then(x => {
         this.userNews = x.data;
-        this.keys = Object.keys(this.userNews);
+        this.keys =_.orderBy(Object.keys(this.userNews),x=>x,"asc") ;
         this.day1 = this.userNews[this.keys[0]];
         this.day2 = this.userNews[this.keys[1]];
       });
