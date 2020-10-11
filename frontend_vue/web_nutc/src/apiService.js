@@ -44,23 +44,37 @@ export default {
     });
   },
 
-  deleteConsumerNews(newId) {
-    return axios.delete('../api/consumer/news/' + newId, {
+  deleteConsumerNews(newId,date) {
+    return axios.delete('../api/consumer/news/' + newId+'?date=' + date, {
       headers: {
         Authorization: 'Bearer ' + this.getToken()
       }
     });
   },
 
-  getConsumerNews() {
-    return axios.get('../api/consumer/newsByUser', {
+  getConsumerNews(date) {
+    return axios.get('../api/consumer/newsByUser?date=' + date, {
       headers: {
         Authorization: 'Bearer ' + this.getToken()
       }
     });
   },
-  oneNewsByUser(newId) {
-    return axios.get('../api/consumer/oneNewsByUser/' + newId, {
+  oneNewsByUser(newId,date) {
+    return axios.get('../api/consumer/oneNewsByUser/'+newId+'?date='+date, {
+      headers: {
+        Authorization: 'Bearer ' + this.getToken()
+      }
+    });
+  },
+  getConsumerInfo(){
+    return axios.get('../api/consumer/info', {
+      headers: {
+        Authorization: 'Bearer ' + this.getToken()
+      }
+    });
+  },
+  putConsumerDate(date){
+    return axios.put('../api/consumer/selectDate?date='+date,null, {
       headers: {
         Authorization: 'Bearer ' + this.getToken()
       }

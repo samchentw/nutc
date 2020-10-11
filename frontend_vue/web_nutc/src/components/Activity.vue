@@ -4,12 +4,10 @@
       <div class="services-bar">
         <h1 class="my-4">平樂觀賦</h1>
 
-        <div
-          v-if="
+        
+        <div  v-if="
             nowtype == '兩天一夜過夜型(晴天)' ||
-              nowtype == '兩天一夜過夜型(雨天)'
-          "
-        >
+              nowtype == '兩天一夜過夜型(雨天)'">
           <b-form-datepicker
             v-model="selectDate"
             locale="cn"
@@ -19,9 +17,10 @@
             <div class="card">
               <div class="card-body">
                 <h4 class="card-title mb-5">個人行程</h4>
-
+                
                 <div class="hori-timeline" dir="ltr">
-                  <ul class="list-inline events">
+                  <div  v-if="!day1">第一天目前無任何行程</div>
+                  <ul class="list-inline events"  v-if="day1">
                     <li class="list-inline-item event-list">
                       <div class="px-4">
                         <div class="event-date bg-soft-primary text-primary">
@@ -36,9 +35,12 @@
                     >
                       <div class="px-4">
                         <div class="event-date bg-soft-success text-success">
-                          {{item.time}}
-                          <br>
-                          <span style="color:black">尚未安排行程</span>
+                          {{ item.time | dateformate }}
+                          <br />
+                          <span style="color:black">{{
+                            item.displayName
+                          }}</span>
+                          <!-- <span style="color:black">尚未安排行程</span> -->
                         </div>
                       </div>
                     </li>
@@ -52,7 +54,8 @@
                     </li>
                   </ul>
 
-                  <ul class="list-inline events">
+                <div  v-if="!day2">第二天目前無任何行程</div>
+                  <ul class="list-inline events"  v-if="day2">
                     <li class="list-inline-item event-list">
                       <div class="px-4">
                         <div class="event-date bg-soft-primary text-primary">
@@ -67,9 +70,11 @@
                     >
                       <div class="px-4">
                         <div class="event-date bg-soft-success text-success">
-                          {{item.time}}
-                          <br>
-                          <span style="color:black">尚未安排行程</span>
+                          {{ item.time | dateformate }}
+                          <br />
+                          <span style="color:black">{{
+                            item.displayName
+                          }}</span>
                         </div>
                       </div>
                     </li>
@@ -81,17 +86,13 @@
                         </div>
                       </div>
                     </li>
-
-                    <!-- <li class="list-inline-item event-list">
-                      <div class="px-4">
-                        <div class="event-date bg-soft-warning text-info">
-                          尚未安排行程
-                        </div>
-                      </div>
-                    </li> -->
-
                   </ul>
                 </div>
+
+                <div style="align-items: right;">
+                  <button class="btn btn-info" v-on:click="saveDate()">儲存</button>
+                </div>
+
               </div>
             </div>
           </div>
@@ -292,16 +293,19 @@
               </a>
               <div class="card-body">
                 <h4 class="card-title">
-                  <a :href="'./#/activityDetail/' + item.id">{{
-                    item.title
-                  }}</a>
+                  <a
+                    :href="
+                      './#/activityDetail/' + item.id + '?date=' + selectDate
+                    "
+                    >{{ item.title }}</a
+                  >
                 </h4>
                 <p class="card-text">{{ item.subtitle }}</p>
               </div>
             </div>
           </div>
         </div>
-        
+
         <!--  -->
       </div>
     </div>
@@ -313,6 +317,7 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import messageService from '../messageService';
 import apiService from '../apiService';
+import moment from 'moment';
 export default {
   name: 'Activity',
   props: {},
@@ -329,17 +334,15 @@ export default {
       select: null,
       news: [],
       userNews: null,
-      day1:[
-        {time:"09:00"},{time:"12:00"},{time:"15:00"},{time:"18:00"},{time:"21:00"},
-      ],
-      day2:[
-         {time:"09:00"},{time:"12:00"},{time:"15:00"},{time:"18:00"},{time:"21:00"},
-      ]
+      keys: [],
+      day1: [],
+      day2: [],
+      type:null,
     };
   },
   watch: {
     $route(to, from) {
-      var type = this.$route.query.type;
+      let type = this.$route.query.type;
       if (type) {
         this.selectNewsType_new(type);
       } else {
@@ -347,8 +350,16 @@ export default {
         this.select = null;
       }
     },
+    selectDate(newVal, oldVal) {
+      this.$router.replace({ name: "", query: {type: this.$route.query.type,date:newVal} })
+      this.refresh();
+    },
   },
   async created() {
+    var temp=this.$route.query.date;
+    if(temp!=undefined)this.selectDate = temp;
+     
+  
     await this.getData();
     this.init();
     var type = this.$route.query.type;
@@ -359,20 +370,16 @@ export default {
       this.select = null;
     }
   },
-  methods: {
-    checkIscomplete(id) {
-      let check = this.userNews.find(x => x.id == id);
-      return check.isComplete;
+  filters: {
+    dateformate: function(value) {
+      return moment(value).format('HH:mm');
     },
+  },
+  methods: {
     init() {
       var token = apiService.getToken();
       if (token) {
-        apiService.getConsumerNews().then(x => {
-          this.userNews = x.data;
-          // console.log('已登入', x.data);
-        });
-      } else {
-        // console.log('未登入');
+        this.refresh();
       }
     },
     selectNewsType_new(type) {
@@ -415,26 +422,21 @@ export default {
         this.four = x.data.find(y => y.key == '前台.活動.欄位四');
       });
     },
-    addNews(newsId) {
-      apiService
-        .addorUpdateNews({ newsId: newsId, isComplete: false })
-        .then(x => {
-          messageService.success('加入成功！');
-          this.refresh();
-        });
-    },
-    removeNews(newsId) {
-      apiService.deleteConsumerNews(newsId).then(x => {
-        messageService.success('移除成功！');
-        this.refresh();
-      });
-    },
-
     refresh() {
-      apiService.getConsumerNews().then(x => {
+      this.day1 = [];
+      this.day2 = [];
+      apiService.getConsumerNews(new Date(this.selectDate).toLocaleDateString()).then(x => {
         this.userNews = x.data;
+        this.keys = Object.keys(this.userNews);
+        this.day1 = this.userNews[this.keys[0]];
+        this.day2 = this.userNews[this.keys[1]];
       });
     },
+    saveDate(){
+      apiService.putConsumerDate(this.selectDate).then(x=>{
+        messageService.success("儲存成功！");
+      });
+    }
   },
 };
 </script>
@@ -442,7 +444,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .hori-timeline .events {
-  border-top: 3px solid #e9ecef;
+  border-top: 1px solid #e9ecef;
 }
 .hori-timeline .events .event-list {
   display: block;

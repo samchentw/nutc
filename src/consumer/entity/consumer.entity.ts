@@ -25,6 +25,10 @@ export class Consumer extends BaseEntity {
     @JoinColumn()
     order: Order[];
 
+    @Column({ nullable: true })
+    selectDate: Date;
+
+
     @Column("simple-json")
     newsJson: newsJson[];
 

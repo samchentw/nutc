@@ -3,8 +3,8 @@ import { Roles, RolesGuard } from '@app/core/shared';
 import { User } from '@app/core/shared/decorator/user.decorator';
 import { JwtAuthGuard } from '@app/identity/auth/guard/jwt-auth.guard';
 import { CreateUserDto } from '@app/identity/users/dto';
-import { Body, Controller, Delete, Get, Param, Post, Req, UseGuards } from '@nestjs/common';
-import { ApiBearerAuth, ApiParam, ApiTags, ApiProperty, ApiDefaultResponse } from '@nestjs/swagger';
+import { Body, Controller, Delete, Get, Param, Post, Put, Query, Req, UseGuards } from '@nestjs/common';
+import { ApiBearerAuth, ApiParam, ApiTags, ApiProperty, ApiDefaultResponse, ApiQuery } from '@nestjs/swagger';
 import { ConsumerService } from '../service/consumer.service';
 import { addOrUpdateNewsDto } from '../dto/add-or-update-news.dto';
 import { ConsumerNewsDto } from '../dto/consumer-news.dto';
@@ -34,15 +34,6 @@ export class ConsumerController {
     return this.consumerService.addorUpdateNews(userId, body.newsId, body.isComplete, body.newsDetailId, body.date);
   }
 
-  @Delete("news/:newsDetailId")
-  @ApiBearerAuth()
-  @Roles("user")
-  @UseGuards(JwtAuthGuard, RolesGuard)
-  @ApiParam({ name: 'newsDetailId' })
-  deleteNews(@User("id") userId, @Param('newsDetailId') newsDetailId) {
-    return this.consumerService.removeNewsDetail(userId, newsDetailId);
-  }
-
   @Post("register")
   register(@Body() body: CreateUserDto) {
     return this.consumerService.register(body);
@@ -62,8 +53,9 @@ export class ConsumerController {
   @Roles("user")
   @UseGuards(JwtAuthGuard, RolesGuard)
   @ApiDefaultResponse({ type: ConsumerNewsDto, isArray: true })
-  getNewsByUser(@User("id") userId) {
-    return this.consumerService.getConsumerWithDetil(userId);
+  @ApiQuery({ name: 'date' })
+  getNewsByUser(@User("id") userId, @Query('date') date) {
+    return this.consumerService.getConsumerWithDetil(userId, date);
   }
 
 
@@ -73,18 +65,38 @@ export class ConsumerController {
   @UseGuards(JwtAuthGuard, RolesGuard)
   @ApiParam({ name: 'id' })
   @ApiDefaultResponse({ type: ConsumerNewsDto, isArray: true })
-  getOneNewsByUser(@User("id") userId,@Param('id') newsId) {
-    return this.consumerService.getConsumerWithDetilByOneNews(userId,newsId);
+  @ApiQuery({ name: 'date' })
+  getOneNewsByUser(@User("id") userId, @Param('id') newsId,@Query('date') date) {
+    return this.consumerService.getConsumerWithDetilByOneNews(userId, newsId,date);
   }
 
-
-  @Get("newsByUserByAdmin/:userId")
+  @Put('selectDate')
   @ApiBearerAuth()
-  @Roles("admin")
+  @Roles("user")
   @UseGuards(JwtAuthGuard, RolesGuard)
-  @ApiDefaultResponse({ type: ConsumerNewsDto, isArray: true })
-  @ApiParam({ name: 'userId' })
-  getNewsByUserByAdmin(@Param('userId') userId) {
-    return this.consumerService.getConsumerWithDetil(userId);
+  @ApiQuery({ name: 'date' })
+  updateDate(@User("id") userId, @Query('date') date) {
+    return this.consumerService.updateDate(userId, date);
   }
+
+  @Delete("news/:newsDetailId")
+  @ApiBearerAuth()
+  @Roles("user")
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @ApiParam({ name: 'newsDetailId' })
+  @ApiQuery({ name: 'date' })
+  deleteNews(@User("id") userId, @Param('newsDetailId') newsDetailId,@Query('date') date) {
+    return this.consumerService.removeNewsDetail(userId, newsDetailId,date);
+  }
+
+
+  // @Get("newsByUserByAdmin/:userId")
+  // @ApiBearerAuth()
+  // @Roles("admin")
+  // @UseGuards(JwtAuthGuard, RolesGuard)
+  // @ApiDefaultResponse({ type: ConsumerNewsDto, isArray: true })
+  // @ApiParam({ name: 'userId' })
+  // getNewsByUserByAdmin(@Param('userId') userId) {
+  //   return this.consumerService.getConsumerWithDetil(userId);
+  // }
 }

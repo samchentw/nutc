@@ -62,12 +62,17 @@ export default {
     return {
       news: null,
       token: '',
+      selectDay:new Date(),
       userNewsDetails: [],
     };
   },
   created() {
+    // date
     this.init();
     this.token = apiService.getToken();
+  },
+  watch:{
+    
   },
   methods: {
     checkUserNews(detailId) {
@@ -79,7 +84,7 @@ export default {
         newsId: this.news.id,
         isComplete: false,
         newsDetailId: newDetailId,
-        date: moment(Date(Date.now())).format('YYYY-MM-DD HH:mm:ss'),
+        date: this.selectDay,
       };
       apiService
         .addorUpdateNews(input)
@@ -94,17 +99,18 @@ export default {
         });
     },
     remove(newDetailId) {
-      apiService.deleteConsumerNews(newDetailId).then(x => {
+      apiService.deleteConsumerNews(newDetailId, this.selectDay).then(x => {
         messageService.success('移除成功！');
         this.init();
       });
     },
     init() {
+      this.selectDay = moment(this.$route.query.date).format('YYYY-MM-DD HH:mm:ss')
       var id = this.$route.params.id;
       apiService.getNewsById(id).then(x => {
         this.news = x.data;
         if (this.token) {
-          apiService.oneNewsByUser(this.news.id).then(y => {
+          apiService.oneNewsByUser(this.news.id,this.selectDay).then(y => {
             this.userNewsDetails = y.data;
           });
         }

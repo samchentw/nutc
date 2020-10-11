@@ -141,8 +141,94 @@
               </div>
 
               <div class="tab-pane" id="activity">
-               
-               todo 開發中
+               <!--  -->
+
+        
+            <div v-if="!selectDate">目前無任何行程</div>
+            <div class="card" v-if="selectDate">
+              <div class="card-body">
+                <h4 class="card-title mb-5">個人行程</h4>
+                
+                <div class="hori-timeline" dir="ltr">
+                  <div  v-if="!day1">第一天目前無任何行程</div>
+                  <ul class="list-inline events"  v-if="day1">
+                    <li class="list-inline-item event-list">
+                      <div class="px-4">
+                        <div class="event-date bg-soft-primary text-primary">
+                          第一天<br>
+                            {{selectDate | dateformateForDay}}
+                        </div>
+                      
+                      </div>
+                    </li>
+                    <li
+                      class="list-inline-item event-list"
+                      v-for="item in day1"
+                      :key="item.time"
+                    >
+                      <div class="px-4">
+                        <div class="event-date bg-soft-success text-success"
+                         v-bind:class="{ 'event-date bg-soft-success text-success': !item.isExpired, 'event-date bg-soft-danger text-danger': item.isExpired }">
+                          {{ item.time | dateformateForHHMM }}
+                          <br />
+                          <span style="color:black">{{
+                            item.displayName
+                          }}</span>
+                        </div>
+                      </div>
+                    </li>
+
+                    <li class="list-inline-item event-list">
+                      <div class="px-4">
+                        <div class="event-date bg-soft-danger text-danger">
+                          結束
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+
+                <div  v-if="!day2">第二天目前無任何行程</div>
+                  <ul class="list-inline events"  v-if="day2">
+                    <li class="list-inline-item event-list">
+                      <div class="px-4">
+                        <div class="event-date bg-soft-primary text-primary">
+                          第二天
+                          <br>
+                          {{ano_selectDate | dateformateForDay}}
+                        </div>
+                      </div>
+                    </li>
+                    <li
+                      class="list-inline-item event-list"
+                      v-for="item in day2"
+                      :key="item.time"
+                    >
+                      <div class="px-4">
+                        <div class="event-date bg-soft-success text-success"
+                         v-bind:class="{ 'event-date bg-soft-success text-success': !item.isExpired, 'event-date bg-soft-danger text-danger': item.isExpired }">
+                          {{ item.time | dateformateForHHMM }}
+                          <br />
+                          <span style="color:black">{{
+                            item.displayName
+                          }}</span>
+                        </div>
+                      </div>
+                    </li>
+
+                    <li class="list-inline-item event-list">
+                      <div class="px-4">
+                        <div class="event-date bg-soft-danger text-danger">
+                          結束
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+         
+
+               <!--  -->
 
               </div>
             </div>
@@ -224,11 +310,19 @@ export default {
       newsKey: [],
       isDetail: false,
       st: ['準備中', '運送中', '已送達', '未出貨'],
+      day1:[],
+      day2:[],
+      selectDate:null,
+      ano_selectDate:new Date()
     };
   },
   created() {
     apiService.getUserinfo().then(x => {
       this.user = x.data;
+    });
+    apiService.getConsumerInfo().then(x=>{
+      this.selectDate = x.data.selectDate
+      this.refresh();
     });
     apiService.getOrdersByUser().then(x => {
       this.orders = x.data;
@@ -237,6 +331,12 @@ export default {
   filters: {
     dateformate: function(value) {
       return moment(value).format('YYYY-MM-DD HH:mm:ss');
+    },
+     dateformateForDay: function(value) {
+      return moment(value).format('YYYY-MM-DD');
+    },
+    dateformateForHHMM: function(value) {
+      return moment(value).format('HH:mm');
     },
   },
   methods: {
@@ -248,12 +348,77 @@ export default {
       this.selectItem = {};
       this.isDetail = false;
     },
-
+    refresh(){
+        if(!this.selectDate) return;
+        this.ano_selectDate = new Date(this.selectDate);
+        this.ano_selectDate.setDate(this.ano_selectDate.getDate() + 1);
+       apiService.getConsumerNews(new Date(this.selectDate).toLocaleDateString()).then(x => {
+        this.userNews = x.data;
+        this.keys = Object.keys(this.userNews);
+        this.day1 = this.userNews[this.keys[0]];
+        this.day2 = this.userNews[this.keys[1]];
+      });
+    },
   },
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.hori-timeline .events {
+  border-top: 1px solid #e9ecef;
+}
+.hori-timeline .events .event-list {
+  display: block;
+  position: relative;
+  text-align: center;
+  padding-top: 70px;
+  margin-right: 0;
+}
+.hori-timeline .events .event-list:before {
+  content: '';
+  position: absolute;
+  height: 36px;
+  border-right: 2px dashed #dee2e6;
+  top: 0;
+}
+.hori-timeline .events .event-list .event-date {
+  position: absolute;
+  top: 38px;
+  left: 0;
+  right: 0;
+  width: 105px;
+  margin: 0 auto;
+  border-radius: 4px;
+  padding: 2px 4px;
+}
+@media (min-width: 1140px) {
+  .hori-timeline .events .event-list {
+    display: inline-block;
+    width: 24%;
+    padding-top: 60px;
+  }
+  .hori-timeline .events .event-list .event-date {
+    top: -12px;
+  }
+}
+.bg-soft-primary {
+  background-color: rgba(64, 144, 203, 0.3) !important;
+}
+.bg-soft-success {
+  background-color: rgba(71, 189, 154, 0.3) !important;
+}
+.bg-soft-danger {
+  background-color: rgba(231, 76, 94, 0.3) !important;
+}
+.bg-soft-warning {
+  background-color: rgba(249, 213, 112, 0.3) !important;
+}
+.card {
+  border: none;
+  margin-bottom: 24px;
+  -webkit-box-shadow: 0 0 13px 0 rgba(236, 236, 241, 0.44);
+  box-shadow: 0 0 13px 0 rgba(236, 236, 241, 0.44);
+}
 </style>
 
