@@ -5,9 +5,9 @@
         <h1 class="my-4">平樂觀賦</h1>
 
         
-        <div  v-if="
-            nowtype == '兩天一夜過夜型(晴天)' ||
-              nowtype == '兩天一夜過夜型(雨天)'">
+        <div  v-if=" token && ( nowtype == '兩天一夜過夜型(晴天)' ||
+              nowtype == '兩天一夜過夜型(雨天)')
+           ">
           <b-form-datepicker
             v-model="selectDate"
             locale="cn"
@@ -338,6 +338,7 @@ export default {
       day1: [],
       day2: [],
       type:null,
+      token:null
     };
   },
   watch: {
@@ -357,6 +358,7 @@ export default {
   },
   async created() {
     var temp=this.$route.query.date;
+    this.token = apiService.getToken();
     if(temp!=undefined)this.selectDate = temp;
      
   

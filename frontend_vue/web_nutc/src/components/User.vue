@@ -396,7 +396,7 @@ export default {
   .hori-timeline .events .event-list {
     display: inline-block;
     width: 24%;
-    padding-top: 60px;
+    padding-top: 100px;
   }
   .hori-timeline .events .event-list .event-date {
     top: -12px;
