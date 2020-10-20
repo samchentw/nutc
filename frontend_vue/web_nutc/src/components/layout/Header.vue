@@ -5,7 +5,7 @@
     >
       <div class="container">
         <a class="navbar-brand" href="index.html">
-          <img src="images/logo_main.png" alt="logo" style="width:100px;margin:-10px;"/>
+          <img src="images/logo_main.png" alt="logo" style="width:170px;margin:-5px;"/>
         </a>
         <button
           class="navbar-toggler navbar-toggler-right"
