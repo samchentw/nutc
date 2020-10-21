@@ -88,11 +88,23 @@ export class UsersService {
 
     //admin取得所有會員資料
     async getAllUser() {
-        return await this.UserInfoRepository.find({
-            loadEagerRelations: false,
-            relations: ["role"],
-            select: ["id", "name", "gender", "birthday", "address", "email"]
-        });
+
+       return this.UserRepository.createQueryBuilder('user')
+            .leftJoinAndSelect('user.userinfo', 'userinfo')
+            .select([
+                'user.id',
+                'user.account',
+                'userinfo.address',
+                'userinfo.birthday',
+                'userinfo.email',
+                'userinfo.gender',
+                'userinfo.name',
+            ]).getMany();
+        // return await this.UserInfoRepository.find({
+        //     loadEagerRelations: false,
+        //     relations: ["role"],
+        //     select: ["id", "name", "gender", "birthday", "address", "email"]
+        // });
     }
 
 

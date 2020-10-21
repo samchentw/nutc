@@ -20,7 +20,6 @@ export class NewsController {
   @ApiBearerAuth()
   @UseGuards(JwtAuthGuard)
   create(@Body() input: CreateNewsDto) {
-    // console.log(input)
     return this.newsService.create(input);
   }
 

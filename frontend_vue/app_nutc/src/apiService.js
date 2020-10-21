@@ -103,7 +103,7 @@ export default {
     });
   },
 
-  //活動類型R
+  //活動類型
   getallNewsType() {
     return axios.get('../api/newsType/getAll');
   },
@@ -184,6 +184,15 @@ export default {
 
   uploadfile(data) {
     return axios.post('../api/file/upload', data, {
+      headers: {
+        Authorization: 'Bearer ' + this.getToken()
+      }
+    })
+  },
+
+  //消費者
+  getConsumerByAdmin(userId) {
+    return axios.get('../api/consumer/newsByUserByAdmin/'+userId, {
       headers: {
         Authorization: 'Bearer ' + this.getToken()
       }

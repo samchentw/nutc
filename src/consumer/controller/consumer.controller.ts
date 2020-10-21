@@ -66,8 +66,8 @@ export class ConsumerController {
   @ApiParam({ name: 'id' })
   @ApiDefaultResponse({ type: ConsumerNewsDto, isArray: true })
   @ApiQuery({ name: 'date' })
-  getOneNewsByUser(@User("id") userId, @Param('id') newsId,@Query('date') date) {
-    return this.consumerService.getConsumerWithDetilByOneNews(userId, newsId,date);
+  getOneNewsByUser(@User("id") userId, @Param('id') newsId, @Query('date') date) {
+    return this.consumerService.getConsumerWithDetilByOneNews(userId, newsId, date);
   }
 
   @Put('selectDate')
@@ -85,18 +85,20 @@ export class ConsumerController {
   @UseGuards(JwtAuthGuard, RolesGuard)
   @ApiParam({ name: 'newsDetailId' })
   @ApiQuery({ name: 'date' })
-  deleteNews(@User("id") userId, @Param('newsDetailId') newsDetailId,@Query('date') date) {
-    return this.consumerService.removeNewsDetail(userId, newsDetailId,date);
+  deleteNews(@User("id") userId, @Param('newsDetailId') newsDetailId, @Query('date') date) {
+    return this.consumerService.removeNewsDetail(userId, newsDetailId, date);
   }
 
 
-  // @Get("newsByUserByAdmin/:userId")
-  // @ApiBearerAuth()
-  // @Roles("admin")
-  // @UseGuards(JwtAuthGuard, RolesGuard)
-  // @ApiDefaultResponse({ type: ConsumerNewsDto, isArray: true })
-  // @ApiParam({ name: 'userId' })
-  // getNewsByUserByAdmin(@Param('userId') userId) {
-  //   return this.consumerService.getConsumerWithDetil(userId);
-  // }
+  @Get("newsByUserByAdmin/:userId")
+  @ApiBearerAuth()
+  @Roles("admin")
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @ApiDefaultResponse({ type: ConsumerNewsDto, isArray: true })
+  @ApiParam({ name: 'userId' })
+  async getNewsByUserByAdmin(@Param('userId') userId) {
+    let consumer = await this.consumerService.getByUserId(userId);
+    if (!consumer.selectDate) return {};
+    return this.consumerService.getConsumerWithDetil(userId, consumer.selectDate);
+  }
 }
