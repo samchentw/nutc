@@ -238,7 +238,7 @@
                 <img
                   class="img-fluid"
                   style="height:262.38px;width:100%"
-                  src="images/鹿港天后宮.jpg"
+                  src="images/S__14622878.jpg"
                   alt
                 />
               </div>

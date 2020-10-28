@@ -88,7 +88,6 @@ export class UsersService {
 
     //admin取得所有會員資料
     async getAllUser() {
-
        return this.UserRepository.createQueryBuilder('user')
             .leftJoinAndSelect('user.userinfo', 'userinfo')
             .select([
@@ -100,11 +99,6 @@ export class UsersService {
                 'userinfo.gender',
                 'userinfo.name',
             ]).getMany();
-        // return await this.UserInfoRepository.find({
-        //     loadEagerRelations: false,
-        //     relations: ["role"],
-        //     select: ["id", "name", "gender", "birthday", "address", "email"]
-        // });
     }
 
 
