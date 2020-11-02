@@ -124,7 +124,7 @@
           </ul>
 
           <span v-if="user" class="badge badge-success"
-            >帳號：{{ user.account }},你好！{{ user.userinfo.name }}</span
+            >{{ user.account }}，你好</span
           >
           <!-- <span v-if="user">你好：{{user.userinfo.name}}</span> -->
         </div>
