@@ -2,7 +2,7 @@
   <div>
     <div class="container-fluid">
       <div class="services-bar">
-        <h1 class="my-4">商家介紹</h1>
+        <h1 class="my-4">景點介紹</h1>
         <!-- Services Section -->
         <div class="row">
           <div class="col-lg-4 mb-4">
