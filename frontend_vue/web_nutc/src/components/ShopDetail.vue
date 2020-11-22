@@ -2,7 +2,7 @@
   <div>
     <div class="container card">
       <!-- Heading Row -->
-      <div class="row align-items-center my-5" v-if="shop">
+      <div class="row align-items-center my-5" v-if="shop.id">
         <div class="col-lg-7">
           <img class="img-fluid rounded mb-4 mb-lg-0" :src="transferImage(shop.shopImage)" alt />
         </div>
@@ -45,14 +45,11 @@ export default {
   methods: {
     init() {
       var id = this.$route.params.id;
-      // console.log(id);
       apiService.getshop(id).then(x => {
         this.shop = x.data;
-        // console.log(x.data);
       });
     },
     transferImage(image) {
-      console.log(image);
       var temp = JSON.parse(image);
       if (temp.length > 0) {
         return temp[0].url;
@@ -64,6 +61,6 @@ export default {
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
+
 <style scoped>
 </style>

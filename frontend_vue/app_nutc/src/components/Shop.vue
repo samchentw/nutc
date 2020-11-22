@@ -93,14 +93,13 @@
         </div>
         <div class="form-group">
           <label for="exampleInputEmail1">敘述</label>
-          <input
-            type="email"
+
+           <textarea
             class="form-control"
             v-model="select.description"
-            id="exampleInputEmail1"
-            aria-describedby="emailHelp"
-            placeholder
-          />
+            id="exampleFormControlTextarea1"
+            rows="3"
+          ></textarea>
         </div>
         <div class="form-group">
           <label for="exampleInputEmail1">備註</label>
@@ -228,7 +227,7 @@ export default {
       apiService
         .getShopPage(10 * this.pageIndex)
         .then(x => {
-          this.pages = Math.round(x.data.count / 10);
+          this.pages = Math.ceil(x.data.count / 10);
           this.shop = x.data.items;
           this.file = null;
           this.selectImage = [];

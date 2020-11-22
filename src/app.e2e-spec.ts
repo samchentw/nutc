@@ -24,7 +24,7 @@ describe('AppController (e2e)', () => {
           "port": 3306,
           "username": "root",
           "password": "",
-          "database": "test",
+          "database": "nutc1",
           "entities": ["dist/**/*.entity{.ts,.js}"],
           "autoLoadEntities": true,
           "synchronize": true,

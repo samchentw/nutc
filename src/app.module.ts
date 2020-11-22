@@ -18,7 +18,7 @@ import { ShopModule } from './shop/shop.module';
       "port": 3306,
       "username": "root",
       "password": "",
-      "database": "nutc",
+      "database": "nutc1",
       "entities": ["dist/**/*.entity{.ts,.js}"],
       "autoLoadEntities": true,
       "synchronize": true,
