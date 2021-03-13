@@ -1,4 +1,4 @@
-import { customizedException } from '@app/core/shared';
+import { CustomizedException } from '@app/core/shared';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { plainToClass, classToPlain } from 'class-transformer';
@@ -26,7 +26,7 @@ export class OrderService {
         const { deliveryTime, orderDetail } = input;
 
         if (new Date(deliveryTime) <= new Date()) {
-            throw new customizedException("時間錯誤！！", 400);
+            throw new CustomizedException("時間錯誤！！", 400);
         }
 
         let order = plainToClass(Order, input, { excludeExtraneousValues: true })

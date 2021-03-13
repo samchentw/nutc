@@ -1,4 +1,4 @@
-import { dataDuplicationException, genderDataEnum } from '@app/core/shared';
+import { DataDuplicationException, genderDataEnum } from '@app/core/shared';
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -24,7 +24,7 @@ export class UsersService {
         const { account, password, name, gender, birthday, address, email } = body;
         const check = await this.UserRepository.findOne({ account });
         if (check) {
-            throw new dataDuplicationException();
+            throw new DataDuplicationException();
         }
         var userRole = await this.roleService.getRole("user");
         var roleArray: Role[] = [];

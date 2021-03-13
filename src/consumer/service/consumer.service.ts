@@ -1,5 +1,5 @@
 import { NewsService } from '@app/cms/news/service/news.service';
-import { customizedException } from '@app/core/shared';
+import { CustomizedException } from '@app/core/shared';
 import { CreateUserDto } from '@app/identity/users/dto';
 import { UsersService } from '@app/identity/users/service/users.service';
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
@@ -44,7 +44,7 @@ export class ConsumerService {
         if (xorwith.length == 0) {
             xorwith = this.searchDay(consumer.newsJson, newDate.getDate() + 1)
             newDate.setDate(newDate.getDate() + 1);
-            if (xorwith.length == 0) throw new customizedException("您的行程已滿！", 403)
+            if (xorwith.length == 0) throw new CustomizedException("您的行程已滿！", 403)
         };
         newDate.setHours(_.first(xorwith), 0);
 
